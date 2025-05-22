@@ -30,7 +30,8 @@ export function ToolLayout({ title, description, children, sidebarContent }: Too
                   {word.toUpperCase() === 'DMARC' || 
                    word.toUpperCase() === 'SPF' || 
                    word.toUpperCase() === 'DKIM' || 
-                   word.toUpperCase() === 'XML' ? (
+                   word.toUpperCase() === 'XML' ||
+                   word.toUpperCase() === 'DOMAIN' ? (
                     <span className="text-blue-600">{word}</span>
                   ) : (
                     <span className="text-gray-900">{word}</span>

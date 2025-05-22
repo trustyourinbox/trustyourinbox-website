@@ -156,6 +156,18 @@
 ### B.15. Additional Security Tools
 - [ ] Removed from roadmap (FCrDNS Lookup)
 
+### B.16. Domain Security Checker
+- [x] Implement new shared layout
+- [x] Add modern UI components (Card, Badge, Progress, Tooltip, Separator)
+- [x] Dynamic progress bar color for accessibility (red/amber/green based on score)
+- [x] Improved card layout: compact, consistent, and visually polished
+- [x] Smaller, readable font sizes for all result sections
+- [x] Muted backgrounds and subtle borders for clarity
+- [x] Accessibility/contrast improvements for progress bar and results
+- [x] Touch-friendly and responsive interactions
+- [x] Consistent with other tools' visual style
+- [x] Last updated: 2024-06-08
+
 ## C. General Enhancements
 
 ### C.1. Mobile Responsiveness
@@ -219,6 +231,7 @@
 | BIMI Tools Suite | Removed from roadmap |              |       |
 | MTA-STS & TLS-RPT Tools | Removed from roadmap |              |       |
 | Additional Security Tools | Removed from roadmap |              |       |
+| Domain Security Checker | ✅ Completed | 2024-06-08 | Updated with modern UI components, dynamic progress bar color, improved card layout, compact font sizes, muted backgrounds, subtle borders, accessibility/contrast improvements, touch-friendly interactions, and consistent visual style |
 
 ## Notes
 - All shared UI components have been created and are ready for use
