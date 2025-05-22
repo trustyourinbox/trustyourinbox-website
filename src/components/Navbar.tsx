@@ -78,6 +78,103 @@ const resourcesMenu = [
   },
 ];
 
+const toolsCategories = [
+  {
+    title: "Core Tools",
+    icon: <FaShieldAlt className="h-5 w-5 text-primary" />,
+    items: [
+      { name: "Domain Checker", href: "/tools/dmarc-domain-checker", icon: <FaSearch className="h-4 w-4" />, description: "Verify domain configuration" },
+      { name: "DMARC Analyzer", href: "/tools/dmarc-analyzer", icon: <FaSearch className="h-4 w-4" />, description: "Analyze DMARC records and policies" },
+      { name: "Policy Generator", href: "/tools/dmarc-policy-generator", icon: <FaFileCode className="h-4 w-4" />, description: "Create custom DMARC policies" },
+      { name: "Policy Impact Simulator", href: "/tools/dmarc-policy-impact-simulator", icon: <FaMagic className="h-4 w-4" />, description: "Simulate policy changes" },
+      { name: "Subdomain Checker", href: "/tools/dmarc-subdomain-checker", icon: <FaShieldAlt className="h-4 w-4" />, description: "Verify subdomain configuration" },
+      { name: "Forensic DMARC Report Viewer", href: "/tools/forensic-report-viewer", icon: <FaFileCode className="h-4 w-4" />, description: "Parse and view forensic DMARC (ruf) reports" },
+      { name: "XML Converter", href: "/tools/xml-converter", icon: <FaFileCode className="h-4 w-4" />, description: "Convert between formats" },
+    ],
+  },
+  {
+    title: "Authentication",
+    icon: <FaKey className="h-5 w-5 text-primary" />,
+    items: [
+      { name: "DKIM Validator", href: "/tools/dkim-validator", icon: <FaCheckCircle className="h-4 w-4" />, description: "Validate DKIM signatures" },
+      { name: "DKIM Inspector", href: "/tools/dkim-inspector", icon: <FaSearch className="h-4 w-4" />, description: "Inspect DKIM configuration" },
+      { name: "SPF Surveyor", href: "/tools/spf-surveyor", icon: <FaSun className="h-4 w-4" />, description: "Analyze SPF records" },
+    ],
+  },
+  {
+    title: "Analysis",
+    icon: <FaStar className="h-5 w-5 text-primary" />,
+    items: [
+      { name: "Domain Security Checker", href: "/tools/domain-security-checker", icon: <FaShieldAlt className="h-4 w-4" />, description: "Comprehensive security check" },
+      { name: "DNSSEC Checker", href: "/tools/dnssec-checker", icon: <FaKey className="h-4 w-4" />, description: "Verify DNSSEC implementation" },
+    ],
+  },
+];
+
+const toolsFeaturedBox = {
+  badge: "What&apos;s New",
+  title: "Forensic DMARC Report Viewer",
+  description: "Upload and analyze forensic (ruf) DMARC reports to investigate authentication failures.",
+  buttonText: "Try it now",
+  buttonHref: "/tools/forensic-report-viewer",
+};
+
+const resourcesCategories = [
+  {
+    title: "Learn",
+    icon: <FaBookOpen className="h-5 w-5 text-primary" />,
+    layout: "grid",
+    items: [
+      { name: "DMARC Guide", href: "/guides/dmarc", icon: <FaBookOpen className="h-4 w-4" />, description: "Complete guide to understanding and implementing DMARC" },
+      { name: "DMARC Analyzer", href: "/tools/dmarc-analyzer", icon: <FaSearch className="h-4 w-4" />, description: "Analyze and understand your DMARC record" },
+      { name: "DMARC Domain Checker", href: "/tools/dmarc-domain-checker", icon: <FaCheckCircle className="h-4 w-4" />, description: "Check your domain's DMARC status" },
+      { name: "Support", href: "/support", icon: <FaLifeRing className="h-4 w-4" />, description: "Get help with DMARC implementation" },
+    ],
+  },
+  {
+    title: "Watch & Listen",
+    icon: <FaVideo className="h-5 w-5 text-primary" />,
+    layout: "stack",
+    items: [
+      { name: "Blog", href: "/blog", icon: <FaNewspaper className="h-4 w-4" />, description: "Latest insights on email security" },
+      { name: "Webinars", href: "/webinars", icon: <FaVideo className="h-4 w-4" />, description: "Learn about email security best practices" },
+    ],
+  },
+];
+
+const resourcesFeaturedBox = {
+  badge: "Featured",
+  title: "Explore Our Resources",
+  description: "Discover guides, webinars, and more to help you master email security.",
+  buttonText: "Browse Guides",
+  buttonHref: "/guides",
+  gradient: true,
+};
+
+const companyCategories = [
+  {
+    title: "Company",
+    icon: <FaInfoCircle className="h-5 w-5 text-primary" />,
+    items: [
+      { name: "About Us", href: "/company", icon: <FaInfoCircle className="h-4 w-4" />, description: "Who we are and what we stand for" },
+      { name: "Press & Media", href: "/press", icon: <FaBullhorn className="h-4 w-4" />, description: "Hear what the world says about us in the news" },
+      { name: "Careers", href: "/careers", icon: <FaUserTie className="h-4 w-4" />, description: "Learn about career opportunities at TrustYourInbox" },
+      { name: "Partners", href: "/partners", icon: <FaHandshake className="h-4 w-4" />, description: "Our partner program and collaborations" },
+      { name: "Events", href: "/events", icon: <FaCalendarAlt className="h-4 w-4" />, description: "Company events and webinars" },
+      { name: "Contact Us", href: "/contact", icon: <FaEnvelope className="h-4 w-4" />, description: "How to reach us" },
+    ],
+  },
+];
+
+const companyFeaturedBox = {
+  badge: "Announcement",
+  title: "Securing Email in the AI Era",
+  description: "Join our upcoming webinar to learn how AI is changing email security. June 20, 2025",
+  buttonText: "Register Now",
+  buttonHref: "/events",
+  gradient: true,
+};
+
 export default function Navbar() {
   const pathname = usePathname();
   const [isToolsOpen, setIsToolsOpen] = useState(false);
@@ -176,9 +273,9 @@ export default function Navbar() {
                 <div className="grid grid-cols-2 gap-4">
                   {resourcesMenu[0].items.map((item) => (
                     <Link
-                      key={item.href}
+                      key={item.label}
                       href={item.href}
-                      className="group block p-3 rounded-xl bg-white hover:bg-blue-50 shadow-sm hover:shadow-lg transition-all border border-gray-100 hover:border-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-200"
+                      className="group block p-3 rounded-xl bg-white hover:bg-blue-50 shadow-sm hover:shadow-lg transition-all border border-gray-100 hover:border-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-200 min-h-[140px]"
                       onClick={() => setIsResourcesOpen(false)}
                     >
                       <div className="bg-blue-100 group-hover:bg-blue-600 p-2 rounded-full mb-2 transition-colors inline-block">
@@ -195,18 +292,18 @@ export default function Navbar() {
                   ))}
                 </div>
               </div>
-              {/* WATCH & LISTEN section */}
+              {/* RESOURCES section */}
               <div>
                 <div className="mb-4">
-                  <div className="text-base font-bold text-gray-900 mb-1">WATCH & LISTEN</div>
+                  <div className="text-base font-bold text-gray-900 mb-1">RESOURCES</div>
                   <div className="h-0.5 w-10 bg-blue-600 rounded mb-2" />
                 </div>
-                <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-2 h-full">
                   {resourcesMenu[1].items.map((item) => (
                     <Link
-                      key={item.href}
+                      key={item.label}
                       href={item.href}
-                      className="group block p-3 rounded-xl bg-white hover:bg-blue-50 shadow-sm hover:shadow-lg transition-all border border-gray-100 hover:border-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-200"
+                      className="group block p-3 rounded-xl bg-white hover:bg-blue-50 shadow-sm hover:shadow-lg transition-all border border-gray-100 hover:border-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-200 min-h-[140px]"
                       onClick={() => setIsResourcesOpen(false)}
                     >
                       <div className="bg-blue-100 group-hover:bg-blue-600 p-2 rounded-full mb-2 transition-colors inline-block">
@@ -273,23 +370,25 @@ export default function Navbar() {
                 <span className="text-xl font-bold text-gray-900 tracking-tight">Explore TrustYourInbox</span>
               </div>
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-                {companyMenu.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className="group flex flex-col items-start gap-2 p-3 rounded-xl bg-white hover:bg-blue-50 shadow-sm hover:shadow-lg transition-all border border-gray-100 hover:border-blue-200 transform hover:scale-[1.04] focus:outline-none focus:ring-2 focus:ring-blue-200"
-                  >
-                    <div className="bg-blue-100 group-hover:bg-blue-600 p-2 rounded-full mb-2 transition-colors">
-                      <span className="text-blue-600 group-hover:text-white transition-colors">{item.icon}</span>
-                    </div>
-                    <div className="font-semibold text-gray-900 text-base flex items-center gap-1">
-                      {item.title}
-                      <svg className="w-4 h-4 text-blue-300 group-hover:text-blue-600 transition-colors" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
-                    </div>
-                    {item.description && (
-                      <div className="text-sm text-gray-500 leading-snug">{item.description}</div>
-                    )}
-                  </Link>
+                {companyCategories.map((category) => (
+                  category.items.map((item) => (
+                    <Link
+                      key={item.name}
+                      href={item.href}
+                      className="group flex flex-col items-start gap-2 p-3 rounded-xl bg-white hover:bg-blue-50 shadow-sm hover:shadow-lg transition-all border border-gray-100 hover:border-blue-200 transform hover:scale-[1.04] focus:outline-none focus:ring-2 focus:ring-blue-200"
+                    >
+                      <div className="bg-blue-100 group-hover:bg-blue-600 p-2 rounded-full mb-2 transition-colors">
+                        <span className="text-blue-600 group-hover:text-white transition-colors">{item.icon}</span>
+                      </div>
+                      <div className="font-semibold text-gray-900 text-base flex items-center gap-1">
+                        {item.name}
+                        <svg className="w-4 h-4 text-blue-300 group-hover:text-blue-600 transition-colors" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
+                      </div>
+                      {item.description && (
+                        <div className="text-sm text-gray-500 leading-snug">{item.description}</div>
+                      )}
+                    </Link>
+                  ))
                 ))}
               </div>
             </div>
