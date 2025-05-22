@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { FaCheckCircle, FaExclamationTriangle, FaTimesCircle, FaShieldAlt, FaKey, FaEnvelope, FaTrophy, FaMedal, FaCopy, FaInfoCircle } from "react-icons/fa";
+import { FaCheckCircle, FaExclamationTriangle, FaTimesCircle, FaShieldAlt, FaKey, FaEnvelope, FaTrophy, FaMedal, FaCopy, FaInfoCircle, FaServer } from "react-icons/fa";
 import { ToolLayout, Button, Input, Card, Alert } from "@/components/ui";
 import { DMARCStatus } from "@/components/ui/DMARCStatus";
 
@@ -229,13 +229,13 @@ function CopyButton({ value }: { value: string }) {
     <Button
       variant="ghost"
       size="sm"
-      leftIcon={<FaCopy />}
       onClick={() => {
         navigator.clipboard.writeText(value);
         setCopied(true);
         setTimeout(() => setCopied(false), 1200);
       }}
     >
+      <FaCopy className="mr-2" />
       {copied ? "Copied!" : "Copy"}
     </Button>
   );
@@ -323,7 +323,7 @@ export default function DMARCDomainCheckerPage() {
             required
             pattern="^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
           />
-          <Button type="submit" disabled={loading || !domain} isLoading={loading}>
+          <Button type="submit" disabled={loading || !domain}>
             {loading ? "Checking..." : "Check Domain"}
           </Button>
         </form>
@@ -356,37 +356,15 @@ export default function DMARCDomainCheckerPage() {
 
           {/* Recommendations Section */}
           {recommendations.length > 0 && (
-            <Card>
-              <h3 className="font-semibold text-gray-900 mb-3">Recommendations</h3>
-              <div className="space-y-3">
+            <Card className="mt-6" title="Recommendations">
+              <ul className="space-y-2">
                 {recommendations.map((rec, i) => (
-                  <div
-                    key={i}
-                    className={`flex items-start gap-3 p-3 rounded-lg border ${
-                      rec.type === 'warning' ? 'border-red-200' :
-                      rec.type === 'info' ? 'border-blue-200' :
-                      'border-green-200'
-                    }`}
-                  >
-                    <div className={`mt-0.5 ${
-                      rec.type === 'warning' ? 'text-red-600' :
-                      rec.type === 'info' ? 'text-blue-600' :
-                      'text-green-600'
-                    }`}>
-                      {rec.type === 'warning' ? <FaExclamationTriangle className="w-5 h-5" /> :
-                       rec.type === 'info' ? <FaInfoCircle className="w-5 h-5" /> :
-                       <FaCheckCircle className="w-5 h-5" />}
-                    </div>
-                    <p className={`text-sm ${
-                      rec.type === 'warning' ? 'text-red-700' :
-                      rec.type === 'info' ? 'text-blue-700' :
-                      'text-green-700'
-                    }`}>
-                      {rec.message}
-                    </p>
-                  </div>
+                  <li key={i} className="flex items-start gap-2">
+                    <FaInfoCircle className="w-4 h-4 text-blue-600 mt-0.5" />
+                    <span>{rec.message}</span>
+                  </li>
                 ))}
-              </div>
+              </ul>
             </Card>
           )}
 
@@ -476,6 +454,24 @@ export default function DMARCDomainCheckerPage() {
           </div>
         </div>
       )}
+
+      {/* Related Tools */}
+      <Card className="mt-8" title="Related Tools">
+        <div className="flex flex-wrap gap-4">
+          <a href="/tools/dmarc-analyzer" className="flex items-center gap-2 text-blue-600 hover:text-blue-700">
+            <FaShieldAlt className="w-5 h-5" />
+            <span>DMARC Analyzer</span>
+          </a>
+          <a href="/tools/spf-surveyor" className="flex items-center gap-2 text-blue-600 hover:text-blue-700">
+            <FaServer className="w-5 h-5" />
+            <span>SPF Surveyor</span>
+          </a>
+          <a href="/tools/dkim-validator" className="flex items-center gap-2 text-blue-600 hover:text-blue-700">
+            <FaKey className="w-5 h-5" />
+            <span>DKIM Validator</span>
+          </a>
+        </div>
+      </Card>
     </ToolLayout>
   );
 } 

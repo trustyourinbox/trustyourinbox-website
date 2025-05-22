@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { FaInfoCircle, FaBullhorn, FaUserTie, FaHandshake, FaCalendarAlt, FaEnvelope, FaSearch, FaShieldAlt, FaMagic, FaSun, FaKey, FaCheckCircle, FaFileCode, FaBookOpen, FaNewspaper, FaBook, FaStar, FaLifeRing, FaVideo } from "react-icons/fa";
+import { MegaMenu } from "@/components/MegaMenu"
 
 const navLinks = [
   { href: "/features", label: "Features" },
@@ -132,45 +133,8 @@ export default function Navbar() {
         )}
         {/* Mega Menu Dropdown */}
         {isToolsOpen && (
-          <div className="absolute left-1/2 -translate-x-1/2 top-full mt-0 w-[1100px] rounded-2xl bg-gradient-to-br from-blue-50 via-white to-white shadow-2xl border border-blue-100 py-10 px-10 z-50 flex gap-8 pt-2">
-            {/* Left: Menu grid */}
-            <div className="flex-1 min-w-0">
-              <div className="mb-6 flex items-center gap-2">
-                <span className="inline-block w-1.5 h-6 bg-blue-600 rounded-full"></span>
-                <span className="text-xl font-bold text-gray-900 tracking-tight">DMARC Tools</span>
-              </div>
-              <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {dmarcTools.map((tool) => (
-                  <Link
-                    key={tool.href}
-                    href={tool.href}
-                    className="group flex flex-col items-start gap-2 p-3 rounded-xl bg-white hover:bg-blue-50 shadow-sm hover:shadow-lg transition-all border border-gray-100 hover:border-blue-200 transform hover:scale-[1.04] focus:outline-none focus:ring-2 focus:ring-blue-200"
-                    onClick={() => setIsToolsOpen(false)}
-                  >
-                    <div className="bg-blue-100 group-hover:bg-blue-600 p-2 rounded-full mb-2 transition-colors">
-                      <span className="text-blue-600 group-hover:text-white transition-colors">{tool.icon}</span>
-                    </div>
-                    <div className="font-semibold text-gray-900 text-base flex items-center gap-1">
-                      {tool.label}
-                      <svg className="w-4 h-4 text-blue-300 group-hover:text-blue-600 transition-colors" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
-                    </div>
-                    <div className="text-sm text-gray-500 leading-snug">{tool.description}</div>
-                  </Link>
-                ))}
-              </div>
-            </div>
-            {/* Right: Promo card */}
-            <div className="w-72 flex-shrink-0 flex flex-col justify-between bg-gradient-to-br from-blue-600 to-blue-500 rounded-2xl shadow-lg p-6 text-white">
-              <div>
-                <div className="uppercase text-xs font-bold tracking-widest text-blue-100 mb-2">Featured</div>
-                <div className="text-lg font-semibold mb-2">What is DMARC?</div>
-                <div className="text-sm text-blue-100 mb-4">Learn how DMARC protects your domain from phishing and spoofing. <br/> <span className="font-semibold">Explore our tools</span></div>
-                <a href="/tools/dmarc-domain-checker" className="inline-block mt-2 px-4 py-2 rounded-full bg-white text-blue-700 font-semibold text-sm shadow hover:bg-blue-50 transition-colors">Check Your Domain</a>
-              </div>
-              <div className="mt-6 flex justify-end">
-                <svg width="80" height="40" viewBox="0 0 80 40" fill="none" xmlns="http://www.w3.org/2000/svg"><ellipse cx="40" cy="20" rx="40" ry="20" fill="#2563eb" fillOpacity="0.15"/></svg>
-              </div>
-            </div>
+          <div className="absolute left-1/2 -translate-x-1/2 top-full mt-0 w-[900px] rounded-xl bg-gradient-to-br from-blue-50 via-white to-white shadow-xl border border-blue-100 py-4 px-4 z-50 flex gap-4">
+            <MegaMenu isOpen={isToolsOpen} onClose={() => setIsToolsOpen(false)} />
           </div>
         )}
       </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { FaCopy, FaShieldAlt, FaInfoCircle, FaExclamationTriangle, FaCheckCircle } from "react-icons/fa";
+import { FaCopy, FaShieldAlt, FaInfoCircle, FaExclamationTriangle, FaCheckCircle, FaServer, FaKey } from "react-icons/fa";
 import { ToolLayout, Button, Input, Card } from "@/components/ui";
 import { DMARCStatus } from "@/components/ui/DMARCStatus";
 
@@ -204,39 +204,35 @@ export default function DMARCAnalyzerPage() {
       )}
 
       {recommendations.length > 0 && (
-        <Card className="mt-6">
-          <h3 className="font-semibold text-gray-900 mb-3">Recommendations</h3>
-          <div className="space-y-3">
+        <Card className="mt-6" title="Recommendations">
+          <ul className="space-y-2">
             {recommendations.map((rec, i) => (
-              <div
-                key={i}
-                className={`flex items-start gap-3 p-3 rounded-lg border ${
-                  rec.type === 'warning' ? 'border-red-200' :
-                  rec.type === 'info' ? 'border-blue-200' :
-                  'border-green-200'
-                }`}
-              >
-                <div className={`mt-0.5 ${
-                  rec.type === 'warning' ? 'text-red-600' :
-                  rec.type === 'info' ? 'text-blue-600' :
-                  'text-green-600'
-                }`}>
-                  {rec.type === 'warning' ? <FaExclamationTriangle className="w-5 h-5" /> :
-                   rec.type === 'info' ? <FaInfoCircle className="w-5 h-5" /> :
-                   <FaCheckCircle className="w-5 h-5" />}
-                </div>
-                <p className={`text-sm ${
-                  rec.type === 'warning' ? 'text-red-700' :
-                  rec.type === 'info' ? 'text-blue-700' :
-                  'text-green-700'
-                }`}>
-                  {rec.message}
-                </p>
-              </div>
+              <li key={i} className="flex items-start gap-2">
+                <FaInfoCircle className="w-4 h-4 text-blue-600 mt-0.5" />
+                <span>{rec.message}</span>
+              </li>
             ))}
-          </div>
+          </ul>
         </Card>
       )}
+
+      {/* Related Tools */}
+      <Card className="mt-8" title="Related Tools">
+        <div className="flex flex-wrap gap-4">
+          <a href="/tools/dmarc-domain-checker" className="flex items-center gap-2 text-blue-600 hover:text-blue-700">
+            <FaShieldAlt className="w-5 h-5" />
+            <span>DMARC Domain Checker</span>
+          </a>
+          <a href="/tools/spf-surveyor" className="flex items-center gap-2 text-blue-600 hover:text-blue-700">
+            <FaServer className="w-5 h-5" />
+            <span>SPF Surveyor</span>
+          </a>
+          <a href="/tools/dkim-validator" className="flex items-center gap-2 text-blue-600 hover:text-blue-700">
+            <FaKey className="w-5 h-5" />
+            <span>DKIM Validator</span>
+          </a>
+        </div>
+      </Card>
 
       {tags && (
         <div className="mt-6 space-y-4">
@@ -250,9 +246,9 @@ export default function DMARCAnalyzerPage() {
                 <Button
                   variant="ghost"
                   size="sm"
-                  leftIcon={<FaCopy />}
                   onClick={() => navigator.clipboard.writeText(`${tag}=${value}`)}
                 >
+                  <FaCopy className="mr-2" />
                   Copy
                 </Button>
               </div>

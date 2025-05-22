@@ -1,33 +1,42 @@
 import Image from "next/image"
 import Link from "next/link"
-import { Nunito_Sans } from "next/font/google"
+import { Inter } from "next/font/google"
 import Navbar from "@/components/Navbar"
+import Footer from "@/components/Footer"
+import CtaSection from "@/components/sections/CtaSection"
 import "./globals.css"
 import { FaThLarge, FaTwitter, FaLinkedinIn, FaYoutube, FaMapMarkerAlt, FaPhoneAlt, FaEnvelope, FaCalendarAlt, FaHome, FaInfoCircle, FaCogs, FaTag, FaRegNewspaper } from "react-icons/fa"
+import { Shield } from "lucide-react"
 
-const nunitoSans = Nunito_Sans({
+const inter = Inter({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-nunito-sans",
+  variable: "--font-sans",
 })
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${nunitoSans.variable}`}>
+    <html lang="en" className={`${inter.variable}`}>
+      <head>
+        <title>Free DMARC Checker & Monitoring Tool | Stop Email Spoofing | TrustYourInbox</title>
+        <meta name="description" content="Implement DMARC easily with our free checker. Stop email spoofing, protect your domain, and monitor authentication. Perfect for IT teams, MSPs, and small businesses." />
+        <meta property="og:title" content="Free DMARC Checker & Monitoring Tool | Stop Email Spoofing | TrustYourInbox" />
+        <meta property="og:description" content="Implement DMARC easily with our free checker. Stop email spoofing, protect your domain, and monitor authentication. Perfect for IT teams, MSPs, and small businesses." />
+        <meta property="og:image" content="/images/og-image.png" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://trustyourinbox.com/" />
+        <meta name="keywords" content="DMARC checker, DMARC monitoring, email spoofing protection, DMARC implementation, free DMARC analyzer, MSP DMARC solution" />
+        <link rel="canonical" href="https://trustyourinbox.com/" />
+      </head>
       <body className="font-sans antialiased">
         {/* Navigation */}
         <header className="sticky top-0 z-50 bg-white shadow-sm border-b border-gray-100">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex h-16 items-center justify-between">
               <div className="flex-shrink-0">
-                <Link href="/" className="flex items-center">
-                  <Image
-                    src="/images/logo.png"
-                    alt="TrustYourInbox Logo"
-                    width={200}
-                    height={40}
-                    className="h-10 w-auto"
-                  />
+                <Link href="/" className="flex items-center gap-2 font-bold text-2xl">
+                  <Shield className="h-7 w-7 text-primary" />
+                  <span><span className="text-primary">Trust</span>YourInbox</span>
                 </Link>
               </div>
               <Navbar />
@@ -38,7 +47,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 </Link>
                 <Link
                   href="/signup"
-                  className="inline-flex items-center justify-center rounded-full bg-blue-600 px-6 py-2 text-base font-semibold text-white shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200"
+                  className="inline-flex items-center justify-center rounded-md bg-blue-600 px-6 py-2 text-base font-semibold text-white shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200"
                 >
                   Sign Up
                 </Link>
@@ -47,53 +56,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </div>
         </header>
         <main>{children}</main>
-        {/* Footer */}
-        <footer className="w-full bg-blue-700 text-white pt-12 pb-6 font-sans">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
-              {/* Brand & Social */}
-              <div className="flex flex-col items-start">
-                <div className="text-xl font-bold mb-2 tracking-tight">TrustYourInbox</div>
-                <div className="mb-3 text-sm font-medium leading-relaxed text-white/90">
-                  Secure email solutions for businesses and individuals.<br />
-                  Protecting your communications since 2020.
-                </div>
-                <div className="flex gap-3 mt-3">
-                  <a href="#" aria-label="X (Twitter)" className="hover:text-blue-200"><FaTwitter className="w-4 h-4 text-white/80" /></a>
-                  <a href="#" aria-label="YouTube" className="hover:text-blue-200"><FaYoutube className="w-4 h-4 text-white/80" /></a>
-                  <a href="#" aria-label="LinkedIn" className="hover:text-blue-200"><FaLinkedinIn className="w-4 h-4 text-white/80" /></a>
-                </div>
-              </div>
-              {/* Blank Column */}
-              <div></div>
-              {/* Blank Column */}
-              <div></div>
-              {/* Schedule a Demo CTA */}
-              <div className="flex flex-col items-start">
-                <div className="text-base font-bold mb-2 flex items-center gap-2 tracking-tight">
-                  <FaCalendarAlt className="w-4 h-4 text-white/80" />
-                  Schedule a Demo
-                </div>
-                <div className="mb-3 text-sm font-medium text-white/90">See TrustYourInbox in action. Book a personalized walkthrough with our team.</div>
-                <a href="/demo" className="rounded-lg bg-white text-blue-700 font-semibold py-2 px-5 hover:bg-blue-100 transition-colors shadow text-sm">
-                  Book a Demo
-                </a>
-              </div>
-            </div>
-            {/* Divider */}
-            <div className="border-t border-blue-400 opacity-40 my-5" />
-            {/* Bottom Row */}
-            <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-white/60 font-medium">
-              <div>&copy; {new Date().getFullYear()} TrustYourInbox. All rights reserved.</div>
-              <div className="flex gap-5">
-                <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
-                <Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
-                <Link href="/cookies" className="hover:text-white transition-colors">Cookie Policy</Link>
-                <Link href="/contact" className="hover:text-white transition-colors">Contact</Link>
-              </div>
-            </div>
-          </div>
-        </footer>
+        <CtaSection />
+        <Footer />
       </body>
     </html>
   )

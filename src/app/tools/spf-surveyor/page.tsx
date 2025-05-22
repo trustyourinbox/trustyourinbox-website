@@ -1,6 +1,6 @@
 "use client";
 import { useState, useRef } from "react";
-import { FaCheckCircle, FaExclamationTriangle, FaTimesCircle, FaInfoCircle, FaServer, FaGlobe, FaShieldAlt, FaExclamationCircle, FaNetworkWired, FaChevronRight, FaChevronDown, FaCopy, FaTrophy } from "react-icons/fa";
+import { FaCheckCircle, FaExclamationTriangle, FaTimesCircle, FaInfoCircle, FaServer, FaGlobe, FaShieldAlt, FaExclamationCircle, FaNetworkWired, FaChevronRight, FaChevronDown, FaCopy, FaTrophy, FaKey } from "react-icons/fa";
 import { ToolLayout, Button, Input, Card, Alert } from "@/components/ui";
 
 interface SPFNode {
@@ -414,7 +414,7 @@ export default function SPFSurveyorPage() {
             required
             pattern="^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
           />
-          <Button type="submit" disabled={loading || !domain} isLoading={loading}>
+          <Button type="submit" disabled={loading || !domain}>
             {loading ? "Analyzing..." : "Analyze SPF Record"}
           </Button>
         </form>
@@ -505,9 +505,9 @@ export default function SPFSurveyorPage() {
               <Button
                 variant="ghost"
                 size="sm"
-                leftIcon={<FaCopy />}
                 onClick={() => handleCopy(spfTree.record)}
               >
+                <FaCopy className="mr-2" />
                 {copied ? "Copied!" : "Copy"}
               </Button>
             </div>
@@ -521,6 +521,24 @@ export default function SPFSurveyorPage() {
           </Card>
         </div>
       )}
+
+      {/* Related Tools */}
+      <Card className="mt-8" title="Related Tools">
+        <div className="flex flex-wrap gap-4">
+          <a href="/tools/dmarc-analyzer" className="flex items-center gap-2 text-blue-600 hover:text-blue-700">
+            <FaShieldAlt className="w-5 h-5" />
+            <span>DMARC Analyzer</span>
+          </a>
+          <a href="/tools/dmarc-domain-checker" className="flex items-center gap-2 text-blue-600 hover:text-blue-700">
+            <FaShieldAlt className="w-5 h-5" />
+            <span>DMARC Domain Checker</span>
+          </a>
+          <a href="/tools/dkim-validator" className="flex items-center gap-2 text-blue-600 hover:text-blue-700">
+            <FaKey className="w-5 h-5" />
+            <span>DKIM Validator</span>
+          </a>
+        </div>
+      </Card>
     </ToolLayout>
   );
 } 

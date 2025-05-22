@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { FaCheckCircle, FaExclamationTriangle, FaTimesCircle, FaKey, FaCopy, FaInfoCircle, FaTrophy, FaMedal, FaShieldAlt } from "react-icons/fa";
+import { FaCheckCircle, FaExclamationTriangle, FaTimesCircle, FaKey, FaCopy, FaInfoCircle, FaTrophy, FaMedal, FaShieldAlt, FaServer } from "react-icons/fa";
 import { Buffer } from "buffer";
 // @ts-expect-error: asn1.js has no types
 import asn1 from "asn1.js";
@@ -188,13 +188,13 @@ function CopyButton({ value }: { value: string }) {
     <Button
       variant="ghost"
       size="sm"
-      leftIcon={<FaCopy />}
       onClick={() => {
         navigator.clipboard.writeText(value);
         setCopied(true);
         setTimeout(() => setCopied(false), 1200);
       }}
     >
+      <FaCopy className="mr-2" />
       {copied ? "Copied!" : "Copy"}
     </Button>
   );
@@ -455,6 +455,37 @@ export default function DKIMValidatorPage() {
           </Card>
         </div>
       )}
+
+      {recommendations.length > 0 && (
+        <Card className="mt-6" title="Recommendations">
+          <ul className="space-y-2">
+            {recommendations.map((rec, i) => (
+              <li key={i} className="flex items-start gap-2">
+                <FaInfoCircle className="w-4 h-4 text-blue-600 mt-0.5" />
+                <span>{rec.message}</span>
+              </li>
+            ))}
+          </ul>
+        </Card>
+      )}
+
+      {/* Related Tools */}
+      <Card className="mt-8" title="Related Tools">
+        <div className="flex flex-wrap gap-4">
+          <a href="/tools/dmarc-analyzer" className="flex items-center gap-2 text-blue-600 hover:text-blue-700">
+            <FaShieldAlt className="w-5 h-5" />
+            <span>DMARC Analyzer</span>
+          </a>
+          <a href="/tools/dmarc-domain-checker" className="flex items-center gap-2 text-blue-600 hover:text-blue-700">
+            <FaShieldAlt className="w-5 h-5" />
+            <span>DMARC Domain Checker</span>
+          </a>
+          <a href="/tools/spf-surveyor" className="flex items-center gap-2 text-blue-600 hover:text-blue-700">
+            <FaServer className="w-5 h-5" />
+            <span>SPF Surveyor</span>
+          </a>
+        </div>
+      </Card>
 
       {error && (
         <Alert variant="error" className="mt-6">

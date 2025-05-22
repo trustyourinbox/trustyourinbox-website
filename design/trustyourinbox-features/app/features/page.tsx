@@ -16,6 +16,7 @@ export default function FeaturesPage() {
                   alt="TrustYourInbox Logo"
                   width={200}
                   height={40}
+                  style={{ height: 'auto' }}
                   className="h-8 w-auto"
                 />
               </Link>

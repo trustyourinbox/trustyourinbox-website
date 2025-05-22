@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
+import { Shield } from "lucide-react"
 
 const navigation = [
   { name: 'How It Works', href: '/how-it-works' },
@@ -19,8 +20,9 @@ export function Navbar() {
     <header className="fixed top-0 z-50 w-full glass border-b border-white/20">
       <nav className="container flex items-center justify-between py-4" aria-label="Global">
         <div className="flex lg:flex-1">
-          <Link href="/" className="-m-1.5 p-1.5 transition-all duration-300 hover:scale-105">
-            <span className="font-display text-2xl font-bold gradient-text">TrustYourInbox</span>
+          <Link href="/" className="-m-1.5 p-1.5 transition-all duration-300 hover:scale-105 flex items-center gap-2 font-bold text-xl">
+            <Shield className="h-6 w-6 text-primary" />
+            <span><span className="text-primary">Trust</span>YourInbox</span>
           </Link>
         </div>
         <div className="flex lg:hidden">

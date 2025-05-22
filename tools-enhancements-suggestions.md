@@ -78,13 +78,18 @@
 - [x] Add actionable recommendations section
 - [x] Fix status dots display
 - [x] Improve SPF tree visualization
+- [x] Add Related Tools section to the bottom of the page
+- [x] Remove duplicate recommendations section and resolve all linter/build errors
 
 ### B.5. XML Converter
-- [ ] Implement new shared layout (using DMARC Analyzer as template)
-- [ ] Add modern UI components
-- [ ] Improve conversion feedback
-- [ ] Add file upload preview
-- [ ] Include helpful sidebar content
+- [x] Implement new shared layout (using DMARC Analyzer as template)
+- [x] Add modern UI components
+- [x] Polish chart visualizations
+- [x] Add helpful sidebar content
+- [x] Add Related Tools section
+- [x] Add file upload preview
+- [x] Improve conversion feedback
+- [x] Visually polish Uploaded Files section for clarity and usability
 
 ### B.6. DMARC Domain Checker
 - [x] Implement new shared layout (using DMARC Analyzer as template)
@@ -96,6 +101,101 @@
 - [x] Implement consistent status display with DMARCStatus component
 - [x] Add proper loading states and error handling
 - [x] Improve record display and copy functionality
+
+### B.7. DMARC Policy Generator
+- [x] Implement new shared layout (using DMARC Analyzer as template)
+- [x] Add modern UI components
+- [x] Step-by-step wizard for DMARC record creation
+- [x] Add explanations and best practice tips for each tag
+- [x] Add export/copy functionality for generated record
+- [x] Include helpful sidebar content
+
+### B.8. Forensic DMARC Report Viewer
+- [ ] Implement new shared layout
+- [ ] Add modern UI components
+- [ ] Parse and display forensic (ruf) DMARC reports
+- [ ] Add search/filter for individual incidents
+- [ ] Add export/download functionality
+- [ ] Include helpful sidebar content
+
+### B.9. DMARC Alignment Checker
+- [ ] Implement new shared layout
+- [ ] Add modern UI components
+- [ ] Input for message headers or sample data
+- [ ] Analyze and display alignment results (SPF, DKIM, DMARC)
+- [ ] Add actionable recommendations
+- [ ] Include helpful sidebar content
+
+### B.10. DMARC Policy Impact Simulator
+- [x] Implement new shared layout
+- [x] Add modern UI components
+- [x] Allow user to upload DMARC XML or sample data
+- [x] Simulate effect of stricter DMARC policies
+- [x] Visualize impact and provide recommendations
+- [x] Include helpful sidebar content
+
+### B.11. DMARC Subdomain Policy Checker
+- [ ] Implement new shared layout
+- [ ] Add modern UI components
+- [ ] Input for domain and subdomains
+- [ ] Analyze and display subdomain policy coverage
+- [ ] Add actionable recommendations
+- [ ] Include helpful sidebar content
+
+### B.12. DMARC Report Forwarding Validator
+- [ ] Implement new shared layout
+- [ ] Add modern UI components
+- [ ] Input for rua/ruf addresses
+- [ ] Validate DNS setup for external report delivery
+- [ ] Add actionable recommendations
+- [ ] Include helpful sidebar content
+
+### B.13. BIMI Tools Suite
+- [ ] Implement new shared layout
+- [ ] Add modern UI components
+- [ ] BIMI Checker
+  - [ ] Validate BIMI record syntax
+  - [ ] Check logo accessibility
+  - [ ] Verify DNS configuration
+- [ ] BIMI Generator
+  - [ ] Step-by-step wizard
+  - [ ] Logo optimization
+  - [ ] Record generation
+- [ ] BIMI SVG Logo Converter
+  - [ ] Convert images to SVG
+  - [ ] Optimize for BIMI requirements
+  - [ ] Preview functionality
+- [ ] Include helpful sidebar content
+
+### B.14. MTA-STS & TLS-RPT Tools
+- [ ] Implement new shared layout
+- [ ] Add modern UI components
+- [ ] MTA-STS & TLS-RPT Checker
+  - [ ] Validate policy syntax
+  - [ ] Check DNS configuration
+  - [ ] Verify HTTPS endpoints
+- [ ] MTA-STS & TLS-RPT Generator
+  - [ ] Policy creation wizard
+  - [ ] Best practice recommendations
+  - [ ] Export functionality
+- [ ] Include helpful sidebar content
+
+### B.15. Additional Security Tools
+- [ ] Implement new shared layout
+- [ ] Add modern UI components
+- [ ] Domain Security Checker
+  - [ ] Comprehensive security audit
+  - [ ] Multiple protocol validation
+  - [ ] Actionable recommendations
+- [ ] DNSSEC Checker
+  - [ ] Validate DNSSEC configuration
+  - [ ] Check key rotation
+  - [ ] Security recommendations
+- [ ] FCrDNS Lookup
+  - [ ] Forward/reverse DNS validation
+  - [ ] IP reputation checking
+  - [ ] Configuration recommendations
+- [ ] Include helpful sidebar content
 
 ## C. General Enhancements
 
@@ -143,14 +243,23 @@
 
 ## Tool Page Update Status
 
-| Tool | Status | Last Updated | Notes |
-|------|--------|--------------|-------|
-| DMARC Analyzer | ✅ Completed | 2024-03-19 | Updated with shared layout, modern UI, and recommendations |
-| DKIM Validator | ✅ Completed | 2024-03-19 | Updated with shared layout, modern UI, and recommendations |
-| DKIM Inspector | ✅ Completed | 2024-03-19 | Updated with shared layout, modern UI, and recommendations |
-| SPF Surveyor | ✅ Completed | 2024-03-19 | Updated with shared layout, modern UI, dot-based rating, recommendations, and improved tree visualization |
-| XML Converter | ⏳ Pending | - | - |
-| DMARC Domain Checker | ✅ Completed | 2024-03-19 | Updated with shared layout, modern UI, dot-based rating, and recommendations |
+| Tool                | Status    | Last Updated | Notes |
+|---------------------|-----------|--------------|-------|
+| DMARC Analyzer       | ✅ Completed | 2024-03-19 | Updated with shared layout, modern UI, and recommendations |
+| DKIM Validator        | ✅ Completed | 2024-03-19 | Updated with shared layout, modern UI, and recommendations |
+| DKIM Inspector       | ✅ Completed | 2024-03-19 | Updated with shared layout, modern UI, and recommendations |
+| SPF Surveyor          | ✅ Complete  | 2024-03-19 | Updated with shared layout, dot-based rating, recommendations, Related Tools, all errors fixed |
+| XML Converter         | Complete    | 2024-03-19   | All tasks done. File upload section visually polished for clarity and usability. |
+| DMARC Domain Checker  | ✅ Completed | 2024-03-19 | Updated with shared layout, modern UI, dot-based rating, and recommendations |
+| DMARC Policy Generator | ✅ Completed | 2024-03-19 | Updated with shared layout, modern UI, step-by-step wizard, and best practices |
+| Forensic DMARC Report Viewer | Planned  |              |       |
+| DMARC Alignment Checker | Planned  |              |       |
+| DMARC Policy Impact Simulator | ✅ Completed | 2024-03-19 | Updated with shared layout, modern UI, charts, and recommendations |
+| DMARC Subdomain Policy Checker | Planned  |              |       |
+| DMARC Report Forwarding Validator | Planned  |              |       |
+| BIMI Tools Suite | Planned  |              | New addition based on PowerDMARC analysis |
+| MTA-STS & TLS-RPT Tools | Planned  |              | New addition based on PowerDMARC analysis |
+| Additional Security Tools | Planned  |              | New addition based on PowerDMARC analysis |
 
 ## Notes
 - All shared UI components have been created and are ready for use
@@ -164,4 +273,8 @@
   - Interactive elements and feedback
   - Helpful sidebar content
   - Consistent styling and spacing
-  - Proper error handling and loading states 
+  - Proper error handling and loading states
+- New tools added based on PowerDMARC analysis:
+  - BIMI Tools Suite for brand logo display in email clients
+  - MTA-STS & TLS-RPT Tools for secure email transport
+  - Additional Security Tools for comprehensive domain security 

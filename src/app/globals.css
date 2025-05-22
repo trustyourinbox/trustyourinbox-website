@@ -3,9 +3,6 @@
 @tailwind utilities;
 
 :root {
-  /* Font */
-  --font-nunito-sans: "Nunito Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  
   /* Colors */
   --background: 0 0% 100%;
   --foreground: 222.2 84% 4.9%;
