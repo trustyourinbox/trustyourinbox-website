@@ -629,7 +629,7 @@ export default function SPFSurveyorPage() {
               </div>
               <div>
                 <h3 className="font-semibold text-lg group-hover:underline">Domain Security Checker</h3>
-                <p className="text-sm text-muted-foreground mt-1">Check your domain's overall email security configuration</p>
+                <p className="text-sm text-muted-foreground mt-1">Check your domain&apos;s overall email security configuration</p>
               </div>
             </div>
             <div className="absolute bottom-0 left-0 h-1 w-0 bg-primary transition-all duration-300 group-hover:w-full"></div>

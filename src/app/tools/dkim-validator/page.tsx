@@ -250,7 +250,7 @@ export default function DKIMValidatorPage() {
           About DKIM
         </h3>
         <p className="text-sm text-gray-500 mt-2">
-          DKIM (DomainKeys Identified Mail) adds a digital signature to your emails, allowing recipients to verify the message hasn't been tampered with.
+          DKIM (DomainKeys Identified Mail) adds a digital signature to your emails, allowing recipients to verify the message hasn&apos;t been tampered with.
         </p>
       </div>
 
