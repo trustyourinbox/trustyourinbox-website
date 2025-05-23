@@ -5,7 +5,7 @@ import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { FaShieldAlt, FaCheckCircle, FaTimesCircle, FaInfoCircle, FaExclamationTriangle, FaLock, FaEnvelope, FaServer } from "react-icons/fa";
-import { Shield, Mail, Lock, Database, AlertTriangle, XCircle, Info, Key } from "lucide-react";
+import { Shield, Mail, Lock, Database, AlertTriangle, XCircle, Info, Key, Globe, ArrowRight } from "lucide-react";
 import { Progress } from "@/components/ui/Progress";
 import { Badge } from "@/components/ui/Badge";
 import { CardHeader, CardContent, CardTitle } from "@/components/ui/Card";
@@ -154,51 +154,74 @@ export default function DomainSecurityCheckerPage() {
         </>
       }
     >
-      <Card className="mb-8 p-6 bg-gradient-to-br from-brand/5 to-white border border-brand/10 relative overflow-hidden shadow-lg rounded-2xl">
-        {/* Watermark accent */}
-        <div className="absolute right-0 bottom-0 opacity-10 pointer-events-none select-none" style={{zIndex:0}}>
-          <FaShieldAlt className="w-40 h-40 text-brand" />
-        </div>
-        <div className="mb-4 relative z-10">
-          <label className="block font-semibold mb-2 text-brand-dark">Domain</label>
-          <div className="relative">
-            <Input
-              type="text"
-              placeholder="yourdomain.com"
-              value={domain}
-              onChange={e => setDomain(e.target.value)}
-              className="max-w-md pl-10 bg-white border-brand/20 focus:border-brand focus:ring-brand"
-            />
-            <div className="absolute left-3 top-1/2 -translate-y-1/2 text-brand/60">
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-              </svg>
+      <Card className="w-full border-0 shadow-lg">
+        <div className="p-6">
+          <div className="flex items-center gap-2 mb-6">
+            <Shield className="h-6 w-6 text-blue-600" />
+            <h2 className="text-2xl font-bold">Domain Security Checker</h2>
+          </div>
+
+          <form onSubmit={(e) => { e.preventDefault(); handleCheck(); }} className="space-y-4">
+            <div className="space-y-2">
+              <label htmlFor="domain" className="text-sm font-medium">
+                Domain Name
+              </label>
+              <div className="relative flex-1">
+                <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                  <Globe className="h-5 w-5 text-gray-400" />
+                </div>
+                <Input
+                  id="domain"
+                  type="text"
+                  placeholder="yourdomain.com"
+                  className="pl-10 h-11 border-gray-200 focus:border-blue-600 focus:ring-blue-600"
+                  value={domain}
+                  onChange={e => setDomain(e.target.value)}
+                  required
+                  pattern="^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                />
+              </div>
             </div>
-          </div>
+
+            <div>
+              <Button
+                type="submit"
+                className="bg-blue-600 hover:bg-blue-700 text-white min-w-[120px]"
+                disabled={loading || !domain}
+              >
+                {loading ? (
+                  <span className="flex items-center gap-2">
+                    <svg
+                      className="animate-spin h-4 w-4 text-white"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      ></circle>
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                      ></path>
+                    </svg>
+                    Checking...
+                  </span>
+                ) : (
+                  <span className="flex items-center gap-2">
+                    Check Now <ArrowRight className="h-4 w-4" />
+                  </span>
+                )}
+              </Button>
+            </div>
+          </form>
         </div>
-        <Button
-          onClick={handleCheck}
-          disabled={!domain || loading}
-          className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-semibold shadow-sm hover:shadow transition-all"
-        >
-          {loading ? (
-            <span className="flex items-center gap-2">
-              <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">
-                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
-                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-              </svg>
-              Checking...
-            </span>
-          ) : (
-            "Check Now"
-          )}
-        </Button>
-        {error && (
-          <div className="text-red-600 text-sm flex items-center gap-2 mt-2">
-            <FaTimesCircle className="w-4 h-4" />
-            {error}
-          </div>
-        )}
       </Card>
 
       {results.length > 0 && (
