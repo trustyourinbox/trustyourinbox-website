@@ -63,10 +63,8 @@ const resourcesMenu = [
   {
     heading: "LEARN",
     items: [
-      { label: "DMARC Guide", href: "/guides/dmarc", description: "Complete guide to understanding and implementing DMARC", icon: <FaBookOpen className="h-6 w-6" /> },
-      { label: "DMARC Analyzer", href: "/tools/dmarc-analyzer", description: "Analyze and understand your DMARC record", icon: <FaSearch className="h-6 w-6" /> },
-      { label: "DMARC Domain Checker", href: "/tools/dmarc-domain-checker", description: "Check your domain's DMARC status", icon: <FaCheckCircle className="h-6 w-6" /> },
-      { label: "Support", href: "/support", description: "Get help with DMARC implementation", icon: <FaLifeRing className="h-6 w-6" /> },
+      { label: "Email Security Guide", href: "/guides/email-security", description: "Complete guide to understanding and implementing email security", icon: <FaBookOpen className="h-6 w-6" /> },
+      { label: "Support", href: "/support", description: "Get help with email security implementation", icon: <FaLifeRing className="h-6 w-6" /> },
     ],
   },
   {
