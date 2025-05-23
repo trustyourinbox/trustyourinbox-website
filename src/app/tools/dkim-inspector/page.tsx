@@ -6,6 +6,8 @@ import { Buffer } from "buffer";
 // @ts-expect-error: asn1.js has no types
 import asn1 from "asn1.js";
 import { ToolLayout, Button, Input, Card, Alert } from "@/components/ui";
+import Link from "next/link";
+import { Shield, Mail, Key } from "lucide-react";
 
 function parseDKIMRecord(record: string) {
   // Parse DKIM record into key-value pairs
@@ -452,6 +454,63 @@ export default function DKIMInspectorPage() {
           {error}
         </Alert>
       )}
+
+      <div className="mt-12 mb-8">
+        <div className="mb-6">
+          <h2 className="text-2xl font-bold tracking-tight">Related Tools</h2>
+          <p className="text-muted-foreground mt-1">Explore more email authentication tools to secure your domain</p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <Link
+            href="/tools/dmarc-analyzer"
+            className="group relative overflow-hidden rounded-lg border p-5 transition-all hover:shadow-md border-blue-200 bg-blue-50 dark:border-blue-800 dark:bg-blue-950"
+          >
+            <div className="flex items-start gap-4">
+              <div className="rounded-full p-2 bg-blue-100 dark:bg-blue-900">
+                <Shield className="h-6 w-6 text-primary" />
+              </div>
+              <div>
+                <h3 className="font-semibold text-lg group-hover:underline">DMARC Analyzer</h3>
+                <p className="text-sm text-muted-foreground mt-1">Analyze your DMARC configuration and get detailed reports</p>
+              </div>
+            </div>
+            <div className="absolute bottom-0 left-0 h-1 w-0 bg-primary transition-all duration-300 group-hover:w-full"></div>
+          </Link>
+
+          <Link
+            href="/tools/spf-surveyor"
+            className="group relative overflow-hidden rounded-lg border p-5 transition-all hover:shadow-md border-green-200 bg-green-50 dark:border-green-800 dark:bg-green-950"
+          >
+            <div className="flex items-start gap-4">
+              <div className="rounded-full p-2 bg-green-100 dark:bg-green-900">
+                <Mail className="h-6 w-6 text-primary" />
+              </div>
+              <div>
+                <h3 className="font-semibold text-lg group-hover:underline">SPF Surveyor</h3>
+                <p className="text-sm text-muted-foreground mt-1">Validate and troubleshoot your SPF records</p>
+              </div>
+            </div>
+            <div className="absolute bottom-0 left-0 h-1 w-0 bg-primary transition-all duration-300 group-hover:w-full"></div>
+          </Link>
+
+          <Link
+            href="/tools/domain-security-checker"
+            className="group relative overflow-hidden rounded-lg border p-5 transition-all hover:shadow-md border-purple-200 bg-purple-50 dark:border-purple-800 dark:bg-purple-950"
+          >
+            <div className="flex items-start gap-4">
+              <div className="rounded-full p-2 bg-purple-100 dark:bg-purple-900">
+                <Key className="h-6 w-6 text-primary" />
+              </div>
+              <div>
+                <h3 className="font-semibold text-lg group-hover:underline">Domain Security Checker</h3>
+                <p className="text-sm text-muted-foreground mt-1">Comprehensive security analysis for your domain</p>
+              </div>
+            </div>
+            <div className="absolute bottom-0 left-0 h-1 w-0 bg-primary transition-all duration-300 group-hover:w-full"></div>
+          </Link>
+        </div>
+      </div>
     </ToolLayout>
   );
 } 

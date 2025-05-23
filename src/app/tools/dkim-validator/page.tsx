@@ -1,11 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { FaCheckCircle, FaExclamationTriangle, FaTimesCircle, FaKey, FaCopy, FaInfoCircle, FaTrophy, FaMedal, FaShieldAlt, FaServer } from "react-icons/fa";
+import { FaCheckCircle, FaExclamationTriangle, FaTimesCircle, FaKey, FaCopy, FaInfoCircle, FaTrophy, FaMedal, FaShieldAlt, FaServer, FaFileAlt } from "react-icons/fa";
 import { Buffer } from "buffer";
 // @ts-expect-error: asn1.js has no types
 import asn1 from "asn1.js";
 import { ToolLayout, Button, Input, Card, Alert } from "@/components/ui";
+import { Shield, Mail, Key } from "lucide-react";
+import Link from "next/link";
 
 function parseDKIMRecord(record: string) {
   const fields: Record<string, string> = {};
@@ -211,6 +213,69 @@ const DKIM_TAG_LEGEND: { tag: string; name: string; desc: string }[] = [
   { tag: "s", name: "Service Type", desc: "Service type (should be '*', rarely used)." },
 ];
 
+function RelatedTools() {
+  const tools = [
+    {
+      id: "dmarc-analyzer",
+      name: "DMARC Analyzer",
+      description: "Analyze your DMARC configuration and get detailed reports",
+      icon: <Shield className="h-6 w-6 text-primary" />,
+      href: "/tools/dmarc-analyzer",
+      color: "bg-blue-50 dark:bg-blue-950",
+      borderColor: "border-blue-200 dark:border-blue-800",
+      iconBg: "bg-blue-100 dark:bg-blue-900",
+    },
+    {
+      id: "spf-surveyor",
+      name: "SPF Surveyor",
+      description: "Validate and troubleshoot your SPF records",
+      icon: <Mail className="h-6 w-6 text-primary" />,
+      href: "/tools/spf-surveyor",
+      color: "bg-green-50 dark:bg-green-950",
+      borderColor: "border-green-200 dark:border-green-800",
+      iconBg: "bg-green-100 dark:bg-green-900",
+    },
+    {
+      id: "dkim-validator",
+      name: "DKIM Validator",
+      description: "Verify your DKIM signatures and configuration",
+      icon: <Key className="h-6 w-6 text-primary" />,
+      href: "/tools/dkim-validator",
+      color: "bg-purple-50 dark:bg-purple-950",
+      borderColor: "border-purple-200 dark:border-purple-800",
+      iconBg: "bg-purple-100 dark:bg-purple-900",
+    },
+  ];
+
+  return (
+    <div className="mt-12 mb-8">
+      <div className="mb-6">
+        <h2 className="text-2xl font-bold tracking-tight">Related Tools</h2>
+        <p className="text-muted-foreground mt-1">Explore more email authentication tools to secure your domain</p>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {tools.map((tool) => (
+          <Link
+            key={tool.id}
+            href={tool.href}
+            className={`group relative overflow-hidden rounded-lg border p-5 transition-all hover:shadow-md ${tool.borderColor} ${tool.color}`}
+          >
+            <div className="flex items-start gap-4">
+              <div className={`rounded-full p-2 ${tool.iconBg}`}>{tool.icon}</div>
+              <div>
+                <h3 className="font-semibold text-lg group-hover:underline">{tool.name}</h3>
+                <p className="text-sm text-muted-foreground mt-1">{tool.description}</p>
+              </div>
+            </div>
+            <div className="absolute bottom-0 left-0 h-1 w-0 bg-primary transition-all duration-300 group-hover:w-full"></div>
+          </Link>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function DKIMValidatorPage() {
   const [input, setInput] = useState("");
   const [record, setRecord] = useState<string | null>(null);
@@ -279,219 +344,199 @@ export default function DKIMValidatorPage() {
   return (
     <ToolLayout
       title="DKIM Validator"
-      description="Validate and analyze DKIM records for proper configuration and security. Paste a DKIM record to get started."
+      description="Validate DKIM signatures in your email headers and troubleshoot authentication issues."
       sidebarContent={sidebarContent}
     >
-      <Card>
-        <form onSubmit={handleValidate} className="space-y-4">
-          <div className="space-y-2">
-            <label htmlFor="dkim-record" className="block text-sm font-medium text-gray-700">
-              DKIM Record
-            </label>
-            <textarea
-              id="dkim-record"
-              placeholder="Paste DKIM record (TXT value) here..."
-              value={input}
-              onChange={e => setInput(e.target.value)}
-              required
-              rows={4}
-              className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            />
-          </div>
-          <Button type="submit" disabled={!input.trim()}>
-            Validate DKIM Record
-          </Button>
-        </form>
-      </Card>
-
-      {record && (
-        <div className="space-y-6 mt-6">
-          {/* Rating and Score Card */}
-          <Card className={getStatusColor(rating)}>
-            <div className="flex items-center justify-between mb-6">
-              <div className="flex items-center gap-4">
-                <div className="flex items-center gap-1">
-                  {[...Array(5)].map((_, i) => (
-                    <div
-                      key={i}
-                      className={`w-3 h-3 rounded-full ${
-                        i < rating
-                          ? rating >= 4
-                            ? "bg-green-500"
-                            : rating >= 3
-                            ? "bg-blue-500"
-                            : rating >= 2
-                            ? "bg-yellow-500"
-                            : "bg-red-500"
-                          : "bg-gray-200"
-                      }`}
-                    />
-                  ))}
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-900">DKIM Score: {score}/100</h3>
-                  <p className="text-sm text-gray-500">Based on key strength, version, and configuration</p>
-                </div>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {badges.map((badge, i) => (
-                  <span key={i} className="px-2 py-1 bg-blue-50 text-blue-700 rounded-full text-xs font-medium">
-                    {badge}
-                  </span>
-                ))}
-              </div>
+      <div className="container">
+        <Card>
+          <form onSubmit={handleValidate} className="space-y-4">
+            <div className="space-y-2">
+              <label htmlFor="dkim-record" className="block text-sm font-medium text-gray-700">
+                DKIM Record
+              </label>
+              <textarea
+                id="dkim-record"
+                placeholder="Paste DKIM record (TXT value) here..."
+                value={input}
+                onChange={e => setInput(e.target.value)}
+                required
+                rows={4}
+                className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              />
             </div>
-
-            {/* Status Dots */}
-            <div className="border-t border-gray-100 pt-4">
-              <div className="flex flex-wrap gap-4">
-                {dots.map((dot, i) => (
-                  <div key={i} className="flex items-center gap-2">
-                    <div className={`w-3 h-3 rounded-full ${dot.color}`} />
-                    <span className="text-sm text-gray-600">{dot.label}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Recommendations Section */}
-            {recommendations.length > 0 && (
-              <div className="border-t border-gray-100 pt-4 mt-4">
-                <h3 className="font-semibold text-gray-900 mb-3">Recommendations</h3>
-                <div className="space-y-3">
-                  {recommendations.map((rec, i) => (
-                    <div
-                      key={i}
-                      className={`flex items-start gap-3 p-3 rounded-lg ${
-                        rec.type === 'warning' ? 'bg-red-50' :
-                        rec.type === 'info' ? 'bg-blue-50' :
-                        'bg-green-50'
-                      }`}
-                    >
-                      <div className={`mt-0.5 ${
-                        rec.type === 'warning' ? 'text-red-600' :
-                        rec.type === 'info' ? 'text-blue-600' :
-                        'text-green-600'
-                      }`}>
-                        {rec.type === 'warning' ? <FaExclamationTriangle className="w-5 h-5" /> :
-                         rec.type === 'info' ? <FaInfoCircle className="w-5 h-5" /> :
-                         <FaCheckCircle className="w-5 h-5" />}
-                      </div>
-                      <p className={`text-sm ${
-                        rec.type === 'warning' ? 'text-red-700' :
-                        rec.type === 'info' ? 'text-blue-700' :
-                        'text-green-700'
-                      }`}>
-                        {rec.message}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Warnings Section */}
-            {warnings.length > 0 && (
-              <div className="border-t border-gray-100 pt-4 mt-4">
-                <h3 className="font-semibold text-gray-900 mb-3">Warnings and Suggestions</h3>
-                <div className="space-y-3">
-                  {warnings.map((w, i) => (
-                    <div key={i} className={`flex items-start gap-3 p-3 rounded-lg ${w.color}`}>
-                      <div className="mt-0.5">{w.icon}</div>
-                      <p className="text-sm">{w.message}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-          </Card>
-
-          {/* DKIM Record Card */}
-          <Card>
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-3">
-                <FaKey className="w-6 h-6 text-blue-400" />
-                <span className="font-bold text-xl text-gray-900">DKIM Record</span>
-                {keyLength && (
-                  <span className={`ml-2 px-2 py-0.5 rounded-full text-xs font-semibold border ${keyLength < 1024 ? "bg-red-100 text-red-800 border-red-200" : "bg-green-100 text-green-800 border-green-200"}`} title="Bit length of the DKIM public key">
-                    {keyLength} bits
-                  </span>
-                )}
-              </div>
-            </div>
-            <div className="flex items-center gap-2">
-              <pre className="whitespace-pre-wrap break-all text-gray-800 bg-gray-50 rounded p-2 border border-gray-100 text-xs flex-1">{record}</pre>
-              <CopyButton value={record} />
-            </div>
-          </Card>
-
-          {/* Parsed Fields */}
-          <Card>
-            <h3 className="font-semibold text-gray-900 mb-4">Parsed Fields</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {Object.entries(fields).map(([k, v]) => (
-                <div key={k} className="flex items-center gap-2">
-                  <span className="font-mono text-xs bg-blue-50 text-blue-700 rounded px-2 py-0.5">{k}</span>
-                  <span className="text-gray-800 break-all text-xs">{v}</span>
-                </div>
-              ))}
-            </div>
-          </Card>
-
-          {/* DKIM Tag Legend */}
-          <Card>
-            <h3 className="font-semibold text-gray-900 mb-4">DKIM Tag Legend</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {DKIM_TAG_LEGEND.map(({ tag, name, desc }) => (
-                <div key={tag} className="flex items-start gap-3">
-                  <span className="font-mono text-xs bg-blue-100 text-blue-700 rounded px-2 py-0.5 mt-0.5">{tag}</span>
-                  <div>
-                    <span className="font-semibold text-gray-900">{name}</span>
-                    <span className="block text-gray-600 text-sm">{desc}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </Card>
-        </div>
-      )}
-
-      {recommendations.length > 0 && (
-        <Card className="mt-6" title="Recommendations">
-          <ul className="space-y-2">
-            {recommendations.map((rec, i) => (
-              <li key={i} className="flex items-start gap-2">
-                <FaInfoCircle className="w-4 h-4 text-blue-600 mt-0.5" />
-                <span>{rec.message}</span>
-              </li>
-            ))}
-          </ul>
+            <Button type="submit" disabled={!input.trim()}>
+              Validate DKIM Record
+            </Button>
+          </form>
         </Card>
-      )}
 
-      {/* Related Tools */}
-      <Card className="mt-8" title="Related Tools">
-        <div className="flex flex-wrap gap-4">
-          <a href="/tools/dmarc-analyzer" className="flex items-center gap-2 text-blue-600 hover:text-blue-700">
-            <FaShieldAlt className="w-5 h-5" />
-            <span>DMARC Analyzer</span>
-          </a>
-          <a href="/tools/dmarc-domain-checker" className="flex items-center gap-2 text-blue-600 hover:text-blue-700">
-            <FaShieldAlt className="w-5 h-5" />
-            <span>DMARC Domain Checker</span>
-          </a>
-          <a href="/tools/spf-surveyor" className="flex items-center gap-2 text-blue-600 hover:text-blue-700">
-            <FaServer className="w-5 h-5" />
-            <span>SPF Surveyor</span>
-          </a>
-        </div>
-      </Card>
+        {record && (
+          <div className="space-y-6 mt-6">
+            {/* Rating and Score Card */}
+            <Card className={getStatusColor(rating)}>
+              <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-1">
+                    {[...Array(5)].map((_, i) => (
+                      <div
+                        key={i}
+                        className={`w-3 h-3 rounded-full ${
+                          i < rating
+                            ? rating >= 4
+                              ? "bg-green-500"
+                              : rating >= 3
+                              ? "bg-blue-500"
+                              : rating >= 2
+                              ? "bg-yellow-500"
+                              : "bg-red-500"
+                            : "bg-gray-200"
+                        }`}
+                      />
+                    ))}
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900">DKIM Score: {score}/100</h3>
+                    <p className="text-sm text-gray-500">Based on key strength, version, and configuration</p>
+                  </div>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {badges.map((badge, i) => (
+                    <span key={i} className="px-2 py-1 bg-blue-50 text-blue-700 rounded-full text-xs font-medium">
+                      {badge}
+                    </span>
+                  ))}
+                </div>
+              </div>
 
-      {error && (
-        <Alert variant="error" className="mt-6">
-          {error}
-        </Alert>
-      )}
+              {/* Status Dots */}
+              <div className="border-t border-gray-100 pt-4">
+                <div className="flex flex-wrap gap-4">
+                  {dots.map((dot, i) => (
+                    <div key={i} className="flex items-center gap-2">
+                      <div className={`w-3 h-3 rounded-full ${dot.color}`} />
+                      <span className="text-sm text-gray-600">{dot.label}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Recommendations Section */}
+              {recommendations.length > 0 && (
+                <div className="border-t border-gray-100 pt-4 mt-4">
+                  <h3 className="font-semibold text-gray-900 mb-3">Recommendations</h3>
+                  <div className="space-y-3">
+                    {recommendations.map((rec, i) => (
+                      <div
+                        key={i}
+                        className={`flex items-start gap-3 p-3 rounded-lg ${
+                          rec.type === 'warning' ? 'bg-red-50' :
+                          rec.type === 'info' ? 'bg-blue-50' :
+                          'bg-green-50'
+                        }`}
+                      >
+                        <div className={`mt-0.5 ${
+                          rec.type === 'warning' ? 'text-red-600' :
+                          rec.type === 'info' ? 'text-blue-600' :
+                          'text-green-600'
+                        }`}>
+                          {rec.type === 'warning' ? <FaExclamationTriangle className="w-5 h-5" /> :
+                           rec.type === 'info' ? <FaInfoCircle className="w-5 h-5" /> :
+                           <FaCheckCircle className="w-5 h-5" />}
+                        </div>
+                        <p className={`text-sm ${
+                          rec.type === 'warning' ? 'text-red-700' :
+                          rec.type === 'info' ? 'text-blue-700' :
+                          'text-green-700'
+                        }`}>
+                          {rec.message}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Warnings Section */}
+              {warnings.length > 0 && (
+                <div className="border-t border-gray-100 pt-4 mt-4">
+                  <h3 className="font-semibold text-gray-900 mb-3">Warnings and Suggestions</h3>
+                  <div className="space-y-3">
+                    {warnings.map((w, i) => (
+                      <div key={i} className={`flex items-start gap-3 p-3 rounded-lg ${w.color}`}>
+                        <div className="mt-0.5">{w.icon}</div>
+                        <p className="text-sm">{w.message}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </Card>
+
+            {/* DKIM Record Card */}
+            <Card>
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center gap-3">
+                  <FaKey className="w-6 h-6 text-blue-400" />
+                  <span className="font-bold text-xl text-gray-900">DKIM Record</span>
+                  {keyLength && (
+                    <span className={`ml-2 px-2 py-0.5 rounded-full text-xs font-semibold border ${keyLength < 1024 ? "bg-red-100 text-red-800 border-red-200" : "bg-green-100 text-green-800 border-green-200"}`} title="Bit length of the DKIM public key">
+                      {keyLength} bits
+                    </span>
+                  )}
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <pre className="whitespace-pre-wrap break-all text-gray-800 bg-gray-50 rounded p-2 border border-gray-100 text-xs flex-1">{record}</pre>
+                <CopyButton value={record} />
+              </div>
+            </Card>
+
+            {/* Parsed Fields */}
+            <Card>
+              <h3 className="font-semibold text-gray-900 mb-4">Parsed Fields</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {Object.entries(fields).map(([k, v]) => (
+                  <div key={k} className="flex items-center gap-2">
+                    <span className="font-mono text-xs bg-blue-50 text-blue-700 rounded px-2 py-0.5">{k}</span>
+                    <span className="text-gray-800 break-all text-xs">{v}</span>
+                  </div>
+                ))}
+              </div>
+            </Card>
+
+            {/* DKIM Tag Legend */}
+            <Card>
+              <h3 className="font-semibold text-gray-900 mb-4">DKIM Tag Legend</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {DKIM_TAG_LEGEND.map(({ tag, name, desc }) => (
+                  <div key={tag} className="flex items-start gap-3">
+                    <span className="font-mono text-xs bg-blue-100 text-blue-700 rounded px-2 py-0.5 mt-0.5">{tag}</span>
+                    <div>
+                      <span className="font-semibold text-gray-900">{name}</span>
+                      <span className="block text-gray-600 text-sm">{desc}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </Card>
+          </div>
+        )}
+
+        {recommendations.length > 0 && (
+          <Card className="mt-6" title="Recommendations">
+            <ul className="space-y-2">
+              {recommendations.map((rec, i) => (
+                <li key={i} className="flex items-start gap-2">
+                  <FaInfoCircle className="w-4 h-4 text-blue-600 mt-0.5" />
+                  <span>{rec.message}</span>
+                </li>
+              ))}
+            </ul>
+          </Card>
+        )}
+
+        <RelatedTools />
+      </div>
     </ToolLayout>
   );
 } 

@@ -14,6 +14,8 @@ import {
   Title,
 } from "chart.js";
 import { ToolLayout, Card, Button, Input, Alert } from "@/components/ui";
+import { Shield, Mail, Key } from "lucide-react";
+import Link from "next/link";
 
 ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement, Title);
 
@@ -166,6 +168,69 @@ const chartOptions = {
   },
 };
 
+function RelatedTools() {
+  const tools = [
+    {
+      id: "dmarc-analyzer",
+      name: "DMARC Analyzer",
+      description: "Analyze your DMARC configuration and get detailed reports",
+      icon: <Shield className="h-6 w-6 text-primary" />,
+      href: "/tools/dmarc-analyzer",
+      color: "bg-blue-50 dark:bg-blue-950",
+      borderColor: "border-blue-200 dark:border-blue-800",
+      iconBg: "bg-blue-100 dark:bg-blue-900",
+    },
+    {
+      id: "spf-surveyor",
+      name: "SPF Surveyor",
+      description: "Validate and troubleshoot your SPF records",
+      icon: <Mail className="h-6 w-6 text-primary" />,
+      href: "/tools/spf-surveyor",
+      color: "bg-green-50 dark:bg-green-950",
+      borderColor: "border-green-200 dark:border-green-800",
+      iconBg: "bg-green-100 dark:bg-green-900",
+    },
+    {
+      id: "dkim-validator",
+      name: "DKIM Validator",
+      description: "Verify your DKIM signatures and configuration",
+      icon: <Key className="h-6 w-6 text-primary" />,
+      href: "/tools/dkim-validator",
+      color: "bg-purple-50 dark:bg-purple-950",
+      borderColor: "border-purple-200 dark:border-purple-800",
+      iconBg: "bg-purple-100 dark:bg-purple-900",
+    },
+  ];
+
+  return (
+    <div className="mt-12 mb-8">
+      <div className="mb-6">
+        <h2 className="text-2xl font-bold tracking-tight">Related Tools</h2>
+        <p className="text-muted-foreground mt-1">Explore more email authentication tools to secure your domain</p>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {tools.map((tool) => (
+          <Link
+            key={tool.id}
+            href={tool.href}
+            className={`group relative overflow-hidden rounded-lg border p-5 transition-all hover:shadow-md ${tool.borderColor} ${tool.color}`}
+          >
+            <div className="flex items-start gap-4">
+              <div className={`rounded-full p-2 ${tool.iconBg}`}>{tool.icon}</div>
+              <div>
+                <h3 className="font-semibold text-lg group-hover:underline">{tool.name}</h3>
+                <p className="text-sm text-muted-foreground mt-1">{tool.description}</p>
+              </div>
+            </div>
+            <div className="absolute bottom-0 left-0 h-1 w-0 bg-primary transition-all duration-300 group-hover:w-full"></div>
+          </Link>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function XMLConverterPage() {
   const [files, setFiles] = useState<File[]>([]);
   const [error, setError] = useState<string | null>(null);
@@ -248,199 +313,189 @@ export default function XMLConverterPage() {
       description="Upload DMARC XML feedback files (compressed or uncompressed) and view them in a human-readable format."
       sidebarContent={sidebarContent}
     >
-      <Card className="mb-8">
-        <div
-          className="border-2 border-dashed border-blue-300 rounded-xl bg-blue-50 p-8 flex flex-col items-center justify-center cursor-pointer hover:bg-blue-100 transition"
-          onDrop={handleDrop}
-          onDragOver={e => e.preventDefault()}
-          onClick={handleBrowse}
-          tabIndex={0}
-          role="button"
-          aria-label="Upload DMARC XML files"
-        >
-          <FaUpload className="w-10 h-10 text-blue-600 mb-2" />
-          <span className="font-semibold text-blue-700">Drag and drop DMARC XML, .gz, or .zip files here</span>
-          <span className="text-gray-500 text-sm mt-1">or click to browse</span>
-          <span className="text-gray-400 text-xs mt-2">Maximum file size: 10MB. Multiple files supported.</span>
-          <input
-            type="file"
-            ref={fileInputRef}
-            className="hidden"
-            multiple
-            accept=".xml,.gz,.zip,application/xml,text/xml,application/gzip,application/x-gzip,application/zip"
-            onChange={e => handleFiles(e.target.files)}
-          />
-        </div>
-        {error && (
-          <div className="mt-4">
-            <Alert variant="error" title="Error">
-              {error}
-            </Alert>
-          </div>
-        )}
-      </Card>
-      {files.length > 0 && (
+      <div className="container">
         <Card className="mb-8">
-          <div className="flex items-center justify-between mb-4">
-            <span className="text-lg font-bold text-gray-900">Uploaded Files</span>
-            <span className="flex-1 border-b border-gray-200 ml-4" />
+          <div
+            className="border-2 border-dashed border-blue-300 rounded-xl bg-blue-50 p-8 flex flex-col items-center justify-center cursor-pointer hover:bg-blue-100 transition"
+            onDrop={handleDrop}
+            onDragOver={e => e.preventDefault()}
+            onClick={handleBrowse}
+            tabIndex={0}
+            role="button"
+            aria-label="Upload DMARC XML files"
+          >
+            <FaUpload className="w-10 h-10 text-blue-600 mb-2" />
+            <span className="font-semibold text-blue-700">Drag and drop DMARC XML, .gz, or .zip files here</span>
+            <span className="text-gray-500 text-sm mt-1">or click to browse</span>
+            <span className="text-gray-400 text-xs mt-2">Maximum file size: 10MB. Multiple files supported.</span>
+            <input
+              type="file"
+              ref={fileInputRef}
+              className="hidden"
+              multiple
+              accept=".xml,.gz,.zip,application/xml,text/xml,application/gzip,application/x-gzip,application/zip"
+              onChange={e => handleFiles(e.target.files)}
+            />
           </div>
-          <ul className="divide-y divide-gray-100">
-            {files.map((file, idx) => {
-              const ext = file.name.split('.').pop()?.toUpperCase() || "FILE";
-              return (
-                <li
-                  key={file.name + idx}
-                  className="group py-4 px-3 flex items-center gap-4 bg-white rounded-lg transition-shadow hover:shadow-md mb-2"
-                  style={{ minHeight: 64 }}
-                >
-                  <div className="flex items-center justify-center w-10 h-10 bg-gray-100 rounded-full mr-2">
-                    {getFileIcon(file.type || file.name)}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2">
-                      <span className="font-medium text-gray-900 truncate max-w-xs">{file.name}</span>
-                      <span className={`inline-block px-2 py-0.5 rounded text-xs font-semibold border ${ext === 'XML' ? 'bg-blue-50 text-blue-700 border-blue-200' : ext === 'ZIP' ? 'bg-green-50 text-green-700 border-green-200' : 'bg-gray-50 text-gray-600 border-gray-200'}`}>{ext}</span>
-                      <span className="text-xs text-gray-400">{(file.size / 1024).toFixed(1)} KB</span>
-                      {/* Checkmark for new file (static for now) */}
-                      <span className="ml-1 text-green-500" aria-label="File added">✓</span>
-                    </div>
-                  </div>
-                  <button
-                    aria-label={`Remove file ${file.name}`}
-                    title="Remove file"
-                    className="ml-2 p-2 rounded-full border border-blue-200 text-blue-600 hover:bg-blue-50 hover:text-blue-800 transition group-hover:shadow"
-                    onClick={e => { e.stopPropagation(); handleRemove(idx); }}
-                    type="button"
-                  >
-                    <FaTimesCircle className="w-4 h-4" />
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
-          <div className="mt-8 flex flex-col items-center gap-4">
-            <Button
-              variant="default"
-              size="lg"
-              onClick={handleProcess}
-              disabled={loading || files.length === 0}
-              className="shadow-md w-56 mx-auto"
-              aria-label="Process uploaded files"
-            >
-              {loading ? "Processing..." : "Process Files"}
-            </Button>
-            {error && (
+          {error && (
+            <div className="mt-4">
               <Alert variant="error" title="Error">
                 {error}
               </Alert>
-            )}
-          </div>
+            </div>
+          )}
         </Card>
-      )}
-      {results.length > 0 && (
-        <div className="space-y-8">
-          {results.map((res, idx) => (
-            <Card key={res.name + idx} className="bg-blue-50 border-blue-200">
-              <div className="flex items-center gap-2 cursor-pointer" onClick={() => toggleExpand(res.name)}>
-                {expanded[res.name] ? <FaChevronDown className="w-4 h-4 text-blue-600" /> : <FaChevronRight className="w-4 h-4 text-blue-600" />}
-                <span className="font-semibold text-blue-900">{res.name}</span>
-                {res.error ? (
-                  <span className="ml-2 px-2 py-0.5 rounded-full text-xs font-semibold border bg-red-100 text-red-800 border-red-200">Error</span>
-                ) : (
-                  <span className="ml-2 px-2 py-0.5 rounded-full text-xs font-semibold border bg-green-100 text-green-800 border-green-200">Processed</span>
-                )}
-              </div>
-              {expanded[res.name] && (
-                <div className="mt-4">
-                  {res.error ? (
-                    <Alert variant="error" title="Processing Error">
-                      {res.error}
-                    </Alert>
-                  ) : (
-                    <div>
-                      <div className="mb-2 text-gray-700">
-                        <span className="font-semibold">Org:</span> {res.summary.org || <span className="text-gray-400">N/A</span>}<br />
-                        <span className="font-semibold">Domain:</span> {res.summary.domain || <span className="text-gray-400">N/A</span>}<br />
-                        <span className="font-semibold">Date Range:</span> {res.summary.date_range.begin} - {res.summary.date_range.end}<br />
-                        <span className="font-semibold">Records:</span> {res.summary.record_count}
-                      </div>
-                      {/* Charts */}
-                      {res.summary.records && res.summary.records.length > 0 && (
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                          <div className="bg-white rounded-lg p-4 border shadow-sm flex flex-col items-center min-h-[320px]">
-                            <h4 className="font-semibold text-gray-900 mb-2 text-sm">Disposition Breakdown</h4>
-                            <div className="w-full h-64">
-                              <Pie data={getDispositionChartData(res.summary.records)} options={chartOptions} />
-                            </div>
-                          </div>
-                          <div className="bg-white rounded-lg p-4 border shadow-sm flex flex-col items-center min-h-[320px]">
-                            <h4 className="font-semibold text-gray-900 mb-2 text-sm">Top Source IPs</h4>
-                            <div className="w-full h-64">
-                              <Bar data={getSourceIpChartData(res.summary.records)} options={chartOptions} />
-                            </div>
-                          </div>
-                          <div className="bg-white rounded-lg p-4 border shadow-sm flex flex-col items-center min-h-[320px]">
-                            <h4 className="font-semibold text-gray-900 mb-2 text-sm">DKIM vs SPF Pass/Fail</h4>
-                            <div className="w-full h-64">
-                              <Bar data={getDkimSpfChartData(res.summary.records)} options={chartOptions} />
-                            </div>
-                          </div>
-                        </div>
-                      )}
-                      <div className="overflow-x-auto">
-                        <table className="min-w-full text-xs text-left border mt-2">
-                          <thead className="bg-blue-100">
-                            <tr>
-                              <th className="px-2 py-1 font-semibold">Source IP</th>
-                              <th className="px-2 py-1 font-semibold">Count</th>
-                              <th className="px-2 py-1 font-semibold">Disposition</th>
-                              <th className="px-2 py-1 font-semibold">DKIM</th>
-                              <th className="px-2 py-1 font-semibold">SPF</th>
-                              <th className="px-2 py-1 font-semibold">Envelope From</th>
-                              <th className="px-2 py-1 font-semibold">Header From</th>
-                              <th className="px-2 py-1 font-semibold">DKIM Domains</th>
-                              <th className="px-2 py-1 font-semibold">SPF Domains</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {res.summary.records.map((rec: any, i: number) => (
-                              <tr key={i} className="border-t">
-                                <td className="px-2 py-1">{rec.source_ip}</td>
-                                <td className="px-2 py-1">{rec.count}</td>
-                                <td className="px-2 py-1">{rec.disposition}</td>
-                                <td className="px-2 py-1">{rec.dkim}</td>
-                                <td className="px-2 py-1">{rec.spf}</td>
-                                <td className="px-2 py-1">{rec.envelope_from}</td>
-                                <td className="px-2 py-1">{rec.header_from}</td>
-                                <td className="px-2 py-1">{rec.dkim_domains.join(", ")}</td>
-                                <td className="px-2 py-1">{rec.spf_domains.join(", ")}</td>
-                              </tr>
-                            ))}
-                          </tbody>
-                        </table>
+        {files.length > 0 && (
+          <Card className="mb-8">
+            <div className="flex items-center justify-between mb-4">
+              <span className="text-lg font-bold text-gray-900">Uploaded Files</span>
+              <span className="flex-1 border-b border-gray-200 ml-4" />
+            </div>
+            <ul className="divide-y divide-gray-100">
+              {files.map((file, idx) => {
+                const ext = file.name.split('.').pop()?.toUpperCase() || "FILE";
+                return (
+                  <li
+                    key={file.name + idx}
+                    className="group py-4 px-3 flex items-center gap-4 bg-white rounded-lg transition-shadow hover:shadow-md mb-2"
+                    style={{ minHeight: 64 }}
+                  >
+                    <div className="flex items-center justify-center w-10 h-10 bg-gray-100 rounded-full mr-2">
+                      {getFileIcon(file.type || file.name)}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2">
+                        <span className="font-medium text-gray-900 truncate max-w-xs">{file.name}</span>
+                        <span className={`inline-block px-2 py-0.5 rounded text-xs font-semibold border ${ext === 'XML' ? 'bg-blue-50 text-blue-700 border-blue-200' : ext === 'ZIP' ? 'bg-green-50 text-green-700 border-green-200' : 'bg-gray-50 text-gray-600 border-gray-200'}`}>{ext}</span>
+                        <span className="text-xs text-gray-400">{(file.size / 1024).toFixed(1)} KB</span>
+                        {/* Checkmark for new file (static for now) */}
+                        <span className="ml-1 text-green-500" aria-label="File added">✓</span>
                       </div>
                     </div>
+                    <button
+                      aria-label={`Remove file ${file.name}`}
+                      title="Remove file"
+                      className="ml-2 p-2 rounded-full border border-blue-200 text-blue-600 hover:bg-blue-50 hover:text-blue-800 transition group-hover:shadow"
+                      onClick={e => { e.stopPropagation(); handleRemove(idx); }}
+                      type="button"
+                    >
+                      <FaTimesCircle className="w-4 h-4" />
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
+            <div className="mt-8 flex flex-col items-center gap-4">
+              <Button
+                variant="default"
+                size="lg"
+                onClick={handleProcess}
+                disabled={loading || files.length === 0}
+                className="shadow-md w-56 mx-auto"
+                aria-label="Process uploaded files"
+              >
+                {loading ? "Processing..." : "Process Files"}
+              </Button>
+              {error && (
+                <Alert variant="error" title="Error">
+                  {error}
+                </Alert>
+              )}
+            </div>
+          </Card>
+        )}
+        {results.length > 0 && (
+          <div className="space-y-8">
+            {results.map((res, idx) => (
+              <Card key={res.name + idx} className="bg-blue-50 border-blue-200">
+                <div className="flex items-center gap-2 cursor-pointer" onClick={() => toggleExpand(res.name)}>
+                  {expanded[res.name] ? <FaChevronDown className="w-4 h-4 text-blue-600" /> : <FaChevronRight className="w-4 h-4 text-blue-600" />}
+                  <span className="font-semibold text-blue-900">{res.name}</span>
+                  {res.error ? (
+                    <span className="ml-2 px-2 py-0.5 rounded-full text-xs font-semibold border bg-red-100 text-red-800 border-red-200">Error</span>
+                  ) : (
+                    <span className="ml-2 px-2 py-0.5 rounded-full text-xs font-semibold border bg-green-100 text-green-800 border-green-200">Processed</span>
                   )}
                 </div>
-              )}
-            </Card>
-          ))}
-        </div>
-      )}
-      {/* Integration with Other Tools */}
-      <Card className="mt-8" title="Related Tools">
-        <div className="flex flex-wrap gap-4">
-          <a href="/tools/dmarc-analyzer" className="flex items-center gap-2 text-blue-600 hover:text-blue-700">
-            <FaFileAlt className="w-5 h-5" />
-            <span>DMARC Analyzer</span>
-          </a>
-          <a href="/tools/spf-surveyor" className="flex items-center gap-2 text-blue-600 hover:text-blue-700">
-            <FaFileAlt className="w-5 h-5" />
-            <span>SPF Surveyor</span>
-          </a>
-        </div>
-      </Card>
+                {expanded[res.name] && (
+                  <div className="mt-4">
+                    {res.error ? (
+                      <Alert variant="error" title="Processing Error">
+                        {res.error}
+                      </Alert>
+                    ) : (
+                      <div>
+                        <div className="mb-2 text-gray-700">
+                          <span className="font-semibold">Org:</span> {res.summary.org || <span className="text-gray-400">N/A</span>}<br />
+                          <span className="font-semibold">Domain:</span> {res.summary.domain || <span className="text-gray-400">N/A</span>}<br />
+                          <span className="font-semibold">Date Range:</span> {res.summary.date_range.begin} - {res.summary.date_range.end}<br />
+                          <span className="font-semibold">Records:</span> {res.summary.record_count}
+                        </div>
+                        {/* Charts */}
+                        {res.summary.records && res.summary.records.length > 0 && (
+                          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                            <div className="bg-white rounded-lg p-4 border shadow-sm flex flex-col items-center min-h-[320px]">
+                              <h4 className="font-semibold text-gray-900 mb-2 text-sm">Disposition Breakdown</h4>
+                              <div className="w-full h-64">
+                                <Pie data={getDispositionChartData(res.summary.records)} options={chartOptions} />
+                              </div>
+                            </div>
+                            <div className="bg-white rounded-lg p-4 border shadow-sm flex flex-col items-center min-h-[320px]">
+                              <h4 className="font-semibold text-gray-900 mb-2 text-sm">Top Source IPs</h4>
+                              <div className="w-full h-64">
+                                <Bar data={getSourceIpChartData(res.summary.records)} options={chartOptions} />
+                              </div>
+                            </div>
+                            <div className="bg-white rounded-lg p-4 border shadow-sm flex flex-col items-center min-h-[320px]">
+                              <h4 className="font-semibold text-gray-900 mb-2 text-sm">DKIM vs SPF Pass/Fail</h4>
+                              <div className="w-full h-64">
+                                <Bar data={getDkimSpfChartData(res.summary.records)} options={chartOptions} />
+                              </div>
+                            </div>
+                          </div>
+                        )}
+                        <div className="overflow-x-auto">
+                          <table className="min-w-full text-xs text-left border mt-2">
+                            <thead className="bg-blue-100">
+                              <tr>
+                                <th className="px-2 py-1 font-semibold">Source IP</th>
+                                <th className="px-2 py-1 font-semibold">Count</th>
+                                <th className="px-2 py-1 font-semibold">Disposition</th>
+                                <th className="px-2 py-1 font-semibold">DKIM</th>
+                                <th className="px-2 py-1 font-semibold">SPF</th>
+                                <th className="px-2 py-1 font-semibold">Envelope From</th>
+                                <th className="px-2 py-1 font-semibold">Header From</th>
+                                <th className="px-2 py-1 font-semibold">DKIM Domains</th>
+                                <th className="px-2 py-1 font-semibold">SPF Domains</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {res.summary.records.map((rec: any, i: number) => (
+                                <tr key={i} className="border-t">
+                                  <td className="px-2 py-1">{rec.source_ip}</td>
+                                  <td className="px-2 py-1">{rec.count}</td>
+                                  <td className="px-2 py-1">{rec.disposition}</td>
+                                  <td className="px-2 py-1">{rec.dkim}</td>
+                                  <td className="px-2 py-1">{rec.spf}</td>
+                                  <td className="px-2 py-1">{rec.envelope_from}</td>
+                                  <td className="px-2 py-1">{rec.header_from}</td>
+                                  <td className="px-2 py-1">{rec.dkim_domains.join(", ")}</td>
+                                  <td className="px-2 py-1">{rec.spf_domains.join(", ")}</td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </Card>
+            ))}
+          </div>
+        )}
+        <RelatedTools />
+      </div>
     </ToolLayout>
   );
 } 

@@ -4,6 +4,8 @@ import { useState } from "react";
 import { FaCopy, FaShieldAlt, FaInfoCircle, FaExclamationTriangle, FaCheckCircle, FaServer, FaKey } from "react-icons/fa";
 import { ToolLayout, Button, Input, Card } from "@/components/ui";
 import { DMARCStatus } from "@/components/ui/DMARCStatus";
+import { Shield, Mail, Key } from "lucide-react";
+import Link from "next/link";
 
 function parseDMARC(record: string) {
   const tags: { tag: string; value: string }[] = [];
@@ -216,23 +218,62 @@ export default function DMARCAnalyzerPage() {
         </Card>
       )}
 
-      {/* Related Tools */}
-      <Card className="mt-8" title="Related Tools">
-        <div className="flex flex-wrap gap-4">
-          <a href="/tools/dmarc-domain-checker" className="flex items-center gap-2 text-blue-600 hover:text-blue-700">
-            <FaShieldAlt className="w-5 h-5" />
-            <span>DMARC Domain Checker</span>
-          </a>
-          <a href="/tools/spf-surveyor" className="flex items-center gap-2 text-blue-600 hover:text-blue-700">
-            <FaServer className="w-5 h-5" />
-            <span>SPF Surveyor</span>
-          </a>
-          <a href="/tools/dkim-validator" className="flex items-center gap-2 text-blue-600 hover:text-blue-700">
-            <FaKey className="w-5 h-5" />
-            <span>DKIM Validator</span>
-          </a>
+      <div className="mt-12 mb-8">
+        <div className="mb-6">
+          <h2 className="text-2xl font-bold tracking-tight">Related Tools</h2>
+          <p className="text-muted-foreground mt-1">Explore more email authentication tools to secure your domain</p>
         </div>
-      </Card>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <Link
+            href="/tools/spf-surveyor"
+            className="group relative overflow-hidden rounded-lg border p-5 transition-all hover:shadow-md border-green-200 bg-green-50 dark:border-green-800 dark:bg-green-950"
+          >
+            <div className="flex items-start gap-4">
+              <div className="rounded-full p-2 bg-green-100 dark:bg-green-900">
+                <Mail className="h-6 w-6 text-primary" />
+              </div>
+              <div>
+                <h3 className="font-semibold text-lg group-hover:underline">SPF Surveyor</h3>
+                <p className="text-sm text-muted-foreground mt-1">Validate and troubleshoot your SPF records</p>
+              </div>
+            </div>
+            <div className="absolute bottom-0 left-0 h-1 w-0 bg-primary transition-all duration-300 group-hover:w-full"></div>
+          </Link>
+
+          <Link
+            href="/tools/dkim-validator"
+            className="group relative overflow-hidden rounded-lg border p-5 transition-all hover:shadow-md border-purple-200 bg-purple-50 dark:border-purple-800 dark:bg-purple-950"
+          >
+            <div className="flex items-start gap-4">
+              <div className="rounded-full p-2 bg-purple-100 dark:bg-purple-900">
+                <Key className="h-6 w-6 text-primary" />
+              </div>
+              <div>
+                <h3 className="font-semibold text-lg group-hover:underline">DKIM Validator</h3>
+                <p className="text-sm text-muted-foreground mt-1">Verify your DKIM signatures and configuration</p>
+              </div>
+            </div>
+            <div className="absolute bottom-0 left-0 h-1 w-0 bg-primary transition-all duration-300 group-hover:w-full"></div>
+          </Link>
+
+          <Link
+            href="/tools/domain-security-checker"
+            className="group relative overflow-hidden rounded-lg border p-5 transition-all hover:shadow-md border-blue-200 bg-blue-50 dark:border-blue-800 dark:bg-blue-950"
+          >
+            <div className="flex items-start gap-4">
+              <div className="rounded-full p-2 bg-blue-100 dark:bg-blue-900">
+                <Shield className="h-6 w-6 text-primary" />
+              </div>
+              <div>
+                <h3 className="font-semibold text-lg group-hover:underline">Domain Security Checker</h3>
+                <p className="text-sm text-muted-foreground mt-1">Comprehensive security analysis for your domain</p>
+              </div>
+            </div>
+            <div className="absolute bottom-0 left-0 h-1 w-0 bg-primary transition-all duration-300 group-hover:w-full"></div>
+          </Link>
+        </div>
+      </div>
 
       {tags && (
         <div className="mt-6 space-y-4">

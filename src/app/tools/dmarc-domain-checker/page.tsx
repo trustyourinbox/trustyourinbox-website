@@ -4,6 +4,8 @@ import { useState } from "react";
 import { FaCheckCircle, FaExclamationTriangle, FaTimesCircle, FaShieldAlt, FaKey, FaEnvelope, FaTrophy, FaMedal, FaCopy, FaInfoCircle, FaServer } from "react-icons/fa";
 import { ToolLayout, Button, Input, Card, Alert } from "@/components/ui";
 import { DMARCStatus } from "@/components/ui/DMARCStatus";
+import { Shield, Mail, Key } from "lucide-react";
+import Link from "next/link";
 
 type DMARCPolicy = "reject" | "quarantine" | "none" | "no-policy";
 
@@ -241,6 +243,69 @@ function CopyButton({ value }: { value: string }) {
   );
 }
 
+function RelatedTools() {
+  const tools = [
+    {
+      id: "dmarc-analyzer",
+      name: "DMARC Analyzer",
+      description: "Analyze your DMARC configuration and get detailed reports",
+      icon: <Shield className="h-6 w-6 text-primary" />,
+      href: "/tools/dmarc-analyzer",
+      color: "bg-blue-50 dark:bg-blue-950",
+      borderColor: "border-blue-200 dark:border-blue-800",
+      iconBg: "bg-blue-100 dark:bg-blue-900",
+    },
+    {
+      id: "spf-surveyor",
+      name: "SPF Surveyor",
+      description: "Validate and troubleshoot your SPF records",
+      icon: <Mail className="h-6 w-6 text-primary" />,
+      href: "/tools/spf-surveyor",
+      color: "bg-green-50 dark:bg-green-950",
+      borderColor: "border-green-200 dark:border-green-800",
+      iconBg: "bg-green-100 dark:bg-green-900",
+    },
+    {
+      id: "dkim-validator",
+      name: "DKIM Validator",
+      description: "Verify your DKIM signatures and configuration",
+      icon: <Key className="h-6 w-6 text-primary" />,
+      href: "/tools/dkim-validator",
+      color: "bg-purple-50 dark:bg-purple-950",
+      borderColor: "border-purple-200 dark:border-purple-800",
+      iconBg: "bg-purple-100 dark:bg-purple-900",
+    },
+  ];
+
+  return (
+    <div className="mt-12 mb-8">
+      <div className="mb-6">
+        <h2 className="text-2xl font-bold tracking-tight">Related Tools</h2>
+        <p className="text-muted-foreground mt-1">Explore more email authentication tools to secure your domain</p>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {tools.map((tool) => (
+          <Link
+            key={tool.id}
+            href={tool.href}
+            className={`group relative overflow-hidden rounded-lg border p-5 transition-all hover:shadow-md ${tool.borderColor} ${tool.color}`}
+          >
+            <div className="flex items-start gap-4">
+              <div className={`rounded-full p-2 ${tool.iconBg}`}>{tool.icon}</div>
+              <div>
+                <h3 className="font-semibold text-lg group-hover:underline">{tool.name}</h3>
+                <p className="text-sm text-muted-foreground mt-1">{tool.description}</p>
+              </div>
+            </div>
+            <div className="absolute bottom-0 left-0 h-1 w-0 bg-primary transition-all duration-300 group-hover:w-full"></div>
+          </Link>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function DMARCDomainCheckerPage() {
   const [domain, setDomain] = useState("");
   const [loading, setLoading] = useState(false);
@@ -456,22 +521,7 @@ export default function DMARCDomainCheckerPage() {
       )}
 
       {/* Related Tools */}
-      <Card className="mt-8" title="Related Tools">
-        <div className="flex flex-wrap gap-4">
-          <a href="/tools/dmarc-analyzer" className="flex items-center gap-2 text-blue-600 hover:text-blue-700">
-            <FaShieldAlt className="w-5 h-5" />
-            <span>DMARC Analyzer</span>
-          </a>
-          <a href="/tools/spf-surveyor" className="flex items-center gap-2 text-blue-600 hover:text-blue-700">
-            <FaServer className="w-5 h-5" />
-            <span>SPF Surveyor</span>
-          </a>
-          <a href="/tools/dkim-validator" className="flex items-center gap-2 text-blue-600 hover:text-blue-700">
-            <FaKey className="w-5 h-5" />
-            <span>DKIM Validator</span>
-          </a>
-        </div>
-      </Card>
+      <RelatedTools />
     </ToolLayout>
   );
 } 

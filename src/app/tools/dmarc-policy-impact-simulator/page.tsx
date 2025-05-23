@@ -298,7 +298,7 @@ export default function DmarcPolicyImpactSimulator() {
       description="Simulate the effect of stricter DMARC policies on your email traffic. Upload a DMARC XML report and see the impact."
       sidebarContent={sidebar}
     >
-      <div className="space-y-8">
+      <div className="container space-y-8">
         <Card className="p-6">
           <h2 className="text-xl font-bold mb-4 flex items-center gap-2"><FileText className="h-5 w-5 text-blue-600" />Upload DMARC XML Report</h2>
           <div className="flex flex-col gap-4">
