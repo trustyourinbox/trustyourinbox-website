@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { FaSearch, FaCheckCircle, FaTimesCircle, FaInfoCircle, FaCopy, FaExclamationTriangle } from "react-icons/fa";
 import Link from "next/link";
-import { Shield, Mail, Key } from "lucide-react";
+import { Shield, Mail, Key, ArrowRight } from "lucide-react";
 
 interface SubdomainResult {
   subdomain: string;
@@ -138,51 +138,54 @@ export default function DMARCSubdomainPolicyCheckerPage() {
       description="Check DMARC policy coverage across your domain's subdomains."
       sidebarContent={sidebarContent}
     >
-      <div className="container">
-        <Card className="mb-8 p-6 bg-gradient-to-br from-blue-50 to-white border border-blue-100">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="p-2 bg-blue-100 rounded-lg">
-              <FaSearch className="w-5 h-5 text-blue-600" />
-            </div>
-            <h2 className="text-xl font-semibold text-gray-800">Check Subdomain DMARC Policies</h2>
+      <Card className="w-full border-0 shadow-lg">
+        <div className="p-6">
+          <div className="flex items-center gap-2 mb-6">
+            <Shield className="h-6 w-6 text-blue-600" />
+            <h2 className="text-2xl font-bold">DMARC Subdomain Policy Checker</h2>
           </div>
+
           <div className="grid md:grid-cols-2 gap-6">
             <div className="space-y-4">
-              <div>
-                <label className="block font-medium mb-2 text-gray-700">Domain</label>
-                <div className="relative">
+              <div className="space-y-2">
+                <label htmlFor="domain" className="text-sm font-medium">
+                  Domain
+                </label>
+                <div className="relative flex-1">
+                  <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                    </svg>
+                  </div>
                   <Input
+                    id="domain"
                     type="text"
                     placeholder="example.com"
                     value={domain}
                     onChange={e => setDomain(e.target.value)}
-                    className="max-w-md pl-10 bg-white"
+                    className="pl-10 h-11 border-gray-200 focus:border-blue-600 focus:ring-blue-600"
                   />
-                  <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-                    </svg>
-                  </div>
                 </div>
               </div>
-              <div>
-                <label className="block font-medium mb-2 text-gray-700">Subdomains</label>
+
+              <div className="space-y-2">
+                <label className="text-sm font-medium">Subdomains</label>
                 <div className="space-y-2">
                   {subdomains.map((sub, idx) => (
                     <div key={idx} className="flex items-center gap-2">
                       <div className="relative flex-1">
+                        <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                          <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                          </svg>
+                        </div>
                         <Input
                           type="text"
                           placeholder="mail.example.com"
                           value={sub}
                           onChange={e => handleSubdomainChange(idx, e.target.value)}
-                          className="pl-10 bg-white"
+                          className="pl-10 h-11 border-gray-200 focus:border-blue-600 focus:ring-blue-600"
                         />
-                        <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                          </svg>
-                        </div>
                       </div>
                       {subdomains.length > 1 && (
                         <button
@@ -217,134 +220,149 @@ export default function DMARCSubdomainPolicyCheckerPage() {
                 </div>
               </div>
             </div>
-            <div className="space-y-4">
-              <div>
-                <label className="block font-medium mb-2 text-gray-700">Bulk Import</label>
-                <textarea
-                  className="w-full h-[calc(100%-2rem)] border border-gray-200 rounded p-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-200 bg-white"
-                  rows={6}
-                  placeholder="Paste a list of subdomains, one per line"
-                  value={bulkInput}
-                  onChange={e => setBulkInput(e.target.value)}
-                />
-              </div>
+
+            <div className="space-y-2">
+              <label htmlFor="bulkInput" className="text-sm font-medium">
+                Bulk Import
+              </label>
+              <textarea
+                id="bulkInput"
+                className="w-full h-[calc(100%-2rem)] border border-gray-200 rounded p-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600"
+                rows={6}
+                placeholder="Paste a list of subdomains, one per line"
+                value={bulkInput}
+                onChange={e => setBulkInput(e.target.value)}
+              />
             </div>
           </div>
-          <div className="mt-6 flex items-center gap-4">
+
+          <div className="mt-6">
             <Button
               onClick={handleCheck}
               disabled={!domain || subdomains.every(s => !s.trim()) || loading}
-              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium shadow-sm hover:shadow transition-all"
+              className="bg-blue-600 hover:bg-blue-700 text-white min-w-[120px]"
             >
               {loading ? (
                 <span className="flex items-center gap-2">
-                  <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                  <svg
+                    className="animate-spin h-4 w-4 text-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    ></circle>
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    ></path>
                   </svg>
                   Checking...
                 </span>
               ) : (
-                "Check Policies"
+                <span className="flex items-center gap-2">
+                  Check Policies <ArrowRight className="h-4 w-4" />
+                </span>
               )}
             </Button>
-            {error && (
-              <div className="text-red-600 text-sm flex items-center gap-2">
-                <FaExclamationTriangle className="w-4 h-4" />
-                {error}
-              </div>
-            )}
           </div>
-        </Card>
+        </div>
+      </Card>
 
-        {results.length > 0 && (
-          <Card className="p-6">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl font-semibold text-gray-800">Results</h2>
-              <div className="flex items-center gap-2">
-                <span className="text-sm text-gray-600">Coverage:</span>
-                <span className="font-semibold text-blue-600">{coverage}%</span>
-              </div>
+      {results.length > 0 && (
+        <Card className="p-6">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-xl font-semibold text-gray-800">Results</h2>
+            <div className="flex items-center gap-2">
+              <span className="text-sm text-gray-600">Coverage:</span>
+              <span className="font-semibold text-blue-600">{coverage}%</span>
             </div>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
-              <div className="bg-green-50 p-3 rounded-lg">
-                <div className="text-sm text-gray-600">Strict</div>
-                <div className="text-2xl font-bold text-green-600">{strict}</div>
-              </div>
-              <div className="bg-blue-50 p-3 rounded-lg">
-                <div className="text-sm text-gray-600">Inherited</div>
-                <div className="text-2xl font-bold text-blue-600">{inherited}</div>
-              </div>
-              <div className="bg-yellow-50 p-3 rounded-lg">
-                <div className="text-sm text-gray-600">Weak</div>
-                <div className="text-2xl font-bold text-yellow-600">{weak}</div>
-              </div>
-              <div className="bg-red-50 p-3 rounded-lg">
-                <div className="text-sm text-gray-600">Missing</div>
-                <div className="text-2xl font-bold text-red-600">{missing}</div>
-              </div>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
+            <div className="bg-green-50 p-3 rounded-lg">
+              <div className="text-sm text-gray-600">Strict</div>
+              <div className="text-2xl font-bold text-green-600">{strict}</div>
             </div>
-            <div className="space-y-4">
-              {results.map((result, idx) => (
-                <div key={idx} className="border border-gray-200 rounded-lg p-4">
-                  <div className="flex items-center justify-between mb-2">
-                    <div className="flex items-center gap-2">
-                      <span className="font-medium">{result.subdomain}</span>
-                      {result.policyType === "strict" && (
-                        <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800">
-                          <FaCheckCircle className="w-3 h-3 mr-1" />
-                          Strict
-                        </span>
-                      )}
-                      {result.policyType === "inherited" && (
-                        <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800">
-                          <FaInfoCircle className="w-3 h-3 mr-1" />
-                          Inherited
-                        </span>
-                      )}
-                      {result.policyType === "weak" && (
-                        <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-yellow-100 text-yellow-800">
-                          <FaExclamationTriangle className="w-3 h-3 mr-1" />
-                          Weak
-                        </span>
-                      )}
-                      {result.policyType === "missing" && (
-                        <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-red-100 text-red-800">
-                          <FaTimesCircle className="w-3 h-3 mr-1" />
-                          Missing
-                        </span>
-                      )}
-                    </div>
-                    {result.policy && (
-                      <button
-                        type="button"
-                        className="text-blue-600 hover:text-blue-800 text-sm font-medium hover:bg-blue-50 px-2 py-1 rounded flex items-center gap-1"
-                        onClick={() => handleCopy(idx, result.policy)}
-                      >
-                        {copiedIdx === idx ? (
-                          <>
-                            <FaCheckCircle className="w-4 h-4" />
-                            Copied!
-                          </>
-                        ) : (
-                          <>
-                            <FaCopy className="w-4 h-4" />
-                            Copy Policy
-                          </>
-                        )}
-                      </button>
+            <div className="bg-blue-50 p-3 rounded-lg">
+              <div className="text-sm text-gray-600">Inherited</div>
+              <div className="text-2xl font-bold text-blue-600">{inherited}</div>
+            </div>
+            <div className="bg-yellow-50 p-3 rounded-lg">
+              <div className="text-sm text-gray-600">Weak</div>
+              <div className="text-2xl font-bold text-yellow-600">{weak}</div>
+            </div>
+            <div className="bg-red-50 p-3 rounded-lg">
+              <div className="text-sm text-gray-600">Missing</div>
+              <div className="text-2xl font-bold text-red-600">{missing}</div>
+            </div>
+          </div>
+          <div className="space-y-4">
+            {results.map((result, idx) => (
+              <div key={idx} className="border border-gray-200 rounded-lg p-4">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-2">
+                    <span className="font-medium">{result.subdomain}</span>
+                    {result.policyType === "strict" && (
+                      <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800">
+                        <FaCheckCircle className="w-3 h-3 mr-1" />
+                        Strict
+                      </span>
+                    )}
+                    {result.policyType === "inherited" && (
+                      <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800">
+                        <FaInfoCircle className="w-3 h-3 mr-1" />
+                        Inherited
+                      </span>
+                    )}
+                    {result.policyType === "weak" && (
+                      <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-yellow-100 text-yellow-800">
+                        <FaExclamationTriangle className="w-3 h-3 mr-1" />
+                        Weak
+                      </span>
+                    )}
+                    {result.policyType === "missing" && (
+                      <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-red-100 text-red-800">
+                        <FaTimesCircle className="w-3 h-3 mr-1" />
+                        Missing
+                      </span>
                     )}
                   </div>
                   {result.policy && (
-                    <div className="bg-gray-50 rounded p-3 text-sm font-mono mb-2">{result.policy}</div>
+                    <button
+                      type="button"
+                      className="text-blue-600 hover:text-blue-800 text-sm font-medium hover:bg-blue-50 px-2 py-1 rounded flex items-center gap-1"
+                      onClick={() => handleCopy(idx, result.policy)}
+                    >
+                      {copiedIdx === idx ? (
+                        <>
+                          <FaCheckCircle className="w-4 h-4" />
+                          Copied!
+                        </>
+                      ) : (
+                        <>
+                          <FaCopy className="w-4 h-4" />
+                          Copy Policy
+                        </>
+                      )}
+                    </button>
                   )}
-                  <p className="text-sm text-gray-600">{result.recommendation}</p>
                 </div>
-              ))}
-            </div>
-          </Card>
-        )}
-      </div>
+                {result.policy && (
+                  <div className="bg-gray-50 rounded p-3 text-sm font-mono mb-2">{result.policy}</div>
+                )}
+                <p className="text-sm text-gray-600">{result.recommendation}</p>
+              </div>
+            ))}
+          </div>
+        </Card>
+      )}
 
       <div className="mt-12 mb-8">
         <div className="mb-6">

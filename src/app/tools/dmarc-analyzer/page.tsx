@@ -4,7 +4,7 @@ import { useState } from "react";
 import { FaCopy, FaShieldAlt, FaInfoCircle, FaExclamationTriangle, FaCheckCircle, FaServer, FaKey } from "react-icons/fa";
 import { ToolLayout, Button, Input, Card } from "@/components/ui";
 import { DMARCStatus } from "@/components/ui/DMARCStatus";
-import { Shield, Mail, Key } from "lucide-react";
+import { Shield, Mail, Key, FileText, ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 function parseDMARC(record: string) {
@@ -121,12 +121,15 @@ export default function DMARCAnalyzerPage() {
   const [input, setInput] = useState("");
   const [tags, setTags] = useState<{ tag: string; value: string }[] | null>(null);
   const [policyType, setPolicyType] = useState<"reject" | "quarantine" | "none" | "no-policy" | null>(null);
+  const [loading, setLoading] = useState(false);
 
   function handleAnalyze(e: React.FormEvent) {
     e.preventDefault();
+    setLoading(true);
     const parsed = parseDMARC(input);
     setTags(parsed);
     setPolicyType(getPolicyType(parsed));
+    setLoading(false);
   }
 
   const sidebarContent = (
@@ -184,19 +187,72 @@ export default function DMARCAnalyzerPage() {
       description="Paste a DMARC record below to analyze its configuration and get best-practice advice."
       sidebarContent={sidebarContent}
     >
-      <Card>
-        <form onSubmit={handleAnalyze} className="space-y-4">
-          <Input
-            label="DMARC Record"
-            placeholder="v=DMARC1; p=reject; rua=mailto:reports@example.com; ..."
-            value={input}
-            onChange={e => setInput(e.target.value)}
-            required
-          />
-          <Button type="submit" disabled={!input}>
-            Analyze
-          </Button>
-        </form>
+      <Card className="w-full border-0 shadow-lg">
+        <div className="p-6">
+          <div className="flex items-center gap-2 mb-6">
+            <Shield className="h-6 w-6 text-blue-600" />
+            <h2 className="text-2xl font-bold">DMARC Analyzer</h2>
+          </div>
+
+          <form onSubmit={handleAnalyze} className="space-y-4">
+            <div className="space-y-2">
+              <label htmlFor="dmarc" className="text-sm font-medium">
+                DMARC Record
+              </label>
+              <div className="flex gap-3">
+                <div className="relative flex-1">
+                  <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <FileText className="h-5 w-5 text-gray-400" />
+                  </div>
+                  <Input
+                    id="dmarc"
+                    type="text"
+                    placeholder="v=DMARC1; p=reject; rua=mailto:reports@example.com; ..."
+                    className="pl-10 h-11 border-gray-200 focus:border-blue-600 focus:ring-blue-600"
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                    required
+                  />
+                </div>
+                <Button
+                  type="submit"
+                  className="bg-blue-600 hover:bg-blue-700 text-white min-w-[120px]"
+                  disabled={loading || !input}
+                >
+                  {loading ? (
+                    <span className="flex items-center gap-2">
+                      <svg
+                        className="animate-spin h-4 w-4 text-white"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                        ></circle>
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                        ></path>
+                      </svg>
+                      Analyzing...
+                    </span>
+                  ) : (
+                    <span className="flex items-center gap-2">
+                      Analyze <ArrowRight className="h-4 w-4" />
+                    </span>
+                  )}
+                </Button>
+              </div>
+            </div>
+          </form>
+        </div>
       </Card>
 
       {policyType && (
@@ -216,6 +272,32 @@ export default function DMARCAnalyzerPage() {
             ))}
           </ul>
         </Card>
+      )}
+
+      {tags && (
+        <div className="mt-6 space-y-4">
+          {tags.map(({ tag, value }) => (
+            <Card key={tag}>
+              <div className="flex items-center justify-between">
+                <div>
+                  <h3 className="font-medium text-gray-900">{tag}</h3>
+                  <p className="text-sm text-gray-500">{getTagExplanation(tag, value)}</p>
+                </div>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => navigator.clipboard.writeText(`${tag}=${value}`)}
+                >
+                  <FaCopy className="mr-2" />
+                  Copy
+                </Button>
+              </div>
+              <div className="mt-2 font-mono text-sm bg-gray-50 p-3 rounded">
+                {value}
+              </div>
+            </Card>
+          ))}
+        </div>
       )}
 
       <div className="mt-12 mb-8">
@@ -274,32 +356,6 @@ export default function DMARCAnalyzerPage() {
           </Link>
         </div>
       </div>
-
-      {tags && (
-        <div className="mt-6 space-y-4">
-          {tags.map(({ tag, value }) => (
-            <Card key={tag}>
-              <div className="flex items-center justify-between">
-                <div>
-                  <h3 className="font-medium text-gray-900">{tag}</h3>
-                  <p className="text-sm text-gray-500">{getTagExplanation(tag, value)}</p>
-                </div>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => navigator.clipboard.writeText(`${tag}=${value}`)}
-                >
-                  <FaCopy className="mr-2" />
-                  Copy
-                </Button>
-              </div>
-              <div className="mt-2 font-mono text-sm bg-gray-50 p-3 rounded">
-                {value}
-              </div>
-            </Card>
-          ))}
-        </div>
-      )}
     </ToolLayout>
   );
 } 

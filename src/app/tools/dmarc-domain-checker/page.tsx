@@ -4,7 +4,7 @@ import { useState } from "react";
 import { FaCheckCircle, FaExclamationTriangle, FaTimesCircle, FaShieldAlt, FaKey, FaEnvelope, FaTrophy, FaMedal, FaCopy, FaInfoCircle, FaServer } from "react-icons/fa";
 import { ToolLayout, Button, Input, Card, Alert } from "@/components/ui";
 import { DMARCStatus } from "@/components/ui/DMARCStatus";
-import { Shield, Mail, Key } from "lucide-react";
+import { Shield, Mail, Key, Globe, ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 type DMARCPolicy = "reject" | "quarantine" | "none" | "no-policy";
@@ -378,20 +378,72 @@ export default function DMARCDomainCheckerPage() {
       description="Check your domain's email authentication configuration and get actionable recommendations."
       sidebarContent={sidebarContent}
     >
-      <Card>
-        <form onSubmit={handleCheck} className="space-y-4">
-          <Input
-            label="Domain Name"
-            placeholder="yourdomain.com"
-            value={domain}
-            onChange={e => setDomain(e.target.value)}
-            required
-            pattern="^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-          />
-          <Button type="submit" disabled={loading || !domain}>
-            {loading ? "Checking..." : "Check Domain"}
-          </Button>
-        </form>
+      <Card className="w-full border-0 shadow-lg">
+        <div className="p-6">
+          <div className="flex items-center gap-2 mb-6">
+            <Shield className="h-6 w-6 text-blue-600" />
+            <h2 className="text-2xl font-bold">DMARC Checker</h2>
+          </div>
+
+          <form onSubmit={handleCheck} className="space-y-4">
+            <div className="space-y-2">
+              <label htmlFor="domain" className="text-sm font-medium">
+                Domain
+              </label>
+              <div className="flex gap-3">
+                <div className="relative flex-1">
+                  <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <Globe className="h-5 w-5 text-gray-400" />
+                  </div>
+                  <Input
+                    id="domain"
+                    type="text"
+                    placeholder="yourdomain.com"
+                    className="pl-10 h-11 border-gray-200 focus:border-blue-600 focus:ring-blue-600"
+                    value={domain}
+                    onChange={(e) => setDomain(e.target.value)}
+                    required
+                  />
+                </div>
+                <Button
+                  type="submit"
+                  className="bg-blue-600 hover:bg-blue-700 text-white min-w-[120px]"
+                  disabled={loading}
+                >
+                  {loading ? (
+                    <span className="flex items-center gap-2">
+                      <svg
+                        className="animate-spin h-4 w-4 text-white"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                        ></circle>
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                        ></path>
+                      </svg>
+                      Checking...
+                    </span>
+                  ) : (
+                    <span className="flex items-center gap-2">
+                      Check <ArrowRight className="h-4 w-4" />
+                    </span>
+                  )}
+                </Button>
+              </div>
+            </div>
+          </form>
+        </div>
       </Card>
 
       {result && (

@@ -1,9 +1,9 @@
 "use client";
 import { useState, useRef } from "react";
-import { FaCheckCircle, FaExclamationTriangle, FaTimesCircle, FaInfoCircle, FaServer, FaGlobe, FaShieldAlt, FaExclamationCircle, FaNetworkWired, FaChevronRight, FaChevronDown, FaCopy, FaTrophy, FaKey } from "react-icons/fa";
+import { FaCheckCircle, FaExclamationTriangle, FaTimesCircle, FaInfoCircle, FaServer, FaGlobe, FaShieldAlt, FaExclamationCircle, FaNetworkWired, FaChevronRight, FaChevronDown, FaCopy, FaTrophy, FaKey, FaFileAlt } from "react-icons/fa";
 import { ToolLayout, Button, Input, Card, Alert } from "@/components/ui";
 import Link from "next/link";
-import { Shield, Key, Mail } from "lucide-react";
+import { Shield, Key, Mail, ArrowRight, Globe } from "lucide-react";
 
 interface SPFNode {
   domain: string;
@@ -406,20 +406,74 @@ export default function SPFSurveyorPage() {
       description="Analyze your SPF record to identify authorized email sources and ensure proper configuration."
       sidebarContent={sidebarContent}
     >
-      <Card>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <Input
-            label="Domain Name"
-            placeholder="yourdomain.com"
-            value={domain}
-            onChange={e => setDomain(e.target.value)}
-            required
-            pattern="^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-          />
-          <Button type="submit" disabled={loading || !domain}>
-            {loading ? "Analyzing..." : "Analyze SPF Record"}
-          </Button>
-        </form>
+      <Card className="w-full border-0 shadow-lg">
+        <div className="p-6">
+          <div className="flex items-center gap-2 mb-6">
+            <Shield className="h-6 w-6 text-blue-600" />
+            <h2 className="text-2xl font-bold">SPF Surveyor</h2>
+          </div>
+
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="space-y-2">
+              <label htmlFor="domain" className="text-sm font-medium">
+                Domain Name
+              </label>
+              <div className="relative flex-1">
+                <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                  <Globe className="h-5 w-5 text-gray-400" />
+                </div>
+                <Input
+                  id="domain"
+                  type="text"
+                  placeholder="yourdomain.com"
+                  className="pl-10 h-11 border-gray-200 focus:border-blue-600 focus:ring-blue-600"
+                  value={domain}
+                  onChange={e => setDomain(e.target.value)}
+                  required
+                  pattern="^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                />
+              </div>
+            </div>
+
+            <div>
+              <Button
+                type="submit"
+                className="bg-blue-600 hover:bg-blue-700 text-white min-w-[120px]"
+                disabled={loading || !domain}
+              >
+                {loading ? (
+                  <span className="flex items-center gap-2">
+                    <svg
+                      className="animate-spin h-4 w-4 text-white"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      ></circle>
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                      ></path>
+                    </svg>
+                    Analyzing...
+                  </span>
+                ) : (
+                  <span className="flex items-center gap-2">
+                    Analyze <ArrowRight className="h-4 w-4" />
+                  </span>
+                )}
+              </Button>
+            </div>
+          </form>
+        </div>
       </Card>
 
       {error && (
@@ -501,9 +555,12 @@ export default function SPFSurveyorPage() {
           <Card>
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-3">
-                <FaShieldAlt className="w-6 h-6 text-blue-400" />
+                <FaServer className="w-6 h-6 text-blue-400" />
                 <span className="font-bold text-xl text-gray-900">SPF Record</span>
               </div>
+            </div>
+            <div className="flex items-center gap-2">
+              <pre className="whitespace-pre-wrap break-all text-gray-800 bg-gray-50 rounded p-2 border border-gray-100 text-xs flex-1">{spfTree.record}</pre>
               <Button
                 variant="ghost"
                 size="sm"
@@ -513,12 +570,11 @@ export default function SPFSurveyorPage() {
                 {copied ? "Copied!" : "Copy"}
               </Button>
             </div>
-            <pre className="whitespace-pre-wrap break-all text-gray-800 bg-gray-50 rounded p-2 border border-gray-100 text-xs">{spfTree.record}</pre>
           </Card>
 
-          {/* SPF Tree Visualization */}
+          {/* SPF Tree */}
           <Card>
-            <h3 className="font-semibold text-gray-900 mb-4">SPF Record Tree</h3>
+            <h3 className="font-semibold text-gray-900 mb-4">SPF Record Analysis</h3>
             <SPFTreeNode node={spfTree} />
           </Card>
         </div>
@@ -548,16 +604,16 @@ export default function SPFSurveyorPage() {
           </Link>
 
           <Link
-            href="/tools/dkim-validator"
-            className="group relative overflow-hidden rounded-lg border p-5 transition-all hover:shadow-md border-purple-200 bg-purple-50 dark:border-purple-800 dark:bg-purple-950"
+            href="/tools/dkim-inspector"
+            className="group relative overflow-hidden rounded-lg border p-5 transition-all hover:shadow-md border-green-200 bg-green-50 dark:border-green-800 dark:bg-green-950"
           >
             <div className="flex items-start gap-4">
-              <div className="rounded-full p-2 bg-purple-100 dark:bg-purple-900">
+              <div className="rounded-full p-2 bg-green-100 dark:bg-green-900">
                 <Key className="h-6 w-6 text-primary" />
               </div>
               <div>
-                <h3 className="font-semibold text-lg group-hover:underline">DKIM Validator</h3>
-                <p className="text-sm text-muted-foreground mt-1">Verify your DKIM signatures and configuration</p>
+                <h3 className="font-semibold text-lg group-hover:underline">DKIM Inspector</h3>
+                <p className="text-sm text-muted-foreground mt-1">Validate and troubleshoot your DKIM records</p>
               </div>
             </div>
             <div className="absolute bottom-0 left-0 h-1 w-0 bg-primary transition-all duration-300 group-hover:w-full"></div>
@@ -565,15 +621,15 @@ export default function SPFSurveyorPage() {
 
           <Link
             href="/tools/domain-security-checker"
-            className="group relative overflow-hidden rounded-lg border p-5 transition-all hover:shadow-md border-green-200 bg-green-50 dark:border-green-800 dark:bg-green-950"
+            className="group relative overflow-hidden rounded-lg border p-5 transition-all hover:shadow-md border-purple-200 bg-purple-50 dark:border-purple-800 dark:bg-purple-950"
           >
             <div className="flex items-start gap-4">
-              <div className="rounded-full p-2 bg-green-100 dark:bg-green-900">
+              <div className="rounded-full p-2 bg-purple-100 dark:bg-purple-900">
                 <Mail className="h-6 w-6 text-primary" />
               </div>
               <div>
                 <h3 className="font-semibold text-lg group-hover:underline">Domain Security Checker</h3>
-                <p className="text-sm text-muted-foreground mt-1">Comprehensive security analysis for your domain</p>
+                <p className="text-sm text-muted-foreground mt-1">Check your domain's overall email security configuration</p>
               </div>
             </div>
             <div className="absolute bottom-0 left-0 h-1 w-0 bg-primary transition-all duration-300 group-hover:w-full"></div>

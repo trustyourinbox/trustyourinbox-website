@@ -1,13 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { FaKey, FaCopy, FaInfoCircle, FaShieldAlt, FaExclamationTriangle, FaCheckCircle, FaTimesCircle, FaTrophy, FaServer } from "react-icons/fa";
+import { FaKey, FaCopy, FaInfoCircle, FaShieldAlt, FaExclamationTriangle, FaCheckCircle, FaTimesCircle, FaTrophy, FaServer, FaFileAlt } from "react-icons/fa";
 import { Buffer } from "buffer";
 // @ts-expect-error: asn1.js has no types
 import asn1 from "asn1.js";
 import { ToolLayout, Button, Input, Card, Alert } from "@/components/ui";
 import Link from "next/link";
-import { Shield, Mail, Key } from "lucide-react";
+import { Shield, Mail, Key, ArrowRight, Globe } from "lucide-react";
 
 function parseDKIMRecord(record: string) {
   // Parse DKIM record into key-value pairs
@@ -284,29 +284,96 @@ export default function DKIMInspectorPage() {
       description="Inspect and validate DKIM records for your domain. Enter a domain and selector to get started."
       sidebarContent={sidebarContent}
     >
-      <Card>
-        <form onSubmit={handleCheck} className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <Input
-              label="Domain Name"
-              placeholder="yourdomain.com"
-              value={domain}
-              onChange={e => setDomain(e.target.value)}
-              required
-              pattern="^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-            />
-            <Input
-              label="DKIM Selector"
-              placeholder="selector (e.g., google, default)"
-              value={selector}
-              onChange={e => setSelector(e.target.value)}
-              required
-            />
+      <Card className="w-full border-0 shadow-lg">
+        <div className="p-6">
+          <div className="flex items-center gap-2 mb-6">
+            <Shield className="h-6 w-6 text-blue-600" />
+            <h2 className="text-2xl font-bold">DKIM Inspector</h2>
           </div>
-          <Button type="submit" disabled={loading || !domain || !selector}>
-            {loading ? "Inspecting..." : "Inspect DKIM Record"}
-          </Button>
-        </form>
+
+          <form onSubmit={handleCheck} className="space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <label htmlFor="domain" className="text-sm font-medium">
+                  Domain Name
+                </label>
+                <div className="relative flex-1">
+                  <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <Globe className="h-5 w-5 text-gray-400" />
+                  </div>
+                  <Input
+                    id="domain"
+                    type="text"
+                    placeholder="yourdomain.com"
+                    className="pl-10 h-11 border-gray-200 focus:border-blue-600 focus:ring-blue-600"
+                    value={domain}
+                    onChange={e => setDomain(e.target.value)}
+                    required
+                    pattern="^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <label htmlFor="selector" className="text-sm font-medium">
+                  DKIM Selector
+                </label>
+                <div className="relative flex-1">
+                  <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <FaFileAlt className="h-5 w-5 text-gray-400" />
+                  </div>
+                  <Input
+                    id="selector"
+                    type="text"
+                    placeholder="selector (e.g., google, default)"
+                    className="pl-10 h-11 border-gray-200 focus:border-blue-600 focus:ring-blue-600"
+                    value={selector}
+                    onChange={e => setSelector(e.target.value)}
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <Button
+                type="submit"
+                className="bg-blue-600 hover:bg-blue-700 text-white min-w-[120px]"
+                disabled={loading || !domain || !selector}
+              >
+                {loading ? (
+                  <span className="flex items-center gap-2">
+                    <svg
+                      className="animate-spin h-4 w-4 text-white"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      ></circle>
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                      ></path>
+                    </svg>
+                    Inspecting...
+                  </span>
+                ) : (
+                  <span className="flex items-center gap-2">
+                    Inspect <ArrowRight className="h-4 w-4" />
+                  </span>
+                )}
+              </Button>
+            </div>
+          </form>
+        </div>
       </Card>
 
       {record && (
@@ -418,37 +485,6 @@ export default function DKIMInspectorPage() {
         </div>
       )}
 
-      {recommendations.length > 0 && (
-        <Card className="mt-6" title="Recommendations">
-          <ul className="space-y-2">
-            {recommendations.map((rec, i) => (
-              <li key={i} className="flex items-start gap-2">
-                <FaInfoCircle className="w-4 h-4 text-blue-600 mt-0.5" />
-                <span>{rec.message}</span>
-              </li>
-            ))}
-          </ul>
-        </Card>
-      )}
-
-      {/* Related Tools */}
-      <Card className="mt-8" title="Related Tools">
-        <div className="flex flex-wrap gap-4">
-          <a href="/tools/dmarc-analyzer" className="flex items-center gap-2 text-blue-600 hover:text-blue-700">
-            <FaShieldAlt className="w-5 h-5" />
-            <span>DMARC Analyzer</span>
-          </a>
-          <a href="/tools/dmarc-domain-checker" className="flex items-center gap-2 text-blue-600 hover:text-blue-700">
-            <FaShieldAlt className="w-5 h-5" />
-            <span>DMARC Domain Checker</span>
-          </a>
-          <a href="/tools/spf-surveyor" className="flex items-center gap-2 text-blue-600 hover:text-blue-700">
-            <FaServer className="w-5 h-5" />
-            <span>SPF Surveyor</span>
-          </a>
-        </div>
-      </Card>
-
       {error && (
         <Alert variant="error" className="mt-6">
           {error}
@@ -504,7 +540,7 @@ export default function DKIMInspectorPage() {
               </div>
               <div>
                 <h3 className="font-semibold text-lg group-hover:underline">Domain Security Checker</h3>
-                <p className="text-sm text-muted-foreground mt-1">Comprehensive security analysis for your domain</p>
+                <p className="text-sm text-muted-foreground mt-1">Check your domain's overall email security configuration</p>
               </div>
             </div>
             <div className="absolute bottom-0 left-0 h-1 w-0 bg-primary transition-all duration-300 group-hover:w-full"></div>
