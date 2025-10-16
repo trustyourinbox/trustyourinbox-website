@@ -285,7 +285,7 @@ function CategorizedDropdownMenu({
 
       {isOpen && (
         <div
-          className="absolute top-full left-0 mt-2 w-[750px] bg-background/95 backdrop-blur-xl border border-border rounded-xl shadow-2xl p-6"
+          className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[750px] bg-background/95 backdrop-blur-xl border border-border rounded-xl shadow-2xl p-6"
           onMouseLeave={onToggle}
         >
           {/* Three-Column Grid */}
