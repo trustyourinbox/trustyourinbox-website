@@ -52,6 +52,45 @@
                    radial-gradient(at 0% 50%, hsla(210, 100%, 56%, 0.2) 0px, transparent 50%);
 }
 
+.dark {
+  /* Dark Theme Colors */
+  --background: 222 47% 11%;
+  --foreground: 210 40% 98%;
+  --card: 222 47% 14%;
+  --card-foreground: 210 40% 98%;
+  --popover: 222 47% 14%;
+  --popover-foreground: 210 40% 98%;
+  --primary: 239 84% 70%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 217 33% 17%;
+  --secondary-foreground: 210 40% 98%;
+  --muted: 215 28% 25%;
+  --muted-foreground: 217 33% 65%;
+  --accent: 239 84% 70%;
+  --accent-foreground: 0 0% 100%;
+  --accent-hover: 243 75% 65%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 217 33% 21%;
+  --input: 217 33% 21%;
+  --ring: 239 84% 70%;
+  --success: 160 84% 45%;
+  --warning: 38 92% 55%;
+  --info: 217 91% 65%;
+
+  /* Dark Mode Shadows (stronger contrast) */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.5);
+  --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.5), 0 1px 2px 0 rgb(0 0 0 / 0.3);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.5), 0 2px 4px -1px rgb(0 0 0 / 0.3);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.5), 0 4px 6px -2px rgb(0 0 0 / 0.3);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.5), 0 10px 10px -5px rgb(0 0 0 / 0.3);
+
+  /* Dark Mode Gradients (adjusted opacity) */
+  --gradient-mesh: radial-gradient(at 40% 20%, hsla(239, 84%, 70%, 0.15) 0px, transparent 50%),
+                   radial-gradient(at 80% 0%, hsla(243, 75%, 65%, 0.1) 0px, transparent 50%),
+                   radial-gradient(at 0% 50%, hsla(210, 100%, 60%, 0.1) 0px, transparent 50%);
+}
+
 @layer base {
   * {
     @apply border-border;
@@ -132,4 +171,21 @@
   .text-balance {
     text-wrap: balance;
   }
+
+  /* Smooth theme transitions */
+  .theme-transition {
+    @apply transition-colors duration-200;
+  }
+}
+
+/* Apply smooth transitions to common elements */
+html {
+  transition: background-color 200ms ease-in-out, color 200ms ease-in-out;
+}
+
+body,
+[class*="bg-"],
+[class*="text-"],
+[class*="border-"] {
+  transition: background-color 200ms ease-in-out, color 200ms ease-in-out, border-color 200ms ease-in-out;
 }

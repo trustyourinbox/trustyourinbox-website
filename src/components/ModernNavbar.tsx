@@ -4,6 +4,7 @@ import Link from "next/link"
 import { useState, useEffect } from "react"
 import { Shield, ChevronDown, Menu, X, BarChart3, Globe, Wrench, BookOpen, FileText, Users, Building2, Code, Rocket, Info, Mail, Briefcase, Sparkles, Play, AlertTriangle, Search, CheckCircle, Eye, Settings, FileCode } from "lucide-react"
 import { Button } from "@/components/ui/Button"
+import ThemeToggle from "@/components/ThemeToggle"
 
 const productItems = [
   { name: "Features", href: "/features", icon: Sparkles, desc: "Complete DMARC analytics platform" },
@@ -158,6 +159,7 @@ export default function ModernNavbar() {
 
           {/* Right Side CTAs */}
           <div className="hidden md:flex items-center gap-3">
+            <ThemeToggle />
             <Link
               href="/login"
               className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
@@ -192,6 +194,10 @@ export default function ModernNavbar() {
             <MobileSection title="Resources" items={resourcesItems} />
             <MobileSection title="Company" items={companyItems} />
             <div className="pt-4 border-t border-border space-y-3">
+              <div className="flex items-center justify-between py-2">
+                <span className="text-sm font-medium">Theme</span>
+                <ThemeToggle />
+              </div>
               <Link href="/login" className="block py-2 text-sm font-medium text-muted-foreground">
                 Login
               </Link>

@@ -1,5 +1,6 @@
 import Link from "next/link"
 import localFont from "next/font/local"
+import { ThemeProvider } from "next-themes"
 import ModernNavbar from "@/components/ModernNavbar"
 import Footer from "@/components/Footer"
 import CtaSection from "@/components/sections/CtaSection"
@@ -30,7 +31,7 @@ const averta = localFont({
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${averta.variable}`}>
+    <html lang="en" className={`${averta.variable}`} suppressHydrationWarning>
       <head>
         <title>Free DMARC Checker & Monitoring Tool | Stop Email Spoofing | TrustYourInbox</title>
         <meta name="description" content="Implement DMARC easily with our free checker. Stop email spoofing, protect your domain, and monitor authentication. Perfect for IT teams, MSPs, and small businesses." />
@@ -43,10 +44,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="canonical" href="https://trustyourinbox.com/" />
       </head>
       <body className="font-sans antialiased">
-        <ModernNavbar />
-        <main className="pt-16">{children}</main>
-        <CtaSection />
-        <Footer />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange={false}
+        >
+          <ModernNavbar />
+          <main className="pt-16">{children}</main>
+          <CtaSection />
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   )
