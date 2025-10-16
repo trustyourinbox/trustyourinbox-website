@@ -5,7 +5,7 @@ const coreTools = [
     name: "DMARC Policy Generator",
     description: "Create and customize DMARC policies with our intuitive generator",
     href: "/tools/dmarc-policy-generator",
-    icon: <FaShieldAlt className="w-5 h-5 text-blue-600" />
+    icon: <FaShieldAlt className="w-5 h-5 text-primary" />
   },
   {
     name: "DMARC Policy Impact Simulator",

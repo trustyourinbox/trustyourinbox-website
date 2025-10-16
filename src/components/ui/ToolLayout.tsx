@@ -13,7 +13,7 @@ export function ToolLayout({ title, description, children, sidebarContent }: Too
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
       <section className="relative overflow-hidden py-16 sm:py-24">
-        <div className="absolute inset-0 bg-gradient-to-b from-blue-50 to-white pointer-events-none -z-10">
+        <div className="absolute inset-0 bg-gradient-to-b from-secondary to-white pointer-events-none -z-10">
           <svg className="absolute bottom-0 left-0 right-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
             <path
               fill="#0066FF"
@@ -32,7 +32,7 @@ export function ToolLayout({ title, description, children, sidebarContent }: Too
                    word.toUpperCase() === 'DKIM' || 
                    word.toUpperCase() === 'XML' ||
                    word.toUpperCase() === 'DOMAIN' ? (
-                    <span className="text-blue-600">{word}</span>
+                    <span className="text-primary">{word}</span>
                   ) : (
                     <span className="text-gray-900">{word}</span>
                   )}
@@ -61,7 +61,7 @@ export function ToolLayout({ title, description, children, sidebarContent }: Too
               <div className="lg:col-span-1">
                 <div className="sticky top-24 bg-white rounded-lg border border-gray-200 p-6 shadow-sm">
                   <div className="flex items-center gap-2 mb-6 pb-4 border-b border-gray-200">
-                    <FaInfoCircle className="w-5 h-5 text-blue-600" />
+                    <FaInfoCircle className="w-5 h-5 text-primary" />
                     <h2 className="text-lg font-semibold text-gray-900">Help & Resources</h2>
                   </div>
                   <div className="prose prose-sm max-w-none">
@@ -70,11 +70,11 @@ export function ToolLayout({ title, description, children, sidebarContent }: Too
                   <div className="mt-6 pt-4 border-t border-gray-200">
                     <p className="text-sm text-gray-500">
                       Need more help? Check out our{' '}
-                      <a href="/docs" className="text-blue-600 hover:text-blue-700 font-medium">
+                      <a href="/docs" className="text-primary hover:text-primary font-medium">
                         documentation
                       </a>
                       {' '}or{' '}
-                      <a href="/contact" className="text-blue-600 hover:text-blue-700 font-medium">
+                      <a href="/contact" className="text-primary hover:text-primary font-medium">
                         contact support
                       </a>
                       .

@@ -161,13 +161,13 @@ export function MegaMenu({ isOpen, onClose }: { isOpen: boolean; onClose: () => 
             ))}
           </div>
           {/* Right-side featured box */}
-          <div className="w-full lg:w-80 flex-shrink-0 flex flex-col justify-between bg-blue-50 border border-blue-100 rounded-xl p-5 shadow-sm mt-4 lg:mt-0 lg:ml-2">
+          <div className="w-full lg:w-80 flex-shrink-0 flex flex-col justify-between bg-secondary border border-primary/10 rounded-xl p-5 shadow-sm mt-4 lg:mt-0 lg:ml-2">
             <div>
-              <span className="inline-block bg-blue-600 text-white text-xs font-semibold px-2 py-0.5 rounded mb-2">What&apos;s New</span>
-              <h4 className="text-lg font-bold text-blue-900 mb-1">Forensic DMARC Report Viewer</h4>
-              <p className="text-sm text-blue-800 mb-4">Upload and analyze forensic (ruf) DMARC reports to investigate authentication failures.</p>
+              <span className="inline-block bg-primary text-white text-xs font-semibold px-2 py-0.5 rounded mb-2">What&apos;s New</span>
+              <h4 className="text-lg font-bold text-foreground mb-1">Forensic DMARC Report Viewer</h4>
+              <p className="text-sm text-foreground mb-4">Upload and analyze forensic (ruf) DMARC reports to investigate authentication failures.</p>
             </div>
-            <Link href="/tools/forensic-report-viewer" onClick={onClose} className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm px-4 py-2 rounded-lg text-center transition-colors">Try it now</Link>
+            <Link href="/tools/forensic-report-viewer" onClick={onClose} className="inline-block bg-primary hover:bg-primary text-white font-semibold text-sm px-4 py-2 rounded-lg text-center transition-colors">Try it now</Link>
           </div>
         </div>
       </div>

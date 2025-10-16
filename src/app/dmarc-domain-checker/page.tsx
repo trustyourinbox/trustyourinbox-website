@@ -44,7 +44,7 @@ function DmarcDomainCheckerInner() {
         <div className="max-w-3xl mx-auto text-center">
           <h1 className="text-3xl font-bold text-gray-900 mb-4">No Domain Provided</h1>
           <p className="text-gray-600 mb-8">Please enter a domain to check its DMARC configuration.</p>
-          <a href="/tools/dmarc-domain-checker" className="text-blue-600 hover:text-blue-700">
+          <a href="/tools/dmarc-domain-checker" className="text-primary hover:text-primary">
             Return to DMARC Checker
           </a>
         </div>
@@ -56,7 +56,7 @@ function DmarcDomainCheckerInner() {
     return (
       <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto text-center">
-          <Loader2 className="h-12 w-12 text-blue-600 animate-spin mx-auto mb-4" />
+          <Loader2 className="h-12 w-12 text-primary animate-spin mx-auto mb-4" />
           <h1 className="text-3xl font-bold text-gray-900 mb-4">Checking Domain</h1>
           <p className="text-gray-600">Analyzing {domain} for DMARC, SPF, and DKIM configuration...</p>
         </div>
@@ -71,7 +71,7 @@ function DmarcDomainCheckerInner() {
           <AlertCircle className="h-12 w-12 text-red-600 mx-auto mb-4" />
           <h1 className="text-3xl font-bold text-gray-900 mb-4">Error</h1>
           <p className="text-gray-600 mb-8">{error}</p>
-          <a href="/tools/dmarc-domain-checker" className="text-blue-600 hover:text-blue-700">
+          <a href="/tools/dmarc-domain-checker" className="text-primary hover:text-primary">
             Return to DMARC Checker
           </a>
         </div>
@@ -94,8 +94,8 @@ function DmarcDomainCheckerInner() {
             animate={{ opacity: 1, y: 0 }}
             className="bg-white rounded-xl shadow-lg p-6"
           >
-            <div className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 mb-4">
-              <Shield className="h-6 w-6 text-blue-600" />
+            <div className="flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 mb-4">
+              <Shield className="h-6 w-6 text-primary" />
             </div>
             <h3 className="text-lg font-semibold mb-2">DMARC</h3>
             <div className="space-y-2">
@@ -121,8 +121,8 @@ function DmarcDomainCheckerInner() {
             transition={{ delay: 0.1 }}
             className="bg-white rounded-xl shadow-lg p-6"
           >
-            <div className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 mb-4">
-              <Mail className="h-6 w-6 text-blue-600" />
+            <div className="flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 mb-4">
+              <Mail className="h-6 w-6 text-primary" />
             </div>
             <h3 className="text-lg font-semibold mb-2">SPF</h3>
             <div className="space-y-2">
@@ -144,8 +144,8 @@ function DmarcDomainCheckerInner() {
             transition={{ delay: 0.2 }}
             className="bg-white rounded-xl shadow-lg p-6"
           >
-            <div className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 mb-4">
-              <Lock className="h-6 w-6 text-blue-600" />
+            <div className="flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 mb-4">
+              <Lock className="h-6 w-6 text-primary" />
             </div>
             <h3 className="text-lg font-semibold mb-2">DKIM</h3>
             <div className="space-y-2">
@@ -204,7 +204,7 @@ function DmarcDomainCheckerInner() {
         <div className="mt-12 text-center">
           <a
             href="/tools/dmarc-domain-checker"
-            className="inline-flex items-center justify-center rounded-md bg-blue-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            className="inline-flex items-center justify-center rounded-md bg-primary px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-primary focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
           >
             Check Another Domain
           </a>
@@ -216,7 +216,7 @@ function DmarcDomainCheckerInner() {
 
 export default function DmarcDomainChecker() {
   return (
-    <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><Loader2 className="h-12 w-12 text-blue-600 animate-spin" /></div>}>
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><Loader2 className="h-12 w-12 text-primary animate-spin" /></div>}>
       <DmarcDomainCheckerInner />
     </Suspense>
   )

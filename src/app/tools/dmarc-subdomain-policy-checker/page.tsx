@@ -119,12 +119,12 @@ export default function DMARCSubdomainPolicyCheckerPage() {
       <h4 className="font-semibold mb-2">Learn More</h4>
       <ul className="list-disc pl-5 text-sm">
         <li>
-          <a href="https://dmarc.org/" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">
+          <a href="https://dmarc.org/" target="_blank" rel="noopener noreferrer" className="text-primary underline">
             DMARC.org: Official DMARC Documentation
           </a>
         </li>
         <li>
-          <a href="/guides/dmarc" className="text-blue-600 underline">
+          <a href="/guides/dmarc" className="text-primary underline">
             TrustYourInbox DMARC Guide
           </a>
         </li>
@@ -141,7 +141,7 @@ export default function DMARCSubdomainPolicyCheckerPage() {
       <Card className="w-full border-0 shadow-lg">
         <div className="p-6">
           <div className="flex items-center gap-2 mb-6">
-            <Shield className="h-6 w-6 text-blue-600" />
+            <Shield className="h-6 w-6 text-primary" />
             <h2 className="text-2xl font-bold">DMARC Subdomain Policy Checker</h2>
           </div>
 
@@ -163,7 +163,7 @@ export default function DMARCSubdomainPolicyCheckerPage() {
                     placeholder="example.com"
                     value={domain}
                     onChange={e => setDomain(e.target.value)}
-                    className="pl-10 h-11 border-gray-200 focus:border-blue-600 focus:ring-blue-600"
+                    className="pl-10 h-11 border-gray-200 focus:border-primary focus:ring-ring"
                   />
                 </div>
               </div>
@@ -184,7 +184,7 @@ export default function DMARCSubdomainPolicyCheckerPage() {
                           placeholder="mail.example.com"
                           value={sub}
                           onChange={e => handleSubdomainChange(idx, e.target.value)}
-                          className="pl-10 h-11 border-gray-200 focus:border-blue-600 focus:ring-blue-600"
+                          className="pl-10 h-11 border-gray-200 focus:border-primary focus:ring-ring"
                         />
                       </div>
                       {subdomains.length > 1 && (
@@ -203,7 +203,7 @@ export default function DMARCSubdomainPolicyCheckerPage() {
                 <div className="flex items-center gap-2 mt-3">
                   <button
                     type="button"
-                    className="text-blue-600 hover:text-blue-800 text-sm font-semibold hover:bg-blue-50 px-2 py-1 rounded"
+                    className="text-primary hover:text-foreground text-sm font-semibold hover:bg-secondary px-2 py-1 rounded"
                     onClick={addSubdomain}
                   >
                     + Add another subdomain
@@ -211,7 +211,7 @@ export default function DMARCSubdomainPolicyCheckerPage() {
                   <span className="text-gray-400 text-xs">or</span>
                   <button
                     type="button"
-                    className="text-blue-600 hover:text-blue-800 text-sm font-semibold hover:bg-blue-50 px-2 py-1 rounded"
+                    className="text-primary hover:text-foreground text-sm font-semibold hover:bg-secondary px-2 py-1 rounded"
                     onClick={handleBulkAdd}
                     disabled={!bulkInput.trim()}
                   >
@@ -227,7 +227,7 @@ export default function DMARCSubdomainPolicyCheckerPage() {
               </label>
               <textarea
                 id="bulkInput"
-                className="w-full h-[calc(100%-2rem)] border border-gray-200 rounded p-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600"
+                className="w-full h-[calc(100%-2rem)] border border-gray-200 rounded p-3 text-sm focus:outline-none focus:ring-2 focus:ring-ring focus:border-primary"
                 rows={6}
                 placeholder="Paste a list of subdomains, one per line"
                 value={bulkInput}
@@ -240,7 +240,7 @@ export default function DMARCSubdomainPolicyCheckerPage() {
             <Button
               onClick={handleCheck}
               disabled={!domain || subdomains.every(s => !s.trim()) || loading}
-              className="bg-blue-600 hover:bg-blue-700 text-white min-w-[120px]"
+              className="bg-primary hover:bg-primary text-white min-w-[120px]"
             >
               {loading ? (
                 <span className="flex items-center gap-2">
@@ -282,7 +282,7 @@ export default function DMARCSubdomainPolicyCheckerPage() {
             <h2 className="text-xl font-semibold text-gray-800">Results</h2>
             <div className="flex items-center gap-2">
               <span className="text-sm text-gray-600">Coverage:</span>
-              <span className="font-semibold text-blue-600">{coverage}%</span>
+              <span className="font-semibold text-primary">{coverage}%</span>
             </div>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
@@ -290,9 +290,9 @@ export default function DMARCSubdomainPolicyCheckerPage() {
               <div className="text-sm text-gray-600">Strict</div>
               <div className="text-2xl font-bold text-green-600">{strict}</div>
             </div>
-            <div className="bg-blue-50 p-3 rounded-lg">
+            <div className="bg-secondary p-3 rounded-lg">
               <div className="text-sm text-gray-600">Inherited</div>
-              <div className="text-2xl font-bold text-blue-600">{inherited}</div>
+              <div className="text-2xl font-bold text-primary">{inherited}</div>
             </div>
             <div className="bg-yellow-50 p-3 rounded-lg">
               <div className="text-sm text-gray-600">Weak</div>
@@ -316,7 +316,7 @@ export default function DMARCSubdomainPolicyCheckerPage() {
                       </span>
                     )}
                     {result.policyType === "inherited" && (
-                      <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800">
+                      <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-primary/10 text-foreground">
                         <FaInfoCircle className="w-3 h-3 mr-1" />
                         Inherited
                       </span>
@@ -337,7 +337,7 @@ export default function DMARCSubdomainPolicyCheckerPage() {
                   {result.policy && (
                     <button
                       type="button"
-                      className="text-blue-600 hover:text-blue-800 text-sm font-medium hover:bg-blue-50 px-2 py-1 rounded flex items-center gap-1"
+                      className="text-primary hover:text-foreground text-sm font-medium hover:bg-secondary px-2 py-1 rounded flex items-center gap-1"
                       onClick={() => handleCopy(idx, result.policy)}
                     >
                       {copiedIdx === idx ? (
@@ -373,10 +373,10 @@ export default function DMARCSubdomainPolicyCheckerPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <Link
             href="/tools/dmarc-analyzer"
-            className="group relative overflow-hidden rounded-lg border p-5 transition-all hover:shadow-md border-blue-200 bg-blue-50 dark:border-blue-800 dark:bg-blue-950"
+            className="group relative overflow-hidden rounded-lg border p-5 transition-all hover:shadow-md border-primary/20 bg-secondary dark:border-primary dark:bg-primary"
           >
             <div className="flex items-start gap-4">
-              <div className="rounded-full p-2 bg-blue-100 dark:bg-blue-900">
+              <div className="rounded-full p-2 bg-primary/10 dark:bg-primary">
                 <Shield className="h-6 w-6 text-primary" />
               </div>
               <div>

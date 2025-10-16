@@ -95,7 +95,7 @@ export default function CareersPage() {
     <div className="min-h-screen bg-white">
       <HeroSection
         badge={<span>Join Our Team</span>}
-        title={<>Build the Future of <span className="text-blue-600">Email Security</span></>}
+        title={<>Build the Future of <span className="text-primary">Email Security</span></>}
         subtitle="Join us in our mission to make email security simple, effective, and accessible for everyone."
         ctaButtons={[
           { label: "View Open Positions", href: "#positions", variant: "primary" },
@@ -176,7 +176,7 @@ export default function CareersPage() {
                 <div className="mt-6">
                   <a
                     href={`mailto:careers@trustyourinbox.com?subject=Application for ${job.title}`}
-                    className="inline-flex items-center justify-center rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
+                    className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 transition-colors"
                   >
                     Apply Now
                   </a>

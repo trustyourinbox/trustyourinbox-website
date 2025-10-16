@@ -247,7 +247,7 @@ export default function DKIMInspectorPage() {
     <div className="space-y-6">
       <div>
         <h3 className="text-sm font-medium text-gray-900 flex items-center gap-1.5">
-          <FaShieldAlt className="w-4 h-4 text-blue-600" />
+          <FaShieldAlt className="w-4 h-4 text-primary" />
           About DKIM
         </h3>
         <p className="text-sm text-gray-500 mt-2">
@@ -257,20 +257,20 @@ export default function DKIMInspectorPage() {
 
       <div>
         <h3 className="text-sm font-medium text-gray-900 flex items-center gap-1.5">
-          <FaInfoCircle className="w-4 h-4 text-blue-600" />
+          <FaInfoCircle className="w-4 h-4 text-primary" />
           What We Check
         </h3>
         <ul className="text-sm text-gray-500 space-y-2 mt-2">
           <li className="flex items-start gap-2">
-            <FaKey className="w-4 h-4 text-blue-600 mt-0.5" />
+            <FaKey className="w-4 h-4 text-primary mt-0.5" />
             <span>DKIM record version and format</span>
           </li>
           <li className="flex items-start gap-2">
-            <FaKey className="w-4 h-4 text-blue-600 mt-0.5" />
+            <FaKey className="w-4 h-4 text-primary mt-0.5" />
             <span>Public key presence and length</span>
           </li>
           <li className="flex items-start gap-2">
-            <FaKey className="w-4 h-4 text-blue-600 mt-0.5" />
+            <FaKey className="w-4 h-4 text-primary mt-0.5" />
             <span>Testing mode flags</span>
           </li>
         </ul>
@@ -287,7 +287,7 @@ export default function DKIMInspectorPage() {
       <Card className="w-full border-0 shadow-lg">
         <div className="p-6">
           <div className="flex items-center gap-2 mb-6">
-            <Shield className="h-6 w-6 text-blue-600" />
+            <Shield className="h-6 w-6 text-primary" />
             <h2 className="text-2xl font-bold">DKIM Inspector</h2>
           </div>
 
@@ -305,7 +305,7 @@ export default function DKIMInspectorPage() {
                     id="domain"
                     type="text"
                     placeholder="yourdomain.com"
-                    className="pl-10 h-11 border-gray-200 focus:border-blue-600 focus:ring-blue-600"
+                    className="pl-10 h-11 border-gray-200 focus:border-primary focus:ring-ring"
                     value={domain}
                     onChange={e => setDomain(e.target.value)}
                     required
@@ -326,7 +326,7 @@ export default function DKIMInspectorPage() {
                     id="selector"
                     type="text"
                     placeholder="selector (e.g., google, default)"
-                    className="pl-10 h-11 border-gray-200 focus:border-blue-600 focus:ring-blue-600"
+                    className="pl-10 h-11 border-gray-200 focus:border-primary focus:ring-ring"
                     value={selector}
                     onChange={e => setSelector(e.target.value)}
                     required
@@ -338,7 +338,7 @@ export default function DKIMInspectorPage() {
             <div>
               <Button
                 type="submit"
-                className="bg-blue-600 hover:bg-blue-700 text-white min-w-[120px]"
+                className="bg-primary hover:bg-primary text-white min-w-[120px]"
                 disabled={loading || !domain || !selector}
               >
                 {loading ? (
@@ -382,7 +382,7 @@ export default function DKIMInspectorPage() {
           <Card className={color}>
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-3">
-                <FaShieldAlt className="w-6 h-6 text-blue-400" />
+                <FaShieldAlt className="w-6 h-6 text-primary/70" />
                 <span className="font-bold text-xl text-gray-900">Status</span>
               </div>
               {icon}
@@ -410,13 +410,13 @@ export default function DKIMInspectorPage() {
                   key={i}
                   className={`flex items-start gap-3 p-3 rounded-lg border ${
                     rec.type === 'warning' ? 'border-red-200' :
-                    rec.type === 'info' ? 'border-blue-200' :
+                    rec.type === 'info' ? 'border-primary/20' :
                     'border-green-200'
                   }`}
                 >
                   <div className={`mt-0.5 ${
                     rec.type === 'warning' ? 'text-red-600' :
-                    rec.type === 'info' ? 'text-blue-600' :
+                    rec.type === 'info' ? 'text-primary' :
                     'text-green-600'
                   }`}>
                     {rec.type === 'warning' ? <FaExclamationTriangle className="w-5 h-5" /> :
@@ -425,7 +425,7 @@ export default function DKIMInspectorPage() {
                   </div>
                   <p className={`text-sm ${
                     rec.type === 'warning' ? 'text-red-700' :
-                    rec.type === 'info' ? 'text-blue-700' :
+                    rec.type === 'info' ? 'text-primary' :
                     'text-green-700'
                   }`}>
                     {rec.message}
@@ -439,7 +439,7 @@ export default function DKIMInspectorPage() {
           <Card>
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-3">
-                <FaKey className="w-6 h-6 text-blue-400" />
+                <FaKey className="w-6 h-6 text-primary/70" />
                 <span className="font-bold text-xl text-gray-900">DKIM Record</span>
                 {keyLength && (
                   <span className={`ml-2 px-2 py-0.5 rounded-full text-xs font-semibold border ${keyLength < 1024 ? "bg-red-100 text-red-800 border-red-200" : "bg-green-100 text-green-800 border-green-200"}`} title="Bit length of the DKIM public key">
@@ -460,7 +460,7 @@ export default function DKIMInspectorPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {Object.entries(fields).map(([k, v]) => (
                 <div key={k} className="flex items-center gap-2">
-                  <span className="font-mono text-xs bg-blue-50 text-blue-700 rounded px-2 py-0.5">{k}</span>
+                  <span className="font-mono text-xs bg-secondary text-primary rounded px-2 py-0.5">{k}</span>
                   <span className="text-gray-800 break-all text-xs">{v}</span>
                 </div>
               ))}
@@ -473,7 +473,7 @@ export default function DKIMInspectorPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {DKIM_TAG_LEGEND.map(({ tag, name, desc }) => (
                 <div key={tag} className="flex items-start gap-3">
-                  <span className="font-mono text-xs bg-blue-100 text-blue-700 rounded px-2 py-0.5 mt-0.5">{tag}</span>
+                  <span className="font-mono text-xs bg-primary/10 text-primary rounded px-2 py-0.5 mt-0.5">{tag}</span>
                   <div>
                     <span className="font-semibold text-gray-900">{name}</span>
                     <span className="block text-gray-600 text-sm">{desc}</span>
@@ -500,10 +500,10 @@ export default function DKIMInspectorPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <Link
             href="/tools/dmarc-analyzer"
-            className="group relative overflow-hidden rounded-lg border p-5 transition-all hover:shadow-md border-blue-200 bg-blue-50 dark:border-blue-800 dark:bg-blue-950"
+            className="group relative overflow-hidden rounded-lg border p-5 transition-all hover:shadow-md border-primary/20 bg-secondary dark:border-primary dark:bg-primary"
           >
             <div className="flex items-start gap-4">
-              <div className="rounded-full p-2 bg-blue-100 dark:bg-blue-900">
+              <div className="rounded-full p-2 bg-primary/10 dark:bg-primary">
                 <Shield className="h-6 w-6 text-primary" />
               </div>
               <div>

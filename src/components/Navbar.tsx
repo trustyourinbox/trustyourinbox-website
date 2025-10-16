@@ -188,12 +188,12 @@ export default function Navbar() {
             key={link.href}
             href={link.href}
             className={`relative text-base font-semibold transition-colors duration-200 px-2 py-1
-              ${isActive ? "text-blue-700" : "text-gray-700 hover:text-blue-600"}
+              ${isActive ? "text-primary" : "text-gray-700 hover:text-primary"}
             `}
           >
             {link.label}
             <span
-              className={`absolute left-0 -bottom-1 h-0.5 w-full rounded bg-blue-600 transition-all duration-300
+              className={`absolute left-0 -bottom-1 h-0.5 w-full rounded bg-primary transition-all duration-300
                 ${isActive ? "opacity-100 scale-x-100" : "opacity-0 scale-x-0"}
                 group-hover:opacity-100 group-hover:scale-x-100
               `}
@@ -211,12 +211,12 @@ export default function Navbar() {
       >
         <button
           className={`relative text-base font-semibold transition-colors duration-200 px-2 py-1
-            ${isToolsOpen ? "text-blue-700" : "text-gray-700 hover:text-blue-600"}
+            ${isToolsOpen ? "text-primary" : "text-gray-700 hover:text-primary"}
           `}
         >
           Tools
           <span
-            className={`absolute left-0 -bottom-1 h-0.5 w-full rounded bg-blue-600 transition-all duration-300
+            className={`absolute left-0 -bottom-1 h-0.5 w-full rounded bg-primary transition-all duration-300
               ${isToolsOpen ? "opacity-100 scale-x-100" : "opacity-0 scale-x-0"}
             `}
             aria-hidden="true"
@@ -228,7 +228,7 @@ export default function Navbar() {
         )}
         {/* Mega Menu Dropdown */}
         {isToolsOpen && (
-          <div className="absolute left-1/2 -translate-x-1/2 top-full mt-0 w-[900px] rounded-xl bg-gradient-to-br from-blue-50 via-white to-white shadow-xl border border-blue-100 py-4 px-4 z-50 flex gap-4">
+          <div className="absolute left-1/2 -translate-x-1/2 top-full mt-0 w-[900px] rounded-xl bg-gradient-to-br from-secondary via-white to-white shadow-xl border border-border py-4 px-4 z-50 flex gap-4">
             <MegaMenu isOpen={isToolsOpen} onClose={() => setIsToolsOpen(false)} />
           </div>
         )}
@@ -242,12 +242,12 @@ export default function Navbar() {
       >
         <button
           className={`relative text-base font-semibold transition-colors duration-200 px-2 py-1
-            ${isResourcesOpen ? "text-blue-700" : "text-gray-700 hover:text-blue-600"}
+            ${isResourcesOpen ? "text-primary" : "text-gray-700 hover:text-primary"}
           `}
         >
           Resources
           <span
-            className={`absolute left-0 -bottom-1 h-0.5 w-full rounded bg-blue-600 transition-all duration-300
+            className={`absolute left-0 -bottom-1 h-0.5 w-full rounded bg-primary transition-all duration-300
               ${isResourcesOpen ? "opacity-100 scale-x-100" : "opacity-0 scale-x-0"}
             `}
             aria-hidden="true"
@@ -259,29 +259,29 @@ export default function Navbar() {
         )}
         {/* Resources Mega Menu Dropdown */}
         {isResourcesOpen && (
-          <div className="absolute left-1/2 -translate-x-1/2 top-full mt-0 w-[1100px] rounded-2xl bg-gradient-to-br from-blue-50 via-white to-white shadow-2xl border border-blue-100 py-10 px-10 z-50 flex gap-8 pt-2">
+          <div className="absolute left-1/2 -translate-x-1/2 top-full mt-0 w-[1100px] rounded-2xl bg-gradient-to-br from-secondary via-white to-white shadow-2xl border border-border py-10 px-10 z-50 flex gap-8 pt-2">
             {/* Left: Columns */}
             <div className="flex-1 min-w-0 grid grid-cols-3 gap-8">
               {/* LEARN section spanning two columns */}
               <div className="col-span-2">
                 <div className="mb-4">
                   <div className="text-base font-bold text-gray-900 mb-1">LEARN</div>
-                  <div className="h-0.5 w-10 bg-blue-600 rounded mb-2" />
+                  <div className="h-0.5 w-10 bg-primary rounded mb-2" />
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   {resourcesMenu[0].items.map((item) => (
                     <Link
                       key={item.label}
                       href={item.href}
-                      className="group block p-3 rounded-xl bg-white hover:bg-blue-50 shadow-sm hover:shadow-lg transition-all border border-gray-100 hover:border-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-200 min-h-[140px]"
+                      className="group block p-3 rounded-xl bg-white hover:bg-secondary shadow-sm hover:shadow-lg transition-all border border-gray-100 hover:border-primary/20 focus:outline-none focus:ring-2 focus:ring-ring min-h-[140px]"
                       onClick={() => setIsResourcesOpen(false)}
                     >
-                      <div className="bg-blue-100 group-hover:bg-blue-600 p-2 rounded-full mb-2 transition-colors inline-block">
-                        <span className="text-blue-600 group-hover:text-white transition-colors">{item.icon}</span>
+                      <div className="bg-primary/10 group-hover:bg-primary p-2 rounded-full mb-2 transition-colors inline-block">
+                        <span className="text-primary group-hover:text-white transition-colors">{item.icon}</span>
                       </div>
                       <div className="font-semibold text-gray-900 text-base flex items-center gap-1">
                         {item.label}
-                        <svg className="w-4 h-4 text-blue-300 group-hover:text-blue-600 transition-colors" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
+                        <svg className="w-4 h-4 text-primary/30 group-hover:text-primary transition-colors" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
                       </div>
                       {item.description && (
                         <div className="text-sm text-gray-500 leading-snug">{item.description}</div>
@@ -294,22 +294,22 @@ export default function Navbar() {
               <div>
                 <div className="mb-4">
                   <div className="text-base font-bold text-gray-900 mb-1">RESOURCES</div>
-                  <div className="h-0.5 w-10 bg-blue-600 rounded mb-2" />
+                  <div className="h-0.5 w-10 bg-primary rounded mb-2" />
                 </div>
                 <div className="flex flex-col gap-2 h-full">
                   {resourcesMenu[1].items.map((item) => (
                     <Link
                       key={item.label}
                       href={item.href}
-                      className="group block p-3 rounded-xl bg-white hover:bg-blue-50 shadow-sm hover:shadow-lg transition-all border border-gray-100 hover:border-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-200 min-h-[140px]"
+                      className="group block p-3 rounded-xl bg-white hover:bg-secondary shadow-sm hover:shadow-lg transition-all border border-gray-100 hover:border-primary/20 focus:outline-none focus:ring-2 focus:ring-ring min-h-[140px]"
                       onClick={() => setIsResourcesOpen(false)}
                     >
-                      <div className="bg-blue-100 group-hover:bg-blue-600 p-2 rounded-full mb-2 transition-colors inline-block">
-                        <span className="text-blue-600 group-hover:text-white transition-colors">{item.icon}</span>
+                      <div className="bg-primary/10 group-hover:bg-primary p-2 rounded-full mb-2 transition-colors inline-block">
+                        <span className="text-primary group-hover:text-white transition-colors">{item.icon}</span>
                       </div>
                       <div className="font-semibold text-gray-900 text-base flex items-center gap-1">
                         {item.label}
-                        <svg className="w-4 h-4 text-blue-300 group-hover:text-blue-600 transition-colors" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
+                        <svg className="w-4 h-4 text-primary/30 group-hover:text-primary transition-colors" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
                       </div>
                       {item.description && (
                         <div className="text-sm text-gray-500 leading-snug">{item.description}</div>
@@ -320,15 +320,15 @@ export default function Navbar() {
               </div>
             </div>
             {/* Right: Promo card */}
-            <div className="w-72 flex-shrink-0 flex flex-col justify-between bg-gradient-to-br from-blue-600 to-blue-500 rounded-2xl shadow-lg p-6 text-white">
+            <div className="w-72 flex-shrink-0 flex flex-col justify-between bg-gradient-to-br from-primary to-accent-hover rounded-2xl shadow-lg p-6 text-white">
               <div>
-                <div className="uppercase text-xs font-bold tracking-widest text-blue-100 mb-2">Featured</div>
+                <div className="uppercase text-xs font-bold tracking-widest text-primary-foreground/80 mb-2">Featured</div>
                 <div className="text-lg font-semibold mb-2">Explore Our Resources</div>
-                <div className="text-sm text-blue-100 mb-4">Discover guides, webinars, and more to help you master email security.</div>
-                <a href="/guides" className="inline-block mt-2 px-4 py-2 rounded-full bg-white text-blue-700 font-semibold text-sm shadow hover:bg-blue-50 transition-colors">Browse Guides</a>
+                <div className="text-sm text-primary-foreground/80 mb-4">Discover guides, webinars, and more to help you master email security.</div>
+                <a href="/guides" className="inline-block mt-2 px-4 py-2 rounded-full bg-white text-primary font-semibold text-sm shadow hover:bg-secondary transition-colors">Browse Guides</a>
               </div>
               <div className="mt-6 flex justify-end">
-                <svg width="80" height="40" viewBox="0 0 80 40" fill="none" xmlns="http://www.w3.org/2000/svg"><ellipse cx="40" cy="20" rx="40" ry="20" fill="#2563eb" fillOpacity="0.15"/></svg>
+                <svg width="80" height="40" viewBox="0 0 80 40" fill="none" xmlns="http://www.w3.org/2000/svg"><ellipse cx="40" cy="20" rx="40" ry="20" fill="currentColor" fillOpacity="0.15"/></svg>
               </div>
             </div>
           </div>
@@ -343,12 +343,12 @@ export default function Navbar() {
       >
         <button
           className={`relative text-base font-semibold transition-colors duration-200 px-2 py-1
-            ${isCompanyOpen ? "text-blue-700" : "text-gray-700 hover:text-blue-600"}
+            ${isCompanyOpen ? "text-primary" : "text-gray-700 hover:text-primary"}
           `}
         >
           Company
           <span
-            className={`absolute left-0 -bottom-1 h-0.5 w-full rounded bg-blue-600 transition-all duration-300
+            className={`absolute left-0 -bottom-1 h-0.5 w-full rounded bg-primary transition-all duration-300
               ${isCompanyOpen ? "opacity-100 scale-x-100" : "opacity-0 scale-x-0"}
             `}
             aria-hidden="true"
@@ -360,11 +360,11 @@ export default function Navbar() {
         )}
         {/* Company Mega Menu Dropdown */}
         {isCompanyOpen && (
-          <div className="absolute left-0 top-full mt-0 w-[1100px] rounded-2xl bg-gradient-to-br from-blue-50 via-white to-white shadow-2xl border border-blue-100 py-10 px-10 z-50 flex gap-8 ml-[-640px] pt-2">
+          <div className="absolute left-0 top-full mt-0 w-[1100px] rounded-2xl bg-gradient-to-br from-secondary via-white to-white shadow-2xl border border-border py-10 px-10 z-50 flex gap-8 ml-[-640px] pt-2">
             {/* Left: Menu grid */}
             <div className="flex-1 min-w-0">
               <div className="mb-6 flex items-center gap-2">
-                <span className="inline-block w-1.5 h-6 bg-blue-600 rounded-full"></span>
+                <span className="inline-block w-1.5 h-6 bg-primary rounded-full"></span>
                 <span className="text-xl font-bold text-gray-900 tracking-tight">Explore TrustYourInbox</span>
               </div>
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
@@ -373,14 +373,14 @@ export default function Navbar() {
                     <Link
                       key={item.name}
                       href={item.href}
-                      className="group flex flex-col items-start gap-2 p-3 rounded-xl bg-white hover:bg-blue-50 shadow-sm hover:shadow-lg transition-all border border-gray-100 hover:border-blue-200 transform hover:scale-[1.04] focus:outline-none focus:ring-2 focus:ring-blue-200"
+                      className="group flex flex-col items-start gap-2 p-3 rounded-xl bg-white hover:bg-secondary shadow-sm hover:shadow-lg transition-all border border-gray-100 hover:border-primary/20 transform hover:scale-[1.04] focus:outline-none focus:ring-2 focus:ring-ring"
                     >
-                      <div className="bg-blue-100 group-hover:bg-blue-600 p-2 rounded-full mb-2 transition-colors">
-                        <span className="text-blue-600 group-hover:text-white transition-colors">{item.icon}</span>
+                      <div className="bg-primary/10 group-hover:bg-primary p-2 rounded-full mb-2 transition-colors">
+                        <span className="text-primary group-hover:text-white transition-colors">{item.icon}</span>
                       </div>
                       <div className="font-semibold text-gray-900 text-base flex items-center gap-1">
                         {item.name}
-                        <svg className="w-4 h-4 text-blue-300 group-hover:text-blue-600 transition-colors" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
+                        <svg className="w-4 h-4 text-primary/30 group-hover:text-primary transition-colors" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
                       </div>
                       {item.description && (
                         <div className="text-sm text-gray-500 leading-snug">{item.description}</div>
@@ -391,15 +391,15 @@ export default function Navbar() {
               </div>
             </div>
             {/* Right: Promo card */}
-            <div className="w-72 flex-shrink-0 flex flex-col justify-between bg-gradient-to-br from-blue-600 to-blue-500 rounded-2xl shadow-lg p-6 text-white">
+            <div className="w-72 flex-shrink-0 flex flex-col justify-between bg-gradient-to-br from-primary to-accent-hover rounded-2xl shadow-lg p-6 text-white">
               <div>
-                <div className="uppercase text-xs font-bold tracking-widest text-blue-100 mb-2">Announcement</div>
+                <div className="uppercase text-xs font-bold tracking-widest text-primary-foreground/80 mb-2">Announcement</div>
                 <div className="text-lg font-semibold mb-2">Securing Email in the AI Era</div>
-                <div className="text-sm text-blue-100 mb-4">Join our upcoming webinar to learn how AI is changing email security. <br/> <span className="font-semibold">June 20, 2025</span></div>
-                <a href="/events" className="inline-block mt-2 px-4 py-2 rounded-full bg-white text-blue-700 font-semibold text-sm shadow hover:bg-blue-50 transition-colors">Register Now</a>
+                <div className="text-sm text-primary-foreground/80 mb-4">Join our upcoming webinar to learn how AI is changing email security. <br/> <span className="font-semibold">June 20, 2025</span></div>
+                <a href="/events" className="inline-block mt-2 px-4 py-2 rounded-full bg-white text-primary font-semibold text-sm shadow hover:bg-secondary transition-colors">Register Now</a>
               </div>
               <div className="mt-6 flex justify-end">
-                <svg width="80" height="40" viewBox="0 0 80 40" fill="none" xmlns="http://www.w3.org/2000/svg"><ellipse cx="40" cy="20" rx="40" ry="20" fill="#2563eb" fillOpacity="0.15"/></svg>
+                <svg width="80" height="40" viewBox="0 0 80 40" fill="none" xmlns="http://www.w3.org/2000/svg"><ellipse cx="40" cy="20" rx="40" ry="20" fill="currentColor" fillOpacity="0.15"/></svg>
               </div>
             </div>
           </div>

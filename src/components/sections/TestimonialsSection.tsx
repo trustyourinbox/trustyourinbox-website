@@ -5,7 +5,7 @@ export default function TestimonialsSection() {
     <section id="testimonials" className="bg-muted/30 py-20">
       <div className="container">
         <div className="mx-auto max-w-[58rem] text-center">
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl bg-gradient-to-r from-gray-900 via-primary to-gray-900 bg-clip-text text-transparent">Trusted by IT Teams Worldwide</h2>
+          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl text-foreground">Trusted by IT Teams Worldwide</h2>
           <p className="mt-4 text-lg text-muted-foreground">
             See how organizations of all sizes have simplified their DMARC implementation.
           </p>

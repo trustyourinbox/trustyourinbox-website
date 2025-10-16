@@ -6,7 +6,7 @@ export default function FeaturesSection() {
     <section id="features" className="py-20">
       <div className="container">
         <div className="mx-auto max-w-[58rem] text-center">
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl bg-gradient-to-r from-gray-900 via-primary to-gray-900 bg-clip-text text-transparent">Comprehensive DMARC Protection</h2>
+          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl text-foreground">Comprehensive DMARC Protection</h2>
           <p className="mt-4 text-lg text-muted-foreground">
             Our platform simplifies email authentication and provides the tools you need to secure your domain.
           </p>
@@ -31,20 +31,50 @@ export default function FeaturesSection() {
 
 const features = [
   {
-    title: "Automated DMARC Setup",
+    title: "Comprehensive Analytics Dashboard",
     description:
-      "Configure and deploy DMARC policies in minutes with our guided setup wizard and automated deployment tools.",
-    icon: Shield,
-  },
-  {
-    title: "Real-time Monitoring",
-    description:
-      "Track email authentication performance with real-time dashboards and alerts for immediate visibility.",
+      "Interactive charts and visualizations showing authentication methods distribution, compliance trends, and domain performance with real-time data.",
     icon: BarChart2,
   },
   {
-    title: "Phishing Protection",
-    description: "Prevent domain spoofing and protect your customers and employees from targeted phishing attacks.",
+    title: "DMARC & SPF Analysis Tools",
+    description:
+      "Built-in analyzers to validate DMARC records, analyze SPF configurations, check DNS lookups, and get actionable recommendations.",
+    icon: Shield,
+  },
+  {
+    title: "Bulk Report Processing",
+    description: "Upload and process DMARC aggregate reports (RUA) in bulk. Supports XML, GZIP, and ZIP formats with progress tracking.",
+    icon: Mail,
+  },
+  {
+    title: "Multi-Domain Management",
+    description: "Register, verify, and manage multiple domains from a single dashboard. Filter by status, verification, and track domain quotas.",
+    icon: Shield,
+  },
+  {
+    title: "Sender Intelligence & Insights",
+    description: "Analyze email senders with detailed insights. Identify legitimate sources and detect unauthorized senders across your domains.",
+    icon: BarChart2,
+  },
+  {
+    title: "Team Collaboration & RBAC",
+    description: "Role-based access control with Owner, Admin, Project Manager, Member, and Viewer roles. Manage team members, invitations, and MFA status.",
+    icon: Mail,
+  },
+  {
+    title: "Historical Trends Analysis",
+    description: "Time-series analysis of authentication trends with 7, 30, 90, and 365-day views. Compare multiple domains over time.",
+    icon: BarChart2,
+  },
+  {
+    title: "Failure Pattern Detection",
+    description: "Dedicated dashboard for analyzing DMARC failures, identifying failure rates, and understanding error patterns to improve security.",
+    icon: Shield,
+  },
+  {
+    title: "DMARC Record Generator",
+    description: "Generate properly configured DMARC DNS records with policy settings and reporting configuration through a guided interface.",
     icon: Mail,
   },
 ] 

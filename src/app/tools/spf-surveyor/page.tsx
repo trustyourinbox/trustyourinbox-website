@@ -56,7 +56,7 @@ function SPFTreeNode({ node, level = 0 }: { node: SPFNode; level?: number }) {
             {node.ip4.length > 0 && (
               <div className="bg-white rounded-lg p-3 border border-gray-200">
                 <h4 className="font-medium text-gray-900 mb-2 flex items-center gap-2">
-                  <FaServer className="text-blue-600" />
+                  <FaServer className="text-primary" />
                   IPv4 Addresses ({node.totalIp4Blocks} blocks)
                 </h4>
                 <ul className="space-y-1">
@@ -69,7 +69,7 @@ function SPFTreeNode({ node, level = 0 }: { node: SPFNode; level?: number }) {
             {node.ip6.length > 0 && (
               <div className="bg-white rounded-lg p-3 border border-gray-200">
                 <h4 className="font-medium text-gray-900 mb-2 flex items-center gap-2">
-                  <FaServer className="text-blue-600" />
+                  <FaServer className="text-primary" />
                   IPv6 Addresses ({node.totalIp6Blocks} blocks)
                 </h4>
                 <ul className="space-y-1">
@@ -82,7 +82,7 @@ function SPFTreeNode({ node, level = 0 }: { node: SPFNode; level?: number }) {
             {node.mx.length > 0 && (
               <div className="bg-white rounded-lg p-3 border border-gray-200">
                 <h4 className="font-medium text-gray-900 mb-2 flex items-center gap-2">
-                  <FaGlobe className="text-blue-600" />
+                  <FaGlobe className="text-primary" />
                   MX Records
                 </h4>
                 <ul className="space-y-1">
@@ -95,7 +95,7 @@ function SPFTreeNode({ node, level = 0 }: { node: SPFNode; level?: number }) {
             {node.a.length > 0 && (
               <div className="bg-white rounded-lg p-3 border border-gray-200">
                 <h4 className="font-medium text-gray-900 mb-2 flex items-center gap-2">
-                  <FaNetworkWired className="text-blue-600" />
+                  <FaNetworkWired className="text-primary" />
                   A Records
                 </h4>
                 <ul className="space-y-1">
@@ -357,8 +357,8 @@ export default function SPFSurveyorPage() {
     // SPF flattening suggestion
     if (spfTree.dnsLookups >= 8) {
       warnings.push({
-        icon: <FaInfoCircle className="text-blue-500 w-4 h-4" />,
-        color: "text-blue-700 bg-blue-50 border-blue-200",
+        icon: <FaInfoCircle className="text-primary w-4 h-4" />,
+        color: "text-primary bg-secondary border-primary/20",
         message: "Suggestion: Consider SPF flattening to reduce DNS lookups and improve reliability."
       });
     }
@@ -369,7 +369,7 @@ export default function SPFSurveyorPage() {
     <div className="space-y-6">
       <div>
         <h3 className="text-sm font-medium text-gray-900 flex items-center gap-1.5">
-          <FaShieldAlt className="w-4 h-4 text-blue-600" />
+          <FaShieldAlt className="w-4 h-4 text-primary" />
           About SPF
         </h3>
         <p className="text-sm text-gray-500 mt-2">
@@ -379,20 +379,20 @@ export default function SPFSurveyorPage() {
 
       <div>
         <h3 className="text-sm font-medium text-gray-900 flex items-center gap-1.5">
-          <FaInfoCircle className="w-4 h-4 text-blue-600" />
+          <FaInfoCircle className="w-4 h-4 text-primary" />
           What We Check
         </h3>
         <ul className="text-sm text-gray-500 space-y-2 mt-2">
           <li className="flex items-start gap-2">
-            <FaServer className="w-4 h-4 text-blue-600 mt-0.5" />
+            <FaServer className="w-4 h-4 text-primary mt-0.5" />
             <span>DNS lookup count and limits</span>
           </li>
           <li className="flex items-start gap-2">
-            <FaServer className="w-4 h-4 text-blue-600 mt-0.5" />
+            <FaServer className="w-4 h-4 text-primary mt-0.5" />
             <span>SPF policy and mechanisms</span>
           </li>
           <li className="flex items-start gap-2">
-            <FaServer className="w-4 h-4 text-blue-600 mt-0.5" />
+            <FaServer className="w-4 h-4 text-primary mt-0.5" />
             <span>Record structure and length</span>
           </li>
         </ul>
@@ -409,7 +409,7 @@ export default function SPFSurveyorPage() {
       <Card className="w-full border-0 shadow-lg">
         <div className="p-6">
           <div className="flex items-center gap-2 mb-6">
-            <Shield className="h-6 w-6 text-blue-600" />
+            <Shield className="h-6 w-6 text-primary" />
             <h2 className="text-2xl font-bold">SPF Surveyor</h2>
           </div>
 
@@ -426,7 +426,7 @@ export default function SPFSurveyorPage() {
                   id="domain"
                   type="text"
                   placeholder="yourdomain.com"
-                  className="pl-10 h-11 border-gray-200 focus:border-blue-600 focus:ring-blue-600"
+                  className="pl-10 h-11 border-gray-200 focus:border-primary focus:ring-ring"
                   value={domain}
                   onChange={e => setDomain(e.target.value)}
                   required
@@ -438,7 +438,7 @@ export default function SPFSurveyorPage() {
             <div>
               <Button
                 type="submit"
-                className="bg-blue-600 hover:bg-blue-700 text-white min-w-[120px]"
+                className="bg-primary hover:bg-primary text-white min-w-[120px]"
                 disabled={loading || !domain}
               >
                 {loading ? (
@@ -491,7 +491,7 @@ export default function SPFSurveyorPage() {
               <Card className={color}>
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-3">
-                    <FaShieldAlt className="w-6 h-6 text-blue-400" />
+                    <FaShieldAlt className="w-6 h-6 text-primary/70" />
                     <span className="font-bold text-xl text-gray-900">Status</span>
                   </div>
                   {icon}
@@ -524,13 +524,13 @@ export default function SPFSurveyorPage() {
                       key={i}
                       className={`flex items-start gap-3 p-3 rounded-lg border ${
                         rec.type === 'warning' ? 'border-red-200' :
-                        rec.type === 'info' ? 'border-blue-200' :
+                        rec.type === 'info' ? 'border-primary/20' :
                         'border-green-200'
                       }`}
                     >
                       <div className={`mt-0.5 ${
                         rec.type === 'warning' ? 'text-red-600' :
-                        rec.type === 'info' ? 'text-blue-600' :
+                        rec.type === 'info' ? 'text-primary' :
                         'text-green-600'
                       }`}>
                         {rec.type === 'warning' ? <FaExclamationTriangle className="w-5 h-5" /> :
@@ -539,7 +539,7 @@ export default function SPFSurveyorPage() {
                       </div>
                       <p className={`text-sm ${
                         rec.type === 'warning' ? 'text-red-700' :
-                        rec.type === 'info' ? 'text-blue-700' :
+                        rec.type === 'info' ? 'text-primary' :
                         'text-green-700'
                       }`}>
                         {rec.message}
@@ -555,7 +555,7 @@ export default function SPFSurveyorPage() {
           <Card>
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-3">
-                <FaServer className="w-6 h-6 text-blue-400" />
+                <FaServer className="w-6 h-6 text-primary/70" />
                 <span className="font-bold text-xl text-gray-900">SPF Record</span>
               </div>
             </div>
@@ -589,10 +589,10 @@ export default function SPFSurveyorPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <Link
             href="/tools/dmarc-analyzer"
-            className="group relative overflow-hidden rounded-lg border p-5 transition-all hover:shadow-md border-blue-200 bg-blue-50 dark:border-blue-800 dark:bg-blue-950"
+            className="group relative overflow-hidden rounded-lg border p-5 transition-all hover:shadow-md border-primary/20 bg-secondary dark:border-primary dark:bg-primary"
           >
             <div className="flex items-start gap-4">
-              <div className="rounded-full p-2 bg-blue-100 dark:bg-blue-900">
+              <div className="rounded-full p-2 bg-primary/10 dark:bg-primary">
                 <Shield className="h-6 w-6 text-primary" />
               </div>
               <div>

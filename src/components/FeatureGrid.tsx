@@ -20,7 +20,7 @@ export default function FeatureGrid({ features }: FeatureGridProps) {
               key={feature.title + i}
               className="group relative rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-all hover:shadow-md"
             >
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 text-blue-600 mb-6">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-secondary text-primary mb-6">
                 {feature.icon}
               </div>
               <h3 className="text-xl font-semibold text-gray-900">{feature.title}</h3>

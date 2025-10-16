@@ -13,7 +13,7 @@ export default function CompanyPage() {
       <div className="container">
         <HeroSection
           badge={<span>Our Company</span>}
-          title={<>Get to Know <span className="text-blue-600">TrustYourInbox</span></>}
+          title={<>Get to Know <span className="text-primary">TrustYourInbox</span></>}
           subtitle="We are passionate about making email security simple, effective, and accessible for everyone."
           ctaButtons={[
             { label: "Contact Us", href: "/contact", variant: "primary" },

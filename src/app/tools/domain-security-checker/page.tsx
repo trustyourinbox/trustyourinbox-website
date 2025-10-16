@@ -41,7 +41,7 @@ export default function DomainSecurityCheckerPage() {
       setResults([
         {
           name: "Email Authentication",
-          icon: <FaEnvelope className="w-5 h-5 text-blue-600" />,
+          icon: <FaEnvelope className="w-5 h-5 text-primary" />,
           checks: [
             {
               name: "DMARC",
@@ -157,7 +157,7 @@ export default function DomainSecurityCheckerPage() {
       <Card className="w-full border-0 shadow-lg">
         <div className="p-6">
           <div className="flex items-center gap-2 mb-6">
-            <Shield className="h-6 w-6 text-blue-600" />
+            <Shield className="h-6 w-6 text-primary" />
             <h2 className="text-2xl font-bold">Domain Security Checker</h2>
           </div>
 
@@ -174,7 +174,7 @@ export default function DomainSecurityCheckerPage() {
                   id="domain"
                   type="text"
                   placeholder="yourdomain.com"
-                  className="pl-10 h-11 border-gray-200 focus:border-blue-600 focus:ring-blue-600"
+                  className="pl-10 h-11 border-gray-200 focus:border-primary focus:ring-ring"
                   value={domain}
                   onChange={e => setDomain(e.target.value)}
                   required
@@ -186,7 +186,7 @@ export default function DomainSecurityCheckerPage() {
             <div>
               <Button
                 type="submit"
-                className="bg-blue-600 hover:bg-blue-700 text-white min-w-[120px]"
+                className="bg-primary hover:bg-primary text-white min-w-[120px]"
                 disabled={loading || !domain}
               >
                 {loading ? (
@@ -227,7 +227,7 @@ export default function DomainSecurityCheckerPage() {
       {results.length > 0 && (
         <div className="container mx-auto py-8 px-4 max-w-5xl">
           <Card className="border border-gray-200 shadow-sm overflow-hidden">
-            <CardHeader className="bg-gradient-to-r from-blue-600 to-blue-500 text-white p-6">
+            <CardHeader className="bg-gradient-to-r from-primary to-accent-hover text-white p-6">
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                 <div className="flex items-center gap-3">
                   <div className="bg-white/20 p-2 rounded-lg">
@@ -256,7 +256,7 @@ export default function DomainSecurityCheckerPage() {
                 {/* Email Authentication */}
                 <div className="border border-gray-200 rounded-lg bg-white shadow-sm">
                   <div className="flex items-center gap-2 px-4 py-2 bg-slate-50 border-b border-gray-100 rounded-t-lg">
-                    <Mail className="h-4 w-4 text-blue-600" />
+                    <Mail className="h-4 w-4 text-primary" />
                     <span className="text-sm font-semibold">Email Authentication</span>
                   </div>
                   <div className="p-3 space-y-3">
@@ -270,7 +270,7 @@ export default function DomainSecurityCheckerPage() {
                       {results[0].checks[0].details && (
                         <div className="bg-slate-50 p-1 rounded text-xs font-mono border border-gray-100">{results[0].checks[0].details}</div>
                       )}
-                      <p className="text-xs text-blue-600">Recommendation: {results[0].checks[0].recommendation}</p>
+                      <p className="text-xs text-primary">Recommendation: {results[0].checks[0].recommendation}</p>
                     </div>
                     <Separator />
                     {/* SPF */}
@@ -283,7 +283,7 @@ export default function DomainSecurityCheckerPage() {
                       {results[0].checks[1].details && (
                         <div className="bg-slate-50 p-1 rounded text-xs font-mono border border-gray-100">{results[0].checks[1].details}</div>
                       )}
-                      <p className="text-xs text-blue-600">Recommendation: {results[0].checks[1].recommendation}</p>
+                      <p className="text-xs text-primary">Recommendation: {results[0].checks[1].recommendation}</p>
                     </div>
                     <Separator />
                     {/* DKIM */}
@@ -293,14 +293,14 @@ export default function DomainSecurityCheckerPage() {
                         {getStatusBadge(results[0].checks[2].status)}
                       </div>
                       <p className="text-xs text-muted-foreground">{results[0].checks[2].description}</p>
-                      <p className="text-xs text-blue-600">Recommendation: {results[0].checks[2].recommendation}</p>
+                      <p className="text-xs text-primary">Recommendation: {results[0].checks[2].recommendation}</p>
                     </div>
                   </div>
                 </div>
                 {/* Transport Security */}
                 <div className="border border-gray-200 rounded-lg bg-white shadow-sm">
                   <div className="flex items-center gap-2 px-4 py-2 bg-slate-50 border-b border-gray-100 rounded-t-lg">
-                    <Lock className="h-4 w-4 text-blue-600" />
+                    <Lock className="h-4 w-4 text-primary" />
                     <span className="text-sm font-semibold">Transport Security</span>
                   </div>
                   <div className="p-3 space-y-3">
@@ -314,7 +314,7 @@ export default function DomainSecurityCheckerPage() {
                       {results[1].checks[0].details && (
                         <div className="bg-slate-50 p-1 rounded text-xs font-mono border border-gray-100">{results[1].checks[0].details}</div>
                       )}
-                      <p className="text-xs text-blue-600">Recommendation: {results[1].checks[0].recommendation}</p>
+                      <p className="text-xs text-primary">Recommendation: {results[1].checks[0].recommendation}</p>
                     </div>
                     <Separator />
                     {/* TLS-RPT */}
@@ -324,14 +324,14 @@ export default function DomainSecurityCheckerPage() {
                         {getStatusBadge(results[1].checks[1].status)}
                       </div>
                       <p className="text-xs text-muted-foreground">{results[1].checks[1].description}</p>
-                      <p className="text-xs text-blue-600">Recommendation: {results[1].checks[1].recommendation}</p>
+                      <p className="text-xs text-primary">Recommendation: {results[1].checks[1].recommendation}</p>
                     </div>
                   </div>
                 </div>
                 {/* DNS Security */}
                 <div className="border border-gray-200 rounded-lg bg-white shadow-sm">
                   <div className="flex items-center gap-2 px-4 py-2 bg-slate-50 border-b border-gray-100 rounded-t-lg">
-                    <Database className="h-4 w-4 text-blue-600" />
+                    <Database className="h-4 w-4 text-primary" />
                     <span className="text-sm font-semibold">DNS Security</span>
                   </div>
                   <div className="p-3 space-y-3">
@@ -342,7 +342,7 @@ export default function DomainSecurityCheckerPage() {
                         {getStatusBadge(results[2].checks[0].status)}
                       </div>
                       <p className="text-xs text-muted-foreground">{results[2].checks[0].description}</p>
-                      <p className="text-xs text-blue-600">Recommendation: {results[2].checks[0].recommendation}</p>
+                      <p className="text-xs text-primary">Recommendation: {results[2].checks[0].recommendation}</p>
                     </div>
                     <Separator />
                     {/* FCrDNS */}
@@ -352,7 +352,7 @@ export default function DomainSecurityCheckerPage() {
                         {getStatusBadge(results[2].checks[1].status)}
                       </div>
                       <p className="text-xs text-muted-foreground">{results[2].checks[1].description}</p>
-                      <p className="text-xs text-blue-600">Recommendation: {results[2].checks[1].recommendation}</p>
+                      <p className="text-xs text-primary">Recommendation: {results[2].checks[1].recommendation}</p>
                     </div>
                   </div>
                 </div>
@@ -427,7 +427,7 @@ export default function DomainSecurityCheckerPage() {
                   </div>
                   <div className="flex items-start gap-2">
                     <div className="mt-0.5">
-                      <Info className="h-4 w-4 text-blue-500" />
+                      <Info className="h-4 w-4 text-primary" />
                     </div>
                     <div>
                       <h4 className="font-medium text-xs">Implement DNSSEC</h4>
@@ -452,10 +452,10 @@ export default function DomainSecurityCheckerPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <Link
             href="/tools/dmarc-analyzer"
-            className="group relative overflow-hidden rounded-lg border p-5 transition-all hover:shadow-md border-blue-200 bg-blue-50 dark:border-blue-800 dark:bg-blue-950"
+            className="group relative overflow-hidden rounded-lg border p-5 transition-all hover:shadow-md border-primary/20 bg-secondary dark:border-primary dark:bg-primary"
           >
             <div className="flex items-start gap-4">
-              <div className="rounded-full p-2 bg-blue-100 dark:bg-blue-900">
+              <div className="rounded-full p-2 bg-primary/10 dark:bg-primary">
                 <Shield className="h-6 w-6 text-primary" />
               </div>
               <div>
@@ -513,7 +513,7 @@ function getStatusBadge(status: string) {
     case "warning":
       return <Badge className="bg-amber-100 text-amber-800 hover:bg-amber-100">Warning</Badge>;
     case "info":
-      return <Badge className="bg-blue-100 text-blue-800 hover:bg-blue-100">Info</Badge>;
+      return <Badge className="bg-primary/10 text-foreground hover:bg-primary/10">Info</Badge>;
     default:
       return null;
   }

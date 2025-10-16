@@ -23,7 +23,7 @@ const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
 const ACCEPTED_TYPES = ["application/xml", "text/xml", "application/gzip", "application/x-gzip", "application/zip", ".xml", ".gz", ".zip"];
 
 function getFileIcon(type: string) {
-  if (type.includes("zip")) return <FaFileAlt className="text-blue-600 w-5 h-5" />;
+  if (type.includes("zip")) return <FaFileAlt className="text-primary w-5 h-5" />;
   if (type.includes("gzip")) return <FaFileAlt className="text-green-600 w-5 h-5" />;
   return <FaFileAlt className="text-gray-600 w-5 h-5" />;
 }
@@ -176,9 +176,9 @@ function RelatedTools() {
       description: "Analyze your DMARC configuration and get detailed reports",
       icon: <Shield className="h-6 w-6 text-primary" />,
       href: "/tools/dmarc-analyzer",
-      color: "bg-blue-50 dark:bg-blue-950",
-      borderColor: "border-blue-200 dark:border-blue-800",
-      iconBg: "bg-blue-100 dark:bg-blue-900",
+      color: "bg-secondary dark:bg-primary",
+      borderColor: "border-primary/20 dark:border-primary",
+      iconBg: "bg-primary/10 dark:bg-primary",
     },
     {
       id: "spf-surveyor",
@@ -303,7 +303,7 @@ export default function XMLConverterPage() {
         <li>Multiple files supported</li>
         <li>All processing is done securely in the cloud</li>
       </ul>
-      <p className="text-xs text-gray-500">Need help? <a href="/docs" className="text-blue-600 hover:underline">Read the docs</a> or <a href="/contact" className="text-blue-600 hover:underline">contact support</a>.</p>
+      <p className="text-xs text-gray-500">Need help? <a href="/docs" className="text-primary hover:underline">Read the docs</a> or <a href="/contact" className="text-primary hover:underline">contact support</a>.</p>
     </div>
   );
 
@@ -316,7 +316,7 @@ export default function XMLConverterPage() {
       <div className="container">
         <Card className="mb-8">
           <div
-            className="border-2 border-dashed border-blue-300 rounded-xl bg-blue-50 p-8 flex flex-col items-center justify-center cursor-pointer hover:bg-blue-100 transition"
+            className="border-2 border-dashed border-primary/30 rounded-xl bg-secondary p-8 flex flex-col items-center justify-center cursor-pointer hover:bg-primary/10 transition"
             onDrop={handleDrop}
             onDragOver={e => e.preventDefault()}
             onClick={handleBrowse}
@@ -324,8 +324,8 @@ export default function XMLConverterPage() {
             role="button"
             aria-label="Upload DMARC XML files"
           >
-            <FaUpload className="w-10 h-10 text-blue-600 mb-2" />
-            <span className="font-semibold text-blue-700">Drag and drop DMARC XML, .gz, or .zip files here</span>
+            <FaUpload className="w-10 h-10 text-primary mb-2" />
+            <span className="font-semibold text-primary">Drag and drop DMARC XML, .gz, or .zip files here</span>
             <span className="text-gray-500 text-sm mt-1">or click to browse</span>
             <span className="text-gray-400 text-xs mt-2">Maximum file size: 10MB. Multiple files supported.</span>
             <input
@@ -366,7 +366,7 @@ export default function XMLConverterPage() {
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2">
                         <span className="font-medium text-gray-900 truncate max-w-xs">{file.name}</span>
-                        <span className={`inline-block px-2 py-0.5 rounded text-xs font-semibold border ${ext === 'XML' ? 'bg-blue-50 text-blue-700 border-blue-200' : ext === 'ZIP' ? 'bg-green-50 text-green-700 border-green-200' : 'bg-gray-50 text-gray-600 border-gray-200'}`}>{ext}</span>
+                        <span className={`inline-block px-2 py-0.5 rounded text-xs font-semibold border ${ext === 'XML' ? 'bg-secondary text-primary border-primary/20' : ext === 'ZIP' ? 'bg-green-50 text-green-700 border-green-200' : 'bg-gray-50 text-gray-600 border-gray-200'}`}>{ext}</span>
                         <span className="text-xs text-gray-400">{(file.size / 1024).toFixed(1)} KB</span>
                         {/* Checkmark for new file (static for now) */}
                         <span className="ml-1 text-green-500" aria-label="File added">✓</span>
@@ -375,7 +375,7 @@ export default function XMLConverterPage() {
                     <button
                       aria-label={`Remove file ${file.name}`}
                       title="Remove file"
-                      className="ml-2 p-2 rounded-full border border-blue-200 text-blue-600 hover:bg-blue-50 hover:text-blue-800 transition group-hover:shadow"
+                      className="ml-2 p-2 rounded-full border border-primary/20 text-primary hover:bg-secondary hover:text-foreground transition group-hover:shadow"
                       onClick={e => { e.stopPropagation(); handleRemove(idx); }}
                       type="button"
                     >
@@ -407,10 +407,10 @@ export default function XMLConverterPage() {
         {results.length > 0 && (
           <div className="space-y-8">
             {results.map((res, idx) => (
-              <Card key={res.name + idx} className="bg-blue-50 border-blue-200">
+              <Card key={res.name + idx} className="bg-secondary border-primary/20">
                 <div className="flex items-center gap-2 cursor-pointer" onClick={() => toggleExpand(res.name)}>
-                  {expanded[res.name] ? <FaChevronDown className="w-4 h-4 text-blue-600" /> : <FaChevronRight className="w-4 h-4 text-blue-600" />}
-                  <span className="font-semibold text-blue-900">{res.name}</span>
+                  {expanded[res.name] ? <FaChevronDown className="w-4 h-4 text-primary" /> : <FaChevronRight className="w-4 h-4 text-primary" />}
+                  <span className="font-semibold text-foreground">{res.name}</span>
                   {res.error ? (
                     <span className="ml-2 px-2 py-0.5 rounded-full text-xs font-semibold border bg-red-100 text-red-800 border-red-200">Error</span>
                   ) : (
@@ -456,7 +456,7 @@ export default function XMLConverterPage() {
                         )}
                         <div className="overflow-x-auto">
                           <table className="min-w-full text-xs text-left border mt-2">
-                            <thead className="bg-blue-100">
+                            <thead className="bg-primary/10">
                               <tr>
                                 <th className="px-2 py-1 font-semibold">Source IP</th>
                                 <th className="px-2 py-1 font-semibold">Count</th>

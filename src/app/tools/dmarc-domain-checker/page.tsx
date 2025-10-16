@@ -102,7 +102,7 @@ function getGradeAndScore(dmarcFields: Record<string, string>) {
     message = "Excellent! DMARC is well configured.";
   } else if (score >= 80) {
     grade = "B";
-    color = "bg-blue-100 text-blue-800 border-blue-200";
+    color = "bg-primary/10 text-foreground border-primary/20";
     icon = <FaMedal className="text-yellow-500 w-7 h-7" />;
     message = "Good! DMARC is properly configured.";
   } else if (score >= 70) {
@@ -251,9 +251,9 @@ function RelatedTools() {
       description: "Analyze your DMARC configuration and get detailed reports",
       icon: <Shield className="h-6 w-6 text-primary" />,
       href: "/tools/dmarc-analyzer",
-      color: "bg-blue-50 dark:bg-blue-950",
-      borderColor: "border-blue-200 dark:border-blue-800",
-      iconBg: "bg-blue-100 dark:bg-blue-900",
+      color: "bg-secondary dark:bg-primary",
+      borderColor: "border-primary/20 dark:border-primary",
+      iconBg: "bg-primary/10 dark:bg-primary",
     },
     {
       id: "spf-surveyor",
@@ -335,7 +335,7 @@ export default function DMARCDomainCheckerPage() {
     <div className="space-y-6">
       <div>
         <h3 className="text-sm font-medium text-gray-900 flex items-center gap-1.5">
-          <FaShieldAlt className="w-4 h-4 text-blue-600" />
+          <FaShieldAlt className="w-4 h-4 text-primary" />
           About Domain Authentication
         </h3>
         <p className="text-sm text-gray-500 mt-2">
@@ -345,20 +345,20 @@ export default function DMARCDomainCheckerPage() {
 
       <div>
         <h3 className="text-sm font-medium text-gray-900 flex items-center gap-1.5">
-          <FaInfoCircle className="w-4 h-4 text-blue-600" />
+          <FaInfoCircle className="w-4 h-4 text-primary" />
           What We Check
         </h3>
         <ul className="text-sm text-gray-500 space-y-2 mt-2">
           <li className="flex items-start gap-2">
-            <FaShieldAlt className="w-4 h-4 text-blue-600 mt-0.5" />
+            <FaShieldAlt className="w-4 h-4 text-primary mt-0.5" />
             <span>DMARC record and policy</span>
           </li>
           <li className="flex items-start gap-2">
-            <FaEnvelope className="w-4 h-4 text-blue-600 mt-0.5" />
+            <FaEnvelope className="w-4 h-4 text-primary mt-0.5" />
             <span>SPF record and mechanisms</span>
           </li>
           <li className="flex items-start gap-2">
-            <FaKey className="w-4 h-4 text-blue-600 mt-0.5" />
+            <FaKey className="w-4 h-4 text-primary mt-0.5" />
             <span>DKIM records and selectors</span>
           </li>
         </ul>
@@ -381,7 +381,7 @@ export default function DMARCDomainCheckerPage() {
       <Card className="w-full border-0 shadow-lg">
         <div className="p-6">
           <div className="flex items-center gap-2 mb-6">
-            <Shield className="h-6 w-6 text-blue-600" />
+            <Shield className="h-6 w-6 text-primary" />
             <h2 className="text-2xl font-bold">DMARC Checker</h2>
           </div>
 
@@ -399,7 +399,7 @@ export default function DMARCDomainCheckerPage() {
                     id="domain"
                     type="text"
                     placeholder="yourdomain.com"
-                    className="pl-10 h-11 border-gray-200 focus:border-blue-600 focus:ring-blue-600"
+                    className="pl-10 h-11 border-gray-200 focus:border-primary focus:ring-ring"
                     value={domain}
                     onChange={(e) => setDomain(e.target.value)}
                     required
@@ -407,7 +407,7 @@ export default function DMARCDomainCheckerPage() {
                 </div>
                 <Button
                   type="submit"
-                  className="bg-blue-600 hover:bg-blue-700 text-white min-w-[120px]"
+                  className="bg-primary hover:bg-primary text-white min-w-[120px]"
                   disabled={loading}
                 >
                   {loading ? (
@@ -455,7 +455,7 @@ export default function DMARCDomainCheckerPage() {
           <Card>
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-3">
-                <FaShieldAlt className="w-6 h-6 text-blue-400" />
+                <FaShieldAlt className="w-6 h-6 text-primary/70" />
                 <span className="font-bold text-xl text-gray-900">Status</span>
               </div>
             </div>
@@ -477,7 +477,7 @@ export default function DMARCDomainCheckerPage() {
               <ul className="space-y-2">
                 {recommendations.map((rec, i) => (
                   <li key={i} className="flex items-start gap-2">
-                    <FaInfoCircle className="w-4 h-4 text-blue-600 mt-0.5" />
+                    <FaInfoCircle className="w-4 h-4 text-primary mt-0.5" />
                     <span>{rec.message}</span>
                   </li>
                 ))}
@@ -491,11 +491,11 @@ export default function DMARCDomainCheckerPage() {
             <Card>
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-3">
-                  <FaShieldAlt className="w-6 h-6 text-blue-400" />
+                  <FaShieldAlt className="w-6 h-6 text-primary/70" />
                   <span className="font-bold text-xl text-gray-900">DMARC</span>
                 </div>
                 {result.dmarc ? (
-                  <span className="px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-700">Valid</span>
+                  <span className="px-3 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary">Valid</span>
                 ) : (
                   <span className="px-3 py-1 rounded-full text-xs font-semibold bg-gray-200 text-gray-500">Missing</span>
                 )}
@@ -517,11 +517,11 @@ export default function DMARCDomainCheckerPage() {
             <Card>
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-3">
-                  <FaEnvelope className="w-6 h-6 text-blue-400" />
+                  <FaEnvelope className="w-6 h-6 text-primary/70" />
                   <span className="font-bold text-xl text-gray-900">SPF</span>
                 </div>
                 {result.spf ? (
-                  <span className="px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-700">Valid</span>
+                  <span className="px-3 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary">Valid</span>
                 ) : (
                   <span className="px-3 py-1 rounded-full text-xs font-semibold bg-gray-200 text-gray-500">Missing</span>
                 )}
@@ -543,11 +543,11 @@ export default function DMARCDomainCheckerPage() {
             <Card>
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-3">
-                  <FaKey className="w-6 h-6 text-blue-400" />
+                  <FaKey className="w-6 h-6 text-primary/70" />
                   <span className="font-bold text-xl text-gray-900">DKIM</span>
                 </div>
                 {result.dkim && result.dkim.length > 0 && result.dkim.some(d => d.record) ? (
-                  <span className="px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-700">Valid</span>
+                  <span className="px-3 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary">Valid</span>
                 ) : (
                   <span className="px-3 py-1 rounded-full text-xs font-semibold bg-gray-200 text-gray-500">Missing</span>
                 )}

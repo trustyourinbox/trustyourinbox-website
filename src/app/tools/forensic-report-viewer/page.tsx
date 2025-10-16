@@ -24,7 +24,7 @@ const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
 const ACCEPTED_TYPES = ["application/xml", "text/xml", ".xml"];
 
 function getFileIcon(type: string) {
-  return <FaFileAlt className="text-blue-600 w-5 h-5" />;
+  return <FaFileAlt className="text-primary w-5 h-5" />;
 }
 
 function RelatedTools() {
@@ -35,9 +35,9 @@ function RelatedTools() {
       description: "Analyze your DMARC configuration and get detailed reports",
       icon: <Shield className="h-6 w-6 text-primary" />,
       href: "/tools/dmarc-analyzer",
-      color: "bg-blue-50 dark:bg-blue-950",
-      borderColor: "border-blue-200 dark:border-blue-800",
-      iconBg: "bg-blue-100 dark:bg-blue-900",
+      color: "bg-secondary dark:bg-primary",
+      borderColor: "border-primary/20 dark:border-primary",
+      iconBg: "bg-primary/10 dark:bg-primary",
     },
     {
       id: "spf-surveyor",
@@ -219,12 +219,12 @@ export default function ForensicReportViewerPage() {
       <h4 className="font-semibold mb-2">Learn More</h4>
       <ul className="list-disc pl-5 text-sm">
         <li>
-          <a href="https://dmarc.org/" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">
+          <a href="https://dmarc.org/" target="_blank" rel="noopener noreferrer" className="text-primary underline">
             DMARC.org: Official DMARC Documentation
           </a>
         </li>
         <li>
-          <a href="/guides/dmarc" className="text-blue-600 underline">
+          <a href="/guides/dmarc" className="text-primary underline">
             TrustYourInbox DMARC Guide
           </a>
         </li>
@@ -242,7 +242,7 @@ export default function ForensicReportViewerPage() {
         <Card>
           <div className="space-y-4">
             <div
-              className="border-2 border-dashed border-blue-300 rounded-xl bg-blue-50 p-8 flex flex-col items-center justify-center cursor-pointer hover:bg-blue-100 transition"
+              className="border-2 border-dashed border-primary/30 rounded-xl bg-secondary p-8 flex flex-col items-center justify-center cursor-pointer hover:bg-primary/10 transition"
               onDrop={handleDrop}
               onDragOver={e => e.preventDefault()}
               onClick={handleBrowse}
@@ -250,8 +250,8 @@ export default function ForensicReportViewerPage() {
               role="button"
               aria-label="Upload Forensic DMARC XML files"
             >
-              <FaUpload className="w-10 h-10 text-blue-600 mb-2" />
-              <span className="font-semibold text-blue-700">Drag and drop Forensic DMARC XML files here</span>
+              <FaUpload className="w-10 h-10 text-primary mb-2" />
+              <span className="font-semibold text-primary">Drag and drop Forensic DMARC XML files here</span>
               <span className="text-gray-500 text-sm mt-1">or click to browse</span>
               <span className="text-gray-400 text-xs mt-2">Maximum file size: 10MB. Multiple files supported.</span>
               <input
@@ -289,7 +289,7 @@ export default function ForensicReportViewerPage() {
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2">
                         <span className="font-medium text-gray-900 truncate max-w-xs">{file.name}</span>
-                        <span className={`inline-block px-2 py-0.5 rounded text-xs font-semibold border ${ext === 'XML' ? 'bg-blue-50 text-blue-700 border-blue-200' : 'bg-gray-50 text-gray-600 border-gray-200'}`}>{ext}</span>
+                        <span className={`inline-block px-2 py-0.5 rounded text-xs font-semibold border ${ext === 'XML' ? 'bg-secondary text-primary border-primary/20' : 'bg-gray-50 text-gray-600 border-gray-200'}`}>{ext}</span>
                         <span className="text-xs text-gray-400">{(file.size / 1024).toFixed(1)} KB</span>
                         <span className="ml-1 text-green-500" aria-label="File added">✓</span>
                       </div>
@@ -297,7 +297,7 @@ export default function ForensicReportViewerPage() {
                     <button
                       aria-label={`Remove file ${file.name}`}
                       title="Remove file"
-                      className="ml-2 p-2 rounded-full border border-blue-200 text-blue-600 hover:bg-blue-50 hover:text-blue-800 transition group-hover:shadow"
+                      className="ml-2 p-2 rounded-full border border-primary/20 text-primary hover:bg-secondary hover:text-foreground transition group-hover:shadow"
                       onClick={e => { e.stopPropagation(); handleRemove(idx); }}
                       type="button"
                     >
@@ -312,13 +312,13 @@ export default function ForensicReportViewerPage() {
         {/* Tabs for Table View and Dashboard */}
         <div className="flex items-center gap-2 mb-6">
           <button
-            className={`px-4 py-2 rounded-lg font-semibold text-sm transition-colors ${activeTab === 'table' ? 'bg-gray-100 text-blue-700' : 'bg-white text-gray-500 hover:bg-gray-50'}`}
+            className={`px-4 py-2 rounded-lg font-semibold text-sm transition-colors ${activeTab === 'table' ? 'bg-gray-100 text-primary' : 'bg-white text-gray-500 hover:bg-gray-50'}`}
             onClick={() => setActiveTab('table')}
           >
             Table View
           </button>
           <button
-            className={`px-4 py-2 rounded-lg font-semibold text-sm transition-colors ${activeTab === 'dashboard' ? 'bg-gray-100 text-blue-700' : 'bg-white text-gray-500 hover:bg-gray-50'}`}
+            className={`px-4 py-2 rounded-lg font-semibold text-sm transition-colors ${activeTab === 'dashboard' ? 'bg-gray-100 text-primary' : 'bg-white text-gray-500 hover:bg-gray-50'}`}
             onClick={() => setActiveTab('dashboard')}
           >
             Dashboard

@@ -53,7 +53,7 @@ export function AccordionTrigger({ value, children, className }: AccordionTrigge
   return (
     <button
       type="button"
-      className={`w-full flex justify-between items-center py-3 px-2 font-medium text-left text-gray-900 focus:outline-none transition-colors ${isOpen ? "bg-blue-50" : "bg-white"} ${className || ""}`}
+      className={`w-full flex justify-between items-center py-3 px-2 font-medium text-left text-gray-900 focus:outline-none transition-colors ${isOpen ? "bg-secondary" : "bg-white"} ${className || ""}`}
       onClick={() => context.toggleItem(itemValue)}
       aria-expanded={isOpen}
     >

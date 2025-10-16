@@ -3,7 +3,7 @@ export default function HowItWorksSection() {
     <section id="how-it-works" className="py-20">
       <div className="container">
         <div className="mx-auto max-w-[58rem] text-center">
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl bg-gradient-to-r from-gray-900 via-primary to-gray-900 bg-clip-text text-transparent">How DMARC Implementation Works</h2>
+          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl text-foreground">How DMARC Implementation Works</h2>
           <p className="mt-4 text-lg text-muted-foreground">
             Our streamlined process gets you from zero to full DMARC enforcement in just a few steps.
           </p>

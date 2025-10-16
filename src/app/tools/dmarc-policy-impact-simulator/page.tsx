@@ -175,11 +175,11 @@ export default function DmarcPolicyImpactSimulator() {
   const sidebar = (
     <div className="space-y-6">
       <div>
-        <h3 className="text-sm font-bold text-blue-900 flex items-center gap-2 mb-1"><Shield className="h-4 w-4 text-blue-600" />DMARC Policy Impact Simulator</h3>
+        <h3 className="text-sm font-bold text-foreground flex items-center gap-2 mb-1"><Shield className="h-4 w-4 text-primary" />DMARC Policy Impact Simulator</h3>
         <p className="text-xs text-gray-600">Simulate the effect of stricter DMARC policies on your email traffic. Upload a DMARC XML report and see how policy changes would impact delivery.</p>
       </div>
       <div>
-        <h4 className="text-xs font-semibold text-gray-800 mb-1 flex items-center gap-1"><Info className="h-3 w-3 text-blue-500" />How it works</h4>
+        <h4 className="text-xs font-semibold text-gray-800 mb-1 flex items-center gap-1"><Info className="h-3 w-3 text-primary" />How it works</h4>
         <ul className="text-xs text-gray-600 list-disc pl-4 space-y-1">
           <li>Upload a DMARC XML report or use sample data</li>
           <li>Select a stricter policy to simulate</li>
@@ -188,7 +188,7 @@ export default function DmarcPolicyImpactSimulator() {
         </ul>
       </div>
       <div>
-        <h4 className="text-xs font-semibold text-gray-800 mb-1 flex items-center gap-1"><BarChart2 className="h-3 w-3 text-blue-500" />Best Practices</h4>
+        <h4 className="text-xs font-semibold text-gray-800 mb-1 flex items-center gap-1"><BarChart2 className="h-3 w-3 text-primary" />Best Practices</h4>
         <ul className="text-xs text-gray-600 list-disc pl-4 space-y-1">
           <li>Start with <b>p=none</b> to monitor</li>
           <li>Gradually move to <b>quarantine</b> or <b>reject</b></li>
@@ -300,11 +300,11 @@ export default function DmarcPolicyImpactSimulator() {
     >
       <div className="container space-y-8">
         <Card className="p-6">
-          <h2 className="text-xl font-bold mb-4 flex items-center gap-2"><FileText className="h-5 w-5 text-blue-600" />Upload DMARC XML Report</h2>
+          <h2 className="text-xl font-bold mb-4 flex items-center gap-2"><FileText className="h-5 w-5 text-primary" />Upload DMARC XML Report</h2>
           <div className="flex flex-col gap-4">
             <label
               htmlFor="dmarc-upload"
-              className="flex flex-col items-center justify-center border-2 border-dashed border-blue-200 rounded-lg p-6 cursor-pointer bg-blue-50 hover:bg-blue-100 transition group"
+              className="flex flex-col items-center justify-center border-2 border-dashed border-primary/20 rounded-lg p-6 cursor-pointer bg-secondary hover:bg-primary/10 transition group"
               style={{ minHeight: 120 }}
               onDragOver={e => e.preventDefault()}
               onDrop={e => {
@@ -322,8 +322,8 @@ export default function DmarcPolicyImpactSimulator() {
                 }
               }}
             >
-              <UploadCloud className="h-10 w-10 text-blue-400 mb-2 group-hover:text-blue-600" />
-              <span className="text-sm text-blue-900 font-medium mb-1">Drag & drop DMARC XML here, or click to select</span>
+              <UploadCloud className="h-10 w-10 text-primary/70 mb-2 group-hover:text-primary" />
+              <span className="text-sm text-foreground font-medium mb-1">Drag & drop DMARC XML here, or click to select</span>
               <span className="text-xs text-gray-500">Only .xml files are supported</span>
               <input
                 id="dmarc-upload"
@@ -334,9 +334,9 @@ export default function DmarcPolicyImpactSimulator() {
               />
             </label>
             {(xml || showSample) && (
-              <div className="flex items-center gap-2 bg-white border border-blue-100 rounded px-3 py-2">
-                <FileText className="h-4 w-4 text-blue-500" />
-                <span className="text-xs text-blue-900 font-medium truncate">
+              <div className="flex items-center gap-2 bg-white border border-primary/10 rounded px-3 py-2">
+                <FileText className="h-4 w-4 text-primary" />
+                <span className="text-xs text-foreground font-medium truncate">
                   {showSample ? "Sample Data Loaded" : "File Loaded"}
                 </span>
                 <button
@@ -358,21 +358,21 @@ export default function DmarcPolicyImpactSimulator() {
         </Card>
 
         <Card className="p-6">
-          <h2 className="text-xl font-bold mb-4 flex items-center gap-2"><Shield className="h-5 w-5 text-blue-600" />Simulate Policy</h2>
+          <h2 className="text-xl font-bold mb-4 flex items-center gap-2"><Shield className="h-5 w-5 text-primary" />Simulate Policy</h2>
           <div className="flex gap-4 mb-4">
             <Button variant={policy === "none" ? "default" : "outline"} onClick={() => setPolicy("none")}>p=none</Button>
             <Button variant={policy === "quarantine" ? "default" : "outline"} onClick={() => setPolicy("quarantine")}>p=quarantine</Button>
             <Button variant={policy === "reject" ? "default" : "outline"} onClick={() => setPolicy("reject")}>p=reject</Button>
           </div>
-          <Button onClick={handleSimulate} className="bg-blue-600 hover:bg-blue-700 text-white">Simulate Impact</Button>
+          <Button onClick={handleSimulate} className="bg-primary hover:bg-primary text-white">Simulate Impact</Button>
         </Card>
 
         {impact && (
           <Card className="p-6">
-            <h2 className="text-xl font-bold mb-4 flex items-center gap-2"><BarChart2 className="h-5 w-5 text-blue-600" />Impact Visualization</h2>
+            <h2 className="text-xl font-bold mb-4 flex items-center gap-2"><BarChart2 className="h-5 w-5 text-primary" />Impact Visualization</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-              <div className="bg-blue-50 rounded-lg p-4 text-center">
-                <div className="text-2xl font-bold text-blue-800">{impact.total}</div>
+              <div className="bg-secondary rounded-lg p-4 text-center">
+                <div className="text-2xl font-bold text-foreground">{impact.total}</div>
                 <div className="text-xs text-gray-600">Total Messages</div>
               </div>
               <div className="bg-green-50 rounded-lg p-4 text-center">
@@ -445,7 +445,7 @@ export default function DmarcPolicyImpactSimulator() {
 
         {impact && (
           <Card className="p-6">
-            <h2 className="text-xl font-bold mb-4 flex items-center gap-2"><Info className="h-5 w-5 text-blue-600" />Recommendations</h2>
+            <h2 className="text-xl font-bold mb-4 flex items-center gap-2"><Info className="h-5 w-5 text-primary" />Recommendations</h2>
             <ul className="list-disc pl-5 space-y-2 text-sm text-gray-700">
               {policy === "none" && <li>Consider moving to <b>quarantine</b> or <b>reject</b> for better protection if most sources pass DMARC.</li>}
               {policy === "quarantine" && <li>Review sources that would be quarantined. If all legitimate sources pass DMARC, consider moving to <b>reject</b>.</li>}

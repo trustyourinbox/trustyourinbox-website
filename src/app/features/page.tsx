@@ -33,7 +33,7 @@ export default function FeaturesPage() {
             <Badge className="mb-4" variant="outline">
               Email Security Platform
             </Badge>
-            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl bg-gradient-to-r from-gray-900 via-primary to-gray-900 bg-clip-text text-transparent">
+            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl text-foreground">
               Powerful Features for Email Security
             </h1>
             <p className="text-xl text-muted-foreground mb-8">
@@ -57,13 +57,13 @@ export default function FeaturesPage() {
       {/* Core Features Grid */}
       <section className="py-12 bg-background">
         <div className="container max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
-          <h2 className="text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl text-center mb-8 bg-gradient-to-r from-gray-900 via-primary to-gray-900 bg-clip-text text-transparent">Core Security Features</h2>
+          <h2 className="text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl text-center mb-8 text-foreground">Core Security Features</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {/* Feature 1 */}
             <Card className="border border-slate-200 shadow-sm hover:shadow-md transition-shadow duration-300">
               <CardHeader className="pb-2">
-                <div className="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center mb-3">
-                  <Shield className="h-5 w-5 text-blue-600" />
+                <div className="w-10 h-10 rounded-lg bg-secondary flex items-center justify-center mb-3">
+                  <Shield className="h-5 w-5 text-primary" />
                 </div>
                 <CardTitle className="text-lg">Email Authentication</CardTitle>
               </CardHeader>
@@ -73,7 +73,7 @@ export default function FeaturesPage() {
                 </p>
               </CardContent>
               <CardFooter>
-                <Button variant="ghost" className="p-0 h-auto text-blue-600 hover:text-blue-700">
+                <Button variant="ghost" className="p-0 h-auto text-primary hover:text-primary">
                   Learn more <ArrowRight className="ml-1 h-4 w-4" />
                 </Button>
               </CardFooter>
@@ -206,7 +206,7 @@ export default function FeaturesPage() {
       <section className="py-12 bg-muted/30">
         <div className="container max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl mb-4 bg-gradient-to-r from-gray-900 via-primary to-gray-900 bg-clip-text text-transparent">Email Security Resource Hub</h2>
+            <h2 className="text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl mb-4 text-foreground">Email Security Resource Hub</h2>
             <p className="text-lg text-muted-foreground">
               Everything you need to know about email authentication and domain security
             </p>
@@ -221,8 +221,8 @@ export default function FeaturesPage() {
             <TabsContent value="learning" className="p-6 bg-background rounded-lg shadow-sm">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="bg-background rounded-lg shadow-sm p-4 flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
-                    <CheckCircle className="h-5 w-5 text-blue-600" />
+                  <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <CheckCircle className="h-5 w-5 text-primary" />
                   </div>
                   <div>
                     <h3 className="font-semibold mb-1 text-base">SPF & DKIM Best Practices</h3>
@@ -232,8 +232,8 @@ export default function FeaturesPage() {
                   </div>
                 </div>
                 <div className="bg-background rounded-lg shadow-sm p-4 flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
-                    <Mail className="h-5 w-5 text-blue-600" />
+                  <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <Mail className="h-5 w-5 text-primary" />
                   </div>
                   <div>
                     <h3 className="font-semibold mb-1 text-base">Email Authentication 101</h3>
@@ -243,8 +243,8 @@ export default function FeaturesPage() {
                   </div>
                 </div>
                 <div className="bg-background rounded-lg shadow-sm p-4 flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
-                    <Shield className="h-5 w-5 text-blue-600" />
+                  <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <Shield className="h-5 w-5 text-primary" />
                   </div>
                   <div>
                     <h3 className="font-semibold mb-1 text-base">Phishing Prevention Guide</h3>
@@ -350,9 +350,9 @@ export default function FeaturesPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Success Stories */}
             <div>
-              <h2 className="text-2xl font-bold tracking-tight sm:text-3xl mb-8 bg-gradient-to-r from-gray-900 via-primary to-gray-900 bg-clip-text text-transparent">Success Stories</h2>
+              <h2 className="text-2xl font-bold tracking-tight sm:text-3xl mb-8 text-foreground">Success Stories</h2>
               <div className="space-y-8">
-                <div className="bg-muted/30 p-6 rounded-lg border-l-4 border-blue-500">
+                <div className="bg-muted/30 p-6 rounded-lg border-l-4 border-primary">
                   <p className="italic text-muted-foreground mb-4">
                     &ldquo;TrustYourInbox helped us achieve 100% email authentication compliance within weeks, significantly reducing our
                     email spoofing incidents.&rdquo;
@@ -364,7 +364,7 @@ export default function FeaturesPage() {
                     </div>
                   </div>
                 </div>
-                <div className="bg-muted/30 p-6 rounded-lg border-l-4 border-blue-500">
+                <div className="bg-muted/30 p-6 rounded-lg border-l-4 border-primary">
                   <p className="italic text-muted-foreground mb-4">
                     &ldquo;The automated monitoring and alerts have been invaluable in protecting our brand reputation.&rdquo;
                   </p>
@@ -380,7 +380,7 @@ export default function FeaturesPage() {
 
             {/* Latest Updates */}
             <div>
-              <h2 className="text-2xl font-bold tracking-tight sm:text-3xl mb-8 bg-gradient-to-r from-gray-900 via-primary to-gray-900 bg-clip-text text-transparent">Latest Updates</h2>
+              <h2 className="text-2xl font-bold tracking-tight sm:text-3xl mb-8 text-foreground">Latest Updates</h2>
               <div className="space-y-6">
                 <div className="border-b pb-6">
                   <div className="flex items-center mb-2">
@@ -414,7 +414,7 @@ export default function FeaturesPage() {
       {/* Comprehensive Solution */}
       <section className="py-12 bg-gradient-to-b from-muted/30 to-background">
         <div className="container max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
-          <h2 className="text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl text-center mb-16 bg-gradient-to-r from-gray-900 via-primary to-gray-900 bg-clip-text text-transparent">Comprehensive Email Security Solution</h2>
+          <h2 className="text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl text-center mb-16 text-foreground">Comprehensive Email Security Solution</h2>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-8">
               <h3 className="text-2xl font-bold tracking-tight sm:text-3xl text-primary">Email Authentication Monitoring</h3>

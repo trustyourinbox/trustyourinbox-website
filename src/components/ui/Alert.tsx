@@ -12,8 +12,8 @@ interface AlertProps {
 export function Alert({ children, className, variant = 'info', title }: AlertProps) {
   const variants = {
     info: {
-      icon: <FaInfoCircle className="h-5 w-5 text-blue-400" />,
-      styles: 'bg-blue-50 text-blue-800 border-blue-200',
+      icon: <FaInfoCircle className="h-5 w-5 text-primary/70" />,
+      styles: 'bg-secondary text-foreground border-primary/20',
     },
     success: {
       icon: <FaCheckCircle className="h-5 w-5 text-green-400" />,

@@ -31,8 +31,8 @@ export function TabsTrigger({ value, children, className }: TabsTriggerProps) {
       type="button"
       className={`px-4 py-2 rounded-t-md font-medium text-sm transition-colors border-b-2 focus:outline-none ${
         isActive
-          ? "border-blue-600 text-blue-700 bg-white"
-          : "border-transparent text-gray-500 hover:text-blue-600 hover:bg-gray-50"
+          ? "border-primary text-primary bg-white"
+          : "border-transparent text-gray-500 hover:text-primary hover:bg-gray-50"
       } ${className || ""}`}
       onClick={() => context.onValueChange(value)}
       tabIndex={isActive ? 0 : -1}

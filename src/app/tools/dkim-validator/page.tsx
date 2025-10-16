@@ -235,7 +235,7 @@ export default function DKIMValidatorPage() {
   const getStatusColor = (rating: number) => {
     switch (rating) {
       case 5: return "text-green-600";
-      case 4: return "text-blue-600";
+      case 4: return "text-primary";
       case 3: return "text-yellow-600";
       case 2: return "text-orange-600";
       default: return "text-red-600";
@@ -246,7 +246,7 @@ export default function DKIMValidatorPage() {
     <div className="space-y-6">
       <div>
         <h3 className="text-sm font-medium text-gray-900 flex items-center gap-1.5">
-          <FaShieldAlt className="w-4 h-4 text-blue-600" />
+          <FaShieldAlt className="w-4 h-4 text-primary" />
           About DKIM
         </h3>
         <p className="text-sm text-gray-500 mt-2">
@@ -256,13 +256,13 @@ export default function DKIMValidatorPage() {
 
       <div>
         <h3 className="text-sm font-medium text-gray-900 flex items-center gap-1.5">
-          <FaInfoCircle className="w-4 h-4 text-blue-600" />
+          <FaInfoCircle className="w-4 h-4 text-primary" />
           Common Tags
         </h3>
         <ul className="text-sm text-gray-500 space-y-2 mt-2">
           {DKIM_TAG_LEGEND.slice(0, 5).map(({ tag, name, desc }) => (
             <li key={tag} className="flex items-start gap-2">
-              <code className="bg-gray-100 px-1.5 py-0.5 rounded text-blue-600">{tag}=</code>
+              <code className="bg-gray-100 px-1.5 py-0.5 rounded text-primary">{tag}=</code>
               <span>{desc}</span>
             </li>
           ))}
@@ -280,7 +280,7 @@ export default function DKIMValidatorPage() {
       <Card className="w-full border-0 shadow-lg">
         <div className="p-6">
           <div className="flex items-center gap-2 mb-6">
-            <Shield className="h-6 w-6 text-blue-600" />
+            <Shield className="h-6 w-6 text-primary" />
             <h2 className="text-2xl font-bold">DKIM Validator</h2>
           </div>
 
@@ -297,7 +297,7 @@ export default function DKIMValidatorPage() {
                   id="dkim"
                   type="text"
                   placeholder="v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA..."
-                  className="pl-10 h-11 border-gray-200 focus:border-blue-600 focus:ring-blue-600"
+                  className="pl-10 h-11 border-gray-200 focus:border-primary focus:ring-ring"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   required
@@ -308,7 +308,7 @@ export default function DKIMValidatorPage() {
             <div>
               <Button
                 type="submit"
-                className="bg-blue-600 hover:bg-blue-700 text-white min-w-[120px]"
+                className="bg-primary hover:bg-primary text-white min-w-[120px]"
                 disabled={loading || !input}
               >
                 {loading ? (
@@ -357,7 +357,7 @@ export default function DKIMValidatorPage() {
                     <div
                       key={i}
                       className={`w-2 h-2 rounded-full ${
-                        i < getGradeAndScore(fields).rating ? "bg-blue-600" : "bg-gray-200"
+                        i < getGradeAndScore(fields).rating ? "bg-primary" : "bg-gray-200"
                       }`}
                     />
                   ))}
@@ -367,7 +367,7 @@ export default function DKIMValidatorPage() {
                   <p className="text-sm text-gray-500">Based on best practices and security standards</p>
                 </div>
               </div>
-              <div className="text-3xl font-bold text-blue-600">{getGradeAndScore(fields).score}%</div>
+              <div className="text-3xl font-bold text-primary">{getGradeAndScore(fields).score}%</div>
             </div>
           </Card>
 
@@ -391,7 +391,7 @@ export default function DKIMValidatorPage() {
               <div className="space-y-4">
                 {getRecommendations(fields, getKeyLength(fields.p)).map((rec, idx) => (
                   <div key={idx} className="flex items-start gap-2">
-                    <FaInfoCircle className="w-4 h-4 text-blue-600 mt-0.5" />
+                    <FaInfoCircle className="w-4 h-4 text-primary mt-0.5" />
                     <span>{rec.message}</span>
                   </div>
                 ))}
@@ -410,10 +410,10 @@ export default function DKIMValidatorPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <Link
             href="/tools/dmarc-analyzer"
-            className="group relative overflow-hidden rounded-lg border p-5 transition-all hover:shadow-md border-blue-200 bg-blue-50 dark:border-blue-800 dark:bg-blue-950"
+            className="group relative overflow-hidden rounded-lg border p-5 transition-all hover:shadow-md border-primary/20 bg-secondary dark:border-primary dark:bg-primary"
           >
             <div className="flex items-start gap-4">
-              <div className="rounded-full p-2 bg-blue-100 dark:bg-blue-900">
+              <div className="rounded-full p-2 bg-primary/10 dark:bg-primary">
                 <Shield className="h-6 w-6 text-primary" />
               </div>
               <div>

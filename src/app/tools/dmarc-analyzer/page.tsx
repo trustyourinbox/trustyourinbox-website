@@ -136,7 +136,7 @@ export default function DMARCAnalyzerPage() {
     <div className="space-y-6">
       <div>
         <h3 className="text-sm font-medium text-gray-900 flex items-center gap-1.5">
-          <FaShieldAlt className="w-4 h-4 text-blue-600" />
+          <FaShieldAlt className="w-4 h-4 text-primary" />
           About DMARC
         </h3>
         <p className="text-sm text-gray-500 mt-2">
@@ -146,32 +146,32 @@ export default function DMARCAnalyzerPage() {
 
       <div>
         <h3 className="text-sm font-medium text-gray-900 flex items-center gap-1.5">
-          <FaInfoCircle className="w-4 h-4 text-blue-600" />
+          <FaInfoCircle className="w-4 h-4 text-primary" />
           Common Tags
         </h3>
         <ul className="text-sm text-gray-500 space-y-2 mt-2">
           <li className="flex items-start gap-2">
-            <code className="bg-gray-100 px-1.5 py-0.5 rounded text-blue-600">v=DMARC1</code>
+            <code className="bg-gray-100 px-1.5 py-0.5 rounded text-primary">v=DMARC1</code>
             <span>Version</span>
           </li>
           <li className="flex items-start gap-2">
-            <code className="bg-gray-100 px-1.5 py-0.5 rounded text-blue-600">p=none</code>
+            <code className="bg-gray-100 px-1.5 py-0.5 rounded text-primary">p=none</code>
             <span>Monitoring only</span>
           </li>
           <li className="flex items-start gap-2">
-            <code className="bg-gray-100 px-1.5 py-0.5 rounded text-blue-600">p=quarantine</code>
+            <code className="bg-gray-100 px-1.5 py-0.5 rounded text-primary">p=quarantine</code>
             <span>Send to spam</span>
           </li>
           <li className="flex items-start gap-2">
-            <code className="bg-gray-100 px-1.5 py-0.5 rounded text-blue-600">p=reject</code>
+            <code className="bg-gray-100 px-1.5 py-0.5 rounded text-primary">p=reject</code>
             <span>Reject email</span>
           </li>
           <li className="flex items-start gap-2">
-            <code className="bg-gray-100 px-1.5 py-0.5 rounded text-blue-600">rua=</code>
+            <code className="bg-gray-100 px-1.5 py-0.5 rounded text-primary">rua=</code>
             <span>Aggregate reports</span>
           </li>
           <li className="flex items-start gap-2">
-            <code className="bg-gray-100 px-1.5 py-0.5 rounded text-blue-600">ruf=</code>
+            <code className="bg-gray-100 px-1.5 py-0.5 rounded text-primary">ruf=</code>
             <span>Forensic reports</span>
           </li>
         </ul>
@@ -190,7 +190,7 @@ export default function DMARCAnalyzerPage() {
       <Card className="w-full border-0 shadow-lg">
         <div className="p-6">
           <div className="flex items-center gap-2 mb-6">
-            <Shield className="h-6 w-6 text-blue-600" />
+            <Shield className="h-6 w-6 text-primary" />
             <h2 className="text-2xl font-bold">DMARC Analyzer</h2>
           </div>
 
@@ -208,7 +208,7 @@ export default function DMARCAnalyzerPage() {
                     id="dmarc"
                     type="text"
                     placeholder="v=DMARC1; p=reject; rua=mailto:reports@example.com; ..."
-                    className="pl-10 h-11 border-gray-200 focus:border-blue-600 focus:ring-blue-600"
+                    className="pl-10 h-11 border-gray-200 focus:border-primary focus:ring-ring"
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                     required
@@ -216,7 +216,7 @@ export default function DMARCAnalyzerPage() {
                 </div>
                 <Button
                   type="submit"
-                  className="bg-blue-600 hover:bg-blue-700 text-white min-w-[120px]"
+                  className="bg-primary hover:bg-primary text-white min-w-[120px]"
                   disabled={loading || !input}
                 >
                   {loading ? (
@@ -266,7 +266,7 @@ export default function DMARCAnalyzerPage() {
           <ul className="space-y-2">
             {recommendations.map((rec, i) => (
               <li key={i} className="flex items-start gap-2">
-                <FaInfoCircle className="w-4 h-4 text-blue-600 mt-0.5" />
+                <FaInfoCircle className="w-4 h-4 text-primary mt-0.5" />
                 <span>{rec.message}</span>
               </li>
             ))}
@@ -341,10 +341,10 @@ export default function DMARCAnalyzerPage() {
 
           <Link
             href="/tools/domain-security-checker"
-            className="group relative overflow-hidden rounded-lg border p-5 transition-all hover:shadow-md border-blue-200 bg-blue-50 dark:border-blue-800 dark:bg-blue-950"
+            className="group relative overflow-hidden rounded-lg border p-5 transition-all hover:shadow-md border-primary/20 bg-secondary dark:border-primary dark:bg-primary"
           >
             <div className="flex items-start gap-4">
-              <div className="rounded-full p-2 bg-blue-100 dark:bg-blue-900">
+              <div className="rounded-full p-2 bg-primary/10 dark:bg-primary">
                 <Shield className="h-6 w-6 text-primary" />
               </div>
               <div>
