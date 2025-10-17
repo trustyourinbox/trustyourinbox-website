@@ -64,39 +64,39 @@ const features = [
 
 export default function BentoGridFeatures() {
   return (
-    <section className="py-24 bg-gradient-to-b from-background to-secondary/30">
+    <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-gradient-to-b from-background to-secondary/30">
       <div className="container">
         {/* Header */}
-        <div className="mx-auto max-w-3xl text-center mb-16">
-          <div className="inline-flex items-center rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-sm font-medium mb-6">
-            <Shield className="h-4 w-4 mr-2 text-primary" />
+        <div className="mx-auto max-w-3xl text-center mb-10 sm:mb-12 md:mb-16">
+          <div className="inline-flex items-center rounded-full border border-primary/20 bg-primary/5 px-3 py-1.5 sm:px-4 text-xs sm:text-sm font-medium mb-4 sm:mb-6">
+            <Shield className="h-3 w-3 sm:h-4 sm:w-4 mr-2 text-primary flex-shrink-0" />
             <span className="text-primary">Everything You Need</span>
           </div>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4 sm:mb-6">
             Email Security,{" "}
             <span className="text-primary">
               Simplified
             </span>
           </h2>
-          <p className="text-xl text-muted-foreground">
+          <p className="text-base sm:text-lg md:text-xl text-muted-foreground">
             Professional-grade DMARC tools and analytics designed for teams that value both security and simplicity.
           </p>
         </div>
 
         {/* Bento Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 auto-rows-fr">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 auto-rows-fr">
           {features.map((feature, index) => {
             const Icon = feature.icon
             const getGridSpan = () => {
-              if (feature.size === "large") return "md:col-span-2"
-              if (feature.size === "medium") return "md:col-span-2 lg:col-span-1"
+              if (feature.size === "large") return "sm:col-span-2"
+              if (feature.size === "medium") return "sm:col-span-2 lg:col-span-1"
               return ""
             }
 
             return (
               <div
                 key={index}
-                className={`group relative overflow-hidden rounded-2xl border border-border bg-background p-8 transition-all duration-300 hover:shadow-2xl hover:border-primary/30 hover:-translate-y-1 ${getGridSpan()}`}
+                className={`group relative overflow-hidden rounded-xl sm:rounded-2xl border border-border bg-background p-5 sm:p-6 md:p-8 transition-all duration-300 hover:shadow-2xl hover:border-primary/30 hover:-translate-y-1 ${getGridSpan()}`}
               >
                 {/* Gradient Background */}
                 <div
@@ -106,18 +106,18 @@ export default function BentoGridFeatures() {
                 {/* Content */}
                 <div className="relative z-10 flex flex-col h-full">
                   {/* Icon */}
-                  <div className="mb-6">
-                    <div className="inline-flex p-3 rounded-xl bg-primary/10 group-hover:bg-primary/20 transition-colors">
-                      <Icon className="h-6 w-6 text-primary" />
+                  <div className="mb-4 sm:mb-6">
+                    <div className="inline-flex p-2.5 sm:p-3 rounded-lg sm:rounded-xl bg-primary/10 group-hover:bg-primary/20 transition-colors">
+                      <Icon className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
                     </div>
                   </div>
 
                   {/* Text */}
                   <div className="flex-1">
-                    <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors">
+                    <h3 className="text-lg sm:text-xl font-bold mb-2 sm:mb-3 group-hover:text-primary transition-colors">
                       {feature.title}
                     </h3>
-                    <p className="text-muted-foreground leading-relaxed">
+                    <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
                       {feature.description}
                     </p>
                   </div>
@@ -156,18 +156,18 @@ export default function BentoGridFeatures() {
         </div>
 
         {/* Bottom CTA */}
-        <div className="mt-16 text-center">
-          <p className="text-muted-foreground mb-4">Want to see it in action?</p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        <div className="mt-10 sm:mt-12 md:mt-16 text-center">
+          <p className="text-sm sm:text-base text-muted-foreground mb-4">Want to see it in action?</p>
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
             <a
               href="#demo"
-              className="inline-flex items-center justify-center rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:bg-primary/90 transition-colors"
+              className="inline-flex items-center justify-center rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:bg-primary/90 transition-colors w-full sm:w-auto touch-target"
             >
               Try Live Demo
             </a>
             <a
               href="/features"
-              className="inline-flex items-center justify-center rounded-lg border border-border px-6 py-3 text-sm font-semibold hover:bg-primary/10 transition-colors"
+              className="inline-flex items-center justify-center rounded-lg border border-border px-6 py-3 text-sm font-semibold hover:bg-primary/10 transition-colors w-full sm:w-auto touch-target"
             >
               View All Features
             </a>

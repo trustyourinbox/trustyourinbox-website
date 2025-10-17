@@ -67,50 +67,50 @@ export function Footer() {
       <h2 id="footer-heading" className="sr-only">
         Footer
       </h2>
-      <div className="container py-12 sm:py-16">
-        <div className="xl:grid xl:grid-cols-3 xl:gap-8">
-          <div className="space-y-8">
-            <Link href="/" className="transition-all duration-300 hover:scale-105">
-              <span className="font-display text-2xl font-bold gradient-text">TrustYourInbox</span>
+      <div className="container py-8 sm:py-12 md:py-16">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-3 lg:gap-12">
+          <div className="space-y-6 sm:space-y-8">
+            <Link href="/" className="inline-block transition-all duration-300 hover:scale-105">
+              <span className="font-display text-xl sm:text-2xl font-bold gradient-text">TrustYourInbox</span>
             </Link>
-            <p className="text-sm leading-6 text-gray-300">
+            <p className="text-sm sm:text-base leading-6 text-gray-300 max-w-xs">
               Making email security simple and accessible for everyone.
             </p>
-            <div className="flex space-x-6">
+            <div className="flex space-x-5 sm:space-x-6">
               {navigation.social.map((item) => (
                 <a
                   key={item.name}
                   href={item.href}
-                  className="text-gray-400 transition-colors hover:text-primary"
+                  className="text-gray-400 transition-colors hover:text-primary touch-target"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   <span className="sr-only">{item.name}</span>
-                  <item.icon className="h-6 w-6" aria-hidden="true" />
+                  <item.icon className="h-5 w-5 sm:h-6 sm:w-6" aria-hidden="true" />
                 </a>
               ))}
             </div>
           </div>
-          <div className="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
-            <div className="md:grid md:grid-cols-2 md:gap-8">
+          <div className="grid grid-cols-2 gap-6 sm:gap-8 lg:col-span-2">
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8">
               <div>
-                <h3 className="text-sm font-semibold leading-6 text-white">Product</h3>
-                <ul role="list" className="mt-6 space-y-4">
+                <h3 className="text-sm font-semibold leading-6 text-white mb-4">Product</h3>
+                <ul role="list" className="space-y-3">
                   {navigation.product.map((item) => (
                     <li key={item.name}>
-                      <Link href={item.href} className="text-sm leading-6 text-gray-300 transition-colors hover:text-primary">
+                      <Link href={item.href} className="text-sm leading-6 text-gray-300 transition-colors hover:text-primary inline-block py-1">
                         {item.name}
                       </Link>
                     </li>
                   ))}
                 </ul>
               </div>
-              <div className="mt-10 md:mt-0">
-                <h3 className="text-sm font-semibold leading-6 text-white">Company</h3>
-                <ul role="list" className="mt-6 space-y-4">
+              <div>
+                <h3 className="text-sm font-semibold leading-6 text-white mb-4">Company</h3>
+                <ul role="list" className="space-y-3">
                   {navigation.company.map((item) => (
                     <li key={item.name}>
-                      <Link href={item.href} className="text-sm leading-6 text-gray-300 transition-colors hover:text-primary">
+                      <Link href={item.href} className="text-sm leading-6 text-gray-300 transition-colors hover:text-primary inline-block py-1">
                         {item.name}
                       </Link>
                     </li>
@@ -118,13 +118,13 @@ export function Footer() {
                 </ul>
               </div>
             </div>
-            <div className="md:grid md:grid-cols-2 md:gap-8">
+            <div className="grid grid-cols-1">
               <div>
-                <h3 className="text-sm font-semibold leading-6 text-white">Resources</h3>
-                <ul role="list" className="mt-6 space-y-4">
+                <h3 className="text-sm font-semibold leading-6 text-white mb-4">Resources</h3>
+                <ul role="list" className="space-y-3">
                   {navigation.resources.map((item) => (
                     <li key={item.name}>
-                      <Link href={item.href} className="text-sm leading-6 text-gray-300 transition-colors hover:text-primary">
+                      <Link href={item.href} className="text-sm leading-6 text-gray-300 transition-colors hover:text-primary inline-block py-1">
                         {item.name}
                       </Link>
                     </li>

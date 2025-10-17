@@ -101,25 +101,25 @@ export default function PricingPage() {
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
-      <section className="py-24 md:py-32 bg-gradient-to-b from-background to-secondary/30">
+      <section className="py-12 sm:py-16 md:py-24 lg:py-32 bg-gradient-to-b from-background to-secondary/30">
         <div className="container">
           <div className="mx-auto max-w-3xl text-center">
-            <div className="inline-flex items-center rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-sm font-medium mb-6">
-              <DollarSign className="h-4 w-4 mr-2 text-primary" />
+            <div className="inline-flex items-center rounded-full border border-primary/20 bg-primary/5 px-3 py-1.5 sm:px-4 text-xs sm:text-sm font-medium mb-4 sm:mb-6">
+              <DollarSign className="h-3 w-3 sm:h-4 sm:w-4 mr-2 text-primary flex-shrink-0" />
               <span className="text-primary">Simple, Transparent Pricing</span>
             </div>
-            <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-6">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4 sm:mb-6">
               Choose Your <span className="text-primary">Plan</span>
             </h1>
-            <p className="text-xl text-muted-foreground leading-relaxed mb-8">
+            <p className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed mb-6 sm:mb-8">
               Start free, upgrade as you grow. No credit card required for trial.
             </p>
 
             {/* Billing Toggle */}
-            <div className="inline-flex items-center gap-3 p-1 rounded-lg bg-secondary">
+            <div className="inline-flex items-center gap-2 sm:gap-3 p-1 rounded-lg bg-secondary">
               <button
                 onClick={() => setBillingPeriod("monthly")}
-                className={`px-6 py-2 rounded-md text-sm font-medium transition-all ${
+                className={`px-4 sm:px-6 py-2 rounded-md text-xs sm:text-sm font-medium transition-all touch-target ${
                   billingPeriod === "monthly"
                     ? "bg-background shadow-sm"
                     : "hover:bg-background/50"
@@ -129,13 +129,13 @@ export default function PricingPage() {
               </button>
               <button
                 onClick={() => setBillingPeriod("annual")}
-                className={`px-6 py-2 rounded-md text-sm font-medium transition-all ${
+                className={`px-4 sm:px-6 py-2 rounded-md text-xs sm:text-sm font-medium transition-all touch-target ${
                   billingPeriod === "annual"
                     ? "bg-background shadow-sm"
                     : "hover:bg-background/50"
                 }`}
               >
-                Annual <span className="text-primary ml-1">(Save 20%)</span>
+                Annual <span className="text-primary ml-1 hidden sm:inline">(Save 20%)</span>
               </button>
             </div>
           </div>
@@ -143,9 +143,9 @@ export default function PricingPage() {
       </section>
 
       {/* Pricing Cards */}
-      <section className="py-12 -mt-12">
+      <section className="py-8 sm:py-12 -mt-8 sm:-mt-12">
         <div className="container">
-          <div className="grid lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-7xl mx-auto">
             {plans.map((plan) => {
               const displayPrice = billingPeriod === "annual" && plan.price > 0
                 ? Math.round(plan.price * 0.8)
@@ -218,17 +218,19 @@ export default function PricingPage() {
       </section>
 
       {/* Feature Comparison Table */}
-      <section className="py-24 bg-secondary/30">
+      <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-secondary/30">
         <div className="container max-w-6xl">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4">Compare Plans</h2>
-            <p className="text-lg text-muted-foreground">
+          <div className="text-center mb-8 sm:mb-10 md:mb-12">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">Compare Plans</h2>
+            <p className="text-base sm:text-lg text-muted-foreground">
               Detailed feature breakdown across all plans
             </p>
           </div>
 
-          <div className="overflow-x-auto">
-            <div className="min-w-[600px]">
+          <div className="scroll-container relative">
+            {/* Scroll indicator for mobile */}
+            <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-secondary/30 to-transparent pointer-events-none md:hidden"></div>
+            <div className="min-w-[600px] pb-2">
               {/* Table Header */}
               <div className="grid grid-cols-4 gap-4 mb-6 p-4 bg-background rounded-lg border border-border">
                 <div className="font-bold">Features</div>

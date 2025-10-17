@@ -76,16 +76,16 @@ export default function ModernNavbar() {
       }`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
+        <div className="flex h-14 sm:h-16 items-center justify-between gap-4">
           {/* Logo */}
-          <Link href="/" className="flex items-center group">
+          <Link href="/" className="flex items-center group flex-shrink-0">
             <div className="relative">
               <svg
-                width="36"
-                height="36"
+                width="28"
+                height="28"
                 viewBox="0 0 100 100"
                 xmlns="http://www.w3.org/2000/svg"
-                className="transition-all group-hover:scale-110"
+                className="transition-all group-hover:scale-110 sm:w-9 sm:h-9"
               >
                 <defs>
                   <linearGradient id="shieldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -175,7 +175,8 @@ export default function ModernNavbar() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 rounded-lg hover:bg-primary/10 transition-colors"
+            className="md:hidden p-2 rounded-lg hover:bg-primary/10 transition-colors touch-target flex-shrink-0"
+            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
           >
             {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
@@ -184,8 +185,8 @@ export default function ModernNavbar() {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-background border-t border-border">
-          <div className="container mx-auto px-4 py-6 space-y-4">
+        <div className="md:hidden bg-background border-t border-border max-h-[calc(100vh-3.5rem)] overflow-y-auto">
+          <div className="container mx-auto px-4 py-4 space-y-3">
             <MobileSection title="Product" items={productItems} />
             <MobileCategorizedSection title="Tools" sections={toolsDropdownSections} />
             <Link href="/pricing" className="block py-2 text-sm font-medium">
@@ -354,26 +355,26 @@ function MobileSection({ title, items }: { title: string; items: any[] }) {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <div>
+    <div className="border-b border-border last:border-0">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center justify-between w-full py-2 text-sm font-medium"
+        className="flex items-center justify-between w-full py-3 text-sm font-medium touch-target"
       >
         {title}
         <ChevronDown className={`h-4 w-4 transition-transform ${isOpen ? "rotate-180" : ""}`} />
       </button>
       {isOpen && (
-        <div className="pl-4 space-y-2 mt-2">
+        <div className="pl-2 space-y-1 pb-3">
           {items.map((item) => {
             const Icon = item.icon
             return (
               <Link
                 key={item.name}
                 href={item.href}
-                className="flex items-center gap-2 py-2 text-sm text-muted-foreground"
+                className="flex items-center gap-3 py-2.5 px-2 text-sm text-muted-foreground rounded-lg hover:bg-primary/5 active:bg-primary/10 transition-colors touch-target"
               >
-                <Icon className="h-4 w-4" />
-                {item.name}
+                <Icon className="h-4 w-4 flex-shrink-0" />
+                <span>{item.name}</span>
               </Link>
             )
           })}
@@ -394,19 +395,19 @@ function MobileCategorizedSection({
   const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <div>
+    <div className="border-b border-border last:border-0">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center justify-between w-full py-2 text-sm font-medium"
+        className="flex items-center justify-between w-full py-3 text-sm font-medium touch-target"
       >
         {title}
         <ChevronDown className={`h-4 w-4 transition-transform ${isOpen ? "rotate-180" : ""}`} />
       </button>
       {isOpen && (
-        <div className="pl-4 space-y-4 mt-2">
+        <div className="pl-2 space-y-4 pb-3">
           {sections.map((section) => (
             <div key={section.category}>
-              <div className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2">
+              <div className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2 px-2">
                 {section.category}
               </div>
               <div className="space-y-1">
@@ -416,18 +417,18 @@ function MobileCategorizedSection({
                     <Link
                       key={tool.name}
                       href={tool.href}
-                      className="flex items-center gap-2 py-1.5 text-sm text-muted-foreground"
+                      className="flex items-center gap-3 py-2.5 px-2 text-sm text-muted-foreground rounded-lg hover:bg-primary/5 active:bg-primary/10 transition-colors touch-target"
                     >
-                      <Icon className="h-4 w-4" />
-                      <span>{tool.name}</span>
-                      {tool.popular && <span className="text-[10px]">⭐</span>}
+                      <Icon className="h-4 w-4 flex-shrink-0" />
+                      <span className="flex-1">{tool.name}</span>
+                      {tool.popular && <span className="text-xs">⭐</span>}
                     </Link>
                   )
                 })}
               </div>
             </div>
           ))}
-          <Link href="/tools" className="flex items-center gap-2 py-2 text-sm text-primary font-medium">
+          <Link href="/tools" className="flex items-center gap-3 py-2.5 px-2 text-sm text-primary font-medium rounded-lg hover:bg-primary/5 active:bg-primary/10 transition-colors touch-target mt-2">
             <Wrench className="h-4 w-4" />
             View All Tools
           </Link>

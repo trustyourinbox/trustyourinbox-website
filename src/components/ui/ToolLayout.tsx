@@ -10,11 +10,11 @@ interface ToolLayoutProps {
 
 export function ToolLayout({ title, description, children, sidebarContent }: ToolLayoutProps) {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-background">
       {/* Hero Section */}
-      <section className="relative overflow-hidden py-16 sm:py-24">
-        <div className="absolute inset-0 bg-gradient-to-b from-secondary to-white pointer-events-none -z-10">
-          <svg className="absolute bottom-0 left-0 right-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+      <section className="relative overflow-hidden py-8 sm:py-12 md:py-16 lg:py-24">
+        <div className="absolute inset-0 bg-gradient-to-b from-secondary to-white dark:from-secondary/20 dark:to-background pointer-events-none -z-10">
+          <svg className="absolute bottom-0 left-0 right-0 hidden sm:block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
             <path
               fill="#0066FF"
               fillOpacity="0.1"
@@ -24,7 +24,7 @@ export function ToolLayout({ title, description, children, sidebarContent }: Too
         </div>
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl md:text-6xl">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight text-gray-900 dark:text-foreground">
               {title.split(' ').map((word, index) => (
                 <span key={index}>
                   {word.toUpperCase() === 'DMARC' || 
@@ -48,9 +48,9 @@ export function ToolLayout({ title, description, children, sidebarContent }: Too
       </section>
 
       {/* Main Content */}
-      <section className="py-12">
+      <section className="py-8 sm:py-12">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
             {/* Main Content Area */}
             <div className="lg:col-span-2">
               {children}
@@ -59,22 +59,22 @@ export function ToolLayout({ title, description, children, sidebarContent }: Too
             {/* Sidebar */}
             {sidebarContent && (
               <div className="lg:col-span-1">
-                <div className="sticky top-24 bg-white rounded-lg border border-gray-200 p-6 shadow-sm">
-                  <div className="flex items-center gap-2 mb-6 pb-4 border-b border-gray-200">
-                    <FaInfoCircle className="w-5 h-5 text-primary" />
-                    <h2 className="text-lg font-semibold text-gray-900">Help & Resources</h2>
+                <div className="lg:sticky lg:top-24 bg-white dark:bg-card rounded-lg border border-gray-200 dark:border-border p-4 sm:p-6 shadow-sm">
+                  <div className="flex items-center gap-2 mb-4 sm:mb-6 pb-3 sm:pb-4 border-b border-gray-200 dark:border-border">
+                    <FaInfoCircle className="w-4 h-4 sm:w-5 sm:h-5 text-primary flex-shrink-0" />
+                    <h2 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-foreground">Help & Resources</h2>
                   </div>
-                  <div className="prose prose-sm max-w-none">
+                  <div className="prose prose-sm max-w-none dark:prose-invert text-sm sm:text-base">
                     {sidebarContent}
                   </div>
-                  <div className="mt-6 pt-4 border-t border-gray-200">
-                    <p className="text-sm text-gray-500">
+                  <div className="mt-4 sm:mt-6 pt-3 sm:pt-4 border-t border-gray-200 dark:border-border">
+                    <p className="text-xs sm:text-sm text-gray-500 dark:text-muted-foreground">
                       Need more help? Check out our{' '}
-                      <a href="/docs" className="text-primary hover:text-primary font-medium">
+                      <a href="/docs" className="text-primary hover:text-primary/80 font-medium underline-offset-4 hover:underline">
                         documentation
                       </a>
                       {' '}or{' '}
-                      <a href="/contact" className="text-primary hover:text-primary font-medium">
+                      <a href="/contact" className="text-primary hover:text-primary/80 font-medium underline-offset-4 hover:underline">
                         contact support
                       </a>
                       .
