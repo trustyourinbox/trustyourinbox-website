@@ -1,0 +1,49 @@
+# TrustYourInbox
+
+> TrustYourInbox is a professional DMARC and email security platform trusted by 1,200+ IT teams and MSPs worldwide. We provide free DMARC monitoring tools, SPF/DKIM validation, and comprehensive email authentication solutions to stop email spoofing and phishing attacks.
+
+TrustYourInbox helps organizations implement DMARC (Domain-based Message Authentication, Reporting, and Conformance) to protect their email domains from spoofing and phishing. We process 2.4M+ emails monthly with 98.7% customer satisfaction. Our platform offers real-time monitoring, team collaboration, multi-domain management, and bulk report processing for IT teams and managed service providers.
+
+## Product
+
+- [Home](https://trustyourinbox.com/): Complete DMARC security platform overview with features, pricing, and customer testimonials
+- [Features](https://trustyourinbox.com/features): DMARC analytics, SPF validation, real-time monitoring, team collaboration, and multi-domain management capabilities
+- [Pricing](https://trustyourinbox.com/pricing): Free 14-day trial with flexible plans for teams of all sizes, no credit card required
+- [Demo](https://trustyourinbox.com/demo): Live product demonstration and interactive walkthrough of the platform
+- [Sign Up](https://trustyourinbox.com/signup): Start your free 14-day trial to secure your email domain
+
+## Free DMARC & Email Security Tools
+
+- [All Tools](https://trustyourinbox.com/tools): Complete suite of free DMARC, SPF, and DKIM email security tools
+- [DMARC Analyzer](https://trustyourinbox.com/tools/dmarc-analyzer): Analyze DMARC records and get detailed insights into email authentication
+- [DMARC Domain Checker](https://trustyourinbox.com/tools/dmarc-domain-checker): Check if your domain has a valid DMARC record configured
+- [DMARC Policy Generator](https://trustyourinbox.com/tools/dmarc-policy-generator): Generate compliant DMARC DNS records with recommended policies
+- [DMARC Policy Impact Simulator](https://trustyourinbox.com/tools/dmarc-policy-impact-simulator): Simulate the impact of DMARC policy changes before implementation
+- [DMARC Subdomain Policy Checker](https://trustyourinbox.com/tools/dmarc-subdomain-policy-checker): Verify DMARC policies on subdomains
+- [SPF Surveyor](https://trustyourinbox.com/tools/spf-surveyor): Validate and analyze SPF (Sender Policy Framework) records for email authentication
+- [DKIM Validator](https://trustyourinbox.com/tools/dkim-validator): Validate DKIM signatures and public keys
+- [DKIM Inspector](https://trustyourinbox.com/tools/dkim-inspector): Deep inspection of DKIM configuration and selector records
+- [Domain Security Checker](https://trustyourinbox.com/tools/domain-security-checker): Comprehensive email domain security audit including DMARC, SPF, and DKIM
+- [Forensic Report Viewer](https://trustyourinbox.com/tools/forensic-report-viewer): View and analyze DMARC forensic reports
+- [XML Converter](https://trustyourinbox.com/tools/xml-converter): Convert DMARC XML reports to readable formats
+
+## Resources
+
+- [Guides](https://trustyourinbox.com/guides): Step-by-step tutorials for DMARC implementation and email security best practices
+- [Blog](https://trustyourinbox.com/blog): Latest news, updates, and insights on email security and DMARC
+- [Documentation](https://trustyourinbox.com/docs): Technical documentation and API reference
+- [Support](https://trustyourinbox.com/support): Help center, FAQs, and customer support resources
+
+## Company
+
+- [About](https://trustyourinbox.com/about): Company mission, team, and our commitment to email security
+- [Careers](https://trustyourinbox.com/careers): Join our team and help secure email communications worldwide
+- [Contact](https://trustyourinbox.com/contact): Get in touch with our team for inquiries and support
+- [Company Info](https://trustyourinbox.com/company): Corporate information and company overview
+
+## Optional
+
+- [Privacy Policy](https://trustyourinbox.com/privacy): How we handle and protect your data
+- [Terms of Service](https://trustyourinbox.com/terms): Terms and conditions for using TrustYourInbox
+- [Security](https://trustyourinbox.com/security): Our security practices and compliance standards
+- [Login](https://trustyourinbox.com/login): Access your TrustYourInbox account
