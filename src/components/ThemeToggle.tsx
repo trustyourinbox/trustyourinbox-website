@@ -36,7 +36,7 @@ export default function ThemeToggle() {
           const nextIndex = (currentIndex + 1) % themes.length
           setTheme(themes[nextIndex].name)
         }}
-        className="flex items-center justify-center h-9 w-9 rounded-lg bg-muted/50 hover:bg-muted transition-colors"
+        className="flex items-center justify-center h-9 w-9 rounded-lg bg-muted/50 hover:bg-primary/10 transition-colors"
         aria-label={`Switch theme (current: ${currentTheme.label})`}
       >
         <Icon className="h-4 w-4 text-foreground" />

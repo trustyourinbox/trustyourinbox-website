@@ -9,56 +9,56 @@ const features = [
     description: "Interactive dashboards with pie charts, area charts, and bar graphs showing authentication methods, compliance trends, and domain performance.",
     icon: BarChart3,
     size: "large", // 2 columns
-    gradient: "from-blue-500/10 to-indigo-500/10",
+    gradient: "from-blue-500/20 to-indigo-500/20",
   },
   {
     title: "Bulk Report Processing",
     description: "Upload and process multiple DMARC reports (XML, GZIP, ZIP) with real-time progress tracking.",
     icon: FileText,
     size: "small",
-    gradient: "from-purple-500/10 to-pink-500/10",
+    gradient: "from-purple-500/20 to-pink-500/20",
   },
   {
     title: "DMARC & SPF Tools",
     description: "Built-in analyzers to validate records, check DNS lookups, and get actionable recommendations.",
     icon: Search,
     size: "small",
-    gradient: "from-green-500/10 to-emerald-500/10",
+    gradient: "from-green-500/20 to-emerald-500/20",
   },
   {
     title: "Multi-Domain Dashboard",
     description: "Register, verify, and manage unlimited domains with advanced filtering and status tracking.",
     icon: Globe,
     size: "medium",
-    gradient: "from-orange-500/10 to-red-500/10",
+    gradient: "from-orange-500/20 to-red-500/20",
   },
   {
     title: "Team Collaboration",
     description: "Role-based access control with Owner, Admin, Project Manager, Member, and Viewer roles. MFA support included.",
     icon: Users,
     size: "medium",
-    gradient: "from-cyan-500/10 to-blue-500/10",
+    gradient: "from-cyan-500/20 to-blue-500/20",
   },
   {
     title: "Historical Trends",
     description: "Time-series analysis with 7, 30, 90, and 365-day views. Compare multiple domains over time.",
     icon: TrendingUp,
     size: "small",
-    gradient: "from-yellow-500/10 to-orange-500/10",
+    gradient: "from-yellow-500/20 to-orange-500/20",
   },
   {
     title: "Real-time Monitoring",
     description: "Live authentication status updates and instant alerts for policy changes or security issues.",
     icon: Zap,
     size: "small",
-    gradient: "from-pink-500/10 to-purple-500/10",
+    gradient: "from-pink-500/20 to-purple-500/20",
   },
   {
     title: "Sender Intelligence",
     description: "Analyze email senders with detailed insights. Identify legitimate sources and detect unauthorized senders across domains.",
     icon: Shield,
     size: "large",
-    gradient: "from-indigo-500/10 to-purple-500/10",
+    gradient: "from-indigo-500/20 to-purple-500/20",
   },
 ]
 
@@ -167,7 +167,7 @@ export default function BentoGridFeatures() {
             </a>
             <a
               href="/features"
-              className="inline-flex items-center justify-center rounded-lg border border-border px-6 py-3 text-sm font-semibold hover:bg-muted transition-colors"
+              className="inline-flex items-center justify-center rounded-lg border border-border px-6 py-3 text-sm font-semibold hover:bg-primary/10 transition-colors"
             >
               View All Features
             </a>

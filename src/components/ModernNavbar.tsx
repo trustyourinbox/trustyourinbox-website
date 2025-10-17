@@ -175,7 +175,7 @@ export default function ModernNavbar() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 rounded-lg hover:bg-muted transition-colors"
+            className="md:hidden p-2 rounded-lg hover:bg-primary/10 transition-colors"
           >
             {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
@@ -246,7 +246,7 @@ function DropdownMenu({
               <Link
                 key={item.name}
                 href={item.href}
-                className="flex items-start gap-3 p-3 rounded-lg hover:bg-muted transition-colors group"
+                className="flex items-start gap-3 p-3 rounded-lg hover:bg-primary/10 transition-colors group"
               >
                 <div className="mt-0.5 p-2 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
                   <Icon className="h-4 w-4 text-primary" />
@@ -311,7 +311,7 @@ function CategorizedDropdownMenu({
                       <Link
                         key={tool.name}
                         href={tool.href}
-                        className="flex items-start gap-2.5 p-2 rounded-lg hover:bg-muted transition-colors group"
+                        className="flex items-start gap-2.5 p-2 rounded-lg hover:bg-primary/10 transition-colors group"
                       >
                         <div className="mt-0.5 p-1.5 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors flex-shrink-0">
                           <Icon className="h-3.5 w-3.5 text-primary" />
@@ -337,7 +337,7 @@ function CategorizedDropdownMenu({
           <div className="pt-4 mt-4 border-t border-border">
             <Link
               href="/tools"
-              className="flex items-center justify-between p-2.5 rounded-lg hover:bg-muted transition-colors group"
+              className="flex items-center justify-between p-2.5 rounded-lg hover:bg-primary/10 transition-colors group"
             >
               <span className="text-sm font-medium text-primary">View All Tools</span>
               <ChevronDown className="h-4 w-4 text-primary rotate-[-90deg] group-hover:translate-x-0.5 transition-transform" />

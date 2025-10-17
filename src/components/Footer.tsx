@@ -92,7 +92,7 @@ export default function Footer() {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-2 rounded-lg bg-background hover:bg-muted transition-colors"
+                    className="p-2 rounded-lg bg-background hover:bg-primary/10 transition-colors"
                     aria-label={social.name}
                   >
                     <Icon className="h-4 w-4 text-muted-foreground hover:text-foreground transition-colors" />

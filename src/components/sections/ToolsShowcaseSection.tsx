@@ -3,7 +3,7 @@ import Image from "next/image"
 
 export default function ToolsShowcaseSection() {
   return (
-    <section className="py-20 bg-gradient-to-b from-white to-secondary">
+    <section className="py-20 bg-gradient-to-b from-background to-secondary/50 dark:from-background dark:to-background">
       <div className="container">
         <div className="mx-auto max-w-[58rem] text-center mb-16">
           <div className="inline-flex items-center rounded-full border px-4 py-1.5 text-sm font-medium bg-primary/10 text-primary mb-4">

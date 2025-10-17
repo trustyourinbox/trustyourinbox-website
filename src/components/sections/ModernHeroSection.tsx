@@ -179,29 +179,6 @@ export default function ModernHeroSection() {
           </div>
         </div>
 
-        {/* Customer Logos */}
-        <div className="mt-24 pt-12 border-t border-border">
-          <div className="text-center mb-8">
-            <p className="text-sm font-medium text-muted-foreground uppercase tracking-wider">Trusted by Industry Leaders</p>
-          </div>
-          <div className="flex flex-wrap items-center justify-center gap-16 opacity-40 hover:opacity-60 transition-opacity">
-            {customerLogos.map((logo, i) => (
-              <div
-                key={i}
-                className="relative transition-all duration-300 hover:scale-110 grayscale hover:grayscale-0"
-                style={{ width: logo.width, height: logo.height }}
-              >
-                <Image
-                  src={logo.src}
-                  alt={`${logo.name} logo`}
-                  width={logo.width}
-                  height={logo.height}
-                  className="object-contain"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
       </div>
     </section>
   )
