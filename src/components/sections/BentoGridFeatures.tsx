@@ -107,7 +107,7 @@ export default function BentoGridFeatures() {
         </div>
 
         {/* Bento Grid */}
-        <div className="grid auto-rows-fr grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
           {features.map((feature, index) => {
             const Icon = feature.icon;
             const getGridSpan = () => {
@@ -128,7 +128,7 @@ export default function BentoGridFeatures() {
                 ></div>
 
                 {/* Content */}
-                <div className="relative z-10 flex h-full flex-col">
+                <div className="relative z-10 flex flex-col">
                   {/* Icon */}
                   <div className="mb-4 sm:mb-6">
                     <div className="inline-flex rounded-lg bg-primary/10 p-2.5 transition-colors group-hover:bg-primary/20 sm:rounded-xl sm:p-3">
@@ -137,7 +137,7 @@ export default function BentoGridFeatures() {
                   </div>
 
                   {/* Text */}
-                  <div className="flex-1">
+                  <div>
                     <h3 className="mb-2 text-lg font-bold transition-colors group-hover:text-primary sm:mb-3 sm:text-xl">
                       {feature.title}
                     </h3>
@@ -148,7 +148,7 @@ export default function BentoGridFeatures() {
 
                   {/* Screenshot */}
                   {feature.image && (
-                    <div className="mt-6 overflow-hidden rounded-lg border border-border bg-muted/30">
+                    <div className="mt-4 overflow-hidden rounded-lg border border-border bg-muted/30">
                       <Image
                         src={feature.image}
                         alt={`${feature.title} screenshot`}
@@ -161,7 +161,7 @@ export default function BentoGridFeatures() {
                   )}
 
                   {/* Arrow indicator on hover */}
-                  <div className="mt-4 flex items-center text-sm font-medium text-primary opacity-0 transition-opacity group-hover:opacity-100">
+                  <div className="absolute bottom-5 left-5 flex items-center text-sm font-medium text-primary opacity-0 transition-opacity group-hover:opacity-100 sm:bottom-6 sm:left-6 md:bottom-8 md:left-8">
                     <span>Learn more</span>
                     <svg
                       className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1"
