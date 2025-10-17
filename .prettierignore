@@ -1,0 +1,30 @@
+# Build outputs
+.next/
+out/
+build/
+dist/
+
+# Dependencies
+node_modules/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment files
+.env
+.env.local
+.env.production.local
+.env.development.local
+
+# Misc
+.DS_Store
+*.pem
+
+# Package manager files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Design files
+design/
