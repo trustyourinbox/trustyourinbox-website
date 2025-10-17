@@ -66,19 +66,15 @@ export default function ToolsShowcaseSection() {
               </ul>
             </div>
             <div className="order-1 md:order-2">
-              {/* TODO: Replace with actual dmarc-analyzer-tool.png screenshot */}
               <div className="relative overflow-hidden rounded-xl border-2 border-primary/20 bg-background shadow-2xl">
-                <div className="flex aspect-[4/3] items-center justify-center bg-gradient-to-br from-muted/30 to-background p-6">
-                  <div className="text-center">
-                    <Search className="mx-auto mb-3 h-16 w-16 text-primary/30" />
-                    <p className="text-sm text-muted-foreground">
-                      DMARC Analyzer Tool Screenshot
-                    </p>
-                    <p className="mt-1 text-xs text-muted-foreground/60">
-                      Coming from actual app
-                    </p>
-                  </div>
-                </div>
+                <Image
+                  src="/images/bento-grid/dmarc-spf-tools.png"
+                  alt="DMARC Analyzer Tool Screenshot"
+                  width={1200}
+                  height={900}
+                  className="h-auto w-full"
+                  quality={90}
+                />
               </div>
             </div>
           </div>
@@ -86,19 +82,15 @@ export default function ToolsShowcaseSection() {
           {/* SPF Analyzer Tool */}
           <div className="grid items-center gap-12 md:grid-cols-2">
             <div>
-              {/* TODO: Replace with actual spf-analyzer-tool.png screenshot */}
               <div className="relative overflow-hidden rounded-xl border-2 border-primary/20 bg-background shadow-2xl">
-                <div className="flex aspect-[4/3] items-center justify-center bg-gradient-to-br from-muted/30 to-background p-6">
-                  <div className="text-center">
-                    <Search className="mx-auto mb-3 h-16 w-16 text-primary/30" />
-                    <p className="text-sm text-muted-foreground">
-                      SPF Analyzer Tool Screenshot
-                    </p>
-                    <p className="mt-1 text-xs text-muted-foreground/60">
-                      Coming from actual app
-                    </p>
-                  </div>
-                </div>
+                <Image
+                  src="/images/tools/spf-analyzer.png"
+                  alt="SPF Analyzer Tool Screenshot"
+                  width={1200}
+                  height={900}
+                  className="h-auto w-full"
+                  quality={90}
+                />
               </div>
             </div>
             <div>
@@ -189,17 +181,14 @@ export default function ToolsShowcaseSection() {
             </div>
             <div className="order-1 md:order-2">
               <div className="relative overflow-hidden rounded-xl border-2 border-primary/20 bg-background shadow-2xl">
-                <div className="flex aspect-[4/3] items-center justify-center bg-gradient-to-br from-muted/30 to-background p-6">
-                  <div className="text-center">
-                    <FileCode className="mx-auto mb-3 h-16 w-16 text-primary/30" />
-                    <p className="text-sm text-muted-foreground">
-                      DMARC Generator Tool Screenshot
-                    </p>
-                    <p className="mt-1 text-xs text-muted-foreground/60">
-                      Coming from actual app
-                    </p>
-                  </div>
-                </div>
+                <Image
+                  src="/images/tools/dmarc-generator.png"
+                  alt="DMARC Generator Tool Screenshot"
+                  width={1200}
+                  height={900}
+                  className="h-auto w-full"
+                  quality={90}
+                />
               </div>
             </div>
           </div>

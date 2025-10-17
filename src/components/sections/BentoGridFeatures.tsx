@@ -20,6 +20,7 @@ const features = [
     icon: BarChart3,
     size: "large", // 2 columns
     gradient: "from-blue-500/20 to-indigo-500/20",
+    image: "/images/bento-grid/comprehensive-analytics.png",
   },
   {
     title: "Bulk Report Processing",
@@ -28,6 +29,7 @@ const features = [
     icon: FileText,
     size: "small",
     gradient: "from-purple-500/20 to-pink-500/20",
+    image: "/images/bento-grid/bulk-report-processing.png",
   },
   {
     title: "DMARC & SPF Tools",
@@ -36,6 +38,7 @@ const features = [
     icon: Search,
     size: "small",
     gradient: "from-green-500/20 to-emerald-500/20",
+    image: "/images/bento-grid/dmarc-spf-tools.png",
   },
   {
     title: "Multi-Domain Dashboard",
@@ -44,6 +47,7 @@ const features = [
     icon: Globe,
     size: "medium",
     gradient: "from-orange-500/20 to-red-500/20",
+    image: "/images/bento-grid/multi-domain-dashboard.png",
   },
   {
     title: "Team Collaboration",
@@ -52,6 +56,7 @@ const features = [
     icon: Users,
     size: "medium",
     gradient: "from-cyan-500/20 to-blue-500/20",
+    image: "/images/bento-grid/team-collaboration.png",
   },
   {
     title: "Historical Trends",
@@ -60,6 +65,7 @@ const features = [
     icon: TrendingUp,
     size: "small",
     gradient: "from-yellow-500/20 to-orange-500/20",
+    image: "/images/bento-grid/historical-trends.png",
   },
   {
     title: "Real-time Monitoring",
@@ -68,6 +74,7 @@ const features = [
     icon: Zap,
     size: "small",
     gradient: "from-pink-500/20 to-purple-500/20",
+    image: "/images/bento-grid/real-time-monitoring.png",
   },
   {
     title: "Sender Intelligence",
@@ -76,6 +83,7 @@ const features = [
     icon: Shield,
     size: "large",
     gradient: "from-indigo-500/20 to-purple-500/20",
+    image: "/images/bento-grid/sender-intelligence.png",
   },
 ];
 
@@ -138,23 +146,17 @@ export default function BentoGridFeatures() {
                     </p>
                   </div>
 
-                  {/* Screenshot Placeholder (for larger cards) */}
-                  {feature.size === "large" && (
-                    <div className="mt-6 overflow-hidden rounded-lg border border-border bg-muted/30 p-4">
-                      <div className="mb-2 flex h-20 items-end gap-1">
-                        {[65, 70, 75, 82, 88, 91, 94, 92].map((height, i) => (
-                          <div
-                            key={i}
-                            className="flex-1 rounded-t-sm bg-gradient-to-t from-primary to-primary/40"
-                            style={{ height: `${height}%` }}
-                          ></div>
-                        ))}
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <div className="h-2 w-16 rounded bg-muted"></div>
-                        <div className="h-2 w-12 rounded bg-muted"></div>
-                        <div className="h-2 w-20 rounded bg-muted"></div>
-                      </div>
+                  {/* Screenshot */}
+                  {feature.image && (
+                    <div className="mt-6 overflow-hidden rounded-lg border border-border bg-muted/30">
+                      <Image
+                        src={feature.image}
+                        alt={`${feature.title} screenshot`}
+                        width={600}
+                        height={400}
+                        className="h-auto w-full object-cover"
+                        quality={90}
+                      />
                     </div>
                   )}
 
