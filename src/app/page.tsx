@@ -15,6 +15,7 @@ import {
 import { useState } from "react";
 import ModernHeroSection from "@/components/sections/ModernHeroSection";
 import BentoGridFeatures from "@/components/sections/BentoGridFeatures";
+import AppShowcaseSection from "@/components/sections/AppShowcaseSection";
 import ToolsShowcaseSection from "@/components/sections/ToolsShowcaseSection";
 import DmarcSolutionSection from "@/components/sections/DmarcSolutionSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
@@ -42,6 +43,7 @@ export default function Home() {
     <div className="min-h-screen bg-background font-sans">
       <ModernHeroSection />
       <BentoGridFeatures />
+      <AppShowcaseSection />
       <ToolsShowcaseSection />
       <DmarcSolutionSection />
       <HowItWorksSection />

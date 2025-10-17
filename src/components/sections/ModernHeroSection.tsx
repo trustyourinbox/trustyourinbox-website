@@ -139,78 +139,18 @@ export default function ModernHeroSection() {
             <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-primary/20 blur-3xl sm:-right-20 sm:-top-20 sm:h-72 sm:w-72"></div>
             <div className="bg-accent-hover/20 absolute -bottom-10 -left-10 h-40 w-40 rounded-full blur-3xl sm:-bottom-20 sm:-left-20 sm:h-72 sm:w-72"></div>
 
-            {/* Dashboard mockup - will be replaced with real screenshot */}
+            {/* Real Dashboard Screenshot */}
             <div className="relative">
               <div className="overflow-hidden rounded-xl border-2 border-primary/20 bg-gradient-to-br from-background/50 to-background shadow-2xl backdrop-blur-xl sm:rounded-2xl">
-                <div className="aspect-[16/10] bg-gradient-to-br from-muted/30 via-background to-background p-4 sm:p-6 md:p-8">
-                  {/* Window chrome */}
-                  <div className="mb-4 flex items-center justify-between sm:mb-6">
-                    <div className="flex gap-1.5 sm:gap-2">
-                      <div className="h-2 w-2 rounded-full bg-red-500/80 sm:h-3 sm:w-3"></div>
-                      <div className="h-2 w-2 rounded-full bg-yellow-500/80 sm:h-3 sm:w-3"></div>
-                      <div className="h-2 w-2 rounded-full bg-green-500/80 sm:h-3 sm:w-3"></div>
-                    </div>
-                    <div className="hidden text-xs font-semibold text-muted-foreground sm:block sm:text-sm">
-                      Analytics Dashboard
-                    </div>
-                  </div>
-
-                  {/* Dashboard content */}
-                  <div className="space-y-3 sm:space-y-4">
-                    {/* Stats row */}
-                    <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 sm:gap-3">
-                      <div className="col-span-1 rounded-xl border border-primary/10 bg-background/90 p-4 shadow-sm backdrop-blur-sm">
-                        <div className="text-3xl font-bold text-primary">
-                          94.2%
-                        </div>
-                        <div className="mt-1 text-xs text-muted-foreground">
-                          Compliance
-                        </div>
-                      </div>
-                      <div className="col-span-1 rounded-xl border border-border bg-background/90 p-4 shadow-sm backdrop-blur-sm">
-                        <div className="text-3xl font-bold text-foreground">
-                          2.4M
-                        </div>
-                        <div className="mt-1 text-xs text-muted-foreground">
-                          Emails
-                        </div>
-                      </div>
-                      <div className="col-span-2 rounded-xl border border-border bg-background/90 p-4 shadow-sm backdrop-blur-sm">
-                        <div className="mb-2 text-xs text-muted-foreground">
-                          Authentication Methods
-                        </div>
-                        <div className="flex h-4 gap-1.5">
-                          <div className="flex-1 rounded-sm bg-gradient-to-t from-primary to-primary/60"></div>
-                          <div className="flex-1 rounded-sm bg-gradient-to-t from-primary/70 to-primary/40"></div>
-                          <div className="flex-1 rounded-sm bg-gradient-to-t from-primary/40 to-primary/20"></div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Chart area */}
-                    <div className="rounded-xl border border-border bg-background/90 p-3 shadow-sm backdrop-blur-sm sm:p-4 md:p-6">
-                      <div className="mb-3 flex items-center justify-between sm:mb-4">
-                        <div className="text-xs font-medium text-foreground sm:text-sm">
-                          Compliance Trends
-                        </div>
-                        <div className="text-[10px] text-muted-foreground sm:text-xs">
-                          Last 30 days
-                        </div>
-                      </div>
-                      <div className="flex h-16 items-end gap-1 sm:h-20 sm:gap-1.5 md:h-24">
-                        {[65, 70, 75, 82, 88, 91, 94, 92, 95, 97, 94, 96].map(
-                          (height, i) => (
-                            <div
-                              key={i}
-                              className="flex-1 rounded-t-sm bg-gradient-to-t from-primary via-primary/80 to-primary/60 transition-all hover:from-primary/80"
-                              style={{ height: `${height}%` }}
-                            ></div>
-                          )
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <Image
+                  src="/images/app-screenshots/dashboard-overview.png"
+                  alt="TrustYourInbox Dashboard - Executive analytics showing DMARC score, authentication rates, email volume trends, and top sending sources"
+                  width={1200}
+                  height={750}
+                  className="h-auto w-full"
+                  priority
+                  quality={90}
+                />
               </div>
 
               {/* Floating badge */}
