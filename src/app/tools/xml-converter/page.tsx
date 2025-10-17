@@ -1,7 +1,13 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { FaFileAlt, FaUpload, FaTimesCircle, FaChevronDown, FaChevronRight } from "react-icons/fa";
+import {
+  FaFileAlt,
+  FaUpload,
+  FaTimesCircle,
+  FaChevronDown,
+  FaChevronRight,
+} from "react-icons/fa";
 import { Pie, Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -17,25 +23,44 @@ import { ToolLayout, Card, Button, Input, Alert } from "@/components/ui";
 import { Shield, Mail, Key } from "lucide-react";
 import Link from "next/link";
 
-ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement, Title);
+ChartJS.register(
+  ArcElement,
+  Tooltip,
+  Legend,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title
+);
 
 const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
-const ACCEPTED_TYPES = ["application/xml", "text/xml", "application/gzip", "application/x-gzip", "application/zip", ".xml", ".gz", ".zip"];
+const ACCEPTED_TYPES = [
+  "application/xml",
+  "text/xml",
+  "application/gzip",
+  "application/x-gzip",
+  "application/zip",
+  ".xml",
+  ".gz",
+  ".zip",
+];
 
 function getFileIcon(type: string) {
-  if (type.includes("zip")) return <FaFileAlt className="text-primary w-5 h-5" />;
-  if (type.includes("gzip")) return <FaFileAlt className="text-green-600 w-5 h-5" />;
-  return <FaFileAlt className="text-gray-600 w-5 h-5" />;
+  if (type.includes("zip"))
+    return <FaFileAlt className="h-5 w-5 text-primary" />;
+  if (type.includes("gzip"))
+    return <FaFileAlt className="h-5 w-5 text-green-600" />;
+  return <FaFileAlt className="h-5 w-5 text-gray-600" />;
 }
 
 function getDispositionChartData(records: any[]) {
   const counts: Record<string, number> = {};
-  records.forEach(r => {
+  records.forEach((r) => {
     const disp = r.disposition || "none";
     counts[disp] = (counts[disp] || 0) + Number(r.count || 1);
   });
   const labels = Object.keys(counts);
-  const data = labels.map(l => counts[l]);
+  const data = labels.map((l) => counts[l]);
   return {
     labels,
     datasets: [
@@ -48,7 +73,7 @@ function getDispositionChartData(records: any[]) {
           "#ef4444", // fail
           "#3b82f6", // none/other
           "#a855f7",
-          "#fbbf24"
+          "#fbbf24",
         ],
         borderColor: "#e5e7eb",
         borderWidth: 2,
@@ -59,11 +84,13 @@ function getDispositionChartData(records: any[]) {
 
 function getSourceIpChartData(records: any[]) {
   const counts: Record<string, number> = {};
-  records.forEach(r => {
+  records.forEach((r) => {
     const ip = r.source_ip || "unknown";
     counts[ip] = (counts[ip] || 0) + Number(r.count || 1);
   });
-  const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 10);
+  const sorted = Object.entries(counts)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 10);
   const labels = sorted.map(([ip]) => ip);
   const data = sorted.map(([, count]) => count);
   return {
@@ -82,8 +109,11 @@ function getSourceIpChartData(records: any[]) {
 }
 
 function getDkimSpfChartData(records: any[]) {
-  let dkimPass = 0, dkimFail = 0, spfPass = 0, spfFail = 0;
-  records.forEach(r => {
+  let dkimPass = 0,
+    dkimFail = 0,
+    spfPass = 0,
+    spfFail = 0;
+  records.forEach((r) => {
     if (r.dkim === "pass") dkimPass += Number(r.count || 1);
     else dkimFail += Number(r.count || 1);
     if (r.spf === "pass") spfPass += Number(r.count || 1);
@@ -203,13 +233,15 @@ function RelatedTools() {
   ];
 
   return (
-    <div className="mt-12 mb-8">
+    <div className="mb-8 mt-12">
       <div className="mb-6">
         <h2 className="text-2xl font-bold tracking-tight">Related Tools</h2>
-        <p className="text-muted-foreground mt-1">Explore more email authentication tools to secure your domain</p>
+        <p className="mt-1 text-muted-foreground">
+          Explore more email authentication tools to secure your domain
+        </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
         {tools.map((tool) => (
           <Link
             key={tool.id}
@@ -217,10 +249,16 @@ function RelatedTools() {
             className={`group relative overflow-hidden rounded-lg border p-5 transition-all hover:shadow-md ${tool.borderColor} ${tool.color}`}
           >
             <div className="flex items-start gap-4">
-              <div className={`rounded-full p-2 ${tool.iconBg}`}>{tool.icon}</div>
+              <div className={`rounded-full p-2 ${tool.iconBg}`}>
+                {tool.icon}
+              </div>
               <div>
-                <h3 className="font-semibold text-lg group-hover:underline">{tool.name}</h3>
-                <p className="text-sm text-muted-foreground mt-1">{tool.description}</p>
+                <h3 className="text-lg font-semibold group-hover:underline">
+                  {tool.name}
+                </h3>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  {tool.description}
+                </p>
               </div>
             </div>
             <div className="absolute bottom-0 left-0 h-1 w-0 bg-primary transition-all duration-300 group-hover:w-full"></div>
@@ -248,13 +286,17 @@ export default function XMLConverterPage() {
         setError(`File ${file.name} exceeds 10MB limit.`);
         continue;
       }
-      if (!ACCEPTED_TYPES.some(type => file.type.includes(type) || file.name.endsWith(type))) {
+      if (
+        !ACCEPTED_TYPES.some(
+          (type) => file.type.includes(type) || file.name.endsWith(type)
+        )
+      ) {
         setError(`File ${file.name} is not a supported format.`);
         continue;
       }
       valid.push(file);
     }
-    setFiles(prev => [...prev, ...valid]);
+    setFiles((prev) => [...prev, ...valid]);
   }
 
   function handleDrop(e: React.DragEvent) {
@@ -267,8 +309,8 @@ export default function XMLConverterPage() {
   }
 
   function handleRemove(idx: number) {
-    setFiles(prev => prev.filter((_, i) => i !== idx));
-    setResults(prev => prev.filter((_, i) => i !== idx));
+    setFiles((prev) => prev.filter((_, i) => i !== idx));
+    setResults((prev) => prev.filter((_, i) => i !== idx));
   }
 
   async function handleProcess() {
@@ -277,8 +319,11 @@ export default function XMLConverterPage() {
     setResults([]);
     try {
       const formData = new FormData();
-      files.forEach(f => formData.append("file", f));
-      const res = await fetch("/api/xml-converter", { method: "POST", body: formData });
+      files.forEach((f) => formData.append("file", f));
+      const res = await fetch("/api/xml-converter", {
+        method: "POST",
+        body: formData,
+      });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Failed to process files.");
       setResults(data.files);
@@ -290,20 +335,33 @@ export default function XMLConverterPage() {
   }
 
   function toggleExpand(name: string) {
-    setExpanded(prev => ({ ...prev, [name]: !prev[name] }));
+    setExpanded((prev) => ({ ...prev, [name]: !prev[name] }));
   }
 
   // Sidebar content
   const sidebarContent = (
     <div>
-      <h4 className="font-semibold mb-2">About DMARC XML Converter</h4>
-      <p className="mb-2">Upload DMARC XML feedback files (compressed or uncompressed) to view them in a human-readable format. Supported formats: .xml, .gz, .zip.</p>
-      <ul className="list-disc pl-5 text-sm mb-2">
+      <h4 className="mb-2 font-semibold">About DMARC XML Converter</h4>
+      <p className="mb-2">
+        Upload DMARC XML feedback files (compressed or uncompressed) to view
+        them in a human-readable format. Supported formats: .xml, .gz, .zip.
+      </p>
+      <ul className="mb-2 list-disc pl-5 text-sm">
         <li>Maximum file size: 10MB</li>
         <li>Multiple files supported</li>
         <li>All processing is done securely in the cloud</li>
       </ul>
-      <p className="text-xs text-gray-500">Need help? <a href="/docs" className="text-primary hover:underline">Read the docs</a> or <a href="/contact" className="text-primary hover:underline">contact support</a>.</p>
+      <p className="text-xs text-gray-500">
+        Need help?{" "}
+        <a href="/docs" className="text-primary hover:underline">
+          Read the docs
+        </a>{" "}
+        or{" "}
+        <a href="/contact" className="text-primary hover:underline">
+          contact support
+        </a>
+        .
+      </p>
     </div>
   );
 
@@ -316,25 +374,31 @@ export default function XMLConverterPage() {
       <div className="container">
         <Card className="mb-8">
           <div
-            className="border-2 border-dashed border-primary/30 rounded-xl bg-secondary p-8 flex flex-col items-center justify-center cursor-pointer hover:bg-primary/10 transition"
+            className="flex cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed border-primary/30 bg-secondary p-8 transition hover:bg-primary/10"
             onDrop={handleDrop}
-            onDragOver={e => e.preventDefault()}
+            onDragOver={(e) => e.preventDefault()}
             onClick={handleBrowse}
             tabIndex={0}
             role="button"
             aria-label="Upload DMARC XML files"
           >
-            <FaUpload className="w-10 h-10 text-primary mb-2" />
-            <span className="font-semibold text-primary">Drag and drop DMARC XML, .gz, or .zip files here</span>
-            <span className="text-gray-500 text-sm mt-1">or click to browse</span>
-            <span className="text-gray-400 text-xs mt-2">Maximum file size: 10MB. Multiple files supported.</span>
+            <FaUpload className="mb-2 h-10 w-10 text-primary" />
+            <span className="font-semibold text-primary">
+              Drag and drop DMARC XML, .gz, or .zip files here
+            </span>
+            <span className="mt-1 text-sm text-gray-500">
+              or click to browse
+            </span>
+            <span className="mt-2 text-xs text-gray-400">
+              Maximum file size: 10MB. Multiple files supported.
+            </span>
             <input
               type="file"
               ref={fileInputRef}
               className="hidden"
               multiple
               accept=".xml,.gz,.zip,application/xml,text/xml,application/gzip,application/x-gzip,application/zip"
-              onChange={e => handleFiles(e.target.files)}
+              onChange={(e) => handleFiles(e.target.files)}
             />
           </div>
           {error && (
@@ -347,39 +411,57 @@ export default function XMLConverterPage() {
         </Card>
         {files.length > 0 && (
           <Card className="mb-8">
-            <div className="flex items-center justify-between mb-4">
-              <span className="text-lg font-bold text-gray-900">Uploaded Files</span>
-              <span className="flex-1 border-b border-gray-200 ml-4" />
+            <div className="mb-4 flex items-center justify-between">
+              <span className="text-lg font-bold text-gray-900">
+                Uploaded Files
+              </span>
+              <span className="ml-4 flex-1 border-b border-gray-200" />
             </div>
             <ul className="divide-y divide-gray-100">
               {files.map((file, idx) => {
-                const ext = file.name.split('.').pop()?.toUpperCase() || "FILE";
+                const ext = file.name.split(".").pop()?.toUpperCase() || "FILE";
                 return (
                   <li
                     key={file.name + idx}
-                    className="group py-4 px-3 flex items-center gap-4 bg-white rounded-lg transition-shadow hover:shadow-md mb-2"
+                    className="group mb-2 flex items-center gap-4 rounded-lg bg-white px-3 py-4 transition-shadow hover:shadow-md"
                     style={{ minHeight: 64 }}
                   >
-                    <div className="flex items-center justify-center w-10 h-10 bg-gray-100 rounded-full mr-2">
+                    <div className="mr-2 flex h-10 w-10 items-center justify-center rounded-full bg-gray-100">
                       {getFileIcon(file.type || file.name)}
                     </div>
-                    <div className="flex-1 min-w-0">
+                    <div className="min-w-0 flex-1">
                       <div className="flex items-center gap-2">
-                        <span className="font-medium text-gray-900 truncate max-w-xs">{file.name}</span>
-                        <span className={`inline-block px-2 py-0.5 rounded text-xs font-semibold border ${ext === 'XML' ? 'bg-secondary text-primary border-primary/20' : ext === 'ZIP' ? 'bg-green-50 text-green-700 border-green-200' : 'bg-gray-50 text-gray-600 border-gray-200'}`}>{ext}</span>
-                        <span className="text-xs text-gray-400">{(file.size / 1024).toFixed(1)} KB</span>
+                        <span className="max-w-xs truncate font-medium text-gray-900">
+                          {file.name}
+                        </span>
+                        <span
+                          className={`inline-block rounded border px-2 py-0.5 text-xs font-semibold ${ext === "XML" ? "border-primary/20 bg-secondary text-primary" : ext === "ZIP" ? "border-green-200 bg-green-50 text-green-700" : "border-gray-200 bg-gray-50 text-gray-600"}`}
+                        >
+                          {ext}
+                        </span>
+                        <span className="text-xs text-gray-400">
+                          {(file.size / 1024).toFixed(1)} KB
+                        </span>
                         {/* Checkmark for new file (static for now) */}
-                        <span className="ml-1 text-green-500" aria-label="File added">✓</span>
+                        <span
+                          className="ml-1 text-green-500"
+                          aria-label="File added"
+                        >
+                          ✓
+                        </span>
                       </div>
                     </div>
                     <button
                       aria-label={`Remove file ${file.name}`}
                       title="Remove file"
-                      className="ml-2 p-2 rounded-full border border-primary/20 text-primary hover:bg-secondary hover:text-foreground transition group-hover:shadow"
-                      onClick={e => { e.stopPropagation(); handleRemove(idx); }}
+                      className="ml-2 rounded-full border border-primary/20 p-2 text-primary transition hover:bg-secondary hover:text-foreground group-hover:shadow"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleRemove(idx);
+                      }}
                       type="button"
                     >
-                      <FaTimesCircle className="w-4 h-4" />
+                      <FaTimesCircle className="h-4 w-4" />
                     </button>
                   </li>
                 );
@@ -391,7 +473,7 @@ export default function XMLConverterPage() {
                 size="lg"
                 onClick={handleProcess}
                 disabled={loading || files.length === 0}
-                className="shadow-md w-56 mx-auto"
+                className="mx-auto w-56 shadow-md"
                 aria-label="Process uploaded files"
               >
                 {loading ? "Processing..." : "Process Files"}
@@ -407,14 +489,30 @@ export default function XMLConverterPage() {
         {results.length > 0 && (
           <div className="space-y-8">
             {results.map((res, idx) => (
-              <Card key={res.name + idx} className="bg-secondary border-primary/20">
-                <div className="flex items-center gap-2 cursor-pointer" onClick={() => toggleExpand(res.name)}>
-                  {expanded[res.name] ? <FaChevronDown className="w-4 h-4 text-primary" /> : <FaChevronRight className="w-4 h-4 text-primary" />}
-                  <span className="font-semibold text-foreground">{res.name}</span>
-                  {res.error ? (
-                    <span className="ml-2 px-2 py-0.5 rounded-full text-xs font-semibold border bg-red-100 text-red-800 border-red-200">Error</span>
+              <Card
+                key={res.name + idx}
+                className="border-primary/20 bg-secondary"
+              >
+                <div
+                  className="flex cursor-pointer items-center gap-2"
+                  onClick={() => toggleExpand(res.name)}
+                >
+                  {expanded[res.name] ? (
+                    <FaChevronDown className="h-4 w-4 text-primary" />
                   ) : (
-                    <span className="ml-2 px-2 py-0.5 rounded-full text-xs font-semibold border bg-green-100 text-green-800 border-green-200">Processed</span>
+                    <FaChevronRight className="h-4 w-4 text-primary" />
+                  )}
+                  <span className="font-semibold text-foreground">
+                    {res.name}
+                  </span>
+                  {res.error ? (
+                    <span className="ml-2 rounded-full border border-red-200 bg-red-100 px-2 py-0.5 text-xs font-semibold text-red-800">
+                      Error
+                    </span>
+                  ) : (
+                    <span className="ml-2 rounded-full border border-green-200 bg-green-100 px-2 py-0.5 text-xs font-semibold text-green-800">
+                      Processed
+                    </span>
                   )}
                 </div>
                 {expanded[res.name] && (
@@ -426,63 +524,129 @@ export default function XMLConverterPage() {
                     ) : (
                       <div>
                         <div className="mb-2 text-gray-700">
-                          <span className="font-semibold">Org:</span> {res.summary.org || <span className="text-gray-400">N/A</span>}<br />
-                          <span className="font-semibold">Domain:</span> {res.summary.domain || <span className="text-gray-400">N/A</span>}<br />
-                          <span className="font-semibold">Date Range:</span> {res.summary.date_range.begin} - {res.summary.date_range.end}<br />
-                          <span className="font-semibold">Records:</span> {res.summary.record_count}
+                          <span className="font-semibold">Org:</span>{" "}
+                          {res.summary.org || (
+                            <span className="text-gray-400">N/A</span>
+                          )}
+                          <br />
+                          <span className="font-semibold">Domain:</span>{" "}
+                          {res.summary.domain || (
+                            <span className="text-gray-400">N/A</span>
+                          )}
+                          <br />
+                          <span className="font-semibold">
+                            Date Range:
+                          </span>{" "}
+                          {res.summary.date_range.begin} -{" "}
+                          {res.summary.date_range.end}
+                          <br />
+                          <span className="font-semibold">Records:</span>{" "}
+                          {res.summary.record_count}
                         </div>
                         {/* Charts */}
-                        {res.summary.records && res.summary.records.length > 0 && (
-                          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                            <div className="bg-white rounded-lg p-4 border shadow-sm flex flex-col items-center min-h-[320px]">
-                              <h4 className="font-semibold text-gray-900 mb-2 text-sm">Disposition Breakdown</h4>
-                              <div className="w-full h-64">
-                                <Pie data={getDispositionChartData(res.summary.records)} options={chartOptions} />
+                        {res.summary.records &&
+                          res.summary.records.length > 0 && (
+                            <div className="mb-8 grid grid-cols-1 gap-6 md:grid-cols-3">
+                              <div className="flex min-h-[320px] flex-col items-center rounded-lg border bg-white p-4 shadow-sm">
+                                <h4 className="mb-2 text-sm font-semibold text-gray-900">
+                                  Disposition Breakdown
+                                </h4>
+                                <div className="h-64 w-full">
+                                  <Pie
+                                    data={getDispositionChartData(
+                                      res.summary.records
+                                    )}
+                                    options={chartOptions}
+                                  />
+                                </div>
+                              </div>
+                              <div className="flex min-h-[320px] flex-col items-center rounded-lg border bg-white p-4 shadow-sm">
+                                <h4 className="mb-2 text-sm font-semibold text-gray-900">
+                                  Top Source IPs
+                                </h4>
+                                <div className="h-64 w-full">
+                                  <Bar
+                                    data={getSourceIpChartData(
+                                      res.summary.records
+                                    )}
+                                    options={chartOptions}
+                                  />
+                                </div>
+                              </div>
+                              <div className="flex min-h-[320px] flex-col items-center rounded-lg border bg-white p-4 shadow-sm">
+                                <h4 className="mb-2 text-sm font-semibold text-gray-900">
+                                  DKIM vs SPF Pass/Fail
+                                </h4>
+                                <div className="h-64 w-full">
+                                  <Bar
+                                    data={getDkimSpfChartData(
+                                      res.summary.records
+                                    )}
+                                    options={chartOptions}
+                                  />
+                                </div>
                               </div>
                             </div>
-                            <div className="bg-white rounded-lg p-4 border shadow-sm flex flex-col items-center min-h-[320px]">
-                              <h4 className="font-semibold text-gray-900 mb-2 text-sm">Top Source IPs</h4>
-                              <div className="w-full h-64">
-                                <Bar data={getSourceIpChartData(res.summary.records)} options={chartOptions} />
-                              </div>
-                            </div>
-                            <div className="bg-white rounded-lg p-4 border shadow-sm flex flex-col items-center min-h-[320px]">
-                              <h4 className="font-semibold text-gray-900 mb-2 text-sm">DKIM vs SPF Pass/Fail</h4>
-                              <div className="w-full h-64">
-                                <Bar data={getDkimSpfChartData(res.summary.records)} options={chartOptions} />
-                              </div>
-                            </div>
-                          </div>
-                        )}
+                          )}
                         <div className="overflow-x-auto">
-                          <table className="min-w-full text-xs text-left border mt-2">
+                          <table className="mt-2 min-w-full border text-left text-xs">
                             <thead className="bg-primary/10">
                               <tr>
-                                <th className="px-2 py-1 font-semibold">Source IP</th>
-                                <th className="px-2 py-1 font-semibold">Count</th>
-                                <th className="px-2 py-1 font-semibold">Disposition</th>
-                                <th className="px-2 py-1 font-semibold">DKIM</th>
+                                <th className="px-2 py-1 font-semibold">
+                                  Source IP
+                                </th>
+                                <th className="px-2 py-1 font-semibold">
+                                  Count
+                                </th>
+                                <th className="px-2 py-1 font-semibold">
+                                  Disposition
+                                </th>
+                                <th className="px-2 py-1 font-semibold">
+                                  DKIM
+                                </th>
                                 <th className="px-2 py-1 font-semibold">SPF</th>
-                                <th className="px-2 py-1 font-semibold">Envelope From</th>
-                                <th className="px-2 py-1 font-semibold">Header From</th>
-                                <th className="px-2 py-1 font-semibold">DKIM Domains</th>
-                                <th className="px-2 py-1 font-semibold">SPF Domains</th>
+                                <th className="px-2 py-1 font-semibold">
+                                  Envelope From
+                                </th>
+                                <th className="px-2 py-1 font-semibold">
+                                  Header From
+                                </th>
+                                <th className="px-2 py-1 font-semibold">
+                                  DKIM Domains
+                                </th>
+                                <th className="px-2 py-1 font-semibold">
+                                  SPF Domains
+                                </th>
                               </tr>
                             </thead>
                             <tbody>
-                              {res.summary.records.map((rec: any, i: number) => (
-                                <tr key={i} className="border-t">
-                                  <td className="px-2 py-1">{rec.source_ip}</td>
-                                  <td className="px-2 py-1">{rec.count}</td>
-                                  <td className="px-2 py-1">{rec.disposition}</td>
-                                  <td className="px-2 py-1">{rec.dkim}</td>
-                                  <td className="px-2 py-1">{rec.spf}</td>
-                                  <td className="px-2 py-1">{rec.envelope_from}</td>
-                                  <td className="px-2 py-1">{rec.header_from}</td>
-                                  <td className="px-2 py-1">{rec.dkim_domains.join(", ")}</td>
-                                  <td className="px-2 py-1">{rec.spf_domains.join(", ")}</td>
-                                </tr>
-                              ))}
+                              {res.summary.records.map(
+                                (rec: any, i: number) => (
+                                  <tr key={i} className="border-t">
+                                    <td className="px-2 py-1">
+                                      {rec.source_ip}
+                                    </td>
+                                    <td className="px-2 py-1">{rec.count}</td>
+                                    <td className="px-2 py-1">
+                                      {rec.disposition}
+                                    </td>
+                                    <td className="px-2 py-1">{rec.dkim}</td>
+                                    <td className="px-2 py-1">{rec.spf}</td>
+                                    <td className="px-2 py-1">
+                                      {rec.envelope_from}
+                                    </td>
+                                    <td className="px-2 py-1">
+                                      {rec.header_from}
+                                    </td>
+                                    <td className="px-2 py-1">
+                                      {rec.dkim_domains.join(", ")}
+                                    </td>
+                                    <td className="px-2 py-1">
+                                      {rec.spf_domains.join(", ")}
+                                    </td>
+                                  </tr>
+                                )
+                              )}
                             </tbody>
                           </table>
                         </div>
@@ -498,4 +662,4 @@ export default function XMLConverterPage() {
       </div>
     </ToolLayout>
   );
-} 
+}

@@ -9,7 +9,11 @@ export function Tooltip({ children }: { children: React.ReactNode }) {
 }
 
 export function TooltipTrigger({ children }: { children: React.ReactNode }) {
-  return <span tabIndex={0} className="cursor-pointer focus:outline-none">{children}</span>;
+  return (
+    <span tabIndex={0} className="cursor-pointer focus:outline-none">
+      {children}
+    </span>
+  );
 }
 
 export function TooltipContent({ children }: { children: React.ReactNode }) {
@@ -23,10 +27,10 @@ export function TooltipContent({ children }: { children: React.ReactNode }) {
       className="relative"
     >
       {show && (
-        <span className="absolute z-10 left-1/2 -translate-x-1/2 mt-2 px-3 py-2 bg-gray-900 text-white text-xs rounded shadow-lg whitespace-nowrap">
+        <span className="absolute left-1/2 z-10 mt-2 -translate-x-1/2 whitespace-nowrap rounded bg-gray-900 px-3 py-2 text-xs text-white shadow-lg">
           {children}
         </span>
       )}
     </span>
   );
-} 
+}

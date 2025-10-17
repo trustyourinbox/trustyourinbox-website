@@ -1,5 +1,5 @@
-import type React from "react"
-import Link from "next/link"
+import type React from "react";
+import Link from "next/link";
 import {
   Shield,
   Lock,
@@ -16,23 +16,29 @@ import {
   AlertCircle,
   GitBranch,
   FileCheck,
-} from "lucide-react"
-import { cn } from "@/lib/utils"
+} from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface ToolItem {
-  name: string
-  href: string
-  description?: string
-  icon: React.ReactNode
+  name: string;
+  href: string;
+  description?: string;
+  icon: React.ReactNode;
 }
 
 interface ToolCategory {
-  title: string
-  icon: React.ReactNode
-  tools: ToolItem[]
+  title: string;
+  icon: React.ReactNode;
+  tools: ToolItem[];
 }
 
-export function MegaMenu({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
+export function MegaMenu({
+  isOpen,
+  onClose,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+}) {
   const toolCategories: ToolCategory[] = [
     {
       title: "Core Tools",
@@ -98,7 +104,12 @@ export function MegaMenu({ isOpen, onClose }: { isOpen: boolean; onClose: () => 
           icon: <Search className="h-4 w-4" />,
           description: "Inspect DKIM configuration",
         },
-        { name: "SPF Surveyor", href: "/tools/spf-surveyor", icon: <FileText className="h-4 w-4" />, description: "Analyze SPF records" },
+        {
+          name: "SPF Surveyor",
+          href: "/tools/spf-surveyor",
+          icon: <FileText className="h-4 w-4" />,
+          description: "Analyze SPF records",
+        },
       ],
     },
     {
@@ -119,23 +130,27 @@ export function MegaMenu({ isOpen, onClose }: { isOpen: boolean; onClose: () => 
         },
       ],
     },
-  ]
+  ];
 
   return (
     <div
       className={cn(
-        "absolute top-full left-0 right-0 z-50 w-full transform transition-all duration-200 ease-in-out bg-white shadow-lg rounded-b-xl border-t",
-        isOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4 pointer-events-none",
+        "absolute left-0 right-0 top-full z-50 w-full transform rounded-b-xl border-t bg-white shadow-lg transition-all duration-200 ease-in-out",
+        isOpen
+          ? "translate-y-0 opacity-100"
+          : "pointer-events-none -translate-y-4 opacity-0"
       )}
     >
-      <div className="container mx-auto py-4 px-3">
-        <div className="flex flex-col lg:flex-row gap-4">
-          <div className="flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="container mx-auto px-3 py-4">
+        <div className="flex flex-col gap-4 lg:flex-row">
+          <div className="grid flex-1 grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
             {toolCategories.map((category) => (
               <div key={category.title} className="space-y-2">
-                <div className="flex items-center gap-2 pb-1 border-b">
+                <div className="flex items-center gap-2 border-b pb-1">
                   {category.icon}
-                  <h3 className="text-base font-semibold text-gray-900">{category.title}</h3>
+                  <h3 className="text-base font-semibold text-gray-900">
+                    {category.title}
+                  </h3>
                 </div>
                 <div className="grid gap-1.5">
                   {category.tools.map((tool) => (
@@ -143,16 +158,20 @@ export function MegaMenu({ isOpen, onClose }: { isOpen: boolean; onClose: () => 
                       key={tool.name}
                       href={tool.href}
                       onClick={onClose}
-                      className="group flex items-start gap-2 p-1.5 rounded-lg hover:bg-gray-50 transition-colors"
+                      className="group flex items-start gap-2 rounded-lg p-1.5 transition-colors hover:bg-gray-50"
                     >
-                      <div className="flex-shrink-0 mt-0.5 h-6 w-6 flex items-center justify-center rounded-md bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+                      <div className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-md bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-white">
                         {tool.icon}
                       </div>
                       <div>
-                        <div className="font-medium text-sm text-gray-900 group-hover:text-primary transition-colors">
+                        <div className="text-sm font-medium text-gray-900 transition-colors group-hover:text-primary">
                           {tool.name}
                         </div>
-                        {tool.description && <p className="text-xs text-gray-500 line-clamp-1">{tool.description}</p>}
+                        {tool.description && (
+                          <p className="line-clamp-1 text-xs text-gray-500">
+                            {tool.description}
+                          </p>
+                        )}
                       </div>
                     </Link>
                   ))}
@@ -161,16 +180,29 @@ export function MegaMenu({ isOpen, onClose }: { isOpen: boolean; onClose: () => 
             ))}
           </div>
           {/* Right-side featured box */}
-          <div className="w-full lg:w-80 flex-shrink-0 flex flex-col justify-between bg-secondary border border-primary/10 rounded-xl p-5 shadow-sm mt-4 lg:mt-0 lg:ml-2">
+          <div className="mt-4 flex w-full flex-shrink-0 flex-col justify-between rounded-xl border border-primary/10 bg-secondary p-5 shadow-sm lg:ml-2 lg:mt-0 lg:w-80">
             <div>
-              <span className="inline-block bg-primary text-white text-xs font-semibold px-2 py-0.5 rounded mb-2">What&apos;s New</span>
-              <h4 className="text-lg font-bold text-foreground mb-1">Forensic DMARC Report Viewer</h4>
-              <p className="text-sm text-foreground mb-4">Upload and analyze forensic (ruf) DMARC reports to investigate authentication failures.</p>
+              <span className="mb-2 inline-block rounded bg-primary px-2 py-0.5 text-xs font-semibold text-white">
+                What&apos;s New
+              </span>
+              <h4 className="mb-1 text-lg font-bold text-foreground">
+                Forensic DMARC Report Viewer
+              </h4>
+              <p className="mb-4 text-sm text-foreground">
+                Upload and analyze forensic (ruf) DMARC reports to investigate
+                authentication failures.
+              </p>
             </div>
-            <Link href="/tools/forensic-report-viewer" onClick={onClose} className="inline-block bg-primary hover:bg-primary text-white font-semibold text-sm px-4 py-2 rounded-lg text-center transition-colors">Try it now</Link>
+            <Link
+              href="/tools/forensic-report-viewer"
+              onClick={onClose}
+              className="inline-block rounded-lg bg-primary px-4 py-2 text-center text-sm font-semibold text-white transition-colors hover:bg-primary"
+            >
+              Try it now
+            </Link>
           </div>
         </div>
       </div>
     </div>
-  )
-} 
+  );
+}

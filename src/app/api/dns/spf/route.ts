@@ -43,7 +43,7 @@ async function resolveDomain6(domain: string): Promise<string[]> {
 async function resolveMxRecords(domain: string): Promise<string[]> {
   try {
     const records = await resolveMx(domain);
-    return records.map(r => r.exchange);
+    return records.map((r) => r.exchange);
   } catch {
     return [];
   }
@@ -60,7 +60,11 @@ function countIpBlocks(ips: string[]): number {
   }, 0);
 }
 
-async function parseSPFNode(domain: string, depth = 0, visited = new Set<string>()): Promise<SPFNode | null> {
+async function parseSPFNode(
+  domain: string,
+  depth = 0,
+  visited = new Set<string>()
+): Promise<SPFNode | null> {
   if (visited.has(domain) || depth > 10) {
     return null;
   }
@@ -68,8 +72,10 @@ async function parseSPFNode(domain: string, depth = 0, visited = new Set<string>
 
   try {
     const records = await resolveTxt(domain);
-    const spfRecord = records.flat().find(record => record.startsWith("v=spf1"));
-    
+    const spfRecord = records
+      .flat()
+      .find((record) => record.startsWith("v=spf1"));
+
     if (!spfRecord) {
       return null;
     }
@@ -85,7 +91,7 @@ async function parseSPFNode(domain: string, depth = 0, visited = new Set<string>
       all: "~all",
       dnsLookups: 0,
       totalIp4Blocks: 0,
-      totalIp6Blocks: 0
+      totalIp6Blocks: 0,
     };
 
     const mechanisms = spfRecord.split(" ");
@@ -94,7 +100,11 @@ async function parseSPFNode(domain: string, depth = 0, visited = new Set<string>
     for (const mechanism of mechanisms) {
       if (mechanism.startsWith("include:")) {
         const includeDomain = mechanism.replace("include:", "");
-        const includeNode = await parseSPFNode(includeDomain, depth + 1, visited);
+        const includeNode = await parseSPFNode(
+          includeDomain,
+          depth + 1,
+          visited
+        );
         if (includeNode) {
           node.includes.push(includeNode);
           node.totalIp4Blocks += includeNode.totalIp4Blocks;
@@ -117,7 +127,13 @@ async function parseSPFNode(domain: string, depth = 0, visited = new Set<string>
         const aRecords = await resolveDomain(domain);
         node.a = aRecords;
         node.dnsLookups += aRecords.length;
-      } else if (mechanism === "all" || mechanism === "+all" || mechanism === "-all" || mechanism === "~all" || mechanism === "?all") {
+      } else if (
+        mechanism === "all" ||
+        mechanism === "+all" ||
+        mechanism === "-all" ||
+        mechanism === "~all" ||
+        mechanism === "?all"
+      ) {
         node.all = mechanism;
       }
     }
@@ -142,7 +158,7 @@ export async function GET(request: Request) {
 
   try {
     const spfTree = await parseSPFNode(domain);
-    
+
     if (!spfTree) {
       return NextResponse.json(
         { message: "No SPF record found" },
@@ -158,4 +174,4 @@ export async function GET(request: Request) {
       { status: 500 }
     );
   }
-} 
+}

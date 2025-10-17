@@ -3,9 +3,10 @@ import FeatureGrid from "@/components/FeatureGrid";
 import { FaBullseye, FaUsers, FaHeart } from "react-icons/fa";
 
 export const metadata = {
-  title: 'Company | TrustYourInbox',
-  description: 'Learn more about TrustYourInbox, our mission, team, and values.'
-}
+  title: "Company | TrustYourInbox",
+  description:
+    "Learn more about TrustYourInbox, our mission, team, and values.",
+};
 
 export default function CompanyPage() {
   return (
@@ -13,7 +14,11 @@ export default function CompanyPage() {
       <div className="container">
         <HeroSection
           badge={<span>Our Company</span>}
-          title={<>Get to Know <span className="text-primary">TrustYourInbox</span></>}
+          title={
+            <>
+              Get to Know <span className="text-primary">TrustYourInbox</span>
+            </>
+          }
           subtitle="We are passionate about making email security simple, effective, and accessible for everyone."
           ctaButtons={[
             { label: "Contact Us", href: "/contact", variant: "primary" },
@@ -25,21 +30,24 @@ export default function CompanyPage() {
             {
               icon: <FaBullseye className="h-6 w-6" />,
               title: "Our Mission",
-              description: "To empower organizations of all sizes to protect their email domains and users from phishing and cyber threats with ease.",
+              description:
+                "To empower organizations of all sizes to protect their email domains and users from phishing and cyber threats with ease.",
             },
             {
               icon: <FaUsers className="h-6 w-6" />,
               title: "Our Team",
-              description: "A diverse group of security experts, engineers, and innovators dedicated to building the future of email protection.",
+              description:
+                "A diverse group of security experts, engineers, and innovators dedicated to building the future of email protection.",
             },
             {
               icon: <FaHeart className="h-6 w-6" />,
               title: "Our Values",
-              description: "Integrity, transparency, and a relentless focus on customer success drive everything we do.",
+              description:
+                "Integrity, transparency, and a relentless focus on customer success drive everything we do.",
             },
           ]}
         />
       </div>
     </div>
-  )
-} 
+  );
+}

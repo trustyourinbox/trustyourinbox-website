@@ -3,91 +3,96 @@ import FeatureGrid from "@/components/FeatureGrid";
 import { FaBriefcase, FaUsers, FaRocket, FaHandshake } from "react-icons/fa";
 
 export const metadata = {
-  title: 'Careers | TrustYourInbox',
-  description: 'Join our team and help shape the future of email security. Explore exciting career opportunities at TrustYourInbox.'
-}
+  title: "Careers | TrustYourInbox",
+  description:
+    "Join our team and help shape the future of email security. Explore exciting career opportunities at TrustYourInbox.",
+};
 
 const jobListings = [
   {
     title: "Sales Director - East",
     location: "Remote (East Coast)",
     type: "Full-time",
-    description: "Lead our sales efforts in the Eastern region, driving growth and building strong customer relationships.",
+    description:
+      "Lead our sales efforts in the Eastern region, driving growth and building strong customer relationships.",
     responsibilities: [
       "Develop and execute sales strategies for the Eastern region",
       "Build and lead a high-performing sales team",
       "Drive revenue growth and meet/exceed sales targets",
       "Build and maintain relationships with key enterprise customers",
-      "Collaborate with marketing and product teams to optimize sales processes"
+      "Collaborate with marketing and product teams to optimize sales processes",
     ],
     requirements: [
       "8+ years of enterprise sales experience in SaaS or cybersecurity",
       "Proven track record of exceeding sales targets",
       "Experience managing and growing sales teams",
       "Strong understanding of email security and DMARC",
-      "Excellent communication and leadership skills"
-    ]
+      "Excellent communication and leadership skills",
+    ],
   },
   {
     title: "Sales Director - West",
     location: "Remote (West Coast)",
     type: "Full-time",
-    description: "Lead our sales efforts in the Western region, driving growth and building strong customer relationships.",
+    description:
+      "Lead our sales efforts in the Western region, driving growth and building strong customer relationships.",
     responsibilities: [
       "Develop and execute sales strategies for the Western region",
       "Build and lead a high-performing sales team",
       "Drive revenue growth and meet/exceed sales targets",
       "Build and maintain relationships with key enterprise customers",
-      "Collaborate with marketing and product teams to optimize sales processes"
+      "Collaborate with marketing and product teams to optimize sales processes",
     ],
     requirements: [
       "8+ years of enterprise sales experience in SaaS or cybersecurity",
       "Proven track record of exceeding sales targets",
       "Experience managing and growing sales teams",
       "Strong understanding of email security and DMARC",
-      "Excellent communication and leadership skills"
-    ]
+      "Excellent communication and leadership skills",
+    ],
   },
   {
     title: "Support Engineer",
     location: "Remote",
     type: "Full-time",
-    description: "Provide exceptional technical support to our customers and help them maximize the value of our platform.",
+    description:
+      "Provide exceptional technical support to our customers and help them maximize the value of our platform.",
     responsibilities: [
       "Provide technical support to enterprise customers",
       "Troubleshoot and resolve complex technical issues",
       "Create and maintain technical documentation",
       "Collaborate with product and engineering teams",
-      "Contribute to knowledge base and support processes"
+      "Contribute to knowledge base and support processes",
     ],
     requirements: [
       "3+ years of technical support experience in SaaS or cybersecurity",
       "Strong understanding of email protocols and security",
       "Experience with DMARC, SPF, and DKIM",
       "Excellent problem-solving and communication skills",
-      "Ability to work independently and in a team"
-    ]
+      "Ability to work independently and in a team",
+    ],
   },
   {
     title: "Customer Success Manager",
     location: "Remote",
     type: "Full-time",
-    description: "Ensure our customers achieve their goals and maximize the value of our platform.",
+    description:
+      "Ensure our customers achieve their goals and maximize the value of our platform.",
     responsibilities: [
       "Build and maintain strong customer relationships",
       "Drive customer adoption and success",
       "Conduct regular business reviews with customers",
       "Identify upsell and cross-sell opportunities",
-      "Gather and share customer feedback with product team"
+      "Gather and share customer feedback with product team",
     ],
     requirements: [
       "5+ years of customer success experience in SaaS",
       "Strong understanding of email security",
       "Experience with enterprise customers",
       "Excellent communication and relationship-building skills",
-      "Data-driven approach to customer success"
-    ]
-  }
+      "Data-driven approach to customer success",
+    ],
+  },
 ];
 
 export default function CareersPage() {
@@ -95,10 +100,19 @@ export default function CareersPage() {
     <div className="min-h-screen bg-white">
       <HeroSection
         badge={<span>Join Our Team</span>}
-        title={<>Build the Future of <span className="text-primary">Email Security</span></>}
+        title={
+          <>
+            Build the Future of{" "}
+            <span className="text-primary">Email Security</span>
+          </>
+        }
         subtitle="Join us in our mission to make email security simple, effective, and accessible for everyone."
         ctaButtons={[
-          { label: "View Open Positions", href: "#positions", variant: "primary" },
+          {
+            label: "View Open Positions",
+            href: "#positions",
+            variant: "primary",
+          },
         ]}
         illustrationSrc="/placeholder.svg?height=500&width=600"
       />
@@ -108,30 +122,34 @@ export default function CareersPage() {
           {
             icon: <FaBriefcase className="h-6 w-6" />,
             title: "Meaningful Work",
-            description: "Make a real impact in the fight against email fraud and cyber threats.",
+            description:
+              "Make a real impact in the fight against email fraud and cyber threats.",
           },
           {
             icon: <FaUsers className="h-6 w-6" />,
             title: "Great Team",
-            description: "Work with talented, passionate people who are experts in their fields.",
+            description:
+              "Work with talented, passionate people who are experts in their fields.",
           },
           {
             icon: <FaRocket className="h-6 w-6" />,
             title: "Growth Opportunities",
-            description: "Learn, grow, and advance your career in a fast-paced environment.",
+            description:
+              "Learn, grow, and advance your career in a fast-paced environment.",
           },
           {
             icon: <FaHandshake className="h-6 w-6" />,
             title: "Work-Life Balance",
-            description: "Enjoy flexible hours, remote work, and a supportive company culture.",
+            description:
+              "Enjoy flexible hours, remote work, and a supportive company culture.",
           },
         ]}
       />
 
       {/* Job Listings Section */}
-      <section id="positions" className="py-16 bg-gray-50">
+      <section id="positions" className="bg-gray-50 py-16">
         <div className="container">
-          <div className="text-center mb-12">
+          <div className="mb-12 text-center">
             <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">
               Open Positions
             </h2>
@@ -144,29 +162,33 @@ export default function CareersPage() {
             {jobListings.map((job, index) => (
               <div
                 key={index}
-                className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow"
+                className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm transition-shadow hover:shadow-md"
               >
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                <h3 className="mb-2 text-xl font-semibold text-gray-900">
                   {job.title}
                 </h3>
-                <div className="flex items-center gap-4 text-sm text-gray-600 mb-4">
+                <div className="mb-4 flex items-center gap-4 text-sm text-gray-600">
                   <span>{job.location}</span>
                   <span>•</span>
                   <span>{job.type}</span>
                 </div>
-                <p className="text-gray-600 mb-4">{job.description}</p>
+                <p className="mb-4 text-gray-600">{job.description}</p>
                 <div className="space-y-4">
                   <div>
-                    <h4 className="font-medium text-gray-900 mb-2">Responsibilities</h4>
-                    <ul className="list-disc list-inside text-gray-600 space-y-1">
+                    <h4 className="mb-2 font-medium text-gray-900">
+                      Responsibilities
+                    </h4>
+                    <ul className="list-inside list-disc space-y-1 text-gray-600">
                       {job.responsibilities.map((item, i) => (
                         <li key={i}>{item}</li>
                       ))}
                     </ul>
                   </div>
                   <div>
-                    <h4 className="font-medium text-gray-900 mb-2">Requirements</h4>
-                    <ul className="list-disc list-inside text-gray-600 space-y-1">
+                    <h4 className="mb-2 font-medium text-gray-900">
+                      Requirements
+                    </h4>
+                    <ul className="list-inside list-disc space-y-1 text-gray-600">
                       {job.requirements.map((item, i) => (
                         <li key={i}>{item}</li>
                       ))}
@@ -176,7 +198,7 @@ export default function CareersPage() {
                 <div className="mt-6">
                   <a
                     href={`mailto:careers@trustyourinbox.com?subject=Application for ${job.title}`}
-                    className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 transition-colors"
+                    className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-primary focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
                   >
                     Apply Now
                   </a>
@@ -188,4 +210,4 @@ export default function CareersPage() {
       </section>
     </div>
   );
-} 
+}

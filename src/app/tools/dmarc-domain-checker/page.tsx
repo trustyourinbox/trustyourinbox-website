@@ -1,7 +1,19 @@
 "use client";
 
 import { useState } from "react";
-import { FaCheckCircle, FaExclamationTriangle, FaTimesCircle, FaShieldAlt, FaKey, FaEnvelope, FaTrophy, FaMedal, FaCopy, FaInfoCircle, FaServer } from "react-icons/fa";
+import {
+  FaCheckCircle,
+  FaExclamationTriangle,
+  FaTimesCircle,
+  FaShieldAlt,
+  FaKey,
+  FaEnvelope,
+  FaTrophy,
+  FaMedal,
+  FaCopy,
+  FaInfoCircle,
+  FaServer,
+} from "react-icons/fa";
 import { ToolLayout, Button, Input, Card, Alert } from "@/components/ui";
 import { DMARCStatus } from "@/components/ui/DMARCStatus";
 import { Shield, Mail, Key, Globe, ArrowRight } from "lucide-react";
@@ -10,14 +22,16 @@ import Link from "next/link";
 type DMARCPolicy = "reject" | "quarantine" | "none" | "no-policy";
 
 function getStatusIcon(status: "success" | "warning" | "error") {
-  if (status === "success") return <FaCheckCircle className="text-green-600 w-6 h-6" />;
-  if (status === "warning") return <FaExclamationTriangle className="text-yellow-500 w-6 h-6" />;
-  return <FaTimesCircle className="text-red-600 w-6 h-6" />;
+  if (status === "success")
+    return <FaCheckCircle className="h-6 w-6 text-green-600" />;
+  if (status === "warning")
+    return <FaExclamationTriangle className="h-6 w-6 text-yellow-500" />;
+  return <FaTimesCircle className="h-6 w-6 text-red-600" />;
 }
 
 function parseDMARCRecord(record: string) {
   const fields: Record<string, string> = {};
-  record.split(";").forEach(part => {
+  record.split(";").forEach((part) => {
     const [k, ...rest] = part.trim().split("=");
     if (k && rest.length) fields[k.trim()] = rest.join("=").trim();
   });
@@ -25,7 +39,7 @@ function parseDMARCRecord(record: string) {
 }
 
 function parseSPFRecord(record: string) {
-  return record.split(" ").map(part => part.trim());
+  return record.split(" ").map((part) => part.trim());
 }
 
 function getGradeAndScore(dmarcFields: Record<string, string>) {
@@ -34,9 +48,9 @@ function getGradeAndScore(dmarcFields: Record<string, string>) {
   const dots: { color: string; label: string }[] = [];
   let grade = "F";
   let color = "bg-red-50 text-red-700 border-red-200";
-  let icon = <FaTimesCircle className="text-red-600 w-7 h-7" />;
+  let icon = <FaTimesCircle className="h-7 w-7 text-red-600" />;
   let message = "High risk: DMARC record is missing or invalid.";
-  let dmarcPolicy: 'reject' | 'quarantine' | 'none' | 'no-policy' = 'no-policy';
+  let dmarcPolicy: "reject" | "quarantine" | "none" | "no-policy" = "no-policy";
 
   // Check DMARC version
   if (dmarcFields.v === "DMARC1") {
@@ -53,17 +67,17 @@ function getGradeAndScore(dmarcFields: Record<string, string>) {
       score += 40;
       badges.push("Reject Policy");
       dots.push({ color: "bg-green-500", label: "Strong policy (reject)" });
-      dmarcPolicy = 'reject';
+      dmarcPolicy = "reject";
     } else if (dmarcFields.p === "quarantine") {
       score += 30;
       badges.push("Quarantine Policy");
       dots.push({ color: "bg-green-500", label: "Good policy (quarantine)" });
-      dmarcPolicy = 'quarantine';
+      dmarcPolicy = "quarantine";
     } else if (dmarcFields.p === "none") {
       score += 10;
       badges.push("None Policy");
       dots.push({ color: "bg-yellow-500", label: "Weak policy (none)" });
-      dmarcPolicy = 'none';
+      dmarcPolicy = "none";
     }
   } else {
     dots.push({ color: "bg-red-500", label: "No policy defined" });
@@ -98,22 +112,22 @@ function getGradeAndScore(dmarcFields: Record<string, string>) {
   if (score >= 90) {
     grade = "A";
     color = "bg-green-100 text-green-800 border-green-200";
-    icon = <FaTrophy className="text-yellow-500 w-7 h-7" />;
+    icon = <FaTrophy className="h-7 w-7 text-yellow-500" />;
     message = "Excellent! DMARC is well configured.";
   } else if (score >= 80) {
     grade = "B";
     color = "bg-primary/10 text-foreground border-primary/20";
-    icon = <FaMedal className="text-yellow-500 w-7 h-7" />;
+    icon = <FaMedal className="h-7 w-7 text-yellow-500" />;
     message = "Good! DMARC is properly configured.";
   } else if (score >= 70) {
     grade = "C";
     color = "bg-yellow-100 text-yellow-800 border-yellow-200";
-    icon = <FaCheckCircle className="text-yellow-500 w-7 h-7" />;
+    icon = <FaCheckCircle className="h-7 w-7 text-yellow-500" />;
     message = "Fair. DMARC needs some improvements.";
   } else if (score >= 50) {
     grade = "D";
     color = "bg-orange-100 text-orange-800 border-orange-200";
-    icon = <FaExclamationTriangle className="text-orange-500 w-7 h-7" />;
+    icon = <FaExclamationTriangle className="h-7 w-7 text-orange-500" />;
     message = "Poor. DMARC needs significant improvements.";
   }
 
@@ -124,68 +138,81 @@ function getWarnings(result: any) {
   const warnings: { icon: JSX.Element; color: string; message: string }[] = [];
   if (!result.dmarc) {
     warnings.push({
-      icon: <FaExclamationTriangle className="text-red-500 w-4 h-4" />,
+      icon: <FaExclamationTriangle className="h-4 w-4 text-red-500" />,
       color: "text-red-700 bg-red-50 border-red-200",
-      message: "DMARC record is missing. Your domain is vulnerable to spoofing."
+      message:
+        "DMARC record is missing. Your domain is vulnerable to spoofing.",
     });
   } else if (result.dmarc && /p=none/.test(result.dmarc)) {
     warnings.push({
-      icon: <FaInfoCircle className="text-yellow-500 w-4 h-4" />,
+      icon: <FaInfoCircle className="h-4 w-4 text-yellow-500" />,
       color: "text-yellow-700 bg-yellow-50 border-yellow-200",
-      message: "DMARC policy is 'none'. Monitoring only; enforcement is not active."
+      message:
+        "DMARC policy is 'none'. Monitoring only; enforcement is not active.",
     });
   }
   if (!result.spf) {
     warnings.push({
-      icon: <FaExclamationTriangle className="text-red-500 w-4 h-4" />,
+      icon: <FaExclamationTriangle className="h-4 w-4 text-red-500" />,
       color: "text-red-700 bg-red-50 border-red-200",
-      message: "SPF record is missing. SPF helps prevent unauthorized senders."
+      message: "SPF record is missing. SPF helps prevent unauthorized senders.",
     });
   }
   if (!result.dkim || !result.dkim.some((d: any) => d.record)) {
     warnings.push({
-      icon: <FaExclamationTriangle className="text-red-500 w-4 h-4" />,
+      icon: <FaExclamationTriangle className="h-4 w-4 text-red-500" />,
       color: "text-red-700 bg-red-50 border-red-200",
-      message: "DKIM record is missing. DKIM helps verify message authenticity."
+      message:
+        "DKIM record is missing. DKIM helps verify message authenticity.",
     });
   } else if (result.dkim && result.dkim.some((d: any) => !d.record)) {
     warnings.push({
-      icon: <FaInfoCircle className="text-yellow-500 w-4 h-4" />,
+      icon: <FaInfoCircle className="h-4 w-4 text-yellow-500" />,
       color: "text-yellow-700 bg-yellow-50 border-yellow-200",
-      message: "Some DKIM selectors are missing. Add all recommended selectors."
+      message:
+        "Some DKIM selectors are missing. Add all recommended selectors.",
     });
   }
   if (result.dmarc && result.dmarc.length > 255) {
     warnings.push({
-      icon: <FaInfoCircle className="text-yellow-500 w-4 h-4" />,
+      icon: <FaInfoCircle className="h-4 w-4 text-yellow-500" />,
       color: "text-yellow-700 bg-yellow-50 border-yellow-200",
-      message: `DMARC record is ${result.dmarc.length} characters long. DNS TXT records over 255 characters may be truncated or cause issues.`
+      message: `DMARC record is ${result.dmarc.length} characters long. DNS TXT records over 255 characters may be truncated or cause issues.`,
     });
   }
   return warnings;
 }
 
-function getRecommendations(dmarc: string | null | undefined, spf: string | null | undefined, dkimSelectors: string[]) {
-  const recommendations: { type: 'warning' | 'info' | 'success'; message: string }[] = [];
+function getRecommendations(
+  dmarc: string | null | undefined,
+  spf: string | null | undefined,
+  dkimSelectors: string[]
+) {
+  const recommendations: {
+    type: "warning" | "info" | "success";
+    message: string;
+  }[] = [];
 
   // DMARC recommendations
   if (!dmarc) {
     recommendations.push({
-      type: 'warning',
-      message: 'Add a DMARC record to protect your domain from email spoofing'
+      type: "warning",
+      message: "Add a DMARC record to protect your domain from email spoofing",
     });
   } else {
     const fields = parseDMARCRecord(dmarc);
-    if (fields.p === 'none') {
+    if (fields.p === "none") {
       recommendations.push({
-        type: 'warning',
-        message: 'Upgrade your DMARC policy from "none" to "quarantine" or "reject" for better protection'
+        type: "warning",
+        message:
+          'Upgrade your DMARC policy from "none" to "quarantine" or "reject" for better protection',
       });
     }
     if (!fields.rua) {
       recommendations.push({
-        type: 'info',
-        message: 'Add a DMARC aggregate reporting address (rua) to monitor your email authentication'
+        type: "info",
+        message:
+          "Add a DMARC aggregate reporting address (rua) to monitor your email authentication",
       });
     }
   }
@@ -193,15 +220,16 @@ function getRecommendations(dmarc: string | null | undefined, spf: string | null
   // SPF recommendations
   if (!spf) {
     recommendations.push({
-      type: 'warning',
-      message: 'Add an SPF record to specify authorized email servers'
+      type: "warning",
+      message: "Add an SPF record to specify authorized email servers",
     });
   } else {
     const spfFields = parseSPFRecord(spf);
-    if (!spfFields.includes('-all')) {
+    if (!spfFields.includes("-all")) {
       recommendations.push({
-        type: 'info',
-        message: 'Consider using "-all" in your SPF record for stricter enforcement'
+        type: "info",
+        message:
+          'Consider using "-all" in your SPF record for stricter enforcement',
       });
     }
   }
@@ -209,16 +237,18 @@ function getRecommendations(dmarc: string | null | undefined, spf: string | null
   // DKIM recommendations
   if (dkimSelectors.length === 0) {
     recommendations.push({
-      type: 'warning',
-      message: 'Add DKIM records to improve email deliverability and prevent spoofing'
+      type: "warning",
+      message:
+        "Add DKIM records to improve email deliverability and prevent spoofing",
     });
   }
 
   // Success message if all three are configured
   if (dmarc && spf && dkimSelectors.length > 0) {
     recommendations.push({
-      type: 'success',
-      message: 'Great job! Your domain has all three email authentication methods configured'
+      type: "success",
+      message:
+        "Great job! Your domain has all three email authentication methods configured",
     });
   }
 
@@ -278,13 +308,15 @@ function RelatedTools() {
   ];
 
   return (
-    <div className="mt-12 mb-8">
+    <div className="mb-8 mt-12">
       <div className="mb-6">
         <h2 className="text-2xl font-bold tracking-tight">Related Tools</h2>
-        <p className="text-muted-foreground mt-1">Explore more email authentication tools to secure your domain</p>
+        <p className="mt-1 text-muted-foreground">
+          Explore more email authentication tools to secure your domain
+        </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
         {tools.map((tool) => (
           <Link
             key={tool.id}
@@ -292,10 +324,16 @@ function RelatedTools() {
             className={`group relative overflow-hidden rounded-lg border p-5 transition-all hover:shadow-md ${tool.borderColor} ${tool.color}`}
           >
             <div className="flex items-start gap-4">
-              <div className={`rounded-full p-2 ${tool.iconBg}`}>{tool.icon}</div>
+              <div className={`rounded-full p-2 ${tool.iconBg}`}>
+                {tool.icon}
+              </div>
               <div>
-                <h3 className="font-semibold text-lg group-hover:underline">{tool.name}</h3>
-                <p className="text-sm text-muted-foreground mt-1">{tool.description}</p>
+                <h3 className="text-lg font-semibold group-hover:underline">
+                  {tool.name}
+                </h3>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  {tool.description}
+                </p>
               </div>
             </div>
             <div className="absolute bottom-0 left-0 h-1 w-0 bg-primary transition-all duration-300 group-hover:w-full"></div>
@@ -321,11 +359,18 @@ export default function DMARCDomainCheckerPage() {
     setLoading(true);
     setResult(null);
     try {
-      const res = await fetch(`/api/dmarc-check?domain=${encodeURIComponent(domain)}`);
+      const res = await fetch(
+        `/api/dmarc-check?domain=${encodeURIComponent(domain)}`
+      );
       const data = await res.json();
       setResult(data);
     } catch (err) {
-      setResult({ dmarc: null, spf: null, dkim: [], error: "Error fetching DNS records." });
+      setResult({
+        dmarc: null,
+        spf: null,
+        dkim: [],
+        error: "Error fetching DNS records.",
+      });
     } finally {
       setLoading(false);
     }
@@ -334,31 +379,32 @@ export default function DMARCDomainCheckerPage() {
   const sidebarContent = (
     <div className="space-y-6">
       <div>
-        <h3 className="text-sm font-medium text-gray-900 flex items-center gap-1.5">
-          <FaShieldAlt className="w-4 h-4 text-primary" />
+        <h3 className="flex items-center gap-1.5 text-sm font-medium text-gray-900">
+          <FaShieldAlt className="h-4 w-4 text-primary" />
           About Domain Authentication
         </h3>
-        <p className="text-sm text-gray-500 mt-2">
-          Email authentication helps protect your domain from spoofing and phishing. This tool checks your DMARC, SPF, and DKIM records.
+        <p className="mt-2 text-sm text-gray-500">
+          Email authentication helps protect your domain from spoofing and
+          phishing. This tool checks your DMARC, SPF, and DKIM records.
         </p>
       </div>
 
       <div>
-        <h3 className="text-sm font-medium text-gray-900 flex items-center gap-1.5">
-          <FaInfoCircle className="w-4 h-4 text-primary" />
+        <h3 className="flex items-center gap-1.5 text-sm font-medium text-gray-900">
+          <FaInfoCircle className="h-4 w-4 text-primary" />
           What We Check
         </h3>
-        <ul className="text-sm text-gray-500 space-y-2 mt-2">
+        <ul className="mt-2 space-y-2 text-sm text-gray-500">
           <li className="flex items-start gap-2">
-            <FaShieldAlt className="w-4 h-4 text-primary mt-0.5" />
+            <FaShieldAlt className="mt-0.5 h-4 w-4 text-primary" />
             <span>DMARC record and policy</span>
           </li>
           <li className="flex items-start gap-2">
-            <FaEnvelope className="w-4 h-4 text-primary mt-0.5" />
+            <FaEnvelope className="mt-0.5 h-4 w-4 text-primary" />
             <span>SPF record and mechanisms</span>
           </li>
           <li className="flex items-start gap-2">
-            <FaKey className="w-4 h-4 text-primary mt-0.5" />
+            <FaKey className="mt-0.5 h-4 w-4 text-primary" />
             <span>DKIM records and selectors</span>
           </li>
         </ul>
@@ -368,9 +414,14 @@ export default function DMARCDomainCheckerPage() {
 
   const dmarcFields = result?.dmarc ? parseDMARCRecord(result.dmarc) : {};
   const spfFields = result?.spf ? parseSPFRecord(result.spf) : [];
-  const { score, grade, color, icon, message, badges, dots, dmarcPolicy } = getGradeAndScore(dmarcFields);
+  const { score, grade, color, icon, message, badges, dots, dmarcPolicy } =
+    getGradeAndScore(dmarcFields);
   const warnings = getWarnings(dmarcFields);
-  const recommendations = getRecommendations(result?.dmarc, result?.spf, result?.dkim.map(d => d.selector) || []);
+  const recommendations = getRecommendations(
+    result?.dmarc,
+    result?.spf,
+    result?.dkim.map((d) => d.selector) || []
+  );
 
   return (
     <ToolLayout
@@ -380,7 +431,7 @@ export default function DMARCDomainCheckerPage() {
     >
       <Card className="w-full border-0 shadow-lg">
         <div className="p-6">
-          <div className="flex items-center gap-2 mb-6">
+          <div className="mb-6 flex items-center gap-2">
             <Shield className="h-6 w-6 text-primary" />
             <h2 className="text-2xl font-bold">DMARC Checker</h2>
           </div>
@@ -392,14 +443,14 @@ export default function DMARCDomainCheckerPage() {
               </label>
               <div className="flex gap-3">
                 <div className="relative flex-1">
-                  <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                  <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                     <Globe className="h-5 w-5 text-gray-400" />
                   </div>
                   <Input
                     id="domain"
                     type="text"
                     placeholder="yourdomain.com"
-                    className="pl-10 h-11 border-gray-200 focus:border-primary focus:ring-ring"
+                    className="h-11 border-gray-200 pl-10 focus:border-primary focus:ring-ring"
                     value={domain}
                     onChange={(e) => setDomain(e.target.value)}
                     required
@@ -407,13 +458,13 @@ export default function DMARCDomainCheckerPage() {
                 </div>
                 <Button
                   type="submit"
-                  className="bg-primary hover:bg-primary text-white min-w-[120px]"
+                  className="min-w-[120px] bg-primary text-white hover:bg-primary"
                   disabled={loading}
                 >
                   {loading ? (
                     <span className="flex items-center gap-2">
                       <svg
-                        className="animate-spin h-4 w-4 text-white"
+                        className="h-4 w-4 animate-spin text-white"
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"
@@ -447,16 +498,16 @@ export default function DMARCDomainCheckerPage() {
       </Card>
 
       {result && (
-        <div className="space-y-6 mt-6">
+        <div className="mt-6 space-y-6">
           {/* DMARC Status */}
           <DMARCStatus policy={dmarcPolicy} />
 
           {/* Status Card */}
           <Card>
-            <div className="flex items-center justify-between mb-4">
+            <div className="mb-4 flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <FaShieldAlt className="w-6 h-6 text-primary/70" />
-                <span className="font-bold text-xl text-gray-900">Status</span>
+                <FaShieldAlt className="h-6 w-6 text-primary/70" />
+                <span className="text-xl font-bold text-gray-900">Status</span>
               </div>
             </div>
 
@@ -464,7 +515,7 @@ export default function DMARCDomainCheckerPage() {
             <div className="flex flex-wrap gap-4">
               {dots.map((dot, i) => (
                 <div key={i} className="flex items-center gap-2">
-                  <div className={`w-3 h-3 rounded-full ${dot.color}`} />
+                  <div className={`h-3 w-3 rounded-full ${dot.color}`} />
                   <span className="text-sm text-gray-600">{dot.label}</span>
                 </div>
               ))}
@@ -477,7 +528,7 @@ export default function DMARCDomainCheckerPage() {
               <ul className="space-y-2">
                 {recommendations.map((rec, i) => (
                   <li key={i} className="flex items-start gap-2">
-                    <FaInfoCircle className="w-4 h-4 text-primary mt-0.5" />
+                    <FaInfoCircle className="mt-0.5 h-4 w-4 text-primary" />
                     <span>{rec.message}</span>
                   </li>
                 ))}
@@ -489,83 +540,125 @@ export default function DMARCDomainCheckerPage() {
           <div className="space-y-4">
             {/* DMARC */}
             <Card>
-              <div className="flex items-center justify-between mb-4">
+              <div className="mb-4 flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <FaShieldAlt className="w-6 h-6 text-primary/70" />
-                  <span className="font-bold text-xl text-gray-900">DMARC</span>
+                  <FaShieldAlt className="h-6 w-6 text-primary/70" />
+                  <span className="text-xl font-bold text-gray-900">DMARC</span>
                 </div>
                 {result.dmarc ? (
-                  <span className="px-3 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary">Valid</span>
+                  <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
+                    Valid
+                  </span>
                 ) : (
-                  <span className="px-3 py-1 rounded-full text-xs font-semibold bg-gray-200 text-gray-500">Missing</span>
+                  <span className="rounded-full bg-gray-200 px-3 py-1 text-xs font-semibold text-gray-500">
+                    Missing
+                  </span>
                 )}
               </div>
               {result.dmarc ? (
                 <>
-                  <div className="text-gray-500 text-sm mb-2">Policy: <span className="font-semibold text-gray-700">{result.dmarc.match(/p=([a-zA-Z]+)/)?.[0] || "Unknown"}</span></div>
+                  <div className="mb-2 text-sm text-gray-500">
+                    Policy:{" "}
+                    <span className="font-semibold text-gray-700">
+                      {result.dmarc.match(/p=([a-zA-Z]+)/)?.[0] || "Unknown"}
+                    </span>
+                  </div>
                   <div className="flex items-center gap-2">
-                    <pre className="whitespace-pre-wrap break-all text-gray-700 bg-gray-50 rounded p-2 border border-gray-100 text-xs flex-1 font-mono">{result.dmarc}</pre>
+                    <pre className="flex-1 whitespace-pre-wrap break-all rounded border border-gray-100 bg-gray-50 p-2 font-mono text-xs text-gray-700">
+                      {result.dmarc}
+                    </pre>
                     <CopyButton value={result.dmarc} />
                   </div>
                 </>
               ) : (
-                <div className="text-gray-400 font-medium">No DMARC record found</div>
+                <div className="font-medium text-gray-400">
+                  No DMARC record found
+                </div>
               )}
             </Card>
 
             {/* SPF */}
             <Card>
-              <div className="flex items-center justify-between mb-4">
+              <div className="mb-4 flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <FaEnvelope className="w-6 h-6 text-primary/70" />
-                  <span className="font-bold text-xl text-gray-900">SPF</span>
+                  <FaEnvelope className="h-6 w-6 text-primary/70" />
+                  <span className="text-xl font-bold text-gray-900">SPF</span>
                 </div>
                 {result.spf ? (
-                  <span className="px-3 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary">Valid</span>
+                  <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
+                    Valid
+                  </span>
                 ) : (
-                  <span className="px-3 py-1 rounded-full text-xs font-semibold bg-gray-200 text-gray-500">Missing</span>
+                  <span className="rounded-full bg-gray-200 px-3 py-1 text-xs font-semibold text-gray-500">
+                    Missing
+                  </span>
                 )}
               </div>
               {result.spf ? (
                 <>
-                  <div className="text-gray-500 text-sm mb-2">All mechanisms present</div>
+                  <div className="mb-2 text-sm text-gray-500">
+                    All mechanisms present
+                  </div>
                   <div className="flex items-center gap-2">
-                    <pre className="whitespace-pre-wrap break-all text-gray-700 bg-gray-50 rounded p-2 border border-gray-100 text-xs flex-1 font-mono">{result.spf}</pre>
+                    <pre className="flex-1 whitespace-pre-wrap break-all rounded border border-gray-100 bg-gray-50 p-2 font-mono text-xs text-gray-700">
+                      {result.spf}
+                    </pre>
                     <CopyButton value={result.spf} />
                   </div>
                 </>
               ) : (
-                <div className="text-gray-400 font-medium">No SPF record found</div>
+                <div className="font-medium text-gray-400">
+                  No SPF record found
+                </div>
               )}
             </Card>
 
             {/* DKIM */}
             <Card>
-              <div className="flex items-center justify-between mb-4">
+              <div className="mb-4 flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <FaKey className="w-6 h-6 text-primary/70" />
-                  <span className="font-bold text-xl text-gray-900">DKIM</span>
+                  <FaKey className="h-6 w-6 text-primary/70" />
+                  <span className="text-xl font-bold text-gray-900">DKIM</span>
                 </div>
-                {result.dkim && result.dkim.length > 0 && result.dkim.some(d => d.record) ? (
-                  <span className="px-3 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary">Valid</span>
+                {result.dkim &&
+                result.dkim.length > 0 &&
+                result.dkim.some((d) => d.record) ? (
+                  <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
+                    Valid
+                  </span>
                 ) : (
-                  <span className="px-3 py-1 rounded-full text-xs font-semibold bg-gray-200 text-gray-500">Missing</span>
+                  <span className="rounded-full bg-gray-200 px-3 py-1 text-xs font-semibold text-gray-500">
+                    Missing
+                  </span>
                 )}
               </div>
-              {result.dkim && result.dkim.length > 0 && result.dkim.some(d => d.record) ? (
+              {result.dkim &&
+              result.dkim.length > 0 &&
+              result.dkim.some((d) => d.record) ? (
                 <div className="space-y-3">
-                  {result.dkim.filter(d => d.record).map(d => (
-                    <div key={d.selector}>
-                      <div className="text-gray-500 text-xs mb-1">Selector: <span className="font-semibold text-gray-700">{d.selector}</span></div>
-                      <div className="flex items-center gap-2">
-                        <pre className="whitespace-pre-wrap break-all text-gray-700 bg-gray-50 rounded p-2 border border-gray-100 text-xs flex-1 font-mono">{d.record as string}</pre>
-                        <CopyButton value={d.record as string} />
+                  {result.dkim
+                    .filter((d) => d.record)
+                    .map((d) => (
+                      <div key={d.selector}>
+                        <div className="mb-1 text-xs text-gray-500">
+                          Selector:{" "}
+                          <span className="font-semibold text-gray-700">
+                            {d.selector}
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <pre className="flex-1 whitespace-pre-wrap break-all rounded border border-gray-100 bg-gray-50 p-2 font-mono text-xs text-gray-700">
+                            {d.record as string}
+                          </pre>
+                          <CopyButton value={d.record as string} />
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
                 </div>
               ) : (
-                <div className="text-gray-400 font-medium">No DKIM records found (checked common selectors)</div>
+                <div className="font-medium text-gray-400">
+                  No DKIM records found (checked common selectors)
+                </div>
               )}
             </Card>
           </div>
@@ -576,4 +669,4 @@ export default function DMARCDomainCheckerPage() {
       <RelatedTools />
     </ToolLayout>
   );
-} 
+}

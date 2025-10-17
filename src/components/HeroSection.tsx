@@ -26,7 +26,11 @@ export default function HeroSection({
     <section className="relative overflow-hidden py-16 sm:py-24">
       {/* Background with animated wave effect */}
       <div className="absolute inset-0 bg-gradient-to-b from-secondary to-white">
-        <svg className="absolute bottom-0 left-0 right-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+        <svg
+          className="absolute bottom-0 left-0 right-0"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1440 320"
+        >
           <path
             fill="#0066FF"
             fillOpacity="0.1"
@@ -40,13 +44,21 @@ export default function HeroSection({
         </svg>
       </div>
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid items-center gap-12 lg:grid-cols-2">
           <div>
-            {badge && <div className="inline-flex items-center px-4 py-2 rounded-full bg-primary/10 text-primary mb-6">{badge}</div>}
-            <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl md:text-6xl">{title}</h1>
-            {subtitle && <p className="mt-6 text-xl text-gray-500">{subtitle}</p>}
+            {badge && (
+              <div className="mb-6 inline-flex items-center rounded-full bg-primary/10 px-4 py-2 text-primary">
+                {badge}
+              </div>
+            )}
+            <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl md:text-6xl">
+              {title}
+            </h1>
+            {subtitle && (
+              <p className="mt-6 text-xl text-gray-500">{subtitle}</p>
+            )}
             {ctaButtons && ctaButtons.length > 0 && (
-              <div className="mt-8 flex flex-col sm:flex-row gap-4">
+              <div className="mt-8 flex flex-col gap-4 sm:flex-row">
                 {ctaButtons.map((btn, i) => (
                   <a
                     key={btn.href + i}
@@ -65,9 +77,9 @@ export default function HeroSection({
           </div>
           {illustrationSrc && (
             <div className="relative">
-              <div className="absolute -top-6 -right-6 w-64 h-64 bg-primary/10 rounded-full opacity-30 blur-3xl"></div>
-              <div className="absolute -bottom-8 -left-8 w-64 h-64 bg-primary/20 rounded-full opacity-30 blur-3xl"></div>
-              <div className="relative rounded-xl overflow-hidden shadow-2xl">
+              <div className="absolute -right-6 -top-6 h-64 w-64 rounded-full bg-primary/10 opacity-30 blur-3xl"></div>
+              <div className="absolute -bottom-8 -left-8 h-64 w-64 rounded-full bg-primary/20 opacity-30 blur-3xl"></div>
+              <div className="relative overflow-hidden rounded-xl shadow-2xl">
                 <Image
                   src={illustrationSrc}
                   alt="Hero Illustration"
@@ -83,4 +95,4 @@ export default function HeroSection({
       </div>
     </section>
   );
-} 
+}

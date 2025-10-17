@@ -1,31 +1,31 @@
-'use client'
+"use client";
 
-import Link from 'next/link'
+import Link from "next/link";
 
 const navigation = {
   product: [
-    { name: 'Features', href: '/features' },
-    { name: 'Pricing', href: '/pricing' },
-    { name: 'How It Works', href: '/how-it-works' },
-    { name: 'FAQ', href: '/faq' },
+    { name: "Features", href: "/features" },
+    { name: "Pricing", href: "/pricing" },
+    { name: "How It Works", href: "/how-it-works" },
+    { name: "FAQ", href: "/faq" },
   ],
   company: [
-    { name: 'About', href: '/about' },
-    { name: 'Blog', href: '/blog' },
-    { name: 'Careers', href: '/careers' },
-    { name: 'Contact', href: '/contact' },
+    { name: "About", href: "/about" },
+    { name: "Blog", href: "/blog" },
+    { name: "Careers", href: "/careers" },
+    { name: "Contact", href: "/contact" },
   ],
   resources: [
-    { name: 'Documentation', href: '/docs' },
-    { name: 'API Reference', href: '/api' },
-    { name: 'Status', href: '/status' },
-    { name: 'Terms of Service', href: '/terms' },
-    { name: 'Privacy Policy', href: '/privacy' },
+    { name: "Documentation", href: "/docs" },
+    { name: "API Reference", href: "/api" },
+    { name: "Status", href: "/status" },
+    { name: "Terms of Service", href: "/terms" },
+    { name: "Privacy Policy", href: "/privacy" },
   ],
   social: [
     {
-      name: 'Twitter',
-      href: 'https://twitter.com/trustyourinbox',
+      name: "Twitter",
+      href: "https://twitter.com/trustyourinbox",
       icon: (props: any) => (
         <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
           <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
@@ -33,8 +33,8 @@ const navigation = {
       ),
     },
     {
-      name: 'GitHub',
-      href: 'https://github.com/trustyourinbox',
+      name: "GitHub",
+      href: "https://github.com/trustyourinbox",
       icon: (props: any) => (
         <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
           <path
@@ -46,8 +46,8 @@ const navigation = {
       ),
     },
     {
-      name: 'LinkedIn',
-      href: 'https://linkedin.com/company/trustyourinbox',
+      name: "LinkedIn",
+      href: "https://linkedin.com/company/trustyourinbox",
       icon: (props: any) => (
         <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
           <path
@@ -59,7 +59,7 @@ const navigation = {
       ),
     },
   ],
-}
+};
 
 export function Footer() {
   return (
@@ -70,10 +70,15 @@ export function Footer() {
       <div className="container py-8 sm:py-12 md:py-16">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3 lg:gap-12">
           <div className="space-y-6 sm:space-y-8">
-            <Link href="/" className="inline-block transition-all duration-300 hover:scale-105">
-              <span className="font-display text-xl sm:text-2xl font-bold gradient-text">TrustYourInbox</span>
+            <Link
+              href="/"
+              className="inline-block transition-all duration-300 hover:scale-105"
+            >
+              <span className="font-display gradient-text text-xl font-bold sm:text-2xl">
+                TrustYourInbox
+              </span>
             </Link>
-            <p className="text-sm sm:text-base leading-6 text-gray-300 max-w-xs">
+            <p className="max-w-xs text-sm leading-6 text-gray-300 sm:text-base">
               Making email security simple and accessible for everyone.
             </p>
             <div className="flex space-x-5 sm:space-x-6">
@@ -81,12 +86,15 @@ export function Footer() {
                 <a
                   key={item.name}
                   href={item.href}
-                  className="text-gray-400 transition-colors hover:text-primary touch-target"
+                  className="touch-target text-gray-400 transition-colors hover:text-primary"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   <span className="sr-only">{item.name}</span>
-                  <item.icon className="h-5 w-5 sm:h-6 sm:w-6" aria-hidden="true" />
+                  <item.icon
+                    className="h-5 w-5 sm:h-6 sm:w-6"
+                    aria-hidden="true"
+                  />
                 </a>
               ))}
             </div>
@@ -94,11 +102,16 @@ export function Footer() {
           <div className="grid grid-cols-2 gap-6 sm:gap-8 lg:col-span-2">
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8">
               <div>
-                <h3 className="text-sm font-semibold leading-6 text-white mb-4">Product</h3>
+                <h3 className="mb-4 text-sm font-semibold leading-6 text-white">
+                  Product
+                </h3>
                 <ul role="list" className="space-y-3">
                   {navigation.product.map((item) => (
                     <li key={item.name}>
-                      <Link href={item.href} className="text-sm leading-6 text-gray-300 transition-colors hover:text-primary inline-block py-1">
+                      <Link
+                        href={item.href}
+                        className="inline-block py-1 text-sm leading-6 text-gray-300 transition-colors hover:text-primary"
+                      >
                         {item.name}
                       </Link>
                     </li>
@@ -106,11 +119,16 @@ export function Footer() {
                 </ul>
               </div>
               <div>
-                <h3 className="text-sm font-semibold leading-6 text-white mb-4">Company</h3>
+                <h3 className="mb-4 text-sm font-semibold leading-6 text-white">
+                  Company
+                </h3>
                 <ul role="list" className="space-y-3">
                   {navigation.company.map((item) => (
                     <li key={item.name}>
-                      <Link href={item.href} className="text-sm leading-6 text-gray-300 transition-colors hover:text-primary inline-block py-1">
+                      <Link
+                        href={item.href}
+                        className="inline-block py-1 text-sm leading-6 text-gray-300 transition-colors hover:text-primary"
+                      >
                         {item.name}
                       </Link>
                     </li>
@@ -120,11 +138,16 @@ export function Footer() {
             </div>
             <div className="grid grid-cols-1">
               <div>
-                <h3 className="text-sm font-semibold leading-6 text-white mb-4">Resources</h3>
+                <h3 className="mb-4 text-sm font-semibold leading-6 text-white">
+                  Resources
+                </h3>
                 <ul role="list" className="space-y-3">
                   {navigation.resources.map((item) => (
                     <li key={item.name}>
-                      <Link href={item.href} className="text-sm leading-6 text-gray-300 transition-colors hover:text-primary inline-block py-1">
+                      <Link
+                        href={item.href}
+                        className="inline-block py-1 text-sm leading-6 text-gray-300 transition-colors hover:text-primary"
+                      >
                         {item.name}
                       </Link>
                     </li>
@@ -136,10 +159,11 @@ export function Footer() {
         </div>
         <div className="mt-12 border-t border-white/10 pt-8">
           <p className="text-xs leading-5 text-gray-400">
-            &copy; {new Date().getFullYear()} TrustYourInbox. All rights reserved.
+            &copy; {new Date().getFullYear()} TrustYourInbox. All rights
+            reserved.
           </p>
         </div>
       </div>
     </footer>
-  )
-} 
+  );
+}

@@ -1,96 +1,214 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { useState, useEffect } from "react"
-import { Shield, ChevronDown, Menu, X, BarChart3, Globe, Wrench, BookOpen, FileText, Users, Building2, Code, Rocket, Info, Mail, Briefcase, Sparkles, Play, AlertTriangle, Search, CheckCircle, Eye, Settings, FileCode } from "lucide-react"
-import { Button } from "@/components/ui/Button"
-import ThemeToggle from "@/components/ThemeToggle"
+import Link from "next/link";
+import { useState, useEffect } from "react";
+import {
+  Shield,
+  ChevronDown,
+  Menu,
+  X,
+  BarChart3,
+  Globe,
+  Wrench,
+  BookOpen,
+  FileText,
+  Users,
+  Building2,
+  Code,
+  Rocket,
+  Info,
+  Mail,
+  Briefcase,
+  Sparkles,
+  Play,
+  AlertTriangle,
+  Search,
+  CheckCircle,
+  Eye,
+  Settings,
+  FileCode,
+} from "lucide-react";
+import { Button } from "@/components/ui/Button";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const productItems = [
-  { name: "Features", href: "/features", icon: Sparkles, desc: "Complete DMARC analytics platform" },
-  { name: "Live Demo", href: "/demo", icon: Play, desc: "See TrustYourInbox in action" },
-]
+  {
+    name: "Features",
+    href: "/features",
+    icon: Sparkles,
+    desc: "Complete DMARC analytics platform",
+  },
+  {
+    name: "Live Demo",
+    href: "/demo",
+    icon: Play,
+    desc: "See TrustYourInbox in action",
+  },
+];
 
 const toolsDropdownSections = [
   {
     category: "DMARC",
     tools: [
-      { name: "DMARC Analyzer", href: "/tools/dmarc-analyzer", icon: Shield, desc: "Analyze DMARC records & policy", popular: true },
-      { name: "Policy Generator", href: "/tools/dmarc-policy-generator", icon: FileText, desc: "Create DMARC records", popular: true },
-      { name: "Domain Checker", href: "/tools/dmarc-domain-checker", icon: Globe, desc: "Check domain DMARC status", popular: false },
-      { name: "Subdomain Checker", href: "/tools/dmarc-subdomain-policy-checker", icon: AlertTriangle, desc: "Verify subdomain policies", popular: false },
-      { name: "Policy Impact Simulator", href: "/tools/dmarc-policy-impact-simulator", icon: BarChart3, desc: "Simulate policy changes", popular: false },
-    ]
+      {
+        name: "DMARC Analyzer",
+        href: "/tools/dmarc-analyzer",
+        icon: Shield,
+        desc: "Analyze DMARC records & policy",
+        popular: true,
+      },
+      {
+        name: "Policy Generator",
+        href: "/tools/dmarc-policy-generator",
+        icon: FileText,
+        desc: "Create DMARC records",
+        popular: true,
+      },
+      {
+        name: "Domain Checker",
+        href: "/tools/dmarc-domain-checker",
+        icon: Globe,
+        desc: "Check domain DMARC status",
+        popular: false,
+      },
+      {
+        name: "Subdomain Checker",
+        href: "/tools/dmarc-subdomain-policy-checker",
+        icon: AlertTriangle,
+        desc: "Verify subdomain policies",
+        popular: false,
+      },
+      {
+        name: "Policy Impact Simulator",
+        href: "/tools/dmarc-policy-impact-simulator",
+        icon: BarChart3,
+        desc: "Simulate policy changes",
+        popular: false,
+      },
+    ],
   },
   {
     category: "SPF & DKIM",
     tools: [
-      { name: "SPF Surveyor", href: "/tools/spf-surveyor", icon: Search, desc: "Analyze SPF records & lookups", popular: true },
-      { name: "DKIM Validator", href: "/tools/dkim-validator", icon: CheckCircle, desc: "Validate DKIM signatures", popular: false },
-      { name: "DKIM Inspector", href: "/tools/dkim-inspector", icon: Eye, desc: "Inspect DKIM configuration", popular: false },
-    ]
+      {
+        name: "SPF Surveyor",
+        href: "/tools/spf-surveyor",
+        icon: Search,
+        desc: "Analyze SPF records & lookups",
+        popular: true,
+      },
+      {
+        name: "DKIM Validator",
+        href: "/tools/dkim-validator",
+        icon: CheckCircle,
+        desc: "Validate DKIM signatures",
+        popular: false,
+      },
+      {
+        name: "DKIM Inspector",
+        href: "/tools/dkim-inspector",
+        icon: Eye,
+        desc: "Inspect DKIM configuration",
+        popular: false,
+      },
+    ],
   },
   {
     category: "Security & Reports",
     tools: [
-      { name: "Domain Security Checker", href: "/tools/domain-security-checker", icon: Settings, desc: "Comprehensive security audit", popular: true },
-      { name: "Forensic Report Viewer", href: "/tools/forensic-report-viewer", icon: FileCode, desc: "Parse RUF reports", popular: false },
-      { name: "XML Converter", href: "/tools/xml-converter", icon: Wrench, desc: "Convert aggregate reports", popular: false },
-    ]
-  }
-]
+      {
+        name: "Domain Security Checker",
+        href: "/tools/domain-security-checker",
+        icon: Settings,
+        desc: "Comprehensive security audit",
+        popular: true,
+      },
+      {
+        name: "Forensic Report Viewer",
+        href: "/tools/forensic-report-viewer",
+        icon: FileCode,
+        desc: "Parse RUF reports",
+        popular: false,
+      },
+      {
+        name: "XML Converter",
+        href: "/tools/xml-converter",
+        icon: Wrench,
+        desc: "Convert aggregate reports",
+        popular: false,
+      },
+    ],
+  },
+];
 
 const resourcesItems = [
   { name: "Guides", href: "/guides", icon: BookOpen, desc: "Learn DMARC" },
   { name: "Blog", href: "/blog", icon: FileText, desc: "Latest articles" },
   { name: "Support", href: "/support", icon: Users, desc: "Get help" },
   { name: "API Docs", href: "/docs", icon: Code, desc: "Developer docs" },
-]
+];
 
 const companyItems = [
   { name: "About", href: "/about", icon: Info, desc: "Our story and mission" },
-  { name: "Company", href: "/company", icon: Building2, desc: "Company overview" },
+  {
+    name: "Company",
+    href: "/company",
+    icon: Building2,
+    desc: "Company overview",
+  },
   { name: "Careers", href: "/careers", icon: Briefcase, desc: "Join our team" },
   { name: "Contact", href: "/contact", icon: Mail, desc: "Get in touch" },
-]
+];
 
 export default function ModernNavbar() {
-  const [isScrolled, setIsScrolled] = useState(false)
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [openDropdown, setOpenDropdown] = useState<string | null>(null)
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10)
-    }
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+      setIsScrolled(window.scrollY > 10);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-background/80 backdrop-blur-xl border-b border-border shadow-sm"
+          ? "border-b border-border bg-background/80 shadow-sm backdrop-blur-xl"
           : "bg-transparent"
       }`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex h-14 sm:h-16 items-center justify-between gap-4">
+        <div className="flex h-14 items-center justify-between gap-4 sm:h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center group flex-shrink-0">
+          <Link href="/" className="group flex flex-shrink-0 items-center">
             <div className="relative">
               <svg
                 width="28"
                 height="28"
                 viewBox="0 0 100 100"
                 xmlns="http://www.w3.org/2000/svg"
-                className="transition-all group-hover:scale-110 sm:w-9 sm:h-9"
+                className="transition-all group-hover:scale-110 sm:h-9 sm:w-9"
               >
                 <defs>
-                  <linearGradient id="shieldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" style={{ stopColor: '#6366f1', stopOpacity: 1 }} />
-                    <stop offset="100%" style={{ stopColor: '#8b5cf6', stopOpacity: 1 }} />
+                  <linearGradient
+                    id="shieldGradient"
+                    x1="0%"
+                    y1="0%"
+                    x2="100%"
+                    y2="100%"
+                  >
+                    <stop
+                      offset="0%"
+                      style={{ stopColor: "#6366f1", stopOpacity: 1 }}
+                    />
+                    <stop
+                      offset="100%"
+                      style={{ stopColor: "#8b5cf6", stopOpacity: 1 }}
+                    />
                   </linearGradient>
                 </defs>
                 <title>TrustYourInbox - Email Security</title>
@@ -98,7 +216,7 @@ export default function ModernNavbar() {
                 <path
                   d="M50 5 L85 20 L85 45 Q85 70 50 90 Q15 70 15 45 L15 20 Z"
                   fill="url(#shieldGradient)"
-                  className="group-hover:opacity-90 transition-opacity"
+                  className="transition-opacity group-hover:opacity-90"
                 />
                 {/* Checkmark */}
                 <path
@@ -110,18 +228,20 @@ export default function ModernNavbar() {
                   strokeLinejoin="round"
                 />
               </svg>
-              <div className="absolute inset-0 bg-primary/20 blur-lg group-hover:bg-primary/30 transition-all"></div>
+              <div className="absolute inset-0 bg-primary/20 blur-lg transition-all group-hover:bg-primary/30"></div>
             </div>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden items-center gap-8 md:flex">
             {/* Product Dropdown */}
             <DropdownMenu
               label="Product"
               items={productItems}
               isOpen={openDropdown === "product"}
-              onToggle={() => setOpenDropdown(openDropdown === "product" ? null : "product")}
+              onToggle={() =>
+                setOpenDropdown(openDropdown === "product" ? null : "product")
+              }
             />
 
             {/* Tools Dropdown (Categorized) */}
@@ -129,13 +249,15 @@ export default function ModernNavbar() {
               label="Tools"
               sections={toolsDropdownSections}
               isOpen={openDropdown === "tools"}
-              onToggle={() => setOpenDropdown(openDropdown === "tools" ? null : "tools")}
+              onToggle={() =>
+                setOpenDropdown(openDropdown === "tools" ? null : "tools")
+              }
             />
 
             {/* Pricing */}
             <Link
               href="/pricing"
-              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
             >
               Pricing
             </Link>
@@ -145,7 +267,11 @@ export default function ModernNavbar() {
               label="Resources"
               items={resourcesItems}
               isOpen={openDropdown === "resources"}
-              onToggle={() => setOpenDropdown(openDropdown === "resources" ? null : "resources")}
+              onToggle={() =>
+                setOpenDropdown(
+                  openDropdown === "resources" ? null : "resources"
+                )
+              }
             />
 
             {/* Company Dropdown */}
@@ -153,16 +279,18 @@ export default function ModernNavbar() {
               label="Company"
               items={companyItems}
               isOpen={openDropdown === "company"}
-              onToggle={() => setOpenDropdown(openDropdown === "company" ? null : "company")}
+              onToggle={() =>
+                setOpenDropdown(openDropdown === "company" ? null : "company")
+              }
             />
           </div>
 
           {/* Right Side CTAs */}
-          <div className="hidden md:flex items-center gap-3">
+          <div className="hidden items-center gap-3 md:flex">
             <ThemeToggle />
             <Link
               href="/login"
-              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
             >
               Login
             </Link>
@@ -175,31 +303,41 @@ export default function ModernNavbar() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 rounded-lg hover:bg-primary/10 transition-colors touch-target flex-shrink-0"
+            className="touch-target flex-shrink-0 rounded-lg p-2 transition-colors hover:bg-primary/10 md:hidden"
             aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
           >
-            {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            {mobileMenuOpen ? (
+              <X className="h-6 w-6" />
+            ) : (
+              <Menu className="h-6 w-6" />
+            )}
           </button>
         </div>
       </div>
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-background border-t border-border max-h-[calc(100vh-3.5rem)] overflow-y-auto">
-          <div className="container mx-auto px-4 py-4 space-y-3">
+        <div className="max-h-[calc(100vh-3.5rem)] overflow-y-auto border-t border-border bg-background md:hidden">
+          <div className="container mx-auto space-y-3 px-4 py-4">
             <MobileSection title="Product" items={productItems} />
-            <MobileCategorizedSection title="Tools" sections={toolsDropdownSections} />
+            <MobileCategorizedSection
+              title="Tools"
+              sections={toolsDropdownSections}
+            />
             <Link href="/pricing" className="block py-2 text-sm font-medium">
               Pricing
             </Link>
             <MobileSection title="Resources" items={resourcesItems} />
             <MobileSection title="Company" items={companyItems} />
-            <div className="pt-4 border-t border-border space-y-3">
+            <div className="space-y-3 border-t border-border pt-4">
               <div className="flex items-center justify-between py-2">
                 <span className="text-sm font-medium">Theme</span>
                 <ThemeToggle />
               </div>
-              <Link href="/login" className="block py-2 text-sm font-medium text-muted-foreground">
+              <Link
+                href="/login"
+                className="block py-2 text-sm font-medium text-muted-foreground"
+              >
                 Login
               </Link>
               <Button className="w-full">Start Free Trial</Button>
@@ -208,7 +346,7 @@ export default function ModernNavbar() {
         </div>
       )}
     </nav>
-  )
+  );
 }
 
 // Dropdown Menu Component
@@ -218,17 +356,17 @@ function DropdownMenu({
   isOpen,
   onToggle,
 }: {
-  label: string
-  items: any[]
-  isOpen: boolean
-  onToggle: () => void
+  label: string;
+  items: any[];
+  isOpen: boolean;
+  onToggle: () => void;
 }) {
   return (
     <div className="relative">
       <button
         onClick={onToggle}
         onMouseEnter={onToggle}
-        className="flex items-center gap-1 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+        className="flex items-center gap-1 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
       >
         {label}
         <ChevronDown
@@ -238,31 +376,35 @@ function DropdownMenu({
 
       {isOpen && (
         <div
-          className="absolute top-full left-0 mt-2 w-80 bg-background/95 backdrop-blur-xl border border-border rounded-xl shadow-2xl p-2"
+          className="absolute left-0 top-full mt-2 w-80 rounded-xl border border-border bg-background/95 p-2 shadow-2xl backdrop-blur-xl"
           onMouseLeave={onToggle}
         >
           {items.map((item) => {
-            const Icon = item.icon
+            const Icon = item.icon;
             return (
               <Link
                 key={item.name}
                 href={item.href}
-                className="flex items-start gap-3 p-3 rounded-lg hover:bg-primary/10 transition-colors group"
+                className="group flex items-start gap-3 rounded-lg p-3 transition-colors hover:bg-primary/10"
               >
-                <div className="mt-0.5 p-2 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
+                <div className="mt-0.5 rounded-lg bg-primary/10 p-2 transition-colors group-hover:bg-primary/20">
                   <Icon className="h-4 w-4 text-primary" />
                 </div>
                 <div>
-                  <div className="text-sm font-medium text-foreground">{item.name}</div>
-                  <div className="text-xs text-muted-foreground">{item.desc}</div>
+                  <div className="text-sm font-medium text-foreground">
+                    {item.name}
+                  </div>
+                  <div className="text-xs text-muted-foreground">
+                    {item.desc}
+                  </div>
                 </div>
               </Link>
-            )
+            );
           })}
         </div>
       )}
     </div>
-  )
+  );
 }
 
 // Categorized Dropdown Menu Component for Tools
@@ -272,17 +414,17 @@ function CategorizedDropdownMenu({
   isOpen,
   onToggle,
 }: {
-  label: string
-  sections: Array<{ category: string; tools: any[] }>
-  isOpen: boolean
-  onToggle: () => void
+  label: string;
+  sections: Array<{ category: string; tools: any[] }>;
+  isOpen: boolean;
+  onToggle: () => void;
 }) {
   return (
     <div className="relative">
       <button
         onClick={onToggle}
         onMouseEnter={onToggle}
-        className="flex items-center gap-1 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+        className="flex items-center gap-1 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
       >
         {label}
         <ChevronDown
@@ -292,7 +434,7 @@ function CategorizedDropdownMenu({
 
       {isOpen && (
         <div
-          className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[750px] bg-background/95 backdrop-blur-xl border border-border rounded-xl shadow-2xl p-6"
+          className="absolute left-1/2 top-full mt-2 w-[750px] -translate-x-1/2 rounded-xl border border-border bg-background/95 p-6 shadow-2xl backdrop-blur-xl"
           onMouseLeave={onToggle}
         >
           {/* Three-Column Grid */}
@@ -300,34 +442,40 @@ function CategorizedDropdownMenu({
             {sections.map((section) => (
               <div key={section.category}>
                 {/* Category Header */}
-                <div className="px-2 py-2 mb-3 text-xs font-bold text-muted-foreground uppercase tracking-wider border-b border-border">
+                <div className="mb-3 border-b border-border px-2 py-2 text-xs font-bold uppercase tracking-wider text-muted-foreground">
                   {section.category}
                 </div>
 
                 {/* Tools in Category */}
                 <div className="space-y-1">
                   {section.tools.map((tool) => {
-                    const Icon = tool.icon
+                    const Icon = tool.icon;
                     return (
                       <Link
                         key={tool.name}
                         href={tool.href}
-                        className="flex items-start gap-2.5 p-2 rounded-lg hover:bg-primary/10 transition-colors group"
+                        className="group flex items-start gap-2.5 rounded-lg p-2 transition-colors hover:bg-primary/10"
                       >
-                        <div className="mt-0.5 p-1.5 rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors flex-shrink-0">
+                        <div className="mt-0.5 flex-shrink-0 rounded-lg bg-primary/10 p-1.5 transition-colors group-hover:bg-primary/20">
                           <Icon className="h-3.5 w-3.5 text-primary" />
                         </div>
-                        <div className="flex-1 min-w-0">
+                        <div className="min-w-0 flex-1">
                           <div className="flex items-center gap-1.5">
-                            <span className="text-sm font-medium text-foreground">{tool.name}</span>
+                            <span className="text-sm font-medium text-foreground">
+                              {tool.name}
+                            </span>
                             {tool.popular && (
-                              <span className="text-[10px] font-bold text-primary">⭐</span>
+                              <span className="text-[10px] font-bold text-primary">
+                                ⭐
+                              </span>
                             )}
                           </div>
-                          <div className="text-xs text-muted-foreground leading-snug">{tool.desc}</div>
+                          <div className="text-xs leading-snug text-muted-foreground">
+                            {tool.desc}
+                          </div>
                         </div>
                       </Link>
-                    )
+                    );
                   })}
                 </div>
               </div>
@@ -335,105 +483,114 @@ function CategorizedDropdownMenu({
           </div>
 
           {/* View All Tools Link */}
-          <div className="pt-4 mt-4 border-t border-border">
+          <div className="mt-4 border-t border-border pt-4">
             <Link
               href="/tools"
-              className="flex items-center justify-between p-2.5 rounded-lg hover:bg-primary/10 transition-colors group"
+              className="group flex items-center justify-between rounded-lg p-2.5 transition-colors hover:bg-primary/10"
             >
-              <span className="text-sm font-medium text-primary">View All Tools</span>
-              <ChevronDown className="h-4 w-4 text-primary rotate-[-90deg] group-hover:translate-x-0.5 transition-transform" />
+              <span className="text-sm font-medium text-primary">
+                View All Tools
+              </span>
+              <ChevronDown className="h-4 w-4 rotate-[-90deg] text-primary transition-transform group-hover:translate-x-0.5" />
             </Link>
           </div>
         </div>
       )}
     </div>
-  )
+  );
 }
 
 // Mobile Section Component
 function MobileSection({ title, items }: { title: string; items: any[] }) {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className="border-b border-border last:border-0">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center justify-between w-full py-3 text-sm font-medium touch-target"
+        className="touch-target flex w-full items-center justify-between py-3 text-sm font-medium"
       >
         {title}
-        <ChevronDown className={`h-4 w-4 transition-transform ${isOpen ? "rotate-180" : ""}`} />
+        <ChevronDown
+          className={`h-4 w-4 transition-transform ${isOpen ? "rotate-180" : ""}`}
+        />
       </button>
       {isOpen && (
-        <div className="pl-2 space-y-1 pb-3">
+        <div className="space-y-1 pb-3 pl-2">
           {items.map((item) => {
-            const Icon = item.icon
+            const Icon = item.icon;
             return (
               <Link
                 key={item.name}
                 href={item.href}
-                className="flex items-center gap-3 py-2.5 px-2 text-sm text-muted-foreground rounded-lg hover:bg-primary/5 active:bg-primary/10 transition-colors touch-target"
+                className="touch-target flex items-center gap-3 rounded-lg px-2 py-2.5 text-sm text-muted-foreground transition-colors hover:bg-primary/5 active:bg-primary/10"
               >
                 <Icon className="h-4 w-4 flex-shrink-0" />
                 <span>{item.name}</span>
               </Link>
-            )
+            );
           })}
         </div>
       )}
     </div>
-  )
+  );
 }
 
 // Mobile Categorized Section Component for Tools
 function MobileCategorizedSection({
   title,
-  sections
+  sections,
 }: {
-  title: string
-  sections: Array<{ category: string; tools: any[] }>
+  title: string;
+  sections: Array<{ category: string; tools: any[] }>;
 }) {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className="border-b border-border last:border-0">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center justify-between w-full py-3 text-sm font-medium touch-target"
+        className="touch-target flex w-full items-center justify-between py-3 text-sm font-medium"
       >
         {title}
-        <ChevronDown className={`h-4 w-4 transition-transform ${isOpen ? "rotate-180" : ""}`} />
+        <ChevronDown
+          className={`h-4 w-4 transition-transform ${isOpen ? "rotate-180" : ""}`}
+        />
       </button>
       {isOpen && (
-        <div className="pl-2 space-y-4 pb-3">
+        <div className="space-y-4 pb-3 pl-2">
           {sections.map((section) => (
             <div key={section.category}>
-              <div className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2 px-2">
+              <div className="mb-2 px-2 text-xs font-bold uppercase tracking-wider text-muted-foreground">
                 {section.category}
               </div>
               <div className="space-y-1">
                 {section.tools.map((tool) => {
-                  const Icon = tool.icon
+                  const Icon = tool.icon;
                   return (
                     <Link
                       key={tool.name}
                       href={tool.href}
-                      className="flex items-center gap-3 py-2.5 px-2 text-sm text-muted-foreground rounded-lg hover:bg-primary/5 active:bg-primary/10 transition-colors touch-target"
+                      className="touch-target flex items-center gap-3 rounded-lg px-2 py-2.5 text-sm text-muted-foreground transition-colors hover:bg-primary/5 active:bg-primary/10"
                     >
                       <Icon className="h-4 w-4 flex-shrink-0" />
                       <span className="flex-1">{tool.name}</span>
                       {tool.popular && <span className="text-xs">⭐</span>}
                     </Link>
-                  )
+                  );
                 })}
               </div>
             </div>
           ))}
-          <Link href="/tools" className="flex items-center gap-3 py-2.5 px-2 text-sm text-primary font-medium rounded-lg hover:bg-primary/5 active:bg-primary/10 transition-colors touch-target mt-2">
+          <Link
+            href="/tools"
+            className="touch-target mt-2 flex items-center gap-3 rounded-lg px-2 py-2.5 text-sm font-medium text-primary transition-colors hover:bg-primary/5 active:bg-primary/10"
+          >
             <Wrench className="h-4 w-4" />
             View All Tools
           </Link>
         </div>
       )}
     </div>
-  )
+  );
 }
