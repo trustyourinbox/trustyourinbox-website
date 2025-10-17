@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { ArrowRight, CheckCircle2, Shield } from "lucide-react";
 import { motion } from "framer-motion";
+import DemoRequestForm from "@/components/DemoRequestForm";
 
 export default function FinalCtaSection() {
   return (
@@ -49,12 +50,13 @@ export default function FinalCtaSection() {
               Start Free Trial
               <ArrowRight className="h-5 w-5 transition-transform duration-200 group-hover:translate-x-1" />
             </Link>
-            <Link
-              href="/demo"
-              className="group inline-flex items-center justify-center gap-2 rounded-lg border-2 border-border bg-background px-8 py-4 text-base font-semibold transition-all duration-200 hover:scale-105 hover:border-primary/50 hover:bg-primary/5 active:scale-95 sm:text-lg"
-            >
-              Request Demo
-            </Link>
+            <DemoRequestForm
+              triggerButton={
+                <button className="group inline-flex items-center justify-center gap-2 rounded-lg border-2 border-border bg-background px-8 py-4 text-base font-semibold transition-all duration-200 hover:scale-105 hover:border-primary/50 hover:bg-primary/5 active:scale-95 sm:text-lg">
+                  Schedule Demo
+                </button>
+              }
+            />
           </div>
 
           {/* Trust indicators */}

@@ -1,5 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import DemoRequestForm from "@/components/DemoRequestForm";
 
 export default function CtaSection() {
   return (
@@ -17,13 +18,17 @@ export default function CtaSection() {
             <Button size="lg" variant="secondary" className="gap-2">
               Start Free Trial <ArrowRight className="h-4 w-4" />
             </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-primary-foreground bg-transparent text-primary-foreground hover:bg-primary-foreground/10"
-            >
-              Schedule Demo
-            </Button>
+            <DemoRequestForm
+              triggerButton={
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="border-primary-foreground bg-transparent text-primary-foreground hover:bg-primary-foreground/10"
+                >
+                  Schedule Demo
+                </Button>
+              }
+            />
           </div>
         </div>
       </div>

@@ -46,9 +46,9 @@ export default function ModernHeroSection() {
 
       {/* Content */}
       <div className="container relative z-10 py-12 sm:py-16 md:py-24 lg:py-32">
-        <div className="grid grid-cols-1 items-center gap-8 md:gap-12 lg:grid-cols-2">
+        <div className="grid grid-cols-1 items-center gap-8 md:gap-12 lg:grid-cols-2 xl:gap-16">
           {/* Left: Content */}
-          <div className="space-y-6 sm:space-y-8">
+          <div className="space-y-6 sm:space-y-8 lg:pr-8">
             {/* Badge */}
             <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-3 py-1.5 text-xs font-medium sm:px-4 sm:py-2 sm:text-sm">
               <div className="flex h-2 w-2 flex-shrink-0 items-center justify-center">

@@ -181,7 +181,7 @@ export default function ModernNavbar() {
           : "bg-transparent"
       }`}
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container">
         <div className="flex h-14 items-center justify-between gap-4 sm:h-16">
           {/* Logo */}
           <Link href="/" className="group flex flex-shrink-0 items-center">
@@ -318,7 +318,7 @@ export default function ModernNavbar() {
       {/* Mobile Menu */}
       {mobileMenuOpen && (
         <div className="max-h-[calc(100vh-3.5rem)] overflow-y-auto border-t border-border bg-background md:hidden">
-          <div className="container mx-auto space-y-3 px-4 py-4">
+          <div className="container space-y-3 py-4">
             <MobileSection title="Product" items={productItems} />
             <MobileCategorizedSection
               title="Tools"

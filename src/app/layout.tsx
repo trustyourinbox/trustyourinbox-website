@@ -4,7 +4,6 @@ import localFont from "next/font/local";
 import { ThemeProvider } from "next-themes";
 import ModernNavbar from "@/components/ModernNavbar";
 import Footer from "@/components/Footer";
-import CtaSection from "@/components/sections/CtaSection";
 import "./globals.css";
 import "../styles/fonts.css";
 
@@ -167,7 +166,6 @@ export default function RootLayout({
         >
           <ModernNavbar />
           <main className="pt-16">{children}</main>
-          <CtaSection />
           <Footer />
         </ThemeProvider>
       </body>

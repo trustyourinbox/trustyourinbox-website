@@ -107,7 +107,7 @@ export default function BentoGridFeatures() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mx-auto mb-10 max-w-3xl text-center sm:mb-12 md:mb-16"
+          className="container-text mx-auto mb-10 text-center sm:mb-12 md:mb-16"
         >
           <div className="mb-4 inline-flex items-center rounded-full border border-primary/20 bg-primary/5 px-3 py-1.5 text-xs font-medium sm:mb-6 sm:px-4 sm:text-sm">
             <Shield className="mr-2 h-3 w-3 flex-shrink-0 text-primary sm:h-4 sm:w-4" />
