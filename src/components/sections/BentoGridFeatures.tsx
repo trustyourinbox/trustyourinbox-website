@@ -11,6 +11,8 @@ import {
   Zap,
 } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
+import { motion } from "framer-motion";
 
 const features = [
   {
@@ -21,6 +23,7 @@ const features = [
     size: "large", // 2 columns
     gradient: "from-blue-500/20 to-indigo-500/20",
     image: "/images/bento-grid/comprehensive-analytics.png",
+    href: "/features/analytics",
   },
   {
     title: "Bulk Report Processing",
@@ -30,6 +33,7 @@ const features = [
     size: "small",
     gradient: "from-purple-500/20 to-pink-500/20",
     image: "/images/bento-grid/bulk-report-processing.png",
+    href: "/features/reports",
   },
   {
     title: "DMARC & SPF Tools",
@@ -39,6 +43,7 @@ const features = [
     size: "small",
     gradient: "from-green-500/20 to-emerald-500/20",
     image: "/images/bento-grid/dmarc-spf-tools.png",
+    href: "/features/tools",
   },
   {
     title: "Multi-Domain Dashboard",
@@ -48,6 +53,7 @@ const features = [
     size: "medium",
     gradient: "from-orange-500/20 to-red-500/20",
     image: "/images/bento-grid/multi-domain-dashboard.png",
+    href: "/features/domains",
   },
   {
     title: "Team Collaboration",
@@ -57,6 +63,7 @@ const features = [
     size: "medium",
     gradient: "from-cyan-500/20 to-blue-500/20",
     image: "/images/bento-grid/team-collaboration.png",
+    href: "/features/collaboration",
   },
   {
     title: "Historical Trends",
@@ -66,6 +73,7 @@ const features = [
     size: "small",
     gradient: "from-yellow-500/20 to-orange-500/20",
     image: "/images/bento-grid/historical-trends.png",
+    href: "/features/trends",
   },
   {
     title: "Real-time Monitoring",
@@ -75,6 +83,7 @@ const features = [
     size: "small",
     gradient: "from-pink-500/20 to-purple-500/20",
     image: "/images/bento-grid/real-time-monitoring.png",
+    href: "/features/monitoring",
   },
   {
     title: "Sender Intelligence",
@@ -84,15 +93,22 @@ const features = [
     size: "large",
     gradient: "from-indigo-500/20 to-purple-500/20",
     image: "/images/bento-grid/sender-intelligence.png",
+    href: "/features/sender-intelligence",
   },
 ];
 
 export default function BentoGridFeatures() {
   return (
-    <section className="bg-gradient-to-b from-background to-secondary/30 py-12 sm:py-16 md:py-20 lg:py-24">
+    <section className="bg-gradient-to-b from-background via-secondary/20 to-secondary/30 py-12 sm:py-16 md:py-20 lg:py-24">
       <div className="container">
         {/* Header */}
-        <div className="mx-auto mb-10 max-w-3xl text-center sm:mb-12 md:mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mx-auto mb-10 max-w-3xl text-center sm:mb-12 md:mb-16"
+        >
           <div className="mb-4 inline-flex items-center rounded-full border border-primary/20 bg-primary/5 px-3 py-1.5 text-xs font-medium sm:mb-6 sm:px-4 sm:text-sm">
             <Shield className="mr-2 h-3 w-3 flex-shrink-0 text-primary sm:h-4 sm:w-4" />
             <span className="text-primary">Everything You Need</span>
@@ -104,10 +120,24 @@ export default function BentoGridFeatures() {
             Professional-grade DMARC tools and analytics designed for teams that
             value both security and simplicity.
           </p>
-        </div>
+        </motion.div>
 
         {/* Bento Grid */}
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={{
+            hidden: { opacity: 0 },
+            visible: {
+              opacity: 1,
+              transition: {
+                staggerChildren: 0.1,
+              },
+            },
+          }}
+          className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4"
+        >
           {features.map((feature, index) => {
             const Icon = feature.icon;
             const getGridSpan = () => {
@@ -118,70 +148,81 @@ export default function BentoGridFeatures() {
             };
 
             return (
-              <div
+              <motion.div
                 key={index}
-                className={`group relative overflow-hidden rounded-xl border border-border bg-background p-5 transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-2xl sm:rounded-2xl sm:p-6 md:p-8 ${getGridSpan()}`}
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: { opacity: 1, y: 0 },
+                }}
               >
-                {/* Gradient Background */}
-                <div
-                  className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 transition-opacity duration-500 group-hover:opacity-100`}
-                ></div>
+                <Link
+                  href={feature.href}
+                  className={`group relative block overflow-hidden rounded-xl border border-border bg-background p-5 transition-all duration-300 hover:-translate-y-1 hover:cursor-pointer hover:border-primary/30 hover:shadow-2xl sm:rounded-2xl sm:p-6 md:p-8 ${getGridSpan()}`}
+                >
+                  {/* Gradient Background */}
+                  <div
+                    className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 transition-opacity duration-500 group-hover:opacity-100`}
+                  ></div>
 
-                {/* Content */}
-                <div className="relative z-10 flex flex-col">
-                  {/* Icon */}
-                  <div className="mb-4 sm:mb-6">
-                    <div className="inline-flex rounded-lg bg-primary/10 p-2.5 transition-colors group-hover:bg-primary/20 sm:rounded-xl sm:p-3">
-                      <Icon className="h-5 w-5 text-primary sm:h-6 sm:w-6" />
+                  {/* Content */}
+                  <div className="relative z-10 flex flex-col">
+                    {/* Icon */}
+                    <div className="mb-4 sm:mb-6">
+                      <div className="inline-flex rounded-lg bg-primary/10 p-2.5 transition-all duration-300 group-hover:scale-110 group-hover:bg-primary/20 sm:rounded-xl sm:p-3">
+                        <Icon className="h-5 w-5 text-primary transition-transform duration-300 group-hover:rotate-6 sm:h-6 sm:w-6" />
+                      </div>
+                    </div>
+
+                    {/* Text */}
+                    <div>
+                      <h3 className="mb-2 text-lg font-bold transition-colors group-hover:text-primary sm:mb-3 sm:text-xl">
+                        {feature.title}
+                      </h3>
+                      <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
+                        {feature.description}
+                      </p>
+                    </div>
+
+                    {/* Screenshot */}
+                    {feature.image && (
+                      <div className="mt-4 overflow-hidden rounded-lg border border-border bg-muted/30">
+                        <Image
+                          src={feature.image}
+                          alt={`${feature.title} screenshot`}
+                          width={600}
+                          height={400}
+                          className="h-auto w-full object-cover"
+                          quality={90}
+                          loading="lazy"
+                          placeholder="blur"
+                          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
+                        />
+                      </div>
+                    )}
+
+                    {/* Arrow indicator on hover */}
+                    <div className="absolute bottom-5 left-5 flex items-center text-sm font-medium text-primary opacity-0 transition-opacity group-hover:opacity-100 sm:bottom-6 sm:left-6 md:bottom-8 md:left-8">
+                      <span>Learn more</span>
+                      <svg
+                        className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M9 5l7 7-7 7"
+                        />
+                      </svg>
                     </div>
                   </div>
-
-                  {/* Text */}
-                  <div>
-                    <h3 className="mb-2 text-lg font-bold transition-colors group-hover:text-primary sm:mb-3 sm:text-xl">
-                      {feature.title}
-                    </h3>
-                    <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
-                      {feature.description}
-                    </p>
-                  </div>
-
-                  {/* Screenshot */}
-                  {feature.image && (
-                    <div className="mt-4 overflow-hidden rounded-lg border border-border bg-muted/30">
-                      <Image
-                        src={feature.image}
-                        alt={`${feature.title} screenshot`}
-                        width={600}
-                        height={400}
-                        className="h-auto w-full object-cover"
-                        quality={90}
-                      />
-                    </div>
-                  )}
-
-                  {/* Arrow indicator on hover */}
-                  <div className="absolute bottom-5 left-5 flex items-center text-sm font-medium text-primary opacity-0 transition-opacity group-hover:opacity-100 sm:bottom-6 sm:left-6 md:bottom-8 md:left-8">
-                    <span>Learn more</span>
-                    <svg
-                      className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M9 5l7 7-7 7"
-                      />
-                    </svg>
-                  </div>
-                </div>
-              </div>
+                </Link>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
 
         {/* Bottom CTA */}
         <div className="mt-10 text-center sm:mt-12 md:mt-16">

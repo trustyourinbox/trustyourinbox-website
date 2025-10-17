@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { Shield, FileText, Wrench, Globe } from "lucide-react";
+import { motion } from "framer-motion";
 
 const screenshots = [
   {
@@ -60,10 +61,16 @@ const screenshots = [
 
 export default function AppShowcaseSection() {
   return (
-    <section className="bg-gradient-to-b from-secondary/30 to-background py-12 sm:py-16 md:py-20 lg:py-24">
+    <section className="bg-gradient-to-b from-secondary/30 via-secondary/20 to-background py-12 sm:py-16 md:py-20 lg:py-24">
       <div className="container">
         {/* Header */}
-        <div className="mx-auto mb-10 max-w-3xl text-center sm:mb-12 md:mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mx-auto mb-10 max-w-3xl text-center sm:mb-12 md:mb-16"
+        >
           <div className="mb-4 inline-flex items-center rounded-full border border-primary/20 bg-primary/5 px-3 py-1.5 text-xs font-medium sm:mb-6 sm:px-4 sm:text-sm">
             <Shield className="mr-2 h-3 w-3 flex-shrink-0 text-primary sm:h-4 sm:w-4" />
             <span className="text-primary">See It In Action</span>
@@ -76,7 +83,7 @@ export default function AppShowcaseSection() {
             Experience the dashboard that makes DMARC management effortless for
             IT teams and MSPs.
           </p>
-        </div>
+        </motion.div>
 
         {/* Screenshots */}
         <div className="space-y-16 sm:space-y-20 md:space-y-24">
@@ -85,16 +92,20 @@ export default function AppShowcaseSection() {
             const isEven = index % 2 === 0;
 
             return (
-              <div
+              <motion.div
                 key={index}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.6, delay: 0.2 }}
                 className={`grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-12 ${
                   isEven ? "" : "lg:grid-flow-dense"
                 }`}
               >
                 {/* Content */}
                 <div className={`space-y-6 ${isEven ? "" : "lg:col-start-2"}`}>
-                  <div className="inline-flex rounded-lg bg-primary/10 p-3">
-                    <Icon className="h-6 w-6 text-primary" />
+                  <div className="inline-flex rounded-lg bg-primary/10 p-3 transition-all duration-300 hover:scale-110 hover:bg-primary/20">
+                    <Icon className="h-6 w-6 text-primary transition-transform duration-300 hover:rotate-12" />
                   </div>
 
                   <div>
@@ -148,10 +159,13 @@ export default function AppShowcaseSection() {
                       height={750}
                       className="h-auto w-full"
                       quality={90}
+                      loading="lazy"
+                      placeholder="blur"
+                      blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
                     />
                   </div>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
         </div>

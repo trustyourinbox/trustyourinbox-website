@@ -74,21 +74,25 @@ export default function ModernHeroSection() {
 
             {/* CTAs */}
             <div className="flex flex-col gap-3 sm:flex-row sm:gap-4">
-              <Button
-                size="lg"
-                className="to-accent-hover h-11 w-full gap-2 bg-gradient-to-r from-primary px-6 text-sm hover:opacity-90 sm:h-12 sm:w-auto sm:px-8 sm:text-base"
-              >
-                Start Free Trial
-                <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5" />
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="h-11 w-full gap-2 px-6 text-sm sm:h-12 sm:w-auto sm:px-8 sm:text-base"
-              >
-                <Play className="h-4 w-4 sm:h-5 sm:w-5" />
-                View Live Demo
-              </Button>
+              <Link href="/signup">
+                <Button
+                  size="lg"
+                  className="to-accent-hover h-11 w-full gap-2 bg-gradient-to-r from-primary px-6 text-sm hover:opacity-90 sm:h-12 sm:w-auto sm:px-8 sm:text-base"
+                >
+                  Start Free Trial
+                  <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5" />
+                </Button>
+              </Link>
+              <Link href="/demo">
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="h-11 w-full gap-2 px-6 text-sm sm:h-12 sm:w-auto sm:px-8 sm:text-base"
+                >
+                  <Play className="h-4 w-4 sm:h-5 sm:w-5" />
+                  View Live Demo
+                </Button>
+              </Link>
             </div>
 
             {/* Trust Indicators */}
@@ -106,6 +110,26 @@ export default function ModernHeroSection() {
               <div className="flex items-center gap-2 text-sm">
                 <CheckCircle2 className="h-5 w-5 text-primary" />
                 <span className="text-muted-foreground">Cancel anytime</span>
+              </div>
+            </div>
+
+            {/* Customer Logos */}
+            <div className="border-t border-border pt-6 sm:pt-8">
+              <p className="mb-4 text-center text-xs text-muted-foreground sm:text-left sm:text-sm">
+                Trusted by leading organizations
+              </p>
+              <div className="flex flex-wrap items-center justify-center gap-6 opacity-60 grayscale transition-all hover:opacity-100 hover:grayscale-0 sm:justify-start sm:gap-8">
+                {customerLogos.map((logo) => (
+                  <div key={logo.name} className="flex-shrink-0">
+                    <Image
+                      src={logo.src}
+                      alt={`${logo.name} logo`}
+                      width={logo.width}
+                      height={logo.height}
+                      className="h-8 w-auto object-contain sm:h-10"
+                    />
+                  </div>
+                ))}
               </div>
             </div>
 
@@ -150,6 +174,8 @@ export default function ModernHeroSection() {
                   className="h-auto w-full"
                   priority
                   quality={90}
+                  placeholder="blur"
+                  blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
                 />
               </div>
 

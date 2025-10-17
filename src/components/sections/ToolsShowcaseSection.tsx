@@ -1,11 +1,20 @@
+"use client";
+
 import { Shield, Wrench, FileCode, Search } from "lucide-react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 export default function ToolsShowcaseSection() {
   return (
-    <section className="bg-gradient-to-b from-background to-secondary/50 py-20 dark:from-background dark:to-background">
+    <section className="bg-gradient-to-b from-background via-secondary/20 to-secondary/30 py-20">
       <div className="container">
-        <div className="mx-auto mb-16 max-w-[58rem] text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mx-auto mb-16 max-w-[58rem] text-center"
+        >
           <div className="mb-4 inline-flex items-center rounded-full border bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary">
             <Wrench className="mr-2 h-4 w-4" />
             Powerful Built-in Tools
@@ -17,11 +26,17 @@ export default function ToolsShowcaseSection() {
             Professional-grade tools for DMARC analysis, SPF validation, and
             record generation—all built right into the platform.
           </p>
-        </div>
+        </motion.div>
 
         <div className="space-y-24">
           {/* DMARC Analyzer Tool */}
-          <div className="grid items-center gap-12 md:grid-cols-2">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6 }}
+            className="grid items-center gap-12 md:grid-cols-2"
+          >
             <div className="order-2 md:order-1">
               <div className="mb-4 flex items-center gap-3">
                 <div className="rounded-lg bg-primary/10 p-3">
@@ -74,13 +89,22 @@ export default function ToolsShowcaseSection() {
                   height={900}
                   className="h-auto w-full"
                   quality={90}
+                  loading="lazy"
+                  placeholder="blur"
+                  blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
                 />
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* SPF Analyzer Tool */}
-          <div className="grid items-center gap-12 md:grid-cols-2">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="grid items-center gap-12 md:grid-cols-2"
+          >
             <div>
               <div className="relative overflow-hidden rounded-xl border-2 border-primary/20 bg-background shadow-2xl">
                 <Image
@@ -90,6 +114,9 @@ export default function ToolsShowcaseSection() {
                   height={900}
                   className="h-auto w-full"
                   quality={90}
+                  loading="lazy"
+                  placeholder="blur"
+                  blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
                 />
               </div>
             </div>
@@ -134,10 +161,16 @@ export default function ToolsShowcaseSection() {
                 </li>
               </ul>
             </div>
-          </div>
+          </motion.div>
 
           {/* DMARC Generator Tool */}
-          <div className="grid items-center gap-12 md:grid-cols-2">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="grid items-center gap-12 md:grid-cols-2"
+          >
             <div className="order-2 md:order-1">
               <div className="mb-4 flex items-center gap-3">
                 <div className="rounded-lg bg-primary/10 p-3">
@@ -188,10 +221,13 @@ export default function ToolsShowcaseSection() {
                   height={900}
                   className="h-auto w-full"
                   quality={90}
+                  loading="lazy"
+                  placeholder="blur"
+                  blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
                 />
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
