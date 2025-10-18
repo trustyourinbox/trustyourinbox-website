@@ -204,18 +204,18 @@ export default function DmarcPolicyImpactSimulator() {
           <Shield className="text-primary h-4 w-4" />
           DMARC Policy Impact Simulator
         </h3>
-        <p className="text-xs text-gray-600">
+        <p className="text-muted-foreground text-xs">
           Simulate the effect of stricter DMARC policies on your email traffic.
           Upload a DMARC XML report and see how policy changes would impact
           delivery.
         </p>
       </div>
       <div>
-        <h4 className="mb-1 flex items-center gap-1 text-xs font-semibold text-gray-800">
+        <h4 className="text-foreground mb-1 flex items-center gap-1 text-xs font-semibold">
           <Info className="text-primary h-3 w-3" />
           How it works
         </h4>
-        <ul className="list-disc space-y-1 pl-4 text-xs text-gray-600">
+        <ul className="text-muted-foreground list-disc space-y-1 pl-4 text-xs">
           <li>Upload a DMARC XML report or use sample data</li>
           <li>Select a stricter policy to simulate</li>
           <li>View the impact on message disposition</li>
@@ -223,11 +223,11 @@ export default function DmarcPolicyImpactSimulator() {
         </ul>
       </div>
       <div>
-        <h4 className="mb-1 flex items-center gap-1 text-xs font-semibold text-gray-800">
+        <h4 className="text-foreground mb-1 flex items-center gap-1 text-xs font-semibold">
           <BarChart2 className="text-primary h-3 w-3" />
           Best Practices
         </h4>
-        <ul className="list-disc space-y-1 pl-4 text-xs text-gray-600">
+        <ul className="text-muted-foreground list-disc space-y-1 pl-4 text-xs">
           <li>
             Start with <b>p=none</b> to monitor
           </li>
@@ -385,7 +385,7 @@ export default function DmarcPolicyImpactSimulator() {
               <span className="text-foreground mb-1 text-sm font-medium">
                 Drag & drop DMARC XML here, or click to select
               </span>
-              <span className="text-xs text-gray-500">
+              <span className="text-muted-foreground text-xs">
                 Only .xml files are supported
               </span>
               <input
@@ -397,14 +397,14 @@ export default function DmarcPolicyImpactSimulator() {
               />
             </label>
             {(xml || showSample) && (
-              <div className="border-primary/10 flex items-center gap-2 rounded border bg-white px-3 py-2">
+              <div className="border-primary/10 bg-card flex items-center gap-2 rounded border px-3 py-2">
                 <FileText className="text-primary h-4 w-4" />
                 <span className="text-foreground truncate text-xs font-medium">
                   {showSample ? "Sample Data Loaded" : "File Loaded"}
                 </span>
                 <button
                   type="button"
-                  className="ml-auto text-gray-400 hover:text-red-500"
+                  className="text-muted-foreground hover:text-destructive ml-auto"
                   onClick={() => {
                     setXml("");
                     setShowSample(false);
@@ -427,7 +427,7 @@ export default function DmarcPolicyImpactSimulator() {
                 Use Sample Data
               </Button>
             </div>
-            <div className="mt-1 text-xs text-gray-500">
+            <div className="text-muted-foreground mt-1 text-xs">
               Your DMARC XML report is processed locally and never uploaded to a
               server.
             </div>
@@ -483,30 +483,32 @@ export default function DmarcPolicyImpactSimulator() {
                 <div className="text-foreground text-2xl font-bold">
                   {impact.total}
                 </div>
-                <div className="text-xs text-gray-600">Total Messages</div>
+                <div className="text-muted-foreground text-xs">
+                  Total Messages
+                </div>
               </div>
-              <div className="rounded-lg bg-green-50 p-4 text-center">
-                <div className="text-2xl font-bold text-green-800">
+              <div className="bg-success/10 rounded-lg p-4 text-center">
+                <div className="text-success text-2xl font-bold">
                   {impact.allowed}
                 </div>
-                <div className="text-xs text-gray-600">Allowed</div>
+                <div className="text-muted-foreground text-xs">Allowed</div>
               </div>
-              <div className="rounded-lg bg-yellow-50 p-4 text-center">
-                <div className="text-2xl font-bold text-yellow-800">
+              <div className="bg-warning/10 rounded-lg p-4 text-center">
+                <div className="text-warning text-2xl font-bold">
                   {impact.quarantined}
                 </div>
-                <div className="text-xs text-gray-600">Quarantined</div>
+                <div className="text-muted-foreground text-xs">Quarantined</div>
               </div>
-              <div className="rounded-lg bg-red-50 p-4 text-center">
-                <div className="text-2xl font-bold text-red-800">
+              <div className="bg-destructive/10 rounded-lg p-4 text-center">
+                <div className="text-destructive text-2xl font-bold">
                   {impact.rejected}
                 </div>
-                <div className="text-xs text-gray-600">Rejected</div>
+                <div className="text-muted-foreground text-xs">Rejected</div>
               </div>
             </div>
             <div className="mb-8 grid grid-cols-1 gap-8 md:grid-cols-2">
               <div className="flex min-h-[180px] flex-col justify-center">
-                <h3 className="mb-2 text-sm font-semibold text-gray-900">
+                <h3 className="text-foreground mb-2 text-sm font-semibold">
                   Disposition Breakdown
                 </h3>
                 <div className="h-[180px]">
@@ -525,7 +527,7 @@ export default function DmarcPolicyImpactSimulator() {
                 </div>
               </div>
               <div className="flex min-h-[180px] flex-col justify-center">
-                <h3 className="mb-2 text-sm font-semibold text-gray-900">
+                <h3 className="text-foreground mb-2 text-sm font-semibold">
                   Top Source IPs
                 </h3>
                 <div className="h-[180px]">
@@ -535,7 +537,7 @@ export default function DmarcPolicyImpactSimulator() {
             </div>
             <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
               <div className="flex min-h-[180px] flex-col justify-center">
-                <h3 className="mb-2 text-sm font-semibold text-gray-900">
+                <h3 className="text-foreground mb-2 text-sm font-semibold">
                   DKIM Pass/Fail
                 </h3>
                 <div className="h-[180px]">
@@ -543,7 +545,7 @@ export default function DmarcPolicyImpactSimulator() {
                 </div>
               </div>
               <div className="flex min-h-[180px] flex-col justify-center">
-                <h3 className="mb-2 text-sm font-semibold text-gray-900">
+                <h3 className="text-foreground mb-2 text-sm font-semibold">
                   SPF Pass/Fail
                 </h3>
                 <div className="h-[180px]">
@@ -554,7 +556,7 @@ export default function DmarcPolicyImpactSimulator() {
             <div className="mt-8 overflow-x-auto">
               <table className="min-w-full text-xs">
                 <thead>
-                  <tr className="bg-gray-50">
+                  <tr className="bg-muted">
                     <th className="px-2 py-1 text-left font-semibold">
                       Source IP
                     </th>
@@ -588,7 +590,7 @@ export default function DmarcPolicyImpactSimulator() {
               <Info className="text-primary h-5 w-5" />
               Recommendations
             </h2>
-            <ul className="list-disc space-y-2 pl-5 text-sm text-gray-700">
+            <ul className="text-foreground list-disc space-y-2 pl-5 text-sm">
               {policy === "none" && (
                 <li>
                   Consider moving to <b>quarantine</b> or <b>reject</b> for

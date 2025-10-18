@@ -38,7 +38,57 @@ className = "bg-card text-foreground border-border text-primary";
 | `border-gray-200` | `border-border`                              | Borders                       |
 | `border-gray-100` | `border-border`                              | Light borders                 |
 
-### 3. Spacing Between Labels and Form Controls
+### 3. Status/Semantic Color Standards
+
+**ALWAYS use theme semantic colors for status indicators, not hardcoded colors:**
+
+| Hardcoded Color                  | Replace With                           | Use Case                     |
+| -------------------------------- | -------------------------------------- | ---------------------------- |
+| `bg-green-50` `text-green-800`   | `bg-success/10` `text-success`         | Success, Allowed, Pass, Good |
+| `bg-yellow-50` `text-yellow-800` | `bg-warning/10` `text-warning`         | Warning, Quarantine, Weak    |
+| `bg-red-50` `text-red-800`       | `bg-destructive/10` `text-destructive` | Error, Reject, Fail, Missing |
+| `bg-blue-50` `text-blue-800`     | `bg-primary/10` `text-primary`         | Info, Inherited, Neutral     |
+
+**Examples:**
+
+```jsx
+// WRONG - Hardcoded green/yellow/red colors
+<div className="bg-green-50 rounded-lg p-4">
+  <div className="text-green-800 font-bold">370</div>
+  <div className="text-xs">Allowed</div>
+</div>
+
+// CORRECT - Theme semantic colors
+<div className="bg-success/10 rounded-lg p-4">
+  <div className="text-success font-bold">370</div>
+  <div className="text-muted-foreground text-xs">Allowed</div>
+</div>
+```
+
+**Why this matters:**
+
+- Ensures consistency across all tools (Impact Simulator, Subdomain Checker, etc.)
+- Theme colors automatically adapt to light/dark mode
+- Semantic meaning is clear (success/warning/destructive)
+- Future theme changes only need to update CSS variables
+
+**Common status patterns:**
+
+```jsx
+// Success/Good/Pass
+<div className="bg-success/10 text-success">✓ Passed</div>
+
+// Warning/Weak/Quarantine
+<div className="bg-warning/10 text-warning">⚠ Quarantine</div>
+
+// Error/Bad/Reject
+<div className="bg-destructive/10 text-destructive">✗ Rejected</div>
+
+// Info/Inherited/Neutral
+<div className="bg-primary/10 text-primary">ℹ Inherited</div>
+```
+
+### 4. Spacing Between Labels and Form Controls
 
 **ALWAYS add spacing between labels and their form elements:**
 
@@ -57,7 +107,7 @@ className = "bg-card text-foreground border-border text-primary";
 - `mb-2` for most labels with inputs/selects
 - `mb-3` for labels with sliders or special controls
 
-### 4. Accordion Component Fixes
+### 5. Accordion Component Fixes
 
 **File:** `/src/components/ui/Accordion.tsx`
 
@@ -73,7 +123,7 @@ className={`... bg-white text-gray-900 ...`}
 className={`... bg-card text-foreground ...`}
 ```
 
-### 5. Slider Visibility
+### 6. Slider Visibility
 
 **Issues:**
 
@@ -474,6 +524,7 @@ className =
 - ✅ DMARC Policy Generator (/tools/dmarc-policy-generator) - Full fix with accordion, slider, spacing, and color fixes
 - ✅ DMARC Analyzer (/tools/dmarc-analyzer) - Already properly themed, only needed label spacing fix
 - ✅ DMARC Domain Checker (/tools/dmarc-domain-checker) - Already properly themed, needed label spacing and semantic heading fix
+- ✅ DMARC Policy Impact Simulator (/tools/dmarc-policy-impact-simulator) - Fixed 19 hardcoded colors + standardized status colors to use semantic theme variables
 
 ## DMARC Analyzer Notes
 
@@ -576,3 +627,64 @@ textColor: "text-red-800",
 - `-800` color shades work well for both light and dark modes
 - When `dark:` variants behave unexpectedly, use solid colors instead
 - Always test actual computed color in DevTools, not just visual appearance
+
+## DMARC Policy Impact Simulator Notes
+
+**Fixed:** January 2025
+
+The DMARC Policy Impact Simulator page required comprehensive theme fixes including both standard color replacements and status color standardization.
+
+### Fixes Applied:
+
+**1. Standard Theme Color Fixes (19 instances):**
+
+All hardcoded gray/white colors replaced with theme variables:
+
+- Sidebar descriptions and headings
+- Upload area hints and privacy notices
+- Impact card labels
+- Chart headings
+- Table headers
+- Recommendations text
+- File loaded notification (critical fix - was showing white box in dark mode)
+- Remove button hover states
+
+**2. Status Color Standardization (3 instances):**
+
+Replaced hardcoded status colors with semantic theme variables for consistency across all tools:
+
+Lines 488-505:
+
+```jsx
+// BEFORE - Hardcoded colors
+<div className="rounded-lg bg-green-50 p-4">
+  <div className="text-2xl font-bold text-green-800">370</div>
+  <div className="text-xs">Allowed</div>
+</div>
+
+// AFTER - Theme semantic colors
+<div className="bg-success/10 rounded-lg p-4">
+  <div className="text-success text-2xl font-bold">370</div>
+  <div className="text-muted-foreground text-xs">Allowed</div>
+</div>
+```
+
+**Changes:**
+
+- Line 488: `bg-green-50` → `bg-success/10`, `text-green-800` → `text-success` (Allowed)
+- Line 494: `bg-yellow-50` → `bg-warning/10`, `text-yellow-800` → `text-warning` (Quarantined)
+- Line 500: `bg-red-50` → `bg-destructive/10`, `text-red-800` → `text-destructive` (Rejected)
+
+### Results:
+
+- ✅ All 19 hardcoded colors eliminated
+- ✅ Status colors now match Subdomain Policy Checker standard
+- ✅ Perfect visibility in both light and dark modes
+- ✅ Semantic color names make intent clear
+- ✅ Future-proof - theme changes only need CSS variable updates
+
+### Key Learnings:
+
+- Status colors must use semantic theme variables (`success`, `warning`, `destructive`) not hardcoded colors
+- Consistency across tools improves user experience and maintainability
+- The `/10` opacity modifier on backgrounds provides subtle differentiation while maintaining theme compatibility
