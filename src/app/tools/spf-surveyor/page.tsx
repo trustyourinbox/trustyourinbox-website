@@ -279,7 +279,7 @@ function getRecommendations(spfTree: SPFNode) {
     message: string;
   }[] = [];
   const { dots } = getGradeAndScore(spfTree);
-  const greenDots = dots.filter((dot) => dot.color === "bg-green-500").length;
+  const greenDots = dots.filter((dot) => dot.color === "bg-success").length;
 
   // DNS lookup recommendations
   if (spfTree.dnsLookups >= 10) {
@@ -550,29 +550,31 @@ export default function SPFSurveyorPage() {
           {(() => {
             const { dots, color, icon, message } = getGradeAndScore(spfTree);
             return (
-              <Card className={color}>
-                <div className="mb-4 flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <FaShieldAlt className="text-primary/70 h-6 w-6" />
-                    <h3 className="text-foreground text-xl font-bold">
-                      Status
-                    </h3>
-                  </div>
-                  {icon}
-                </div>
-
-                <p className="mb-4 text-sm">{message}</p>
-
-                {/* Status Dots */}
-                <div className="flex flex-wrap gap-4">
-                  {dots.map((dot, i) => (
-                    <div key={i} className="flex items-center gap-2">
-                      <div className={`h-3 w-3 rounded-full ${dot.color}`} />
-                      <span className="text-muted-foreground text-sm">
-                        {dot.message}
-                      </span>
+              <Card>
+                <div className="p-6">
+                  <div className={`rounded-lg border p-4 ${color}`}>
+                    <div className="mb-4 flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <FaShieldAlt className="h-6 w-6" />
+                        <h3 className="text-xl font-bold">Status</h3>
+                      </div>
+                      {icon}
                     </div>
-                  ))}
+
+                    <p className="mb-4 text-sm">{message}</p>
+
+                    {/* Status Dots */}
+                    <div className="flex flex-wrap gap-4">
+                      {dots.map((dot, i) => (
+                        <div key={i} className="flex items-center gap-2">
+                          <div
+                            className={`h-3 w-3 rounded-full ${dot.color}`}
+                          />
+                          <span className="text-sm">{dot.message}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </Card>
             );
@@ -583,51 +585,53 @@ export default function SPFSurveyorPage() {
             const recommendations = getRecommendations(spfTree);
             return (
               <Card>
-                <h3 className="text-foreground mb-3 text-lg font-semibold">
-                  Recommendations
-                </h3>
-                <div className="space-y-3">
-                  {recommendations.map((rec, i) => (
-                    <div
-                      key={i}
-                      className={`flex items-start gap-3 rounded-lg border p-3 ${
-                        rec.type === "warning"
-                          ? "border-destructive/20"
-                          : rec.type === "info"
-                            ? "border-primary/20"
-                            : "border-success/20"
-                      }`}
-                    >
+                <div className="p-6">
+                  <h3 className="text-foreground mb-3 text-lg font-semibold">
+                    Recommendations
+                  </h3>
+                  <div className="space-y-3">
+                    {recommendations.map((rec, i) => (
                       <div
-                        className={`mt-0.5 ${
+                        key={i}
+                        className={`flex items-start gap-3 rounded-lg border p-3 ${
                           rec.type === "warning"
-                            ? "text-destructive"
+                            ? "border-destructive/20"
                             : rec.type === "info"
-                              ? "text-primary"
-                              : "text-success"
+                              ? "border-primary/20"
+                              : "border-success/20"
                         }`}
                       >
-                        {rec.type === "warning" ? (
-                          <FaExclamationTriangle className="h-5 w-5" />
-                        ) : rec.type === "info" ? (
-                          <FaInfoCircle className="h-5 w-5" />
-                        ) : (
-                          <FaCheckCircle className="h-5 w-5" />
-                        )}
+                        <div
+                          className={`mt-0.5 ${
+                            rec.type === "warning"
+                              ? "text-destructive"
+                              : rec.type === "info"
+                                ? "text-primary"
+                                : "text-success"
+                          }`}
+                        >
+                          {rec.type === "warning" ? (
+                            <FaExclamationTriangle className="h-5 w-5" />
+                          ) : rec.type === "info" ? (
+                            <FaInfoCircle className="h-5 w-5" />
+                          ) : (
+                            <FaCheckCircle className="h-5 w-5" />
+                          )}
+                        </div>
+                        <p
+                          className={`text-sm ${
+                            rec.type === "warning"
+                              ? "text-destructive"
+                              : rec.type === "info"
+                                ? "text-primary"
+                                : "text-success"
+                          }`}
+                        >
+                          {rec.message}
+                        </p>
                       </div>
-                      <p
-                        className={`text-sm ${
-                          rec.type === "warning"
-                            ? "text-destructive"
-                            : rec.type === "info"
-                              ? "text-primary"
-                              : "text-success"
-                        }`}
-                      >
-                        {rec.message}
-                      </p>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
               </Card>
             );
@@ -635,106 +639,110 @@ export default function SPFSurveyorPage() {
 
           {/* SPF Record Card */}
           <Card>
-            <div className="mb-4 flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <FaServer className="text-primary/70 h-6 w-6" />
-                <h3 className="text-foreground text-xl font-bold">
-                  SPF Record
-                </h3>
+            <div className="p-6">
+              <div className="mb-4 flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <FaServer className="text-primary/70 h-6 w-6" />
+                  <h3 className="text-foreground text-xl font-bold">
+                    SPF Record
+                  </h3>
+                </div>
               </div>
-            </div>
-            <div className="flex items-center gap-2">
-              <pre className="border-border bg-muted text-foreground flex-1 rounded border p-2 text-xs break-all whitespace-pre-wrap">
-                {spfTree.record}
-              </pre>
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => handleCopy(spfTree.record)}
-              >
-                <FaCopy className="mr-2" />
-                {copied ? "Copied!" : "Copy"}
-              </Button>
+              <div className="flex items-center gap-2">
+                <pre className="border-border bg-muted text-foreground flex-1 rounded border p-2 text-xs break-all whitespace-pre-wrap">
+                  {spfTree.record}
+                </pre>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => handleCopy(spfTree.record)}
+                >
+                  <FaCopy className="mr-2" />
+                  {copied ? "Copied!" : "Copy"}
+                </Button>
+              </div>
             </div>
           </Card>
 
           {/* SPF Tree */}
           <Card>
-            <h3 className="text-foreground mb-4 text-lg font-semibold">
-              SPF Record Analysis
-            </h3>
-            <SPFTreeNode node={spfTree} />
+            <div className="p-6">
+              <h3 className="text-foreground mb-4 text-lg font-semibold">
+                SPF Record Analysis
+              </h3>
+              <SPFTreeNode node={spfTree} />
+            </div>
           </Card>
         </div>
       )}
 
-      <div className="mt-12 mb-8">
-        <div className="mb-6">
-          <h2 className="text-2xl font-bold tracking-tight">Related Tools</h2>
-          <p className="text-muted-foreground mt-1">
-            Explore more email authentication tools to secure your domain
+      {/* Related Tools */}
+      <div className="mt-8 mb-8">
+        <div className="mb-4">
+          <h2 className="text-foreground text-xl font-bold tracking-tight">
+            Related Tools
+          </h2>
+          <p className="text-muted-foreground mt-1 text-sm">
+            More email authentication tools
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
           <Link
             href="/tools/dmarc-analyzer"
-            className="group border-border bg-card hover:border-primary/30 relative overflow-hidden rounded-lg border p-5 transition-all hover:shadow-md"
+            className="group border-border/40 bg-card hover:border-primary/30 relative overflow-hidden rounded-lg border p-4 transition-all duration-200 hover:shadow-lg"
           >
-            <div className="flex items-start gap-4">
-              <div className="bg-primary/10 rounded-full p-2">
-                <Shield className="text-primary h-6 w-6" />
+            <div className="flex items-start gap-3">
+              <div className="bg-primary/10 flex-shrink-0 rounded-md p-2">
+                <Shield className="text-primary h-4 w-4" />
               </div>
-              <div>
-                <h3 className="text-lg font-semibold group-hover:underline">
+              <div className="min-w-0 flex-1">
+                <h3 className="text-foreground group-hover:text-primary text-sm font-semibold transition-colors">
                   DMARC Analyzer
                 </h3>
-                <p className="text-muted-foreground mt-1 text-sm">
+                <p className="text-muted-foreground mt-0.5 line-clamp-2 text-xs">
                   Analyze your DMARC configuration and get detailed reports
                 </p>
               </div>
             </div>
-            <div className="bg-primary absolute bottom-0 left-0 h-1 w-0 transition-all duration-300 group-hover:w-full"></div>
           </Link>
 
           <Link
             href="/tools/dkim-inspector"
-            className="group border-border bg-card hover:border-primary/30 relative overflow-hidden rounded-lg border p-5 transition-all hover:shadow-md"
+            className="group border-border/40 bg-card hover:border-primary/30 relative overflow-hidden rounded-lg border p-4 transition-all duration-200 hover:shadow-lg"
           >
-            <div className="flex items-start gap-4">
-              <div className="bg-primary/10 rounded-full p-2">
-                <Key className="text-primary h-6 w-6" />
+            <div className="flex items-start gap-3">
+              <div className="bg-primary/10 flex-shrink-0 rounded-md p-2">
+                <Key className="text-primary h-4 w-4" />
               </div>
-              <div>
-                <h3 className="text-lg font-semibold group-hover:underline">
+              <div className="min-w-0 flex-1">
+                <h3 className="text-foreground group-hover:text-primary text-sm font-semibold transition-colors">
                   DKIM Inspector
                 </h3>
-                <p className="text-muted-foreground mt-1 text-sm">
+                <p className="text-muted-foreground mt-0.5 line-clamp-2 text-xs">
                   Validate and troubleshoot your DKIM records
                 </p>
               </div>
             </div>
-            <div className="bg-primary absolute bottom-0 left-0 h-1 w-0 transition-all duration-300 group-hover:w-full"></div>
           </Link>
 
           <Link
             href="/tools/domain-security-checker"
-            className="group border-border bg-card hover:border-primary/30 relative overflow-hidden rounded-lg border p-5 transition-all hover:shadow-md"
+            className="group border-border/40 bg-card hover:border-primary/30 relative overflow-hidden rounded-lg border p-4 transition-all duration-200 hover:shadow-lg"
           >
-            <div className="flex items-start gap-4">
-              <div className="bg-primary/10 rounded-full p-2">
-                <Mail className="text-primary h-6 w-6" />
+            <div className="flex items-start gap-3">
+              <div className="bg-primary/10 flex-shrink-0 rounded-md p-2">
+                <Mail className="text-primary h-4 w-4" />
               </div>
-              <div>
-                <h3 className="text-lg font-semibold group-hover:underline">
+              <div className="min-w-0 flex-1">
+                <h3 className="text-foreground group-hover:text-primary text-sm font-semibold transition-colors">
                   Domain Security Checker
                 </h3>
-                <p className="text-muted-foreground mt-1 text-sm">
+                <p className="text-muted-foreground mt-0.5 line-clamp-2 text-xs">
                   Check your domain&apos;s overall email security configuration
                 </p>
               </div>
             </div>
-            <div className="bg-primary absolute bottom-0 left-0 h-1 w-0 transition-all duration-300 group-hover:w-full"></div>
           </Link>
         </div>
       </div>
