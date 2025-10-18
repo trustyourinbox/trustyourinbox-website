@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, LazyMotion, domAnimation } from "framer-motion";
+import { m, LazyMotion, domAnimation } from "framer-motion";
 import {
   Shield,
   BarChart3,
@@ -170,7 +170,7 @@ export default function ProductShowcase() {
       <section className="from-background via-secondary/20 to-secondary/30 bg-gradient-to-b py-12 sm:py-16 md:py-20 lg:py-24">
         <div className="container">
           {/* Header */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -188,7 +188,7 @@ export default function ProductShowcase() {
               Professional-grade DMARC tools and analytics designed for teams
               that value both security and simplicity.
             </p>
-          </motion.div>
+          </m.div>
 
           {/* Tabs */}
           <div className="mb-8 flex flex-wrap justify-center gap-2 sm:mb-12 sm:gap-3">
@@ -212,7 +212,7 @@ export default function ProductShowcase() {
           </div>
 
           {/* Feature Grid */}
-          <motion.div
+          <m.div
             key={activeTab}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -299,7 +299,7 @@ export default function ProductShowcase() {
                 </div>
               );
             })}
-          </motion.div>
+          </m.div>
 
           {/* Bottom CTA */}
           <div className="mt-16 text-center sm:mt-20 md:mt-24">
