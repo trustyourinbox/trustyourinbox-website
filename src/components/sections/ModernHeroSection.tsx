@@ -18,23 +18,6 @@ const stats = [
   { value: "98.7%", label: "Customer Satisfaction", icon: Users },
 ];
 
-const customerLogos = [
-  {
-    name: "Microsoft",
-    src: "/images/logos/microsoft.svg",
-    width: 120,
-    height: 40,
-  },
-  { name: "Google", src: "/images/logos/google.svg", width: 100, height: 40 },
-  {
-    name: "Salesforce",
-    src: "/images/logos/salesforce.svg",
-    width: 130,
-    height: 40,
-  },
-  { name: "IBM", src: "/images/logos/ibm.svg", width: 80, height: 40 },
-];
-
 export default function ModernHeroSection() {
   return (
     <section className="bg-background relative overflow-hidden">
@@ -110,27 +93,6 @@ export default function ModernHeroSection() {
               <div className="flex items-center gap-2 text-sm">
                 <CheckCircle2 className="text-primary h-5 w-5" />
                 <span className="text-muted-foreground">Cancel anytime</span>
-              </div>
-            </div>
-
-            {/* Customer Logos */}
-            <div className="border-border border-t pt-6 sm:pt-8">
-              <p className="text-muted-foreground mb-4 text-center text-xs sm:text-left sm:text-sm">
-                Trusted by leading organizations
-              </p>
-              <div className="flex flex-wrap items-center justify-center gap-6 opacity-60 grayscale transition-all hover:opacity-100 hover:grayscale-0 sm:justify-start sm:gap-8">
-                {customerLogos.map((logo) => (
-                  <div key={logo.name} className="flex-shrink-0">
-                    <Image
-                      src={logo.src}
-                      alt={`${logo.name} logo`}
-                      width={logo.width}
-                      height={logo.height}
-                      className="h-8 w-auto object-contain sm:h-10"
-                      style={{ height: "auto" }}
-                    />
-                  </div>
-                ))}
               </div>
             </div>
 

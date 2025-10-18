@@ -4,7 +4,9 @@ const nextConfig = {
     ppr: false,
   },
   reactStrictMode: true,
+  compress: true, // Enable Brotli/Gzip compression
   images: {
+    formats: ["image/avif", "image/webp"], // Modern image formats (50% smaller)
     dangerouslyAllowSVG: true,
     contentDispositionType: "attachment",
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
