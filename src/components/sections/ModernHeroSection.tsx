@@ -97,7 +97,7 @@ export default function ModernHeroSection() {
             </div>
 
             {/* Stats */}
-            <div className="border-border grid grid-cols-1 gap-4 border-t pt-6 sm:grid-cols-3 sm:gap-6 sm:pt-8">
+            <div className="border-border grid grid-cols-3 gap-3 border-t pt-6 sm:gap-6 sm:pt-8">
               {stats.map((stat) => {
                 const Icon = stat.icon;
                 return (
@@ -105,13 +105,13 @@ export default function ModernHeroSection() {
                     key={stat.label}
                     className="space-y-1 text-center sm:text-left"
                   >
-                    <div className="flex items-center justify-center gap-2 sm:justify-start">
-                      <Icon className="text-primary h-4 w-4 flex-shrink-0" />
-                      <div className="text-foreground text-xl font-bold sm:text-2xl md:text-3xl">
+                    <div className="flex items-center justify-center gap-1.5 sm:justify-start sm:gap-2">
+                      <Icon className="text-primary h-3.5 w-3.5 flex-shrink-0 sm:h-4 sm:w-4" />
+                      <div className="text-foreground text-lg font-bold sm:text-2xl md:text-3xl">
                         {stat.value}
                       </div>
                     </div>
-                    <div className="text-muted-foreground text-xs sm:text-sm">
+                    <div className="text-muted-foreground text-[10px] leading-tight sm:text-xs sm:leading-normal">
                       {stat.label}
                     </div>
                   </div>
