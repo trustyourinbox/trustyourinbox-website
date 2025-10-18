@@ -38,13 +38,21 @@ interface SPFNode {
 function SPFTreeNode({ node, level = 0 }: { node: SPFNode; level?: number }) {
   const [isExpanded, setIsExpanded] = useState(level === 0);
 
+  // Check if node has any expandable content
+  const hasContent =
+    node.includes.length > 0 ||
+    node.ip4.length > 0 ||
+    node.ip6.length > 0 ||
+    node.mx.length > 0 ||
+    node.a.length > 0;
+
   return (
     <div className="border-border ml-2 border-l-2 pl-4">
       <div
         className="hover:bg-muted flex cursor-pointer items-center gap-2 rounded-lg px-2 py-2 transition-colors"
         onClick={() => setIsExpanded(!isExpanded)}
       >
-        {node.includes.length > 0 && (
+        {hasContent && (
           <span className="text-muted-foreground hover:text-foreground transition-colors">
             {isExpanded ? (
               <FaChevronDown className="h-4 w-4" />
@@ -60,7 +68,7 @@ function SPFTreeNode({ node, level = 0 }: { node: SPFNode; level?: number }) {
               ({node.dnsLookups} DNS lookups)
             </span>
           </div>
-          {!isExpanded && node.includes.length > 0 && (
+          {!isExpanded && hasContent && (
             <div className="text-muted-foreground mt-1 text-sm">
               Click to expand and view details
             </div>
