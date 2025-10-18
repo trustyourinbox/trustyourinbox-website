@@ -16,6 +16,7 @@ import {
   Mail,
   Key,
 } from "lucide-react";
+import { gunzipSync, unzipSync } from "fflate";
 import Link from "next/link";
 import {
   PieChart,
@@ -175,13 +176,74 @@ export default function DmarcPolicyImpactSimulator() {
   function handleFile(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file) return;
+
+    const fileName = file.name.toLowerCase();
     const reader = new FileReader();
-    reader.onload = (ev) => {
-      setXml(ev.target?.result as string);
-      setError(null);
-    };
-    reader.onerror = () => setError("Failed to read file.");
-    reader.readAsText(file);
+
+    // Handle .gz files (GZIP compressed)
+    if (fileName.endsWith(".gz")) {
+      reader.onload = (ev) => {
+        try {
+          const arrayBuffer = ev.target?.result as ArrayBuffer;
+          const uint8Array = new Uint8Array(arrayBuffer);
+          const decompressed = gunzipSync(uint8Array);
+          const xmlText = new TextDecoder().decode(decompressed);
+          setXml(xmlText);
+          setError(null);
+        } catch (err) {
+          setError(
+            "Failed to decompress .gz file. Please ensure it's a valid GZIP file."
+          );
+        }
+      };
+      reader.onerror = () => setError("Failed to read .gz file.");
+      reader.readAsArrayBuffer(file);
+    }
+    // Handle .zip files
+    else if (fileName.endsWith(".zip")) {
+      reader.onload = (ev) => {
+        try {
+          const arrayBuffer = ev.target?.result as ArrayBuffer;
+          const uint8Array = new Uint8Array(arrayBuffer);
+          const unzipped = unzipSync(uint8Array);
+
+          // Find the first .xml file in the ZIP
+          const xmlFileName = Object.keys(unzipped).find((name) =>
+            name.toLowerCase().endsWith(".xml")
+          );
+
+          if (!xmlFileName) {
+            setError("No .xml file found in the ZIP archive.");
+            return;
+          }
+
+          const xmlText = new TextDecoder().decode(unzipped[xmlFileName]);
+          setXml(xmlText);
+          setError(null);
+        } catch (err) {
+          setError(
+            "Failed to decompress .zip file. Please ensure it's a valid ZIP file."
+          );
+        }
+      };
+      reader.onerror = () => setError("Failed to read .zip file.");
+      reader.readAsArrayBuffer(file);
+    }
+    // Handle .xml files (plain text)
+    else if (fileName.endsWith(".xml")) {
+      reader.onload = (ev) => {
+        setXml(ev.target?.result as string);
+        setError(null);
+      };
+      reader.onerror = () => setError("Failed to read .xml file.");
+      reader.readAsText(file);
+    }
+    // Unsupported file type
+    else {
+      setError(
+        "Unsupported file type. Please upload a .xml, .zip, or .gz file."
+      );
+    }
   }
 
   function handleSimulate() {
@@ -344,14 +406,80 @@ export default function DmarcPolicyImpactSimulator() {
                 e.preventDefault();
                 if (e.dataTransfer.files && e.dataTransfer.files[0]) {
                   const file = e.dataTransfer.files[0];
+                  const fileName = file.name.toLowerCase();
                   const reader = new FileReader();
-                  reader.onload = (ev) => {
-                    setXml(ev.target?.result as string);
-                    setShowSample(false);
-                    setError(null);
-                  };
-                  reader.onerror = () => setError("Failed to read file.");
-                  reader.readAsText(file);
+
+                  // Handle .gz files (GZIP compressed)
+                  if (fileName.endsWith(".gz")) {
+                    reader.onload = (ev) => {
+                      try {
+                        const arrayBuffer = ev.target?.result as ArrayBuffer;
+                        const uint8Array = new Uint8Array(arrayBuffer);
+                        const decompressed = gunzipSync(uint8Array);
+                        const xmlText = new TextDecoder().decode(decompressed);
+                        setXml(xmlText);
+                        setShowSample(false);
+                        setError(null);
+                      } catch (err) {
+                        setError(
+                          "Failed to decompress .gz file. Please ensure it's a valid GZIP file."
+                        );
+                      }
+                    };
+                    reader.onerror = () => setError("Failed to read .gz file.");
+                    reader.readAsArrayBuffer(file);
+                  }
+                  // Handle .zip files
+                  else if (fileName.endsWith(".zip")) {
+                    reader.onload = (ev) => {
+                      try {
+                        const arrayBuffer = ev.target?.result as ArrayBuffer;
+                        const uint8Array = new Uint8Array(arrayBuffer);
+                        const unzipped = unzipSync(uint8Array);
+
+                        // Find the first .xml file in the ZIP
+                        const xmlFileName = Object.keys(unzipped).find((name) =>
+                          name.toLowerCase().endsWith(".xml")
+                        );
+
+                        if (!xmlFileName) {
+                          setError("No .xml file found in the ZIP archive.");
+                          return;
+                        }
+
+                        const xmlText = new TextDecoder().decode(
+                          unzipped[xmlFileName]
+                        );
+                        setXml(xmlText);
+                        setShowSample(false);
+                        setError(null);
+                      } catch (err) {
+                        setError(
+                          "Failed to decompress .zip file. Please ensure it's a valid ZIP file."
+                        );
+                      }
+                    };
+                    reader.onerror = () =>
+                      setError("Failed to read .zip file.");
+                    reader.readAsArrayBuffer(file);
+                  }
+                  // Handle .xml files (plain text)
+                  else if (fileName.endsWith(".xml")) {
+                    reader.onload = (ev) => {
+                      setXml(ev.target?.result as string);
+                      setShowSample(false);
+                      setError(null);
+                    };
+                    reader.onerror = () =>
+                      setError("Failed to read .xml file.");
+                    reader.readAsText(file);
+                  }
+                  // Unsupported file type
+                  else {
+                    setError(
+                      "Unsupported file type. Please upload a .xml, .zip, or .gz file."
+                    );
+                  }
                 }
               }}
             >
@@ -360,12 +488,12 @@ export default function DmarcPolicyImpactSimulator() {
                 Drag & drop DMARC XML here, or click to select
               </span>
               <span className="text-muted-foreground text-xs">
-                Only .xml files are supported
+                Supports .xml, .zip, and .gz files
               </span>
               <input
                 id="dmarc-upload"
                 type="file"
-                accept=".xml"
+                accept=".xml,.zip,.gz"
                 onChange={handleFile}
                 className="hidden"
               />
