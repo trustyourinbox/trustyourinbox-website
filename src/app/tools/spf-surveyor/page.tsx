@@ -70,7 +70,7 @@ function SPFTreeNode({ node, level = 0 }: { node: SPFNode; level?: number }) {
 
       {isExpanded && (
         <div className="mt-2 space-y-4">
-          <div className="break-all rounded-lg border border-gray-200 bg-gray-50 p-3 font-mono text-sm">
+          <div className="rounded-lg border border-gray-200 bg-gray-50 p-3 font-mono text-sm break-all">
             {node.record}
           </div>
 
@@ -388,8 +388,11 @@ export default function SPFSurveyorPage() {
   }
 
   function getWarnings(spfTree: SPFNode) {
-    const warnings: { icon: JSX.Element; color: string; message: string }[] =
-      [];
+    const warnings: {
+      icon: React.ReactElement;
+      color: string;
+      message: string;
+    }[] = [];
     // Risky mechanism: +all or all
     if (spfTree.all === "+all" || spfTree.all === "all") {
       warnings.push({
@@ -410,7 +413,7 @@ export default function SPFSurveyorPage() {
     // SPF flattening suggestion
     if (spfTree.dnsLookups >= 8) {
       warnings.push({
-        icon: <FaInfoCircle className="h-4 w-4 text-primary" />,
+        icon: <FaInfoCircle className="text-primary h-4 w-4" />,
         color: "text-primary bg-secondary border-primary/20",
         message:
           "Suggestion: Consider SPF flattening to reduce DNS lookups and improve reliability.",
@@ -423,7 +426,7 @@ export default function SPFSurveyorPage() {
     <div className="space-y-6">
       <div>
         <h3 className="flex items-center gap-1.5 text-sm font-medium text-gray-900">
-          <FaShieldAlt className="h-4 w-4 text-primary" />
+          <FaShieldAlt className="text-primary h-4 w-4" />
           About SPF
         </h3>
         <p className="mt-2 text-sm text-gray-500">
@@ -435,20 +438,20 @@ export default function SPFSurveyorPage() {
 
       <div>
         <h3 className="flex items-center gap-1.5 text-sm font-medium text-gray-900">
-          <FaInfoCircle className="h-4 w-4 text-primary" />
+          <FaInfoCircle className="text-primary h-4 w-4" />
           What We Check
         </h3>
         <ul className="mt-2 space-y-2 text-sm text-gray-500">
           <li className="flex items-start gap-2">
-            <FaServer className="mt-0.5 h-4 w-4 text-primary" />
+            <FaServer className="text-primary mt-0.5 h-4 w-4" />
             <span>DNS lookup count and limits</span>
           </li>
           <li className="flex items-start gap-2">
-            <FaServer className="mt-0.5 h-4 w-4 text-primary" />
+            <FaServer className="text-primary mt-0.5 h-4 w-4" />
             <span>SPF policy and mechanisms</span>
           </li>
           <li className="flex items-start gap-2">
-            <FaServer className="mt-0.5 h-4 w-4 text-primary" />
+            <FaServer className="text-primary mt-0.5 h-4 w-4" />
             <span>Record structure and length</span>
           </li>
         </ul>
@@ -465,7 +468,7 @@ export default function SPFSurveyorPage() {
       <Card className="w-full border-0 shadow-lg">
         <div className="p-6">
           <div className="mb-6 flex items-center gap-2">
-            <Shield className="h-6 w-6 text-primary" />
+            <Shield className="text-primary h-6 w-6" />
             <h2 className="text-2xl font-bold">SPF Surveyor</h2>
           </div>
 
@@ -482,7 +485,7 @@ export default function SPFSurveyorPage() {
                   id="domain"
                   type="text"
                   placeholder="yourdomain.com"
-                  className="h-11 border-gray-200 pl-10 focus:border-primary focus:ring-ring"
+                  className="focus:border-primary focus:ring-ring h-11 border-gray-200 pl-10"
                   value={domain}
                   onChange={(e) => setDomain(e.target.value)}
                   required
@@ -494,7 +497,7 @@ export default function SPFSurveyorPage() {
             <div>
               <Button
                 type="submit"
-                className="min-w-[120px] bg-primary text-white hover:bg-primary"
+                className="bg-primary hover:bg-primary min-w-[120px] text-white"
                 disabled={loading || !domain}
               >
                 {loading ? (
@@ -547,7 +550,7 @@ export default function SPFSurveyorPage() {
               <Card className={color}>
                 <div className="mb-4 flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <FaShieldAlt className="h-6 w-6 text-primary/70" />
+                    <FaShieldAlt className="text-primary/70 h-6 w-6" />
                     <span className="text-xl font-bold text-gray-900">
                       Status
                     </span>
@@ -631,14 +634,14 @@ export default function SPFSurveyorPage() {
           <Card>
             <div className="mb-4 flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <FaServer className="h-6 w-6 text-primary/70" />
+                <FaServer className="text-primary/70 h-6 w-6" />
                 <span className="text-xl font-bold text-gray-900">
                   SPF Record
                 </span>
               </div>
             </div>
             <div className="flex items-center gap-2">
-              <pre className="flex-1 whitespace-pre-wrap break-all rounded border border-gray-100 bg-gray-50 p-2 text-xs text-gray-800">
+              <pre className="flex-1 rounded border border-gray-100 bg-gray-50 p-2 text-xs break-all whitespace-pre-wrap text-gray-800">
                 {spfTree.record}
               </pre>
               <Button
@@ -662,10 +665,10 @@ export default function SPFSurveyorPage() {
         </div>
       )}
 
-      <div className="mb-8 mt-12">
+      <div className="mt-12 mb-8">
         <div className="mb-6">
           <h2 className="text-2xl font-bold tracking-tight">Related Tools</h2>
-          <p className="mt-1 text-muted-foreground">
+          <p className="text-muted-foreground mt-1">
             Explore more email authentication tools to secure your domain
           </p>
         </div>
@@ -673,22 +676,22 @@ export default function SPFSurveyorPage() {
         <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
           <Link
             href="/tools/dmarc-analyzer"
-            className="group relative overflow-hidden rounded-lg border border-primary/20 bg-secondary p-5 transition-all hover:shadow-md dark:border-primary dark:bg-primary"
+            className="group border-primary/20 bg-secondary dark:border-primary dark:bg-primary relative overflow-hidden rounded-lg border p-5 transition-all hover:shadow-md"
           >
             <div className="flex items-start gap-4">
-              <div className="rounded-full bg-primary/10 p-2 dark:bg-primary">
-                <Shield className="h-6 w-6 text-primary" />
+              <div className="bg-primary/10 dark:bg-primary rounded-full p-2">
+                <Shield className="text-primary h-6 w-6" />
               </div>
               <div>
                 <h3 className="text-lg font-semibold group-hover:underline">
                   DMARC Analyzer
                 </h3>
-                <p className="mt-1 text-sm text-muted-foreground">
+                <p className="text-muted-foreground mt-1 text-sm">
                   Analyze your DMARC configuration and get detailed reports
                 </p>
               </div>
             </div>
-            <div className="absolute bottom-0 left-0 h-1 w-0 bg-primary transition-all duration-300 group-hover:w-full"></div>
+            <div className="bg-primary absolute bottom-0 left-0 h-1 w-0 transition-all duration-300 group-hover:w-full"></div>
           </Link>
 
           <Link
@@ -697,18 +700,18 @@ export default function SPFSurveyorPage() {
           >
             <div className="flex items-start gap-4">
               <div className="rounded-full bg-green-100 p-2 dark:bg-green-900">
-                <Key className="h-6 w-6 text-primary" />
+                <Key className="text-primary h-6 w-6" />
               </div>
               <div>
                 <h3 className="text-lg font-semibold group-hover:underline">
                   DKIM Inspector
                 </h3>
-                <p className="mt-1 text-sm text-muted-foreground">
+                <p className="text-muted-foreground mt-1 text-sm">
                   Validate and troubleshoot your DKIM records
                 </p>
               </div>
             </div>
-            <div className="absolute bottom-0 left-0 h-1 w-0 bg-primary transition-all duration-300 group-hover:w-full"></div>
+            <div className="bg-primary absolute bottom-0 left-0 h-1 w-0 transition-all duration-300 group-hover:w-full"></div>
           </Link>
 
           <Link
@@ -717,18 +720,18 @@ export default function SPFSurveyorPage() {
           >
             <div className="flex items-start gap-4">
               <div className="rounded-full bg-purple-100 p-2 dark:bg-purple-900">
-                <Mail className="h-6 w-6 text-primary" />
+                <Mail className="text-primary h-6 w-6" />
               </div>
               <div>
                 <h3 className="text-lg font-semibold group-hover:underline">
                   Domain Security Checker
                 </h3>
-                <p className="mt-1 text-sm text-muted-foreground">
+                <p className="text-muted-foreground mt-1 text-sm">
                   Check your domain&apos;s overall email security configuration
                 </p>
               </div>
             </div>
-            <div className="absolute bottom-0 left-0 h-1 w-0 bg-primary transition-all duration-300 group-hover:w-full"></div>
+            <div className="bg-primary absolute bottom-0 left-0 h-1 w-0 transition-all duration-300 group-hover:w-full"></div>
           </Link>
         </div>
       </div>

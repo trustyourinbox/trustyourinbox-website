@@ -1,20 +1,14 @@
 import ModernHeroSection from "@/components/sections/ModernHeroSection";
-import BentoGridFeatures from "@/components/sections/BentoGridFeatures";
-import AppShowcaseSection from "@/components/sections/AppShowcaseSection";
-import ToolsShowcaseSection from "@/components/sections/ToolsShowcaseSection";
-import DmarcSolutionSection from "@/components/sections/DmarcSolutionSection";
-import TestimonialsSection from "@/components/sections/TestimonialsSection";
+import ProductShowcase from "@/components/sections/ProductShowcase";
 import HowItWorksSection from "@/components/sections/HowItWorksSection";
+import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import FinalCtaSection from "@/components/sections/FinalCtaSection";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-background font-sans">
+    <div className="bg-background min-h-screen font-sans">
       <ModernHeroSection />
-      <BentoGridFeatures />
-      <AppShowcaseSection />
-      <ToolsShowcaseSection />
-      <DmarcSolutionSection />
+      <ProductShowcase />
       <HowItWorksSection />
       <TestimonialsSection />
       <FinalCtaSection />

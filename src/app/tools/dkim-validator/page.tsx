@@ -117,7 +117,11 @@ function getGradeAndScore(fields: Record<string, string>) {
 }
 
 function getWarnings(fields: Record<string, string>) {
-  const warnings: { icon: JSX.Element; color: string; message: string }[] = [];
+  const warnings: {
+    icon: React.ReactElement;
+    color: string;
+    message: string;
+  }[] = [];
   if (!fields.v || fields.v !== "DKIM1") {
     warnings.push({
       icon: <FaTimesCircle className="h-4 w-4 text-red-500" />,
@@ -304,7 +308,7 @@ export default function DKIMValidatorPage() {
     <div className="space-y-6">
       <div>
         <h3 className="flex items-center gap-1.5 text-sm font-medium text-gray-900">
-          <FaShieldAlt className="h-4 w-4 text-primary" />
+          <FaShieldAlt className="text-primary h-4 w-4" />
           About DKIM
         </h3>
         <p className="mt-2 text-sm text-gray-500">
@@ -316,13 +320,13 @@ export default function DKIMValidatorPage() {
 
       <div>
         <h3 className="flex items-center gap-1.5 text-sm font-medium text-gray-900">
-          <FaInfoCircle className="h-4 w-4 text-primary" />
+          <FaInfoCircle className="text-primary h-4 w-4" />
           Common Tags
         </h3>
         <ul className="mt-2 space-y-2 text-sm text-gray-500">
           {DKIM_TAG_LEGEND.slice(0, 5).map(({ tag, name, desc }) => (
             <li key={tag} className="flex items-start gap-2">
-              <code className="rounded bg-gray-100 px-1.5 py-0.5 text-primary">
+              <code className="text-primary rounded bg-gray-100 px-1.5 py-0.5">
                 {tag}=
               </code>
               <span>{desc}</span>
@@ -342,7 +346,7 @@ export default function DKIMValidatorPage() {
       <Card className="w-full border-0 shadow-lg">
         <div className="p-6">
           <div className="mb-6 flex items-center gap-2">
-            <Shield className="h-6 w-6 text-primary" />
+            <Shield className="text-primary h-6 w-6" />
             <h2 className="text-2xl font-bold">DKIM Validator</h2>
           </div>
 
@@ -359,7 +363,7 @@ export default function DKIMValidatorPage() {
                   id="dkim"
                   type="text"
                   placeholder="v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA..."
-                  className="h-11 border-gray-200 pl-10 focus:border-primary focus:ring-ring"
+                  className="focus:border-primary focus:ring-ring h-11 border-gray-200 pl-10"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   required
@@ -370,7 +374,7 @@ export default function DKIMValidatorPage() {
             <div>
               <Button
                 type="submit"
-                className="min-w-[120px] bg-primary text-white hover:bg-primary"
+                className="bg-primary hover:bg-primary min-w-[120px] text-white"
                 disabled={loading || !input}
               >
                 {loading ? (
@@ -435,7 +439,7 @@ export default function DKIMValidatorPage() {
                   </p>
                 </div>
               </div>
-              <div className="text-3xl font-bold text-primary">
+              <div className="text-primary text-3xl font-bold">
                 {getGradeAndScore(fields).score}%
               </div>
             </div>
@@ -465,7 +469,7 @@ export default function DKIMValidatorPage() {
                 {getRecommendations(fields, getKeyLength(fields.p)).map(
                   (rec, idx) => (
                     <div key={idx} className="flex items-start gap-2">
-                      <FaInfoCircle className="mt-0.5 h-4 w-4 text-primary" />
+                      <FaInfoCircle className="text-primary mt-0.5 h-4 w-4" />
                       <span>{rec.message}</span>
                     </div>
                   )
@@ -476,10 +480,10 @@ export default function DKIMValidatorPage() {
         </div>
       )}
 
-      <div className="mb-8 mt-12">
+      <div className="mt-12 mb-8">
         <div className="mb-6">
           <h2 className="text-2xl font-bold tracking-tight">Related Tools</h2>
-          <p className="mt-1 text-muted-foreground">
+          <p className="text-muted-foreground mt-1">
             Explore more email authentication tools to secure your domain
           </p>
         </div>
@@ -487,22 +491,22 @@ export default function DKIMValidatorPage() {
         <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
           <Link
             href="/tools/dmarc-analyzer"
-            className="group relative overflow-hidden rounded-lg border border-primary/20 bg-secondary p-5 transition-all hover:shadow-md dark:border-primary dark:bg-primary"
+            className="group border-primary/20 bg-secondary dark:border-primary dark:bg-primary relative overflow-hidden rounded-lg border p-5 transition-all hover:shadow-md"
           >
             <div className="flex items-start gap-4">
-              <div className="rounded-full bg-primary/10 p-2 dark:bg-primary">
-                <Shield className="h-6 w-6 text-primary" />
+              <div className="bg-primary/10 dark:bg-primary rounded-full p-2">
+                <Shield className="text-primary h-6 w-6" />
               </div>
               <div>
                 <h3 className="text-lg font-semibold group-hover:underline">
                   DMARC Analyzer
                 </h3>
-                <p className="mt-1 text-sm text-muted-foreground">
+                <p className="text-muted-foreground mt-1 text-sm">
                   Analyze your DMARC configuration and get detailed reports
                 </p>
               </div>
             </div>
-            <div className="absolute bottom-0 left-0 h-1 w-0 bg-primary transition-all duration-300 group-hover:w-full"></div>
+            <div className="bg-primary absolute bottom-0 left-0 h-1 w-0 transition-all duration-300 group-hover:w-full"></div>
           </Link>
 
           <Link
@@ -511,18 +515,18 @@ export default function DKIMValidatorPage() {
           >
             <div className="flex items-start gap-4">
               <div className="rounded-full bg-green-100 p-2 dark:bg-green-900">
-                <Mail className="h-6 w-6 text-primary" />
+                <Mail className="text-primary h-6 w-6" />
               </div>
               <div>
                 <h3 className="text-lg font-semibold group-hover:underline">
                   SPF Surveyor
                 </h3>
-                <p className="mt-1 text-sm text-muted-foreground">
+                <p className="text-muted-foreground mt-1 text-sm">
                   Validate and troubleshoot your SPF records
                 </p>
               </div>
             </div>
-            <div className="absolute bottom-0 left-0 h-1 w-0 bg-primary transition-all duration-300 group-hover:w-full"></div>
+            <div className="bg-primary absolute bottom-0 left-0 h-1 w-0 transition-all duration-300 group-hover:w-full"></div>
           </Link>
 
           <Link
@@ -531,18 +535,18 @@ export default function DKIMValidatorPage() {
           >
             <div className="flex items-start gap-4">
               <div className="rounded-full bg-purple-100 p-2 dark:bg-purple-900">
-                <Key className="h-6 w-6 text-primary" />
+                <Key className="text-primary h-6 w-6" />
               </div>
               <div>
                 <h3 className="text-lg font-semibold group-hover:underline">
                   DMARC Subdomain Policy Checker
                 </h3>
-                <p className="mt-1 text-sm text-muted-foreground">
+                <p className="text-muted-foreground mt-1 text-sm">
                   Check DMARC policy coverage across your subdomains
                 </p>
               </div>
             </div>
-            <div className="absolute bottom-0 left-0 h-1 w-0 bg-primary transition-all duration-300 group-hover:w-full"></div>
+            <div className="bg-primary absolute bottom-0 left-0 h-1 w-0 transition-all duration-300 group-hover:w-full"></div>
           </Link>
         </div>
       </div>

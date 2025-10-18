@@ -135,7 +135,11 @@ function getGradeAndScore(dmarcFields: Record<string, string>) {
 }
 
 function getWarnings(result: any) {
-  const warnings: { icon: JSX.Element; color: string; message: string }[] = [];
+  const warnings: {
+    icon: React.ReactElement;
+    color: string;
+    message: string;
+  }[] = [];
   if (!result.dmarc) {
     warnings.push({
       icon: <FaExclamationTriangle className="h-4 w-4 text-red-500" />,
@@ -279,7 +283,7 @@ function RelatedTools() {
       id: "dmarc-analyzer",
       name: "DMARC Analyzer",
       description: "Analyze your DMARC configuration and get detailed reports",
-      icon: <Shield className="h-6 w-6 text-primary" />,
+      icon: <Shield className="text-primary h-6 w-6" />,
       href: "/tools/dmarc-analyzer",
       color: "bg-secondary dark:bg-primary",
       borderColor: "border-primary/20 dark:border-primary",
@@ -289,7 +293,7 @@ function RelatedTools() {
       id: "spf-surveyor",
       name: "SPF Surveyor",
       description: "Validate and troubleshoot your SPF records",
-      icon: <Mail className="h-6 w-6 text-primary" />,
+      icon: <Mail className="text-primary h-6 w-6" />,
       href: "/tools/spf-surveyor",
       color: "bg-green-50 dark:bg-green-950",
       borderColor: "border-green-200 dark:border-green-800",
@@ -299,7 +303,7 @@ function RelatedTools() {
       id: "dkim-validator",
       name: "DKIM Validator",
       description: "Verify your DKIM signatures and configuration",
-      icon: <Key className="h-6 w-6 text-primary" />,
+      icon: <Key className="text-primary h-6 w-6" />,
       href: "/tools/dkim-validator",
       color: "bg-purple-50 dark:bg-purple-950",
       borderColor: "border-purple-200 dark:border-purple-800",
@@ -308,10 +312,10 @@ function RelatedTools() {
   ];
 
   return (
-    <div className="mb-8 mt-12">
+    <div className="mt-12 mb-8">
       <div className="mb-6">
         <h2 className="text-2xl font-bold tracking-tight">Related Tools</h2>
-        <p className="mt-1 text-muted-foreground">
+        <p className="text-muted-foreground mt-1">
           Explore more email authentication tools to secure your domain
         </p>
       </div>
@@ -331,12 +335,12 @@ function RelatedTools() {
                 <h3 className="text-lg font-semibold group-hover:underline">
                   {tool.name}
                 </h3>
-                <p className="mt-1 text-sm text-muted-foreground">
+                <p className="text-muted-foreground mt-1 text-sm">
                   {tool.description}
                 </p>
               </div>
             </div>
-            <div className="absolute bottom-0 left-0 h-1 w-0 bg-primary transition-all duration-300 group-hover:w-full"></div>
+            <div className="bg-primary absolute bottom-0 left-0 h-1 w-0 transition-all duration-300 group-hover:w-full"></div>
           </Link>
         ))}
       </div>
@@ -380,7 +384,7 @@ export default function DMARCDomainCheckerPage() {
     <div className="space-y-6">
       <div>
         <h3 className="flex items-center gap-1.5 text-sm font-medium text-gray-900">
-          <FaShieldAlt className="h-4 w-4 text-primary" />
+          <FaShieldAlt className="text-primary h-4 w-4" />
           About Domain Authentication
         </h3>
         <p className="mt-2 text-sm text-gray-500">
@@ -391,20 +395,20 @@ export default function DMARCDomainCheckerPage() {
 
       <div>
         <h3 className="flex items-center gap-1.5 text-sm font-medium text-gray-900">
-          <FaInfoCircle className="h-4 w-4 text-primary" />
+          <FaInfoCircle className="text-primary h-4 w-4" />
           What We Check
         </h3>
         <ul className="mt-2 space-y-2 text-sm text-gray-500">
           <li className="flex items-start gap-2">
-            <FaShieldAlt className="mt-0.5 h-4 w-4 text-primary" />
+            <FaShieldAlt className="text-primary mt-0.5 h-4 w-4" />
             <span>DMARC record and policy</span>
           </li>
           <li className="flex items-start gap-2">
-            <FaEnvelope className="mt-0.5 h-4 w-4 text-primary" />
+            <FaEnvelope className="text-primary mt-0.5 h-4 w-4" />
             <span>SPF record and mechanisms</span>
           </li>
           <li className="flex items-start gap-2">
-            <FaKey className="mt-0.5 h-4 w-4 text-primary" />
+            <FaKey className="text-primary mt-0.5 h-4 w-4" />
             <span>DKIM records and selectors</span>
           </li>
         </ul>
@@ -432,7 +436,7 @@ export default function DMARCDomainCheckerPage() {
       <Card className="w-full border-0 shadow-lg">
         <div className="p-6">
           <div className="mb-6 flex items-center gap-2">
-            <Shield className="h-6 w-6 text-primary" />
+            <Shield className="text-primary h-6 w-6" />
             <h2 className="text-2xl font-bold">DMARC Checker</h2>
           </div>
 
@@ -450,7 +454,7 @@ export default function DMARCDomainCheckerPage() {
                     id="domain"
                     type="text"
                     placeholder="yourdomain.com"
-                    className="h-11 border-gray-200 pl-10 focus:border-primary focus:ring-ring"
+                    className="focus:border-primary focus:ring-ring h-11 border-gray-200 pl-10"
                     value={domain}
                     onChange={(e) => setDomain(e.target.value)}
                     required
@@ -458,7 +462,7 @@ export default function DMARCDomainCheckerPage() {
                 </div>
                 <Button
                   type="submit"
-                  className="min-w-[120px] bg-primary text-white hover:bg-primary"
+                  className="bg-primary hover:bg-primary min-w-[120px] text-white"
                   disabled={loading}
                 >
                   {loading ? (
@@ -506,7 +510,7 @@ export default function DMARCDomainCheckerPage() {
           <Card>
             <div className="mb-4 flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <FaShieldAlt className="h-6 w-6 text-primary/70" />
+                <FaShieldAlt className="text-primary/70 h-6 w-6" />
                 <span className="text-xl font-bold text-gray-900">Status</span>
               </div>
             </div>
@@ -528,7 +532,7 @@ export default function DMARCDomainCheckerPage() {
               <ul className="space-y-2">
                 {recommendations.map((rec, i) => (
                   <li key={i} className="flex items-start gap-2">
-                    <FaInfoCircle className="mt-0.5 h-4 w-4 text-primary" />
+                    <FaInfoCircle className="text-primary mt-0.5 h-4 w-4" />
                     <span>{rec.message}</span>
                   </li>
                 ))}
@@ -542,11 +546,11 @@ export default function DMARCDomainCheckerPage() {
             <Card>
               <div className="mb-4 flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <FaShieldAlt className="h-6 w-6 text-primary/70" />
+                  <FaShieldAlt className="text-primary/70 h-6 w-6" />
                   <span className="text-xl font-bold text-gray-900">DMARC</span>
                 </div>
                 {result.dmarc ? (
-                  <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
+                  <span className="bg-primary/10 text-primary rounded-full px-3 py-1 text-xs font-semibold">
                     Valid
                   </span>
                 ) : (
@@ -564,7 +568,7 @@ export default function DMARCDomainCheckerPage() {
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <pre className="flex-1 whitespace-pre-wrap break-all rounded border border-gray-100 bg-gray-50 p-2 font-mono text-xs text-gray-700">
+                    <pre className="flex-1 rounded border border-gray-100 bg-gray-50 p-2 font-mono text-xs break-all whitespace-pre-wrap text-gray-700">
                       {result.dmarc}
                     </pre>
                     <CopyButton value={result.dmarc} />
@@ -581,11 +585,11 @@ export default function DMARCDomainCheckerPage() {
             <Card>
               <div className="mb-4 flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <FaEnvelope className="h-6 w-6 text-primary/70" />
+                  <FaEnvelope className="text-primary/70 h-6 w-6" />
                   <span className="text-xl font-bold text-gray-900">SPF</span>
                 </div>
                 {result.spf ? (
-                  <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
+                  <span className="bg-primary/10 text-primary rounded-full px-3 py-1 text-xs font-semibold">
                     Valid
                   </span>
                 ) : (
@@ -600,7 +604,7 @@ export default function DMARCDomainCheckerPage() {
                     All mechanisms present
                   </div>
                   <div className="flex items-center gap-2">
-                    <pre className="flex-1 whitespace-pre-wrap break-all rounded border border-gray-100 bg-gray-50 p-2 font-mono text-xs text-gray-700">
+                    <pre className="flex-1 rounded border border-gray-100 bg-gray-50 p-2 font-mono text-xs break-all whitespace-pre-wrap text-gray-700">
                       {result.spf}
                     </pre>
                     <CopyButton value={result.spf} />
@@ -617,13 +621,13 @@ export default function DMARCDomainCheckerPage() {
             <Card>
               <div className="mb-4 flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <FaKey className="h-6 w-6 text-primary/70" />
+                  <FaKey className="text-primary/70 h-6 w-6" />
                   <span className="text-xl font-bold text-gray-900">DKIM</span>
                 </div>
                 {result.dkim &&
                 result.dkim.length > 0 &&
                 result.dkim.some((d) => d.record) ? (
-                  <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
+                  <span className="bg-primary/10 text-primary rounded-full px-3 py-1 text-xs font-semibold">
                     Valid
                   </span>
                 ) : (
@@ -647,7 +651,7 @@ export default function DMARCDomainCheckerPage() {
                           </span>
                         </div>
                         <div className="flex items-center gap-2">
-                          <pre className="flex-1 whitespace-pre-wrap break-all rounded border border-gray-100 bg-gray-50 p-2 font-mono text-xs text-gray-700">
+                          <pre className="flex-1 rounded border border-gray-100 bg-gray-50 p-2 font-mono text-xs break-all whitespace-pre-wrap text-gray-700">
                             {d.record as string}
                           </pre>
                           <CopyButton value={d.record as string} />

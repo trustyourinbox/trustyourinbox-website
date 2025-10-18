@@ -1,41 +1,39 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-:root {
-  /* Light Theme Colors (from frontend) */
-  --background: 0 0% 100%;
-  --foreground: 220 26% 14%;
-  --card: 0 0% 100%;
-  --card-foreground: 220 26% 14%;
-  --popover: 0 0% 100%;
-  --popover-foreground: 220 26% 14%;
-  --primary: 239 84% 67%;
-  --primary-foreground: 0 0% 100%;
-  --secondary: 210 40% 97%;
-  --secondary-foreground: 220 26% 14%;
-  --muted: 214 32% 91%;
-  --muted-foreground: 220 9% 46%;
-  --accent: 239 84% 67%;
-  --accent-foreground: 0 0% 100%;
-  --accent-hover: 243 75% 59%;
-  --destructive: 0 84% 60%;
-  --destructive-foreground: 0 0% 98%;
-  --border: 220 13% 91%;
-  --input: 220 13% 91%;
-  --ring: 239 84% 67%;
-  --success: 160 84% 39%;
-  --warning: 38 92% 50%;
-  --info: 217 91% 60%;
+@theme {
+  /* Colors */
+  --color-background: hsl(0 0% 100%);
+  --color-foreground: hsl(220 26% 14%);
+  --color-card: hsl(0 0% 100%);
+  --color-card-foreground: hsl(220 26% 14%);
+  --color-popover: hsl(0 0% 100%);
+  --color-popover-foreground: hsl(220 26% 14%);
+  --color-primary: hsl(239 84% 67%);
+  --color-primary-foreground: hsl(0 0% 100%);
+  --color-secondary: hsl(210 40% 97%);
+  --color-secondary-foreground: hsl(220 26% 14%);
+  --color-muted: hsl(214 32% 91%);
+  --color-muted-foreground: hsl(220 9% 46%);
+  --color-accent: hsl(239 84% 67%);
+  --color-accent-foreground: hsl(0 0% 100%);
+  --color-accent-hover: hsl(243 75% 59%);
+  --color-destructive: hsl(0 84% 60%);
+  --color-destructive-foreground: hsl(0 0% 98%);
+  --color-border: hsl(220 13% 91%);
+  --color-input: hsl(220 13% 91%);
+  --color-ring: hsl(239 84% 67%);
+  --color-success: hsl(160 84% 39%);
+  --color-warning: hsl(38 92% 50%);
+  --color-info: hsl(217 91% 60%);
 
-  /* Spacing */
-  --radius: 0.5rem;
-  --container-padding: 2rem;
-  --section-spacing: 6rem;
+  /* Border Radius */
+  --radius-lg: 0.5rem;
+  --radius-md: calc(0.5rem - 2px);
+  --radius-sm: calc(0.5rem - 4px);
 
-  /* Shadows (from frontend elevation system) */
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px 0 rgb(0 0 0 / 0.06);
+  /* Shadows */
+  --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px 0 rgb(0 0 0 / 0.06);
   --shadow-md:
     0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -1px rgb(0 0 0 / 0.06);
   --shadow-lg:
@@ -43,20 +41,69 @@
   --shadow-xl:
     0 20px 25px -5px rgb(0 0 0 / 0.1), 0 10px 10px -5px rgb(0 0 0 / 0.04);
 
-  /* Typography */
+  /* Animations from tailwind.config.ts */
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+  --animate-float: float 3s ease-in-out infinite;
+  --animate-fade-in: fade-in 0.5s ease-out;
+  --animate-fade-out: fade-out 0.5s ease-out;
+  --animate-slide-in: slide-in 0.5s ease-out;
+  --animate-slide-out: slide-out 0.5s ease-out;
+}
+
+/* Dark mode colors */
+:is(.dark *) {
+  --color-background: hsl(220 15% 10%);
+  --color-foreground: hsl(210 20% 98%);
+  --color-card: hsl(220 15% 18%);
+  --color-card-foreground: hsl(210 20% 98%);
+  --color-popover: hsl(220 15% 16%);
+  --color-popover-foreground: hsl(210 20% 98%);
+  --color-primary: hsl(239 84% 67%);
+  --color-primary-foreground: hsl(0 0% 100%);
+  --color-secondary: hsl(220 15% 24%);
+  --color-secondary-foreground: hsl(210 20% 98%);
+  --color-muted: hsl(220 15% 20%);
+  --color-muted-foreground: hsl(220 10% 65%);
+  --color-accent: hsl(239 84% 67%);
+  --color-accent-foreground: hsl(0 0% 100%);
+  --color-accent-hover: hsl(243 75% 60%);
+  --color-destructive: hsl(0 84% 60%);
+  --color-destructive-foreground: hsl(0 0% 98%);
+  --color-border: hsl(220 15% 30%);
+  --color-input: hsl(220 15% 24%);
+  --color-ring: hsl(239 84% 67%);
+  --color-success: hsl(160 84% 45%);
+  --color-warning: hsl(38 92% 55%);
+  --color-info: hsl(217 91% 65%);
+
+  /* Dark Mode Shadows */
+  --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.6);
+  --shadow-sm: 0 2px 4px 0 rgb(0 0 0 / 0.6), 0 1px 2px 0 rgb(0 0 0 / 0.4);
+  --shadow-md: 0 4px 8px -1px rgb(0 0 0 / 0.6), 0 2px 4px -1px rgb(0 0 0 / 0.4);
+  --shadow-lg:
+    0 10px 20px -3px rgb(0 0 0 / 0.6), 0 4px 6px -2px rgb(0 0 0 / 0.4);
+  --shadow-xl:
+    0 20px 30px -5px rgb(0 0 0 / 0.6), 0 10px 15px -5px rgb(0 0 0 / 0.5);
+}
+
+/* Custom CSS variables (keep as-is - not part of theme) */
+:root {
   --font-size-base: 13px;
   --line-height-base: 1.7;
+  --container-padding: 2rem;
+  --section-spacing: 6rem;
 
   /* Gradients */
   --gradient-primary: linear-gradient(
     135deg,
-    hsl(var(--primary)) 0%,
-    hsl(var(--accent-hover)) 100%
+    hsl(239 84% 67%) 0%,
+    hsl(243 75% 59%) 100%
   );
   --gradient-secondary: linear-gradient(
     135deg,
     hsl(210 100% 56%) 0%,
-    hsl(var(--primary)) 100%
+    hsl(239 84% 67%) 100%
   );
   --gradient-mesh:
     radial-gradient(at 40% 20%, hsla(239, 84%, 67%, 0.3) 0px, transparent 50%),
@@ -65,54 +112,85 @@
 }
 
 .dark {
-  /* Dark Theme Colors - Neutral charcoal base inspired by modern design systems */
-  --background: 220 15% 10%;
-  --foreground: 210 20% 98%;
-  --card: 220 15% 18%;
-  --card-foreground: 210 20% 98%;
-  --popover: 220 15% 16%;
-  --popover-foreground: 210 20% 98%;
-  --primary: 239 84% 67%;
-  --primary-foreground: 0 0% 100%;
-  --secondary: 220 15% 24%;
-  --secondary-foreground: 210 20% 98%;
-  --muted: 220 15% 20%;
-  --muted-foreground: 220 10% 65%;
-  --accent: 239 84% 67%;
-  --accent-foreground: 0 0% 100%;
-  --accent-hover: 243 75% 60%;
-  --destructive: 0 84% 60%;
-  --destructive-foreground: 0 0% 98%;
-  --border: 220 15% 30%;
-  --input: 220 15% 24%;
-  --ring: 239 84% 67%;
-  --success: 160 84% 45%;
-  --warning: 38 92% 55%;
-  --info: 217 91% 65%;
-
-  /* Dark Mode Shadows (enhanced depth and elevation) */
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.6);
-  --shadow: 0 2px 4px 0 rgb(0 0 0 / 0.6), 0 1px 2px 0 rgb(0 0 0 / 0.4);
-  --shadow-md: 0 4px 8px -1px rgb(0 0 0 / 0.6), 0 2px 4px -1px rgb(0 0 0 / 0.4);
-  --shadow-lg:
-    0 10px 20px -3px rgb(0 0 0 / 0.6), 0 4px 6px -2px rgb(0 0 0 / 0.4);
-  --shadow-xl:
-    0 20px 30px -5px rgb(0 0 0 / 0.6), 0 10px 15px -5px rgb(0 0 0 / 0.5);
-
-  /* Dark Mode Gradients (vibrant accents) */
   --gradient-mesh:
     radial-gradient(at 40% 20%, hsla(239, 84%, 67%, 0.18) 0px, transparent 50%),
     radial-gradient(at 80% 0%, hsla(243, 75%, 60%, 0.12) 0px, transparent 50%),
     radial-gradient(at 0% 50%, hsla(210, 100%, 56%, 0.12) 0px, transparent 50%);
 }
 
+/* Keyframes for animations */
+@keyframes accordion-down {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--radix-accordion-content-height);
+  }
+}
+
+@keyframes accordion-up {
+  from {
+    height: var(--radix-accordion-content-height);
+  }
+  to {
+    height: 0;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes slide-in {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-out {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+/* Base styles */
 @layer base {
   * {
     @apply border-border;
   }
 
   body {
-    @apply bg-background font-sans text-foreground antialiased;
+    @apply bg-background text-foreground font-sans antialiased;
     font-size: var(--font-size-base);
     line-height: var(--line-height-base);
     -webkit-font-smoothing: antialiased;
@@ -141,7 +219,7 @@
   }
 
   p {
-    @apply text-sm leading-6 text-muted-foreground sm:text-base sm:leading-7;
+    @apply text-muted-foreground text-sm leading-6 sm:text-base sm:leading-7;
   }
 }
 
@@ -168,12 +246,12 @@
 
   /* Mobile-optimized card */
   .card {
-    @apply rounded-lg border bg-card p-4 shadow-sm sm:p-6;
+    @apply bg-card rounded-lg border p-4 shadow-sm sm:p-6;
   }
 
   /* Mobile-friendly buttons with proper touch targets */
   .btn {
-    @apply inline-flex min-h-[44px] items-center justify-center rounded-md px-4 text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
+    @apply ring-offset-background focus-visible:ring-ring inline-flex min-h-[44px] items-center justify-center rounded-md px-4 text-sm font-medium transition-colors focus-visible:ring-3 focus-visible:ring-offset-2 focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50;
   }
 
   .btn-primary {
@@ -185,7 +263,7 @@
   }
 
   .btn-outline {
-    @apply border border-input hover:bg-accent hover:text-accent-foreground;
+    @apply border-input hover:bg-accent hover:text-accent-foreground border;
   }
 
   .btn-ghost {
@@ -198,7 +276,7 @@
 
   /* Mobile-friendly inputs */
   .input {
-    @apply flex h-11 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 sm:h-10 sm:text-sm;
+    @apply border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex h-11 w-full rounded-md border px-3 py-2 text-base file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:ring-3 focus-visible:ring-offset-2 focus-visible:outline-hidden disabled:cursor-not-allowed disabled:opacity-50 sm:h-10 sm:text-sm;
   }
 }
 

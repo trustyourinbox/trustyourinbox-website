@@ -4,7 +4,6 @@ const nextConfig = {
     ppr: false,
   },
   reactStrictMode: true,
-  swcMinify: true,
   images: {
     dangerouslyAllowSVG: true,
     contentDispositionType: "attachment",
