@@ -38,7 +38,7 @@ export default function ModernHeroSection() {
                 <div className="bg-primary h-full w-full animate-pulse rounded-full"></div>
               </div>
               <span className="text-primary">
-                Trusted by 1,200+ IT teams worldwide
+                Chosen by leading companies worldwide
               </span>
             </div>
 

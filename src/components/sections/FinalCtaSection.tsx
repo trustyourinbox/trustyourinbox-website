@@ -36,7 +36,7 @@ export default function FinalCtaSection() {
 
           {/* Description */}
           <p className="text-muted-foreground mb-8 text-base leading-relaxed sm:text-lg md:text-xl">
-            Join 1,200+ IT teams and MSPs who trust TrustYourInbox to protect
+            Join leading companies and MSPs who trust TrustYourInbox to protect
             their email domains from spoofing and phishing attacks. Start your
             free 14-day trial today—no credit card required.
           </p>

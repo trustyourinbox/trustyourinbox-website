@@ -136,7 +136,7 @@ export default function ITTeamsSolutionPage() {
               Ready to Simplify DMARC?
             </h2>
             <p className="text-muted-foreground mb-6 text-lg">
-              Join 1,200+ IT teams who have successfully deployed DMARC with
+              Join leading IT teams who have successfully deployed DMARC with
               TrustYourInbox
             </p>
             <Link

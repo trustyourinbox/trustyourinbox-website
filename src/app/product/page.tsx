@@ -65,7 +65,7 @@ export default function ProductPage() {
               Ready to Get Started?
             </h2>
             <p className="text-muted-foreground mb-6 text-lg">
-              Join 1,200+ teams protecting their email domains with
+              Join leading companies protecting their email domains with
               TrustYourInbox
             </p>
             <Link

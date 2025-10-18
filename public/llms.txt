@@ -1,6 +1,6 @@
 # TrustYourInbox
 
-> TrustYourInbox is a professional DMARC and email security platform trusted by 1,200+ IT teams and MSPs worldwide. We provide free DMARC monitoring tools, SPF/DKIM validation, and comprehensive email authentication solutions to stop email spoofing and phishing attacks.
+> TrustYourInbox is a professional DMARC and email security platform chosen by leading companies and MSPs worldwide. We provide free DMARC monitoring tools, SPF/DKIM validation, and comprehensive email authentication solutions to stop email spoofing and phishing attacks.
 
 TrustYourInbox helps organizations implement DMARC (Domain-based Message Authentication, Reporting, and Conformance) to protect their email domains from spoofing and phishing. We process 2.4M+ emails monthly with 98.7% customer satisfaction. Our platform offers real-time monitoring, team collaboration, multi-domain management, and bulk report processing for IT teams and managed service providers.
 

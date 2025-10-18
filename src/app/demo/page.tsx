@@ -79,19 +79,19 @@ const features = [
 
 export default function DemoPage() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="bg-background min-h-screen">
       {/* Hero Section */}
-      <section className="bg-gradient-to-b from-background to-secondary/30 py-24 md:py-32">
+      <section className="from-background to-secondary/30 bg-gradient-to-b py-24 md:py-32">
         <div className="container">
           <div className="mx-auto max-w-3xl text-center">
-            <div className="mb-6 inline-flex items-center rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-sm font-medium">
-              <Play className="mr-2 h-4 w-4 text-primary" />
+            <div className="border-primary/20 bg-primary/5 mb-6 inline-flex items-center rounded-full border px-4 py-1.5 text-sm font-medium">
+              <Play className="text-primary mr-2 h-4 w-4" />
               <span className="text-primary">Product Walkthrough</span>
             </div>
             <h1 className="mb-6 text-5xl font-bold tracking-tight md:text-6xl">
               See <span className="text-primary">TrustYourInbox</span> in Action
             </h1>
-            <p className="mb-8 text-xl leading-relaxed text-muted-foreground">
+            <p className="text-muted-foreground mb-8 text-xl leading-relaxed">
               Discover how easy it is to monitor DMARC compliance, analyze
               reports, and protect your email domain from spoofing.
             </p>
@@ -113,12 +113,12 @@ export default function DemoPage() {
       {/* Video/Screenshot Placeholder */}
       <section className="-mt-8 py-12">
         <div className="container max-w-5xl">
-          <div className="relative overflow-hidden rounded-2xl border-2 border-primary/20 bg-gradient-to-br from-background/50 to-background shadow-2xl backdrop-blur-xl">
+          <div className="border-primary/20 from-background/50 to-background relative overflow-hidden rounded-2xl border-2 bg-gradient-to-br shadow-2xl backdrop-blur-xl">
             {/* Video Placeholder */}
-            <div className="flex aspect-video items-center justify-center bg-gradient-to-br from-muted/30 via-background to-background">
+            <div className="from-muted/30 via-background to-background flex aspect-video items-center justify-center bg-gradient-to-br">
               <div className="text-center">
-                <div className="mb-4 inline-flex rounded-full bg-primary/10 p-6">
-                  <Play className="h-16 w-16 text-primary" />
+                <div className="bg-primary/10 mb-4 inline-flex rounded-full p-6">
+                  <Play className="text-primary h-16 w-16" />
                 </div>
                 <h3 className="mb-2 text-2xl font-bold">Product Demo Video</h3>
                 <p className="text-muted-foreground">
@@ -128,15 +128,15 @@ export default function DemoPage() {
             </div>
 
             {/* Video Controls Mockup */}
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-background/90 to-transparent p-6">
+            <div className="from-background/90 absolute right-0 bottom-0 left-0 bg-gradient-to-t to-transparent p-6">
               <div className="flex items-center gap-4">
-                <button className="rounded-full bg-primary p-2 text-primary-foreground transition-colors hover:bg-primary/90">
+                <button className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full p-2 transition-colors">
                   <Play className="h-5 w-5" />
                 </button>
-                <div className="h-1 flex-1 rounded-full bg-muted">
-                  <div className="h-full w-1/3 rounded-full bg-primary"></div>
+                <div className="bg-muted h-1 flex-1 rounded-full">
+                  <div className="bg-primary h-full w-1/3 rounded-full"></div>
                 </div>
-                <span className="text-sm text-muted-foreground">
+                <span className="text-muted-foreground text-sm">
                   1:20 / 4:00
                 </span>
               </div>
@@ -150,7 +150,7 @@ export default function DemoPage() {
         <div className="container">
           <div className="mb-16 text-center">
             <h2 className="mb-4 text-4xl font-bold">How It Works</h2>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-muted-foreground text-lg">
               Four simple steps to complete DMARC protection
             </p>
           </div>
@@ -166,21 +166,21 @@ export default function DemoPage() {
                   {/* Content */}
                   <div className={index % 2 === 1 ? "md:order-2" : ""}>
                     <div className="mb-4 flex items-center gap-4">
-                      <div className="text-6xl font-bold text-primary/20">
+                      <div className="text-primary/20 text-6xl font-bold">
                         {step.number}
                       </div>
-                      <div className="inline-flex rounded-xl bg-primary/10 p-3">
-                        <Icon className="h-6 w-6 text-primary" />
+                      <div className="bg-primary/10 inline-flex rounded-xl p-3">
+                        <Icon className="text-primary h-6 w-6" />
                       </div>
                     </div>
                     <h3 className="mb-3 text-2xl font-bold">{step.title}</h3>
-                    <p className="mb-6 text-muted-foreground">
+                    <p className="text-muted-foreground mb-6">
                       {step.description}
                     </p>
                     <div className="space-y-2">
                       {step.features.map((feature) => (
                         <div key={feature} className="flex items-center gap-2">
-                          <CheckCircle className="h-4 w-4 text-primary" />
+                          <CheckCircle className="text-primary h-4 w-4" />
                           <span className="text-sm">{feature}</span>
                         </div>
                       ))}
@@ -189,8 +189,8 @@ export default function DemoPage() {
 
                   {/* Screenshot Placeholder */}
                   <div className={index % 2 === 1 ? "md:order-1" : ""}>
-                    <div className="flex aspect-video items-center justify-center rounded-xl border border-border bg-gradient-to-br from-muted/30 to-background">
-                      <Icon className="h-16 w-16 text-primary/20" />
+                    <div className="border-border from-muted/30 to-background flex aspect-video items-center justify-center rounded-xl border bg-gradient-to-br">
+                      <Icon className="text-primary/20 h-16 w-16" />
                     </div>
                   </div>
                 </div>
@@ -205,7 +205,7 @@ export default function DemoPage() {
         <div className="container">
           <div className="mb-12 text-center">
             <h2 className="mb-4 text-4xl font-bold">What You&apos;ll Get</h2>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-muted-foreground text-lg">
               Complete DMARC monitoring and email security platform
             </p>
           </div>
@@ -216,13 +216,13 @@ export default function DemoPage() {
               return (
                 <div
                   key={feature.title}
-                  className="rounded-xl border border-border bg-background p-6"
+                  className="border-border bg-background rounded-xl border p-6"
                 >
-                  <div className="mb-4 inline-flex rounded-lg bg-primary/10 p-3">
-                    <Icon className="h-6 w-6 text-primary" />
+                  <div className="bg-primary/10 mb-4 inline-flex rounded-lg p-3">
+                    <Icon className="text-primary h-6 w-6" />
                   </div>
                   <h3 className="mb-2 font-bold">{feature.title}</h3>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-muted-foreground text-sm">
                     {feature.desc}
                   </p>
                 </div>
@@ -235,14 +235,14 @@ export default function DemoPage() {
       {/* Interactive Demo Callout */}
       <section className="py-24">
         <div className="container max-w-4xl">
-          <div className="rounded-2xl border-2 border-primary/20 bg-gradient-to-br from-primary/5 to-background p-12 text-center">
-            <div className="mb-6 inline-flex rounded-full bg-primary/10 p-4">
-              <BarChart3 className="h-8 w-8 text-primary" />
+          <div className="border-primary/20 from-primary/5 to-background rounded-2xl border-2 bg-gradient-to-br p-12 text-center">
+            <div className="bg-primary/10 mb-6 inline-flex rounded-full p-4">
+              <BarChart3 className="text-primary h-8 w-8" />
             </div>
             <h2 className="mb-4 text-3xl font-bold">
               Want to Try It Yourself?
             </h2>
-            <p className="mb-8 text-lg text-muted-foreground">
+            <p className="text-muted-foreground mb-8 text-lg">
               Sign up for a free account and explore TrustYourInbox with your
               own data. No credit card required.
             </p>
@@ -275,7 +275,7 @@ export default function DemoPage() {
             <div className="flex items-center justify-center gap-4">
               <div>
                 <div className="font-bold">Sarah Chen</div>
-                <div className="text-sm text-muted-foreground">
+                <div className="text-muted-foreground text-sm">
                   IT Director, TechCorp
                 </div>
               </div>
@@ -291,8 +291,8 @@ export default function DemoPage() {
             <h2 className="mb-4 text-3xl font-bold md:text-4xl">
               Ready to Protect Your Domain?
             </h2>
-            <p className="mb-8 text-lg text-muted-foreground">
-              Join 1,200+ IT teams using TrustYourInbox for DMARC compliance
+            <p className="text-muted-foreground mb-8 text-lg">
+              Join leading companies using TrustYourInbox for DMARC compliance
             </p>
             <div className="flex flex-col justify-center gap-4 sm:flex-row">
               <Link href="/signup">

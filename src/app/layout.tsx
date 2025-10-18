@@ -143,7 +143,7 @@ export default function RootLayout({
     url: "https://trustyourinbox.com",
     logo: "https://trustyourinbox.com/images/logo.png",
     description:
-      "Professional DMARC and email security platform trusted by 1,200+ IT teams worldwide.",
+      "Professional DMARC and email security platform chosen by leading companies worldwide.",
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "Customer Support",
