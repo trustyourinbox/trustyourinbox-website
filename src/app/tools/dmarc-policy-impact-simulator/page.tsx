@@ -281,28 +281,28 @@ export default function DmarcPolicyImpactSimulator() {
     {
       name: "Allowed",
       value: dispositionCounts.allowed,
-      fill: "hsl(var(--success))",
+      fill: "var(--color-success)",
     },
     {
       name: "Quarantined",
       value: dispositionCounts.quarantined,
-      fill: "hsl(var(--warning))",
+      fill: "var(--color-warning)",
     },
     {
       name: "Rejected",
       value: dispositionCounts.rejected,
-      fill: "hsl(var(--destructive))",
+      fill: "var(--color-destructive)",
     },
   ].filter((item) => item.value > 0); // Only show non-zero values
 
   const dkimData = [
-    { name: "Pass", value: dkimCounts.pass, fill: "hsl(var(--success))" },
-    { name: "Fail", value: dkimCounts.fail, fill: "hsl(var(--destructive))" },
+    { name: "Pass", value: dkimCounts.pass, fill: "var(--color-success)" },
+    { name: "Fail", value: dkimCounts.fail, fill: "var(--color-destructive)" },
   ];
 
   const spfData = [
-    { name: "Pass", value: spfCounts.pass, fill: "hsl(var(--success))" },
-    { name: "Fail", value: spfCounts.fail, fill: "hsl(var(--destructive))" },
+    { name: "Pass", value: spfCounts.pass, fill: "var(--color-success)" },
+    { name: "Fail", value: spfCounts.fail, fill: "var(--color-destructive)" },
   ];
 
   const topSources = Object.entries(sourceCounts)
@@ -312,7 +312,7 @@ export default function DmarcPolicyImpactSimulator() {
   const sourcesData = topSources.map(([ip, count]) => ({
     name: ip,
     value: count,
-    fill: "hsl(var(--primary))",
+    fill: "var(--color-primary)",
   }));
 
   // Chart config for tooltips
@@ -532,7 +532,7 @@ export default function DmarcPolicyImpactSimulator() {
                     <ChartTooltip content={<ChartTooltipContent />} />
                     <Bar
                       dataKey="value"
-                      fill="hsl(var(--primary))"
+                      fill="var(--color-primary)"
                       radius={[0, 4, 4, 0]}
                       animationDuration={800}
                     />
