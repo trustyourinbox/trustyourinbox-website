@@ -183,7 +183,10 @@ export default function DMARCSubdomainPolicyCheckerPage() {
           <div className="grid gap-6 md:grid-cols-2">
             <div className="space-y-4">
               <div className="space-y-2">
-                <label htmlFor="domain" className="text-sm font-medium">
+                <label
+                  htmlFor="domain"
+                  className="mb-2 block text-sm font-medium"
+                >
                   Domain
                 </label>
                 <div className="relative flex-1">
@@ -202,7 +205,9 @@ export default function DMARCSubdomainPolicyCheckerPage() {
               </div>
 
               <div className="space-y-2">
-                <label className="text-sm font-medium">Subdomains</label>
+                <label className="mb-2 block text-sm font-medium">
+                  Subdomains
+                </label>
                 <div className="space-y-2">
                   {subdomains.map((sub, idx) => (
                     <div key={idx} className="flex items-center gap-2">
@@ -241,7 +246,7 @@ export default function DMARCSubdomainPolicyCheckerPage() {
                   >
                     + Add another subdomain
                   </button>
-                  <span className="text-xs text-gray-400">or</span>
+                  <span className="text-muted-foreground text-xs">or</span>
                   <button
                     type="button"
                     className="text-primary hover:bg-secondary hover:text-foreground rounded px-2 py-1 text-sm font-semibold"
@@ -255,7 +260,10 @@ export default function DMARCSubdomainPolicyCheckerPage() {
             </div>
 
             <div className="space-y-2">
-              <label htmlFor="bulkInput" className="text-sm font-medium">
+              <label
+                htmlFor="bulkInput"
+                className="mb-2 block text-sm font-medium"
+              >
                 Bulk Import
               </label>
               <textarea
