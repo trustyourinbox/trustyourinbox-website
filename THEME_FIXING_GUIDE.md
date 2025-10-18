@@ -524,7 +524,7 @@ className =
 - ✅ DMARC Policy Generator (/tools/dmarc-policy-generator) - Full fix with accordion, slider, spacing, and color fixes
 - ✅ DMARC Analyzer (/tools/dmarc-analyzer) - Already properly themed, only needed label spacing fix
 - ✅ DMARC Domain Checker (/tools/dmarc-domain-checker) - Already properly themed, needed label spacing and semantic heading fix
-- ✅ DMARC Policy Impact Simulator (/tools/dmarc-policy-impact-simulator) - Fixed 19 hardcoded colors + standardized status colors to use semantic theme variables
+- ✅ DMARC Policy Impact Simulator (/tools/dmarc-policy-impact-simulator) - Fixed 19 hardcoded colors + standardized status colors + fixed critical DMARC logic bug
 
 ## DMARC Analyzer Notes
 
@@ -688,3 +688,105 @@ Lines 488-505:
 - Status colors must use semantic theme variables (`success`, `warning`, `destructive`) not hardcoded colors
 - Consistency across tools improves user experience and maintainability
 - The `/10` opacity modifier on backgrounds provides subtle differentiation while maintaining theme compatibility
+
+### Critical Logic Bug Fixed:
+
+While fixing theme issues, discovered the simulator had **fundamentally broken DMARC logic**:
+
+**Problem:**
+
+- Simulator was using fake 70/30 percentage splits
+- Would reject/quarantine ALL mail regardless of DMARC alignment
+- Completely ignored whether DKIM or SPF passed
+- Example: `p=reject` would reject all 370 messages instead of just 40
+
+**Root Cause:**
+
+```jsx
+// WRONG - Treats all mail the same way
+rejected: policy === "reject"
+  ? parsed.reduce((a, b) => a + b.count, 0) // Rejects EVERYTHING
+  : policy === "quarantine"
+    ? Math.round(parsed.reduce((a, b) => a + b.count, 0) * 0.7) // Fake 70%
+    : 0;
+```
+
+**Correct DMARC Logic:**
+
+```jsx
+// RIGHT - Only applies policy to messages that FAIL DMARC
+parsed.forEach((rec) => {
+  // DMARC alignment: pass if DKIM OR SPF passes
+  const dmarcAligned = rec.dkim === "pass" || rec.spf === "pass";
+
+  if (dmarcAligned) {
+    // Messages that pass DMARC are ALWAYS allowed
+    allowed += rec.count;
+  } else {
+    // Only messages that fail BOTH checks are subject to policy
+    if (policy === "reject") rejected += rec.count;
+    else if (policy === "quarantine") quarantined += rec.count;
+    else allowed += rec.count; // p=none still allows, just monitors
+  }
+});
+```
+
+**Lesson:** Always verify simulator logic is correct, not just the UI theme. A beautifully themed but logically broken tool is worse than a working tool with theme issues.
+
+### UX Flow Improvements:
+
+Beyond theme fixes, improved the user experience significantly:
+
+**Before:**
+
+1. Upload file → See "File Loaded"
+2. User confused - no clear next step
+3. Must manually click hidden "Simulate Impact" button
+4. Results finally appear
+
+**After:**
+
+1. Upload file → Results appear **instantly**
+2. Policy buttons integrated into results section
+3. Switch policies → Charts update in real-time
+4. No manual "simulate" button needed
+
+**Implementation:**
+
+```jsx
+// Auto-parse on upload
+reader.onload = (ev) => {
+  const xmlText = new TextDecoder().decode(decompressed);
+  setXml(xmlText);
+  setParsed(parseXml(xmlText)); // ← Auto-parse immediately
+  setError(null);
+};
+
+// Move policy selector into results
+{
+  impact && (
+    <Card>
+      <h2>Impact Visualization</h2>
+      <p>Select a policy to see how it would affect your email traffic</p>
+      {/* Policy buttons here - instantly reactive */}
+      <Button onClick={() => setPolicy("none")}>p=none</Button>
+      {/* Charts update automatically via React state */}
+    </Card>
+  );
+}
+```
+
+**Updated Sidebar Instructions:**
+
+- "Upload a DMARC XML report or use sample data"
+- "View instant analysis with default p=none policy" ← Changed from "Select policy to simulate"
+- "Switch between policies to see impact changes" ← Changed from "View impact on disposition"
+- "Get actionable recommendations"
+
+**Lessons:**
+
+- Auto-parsing eliminates user confusion ("What do I do now?")
+- Putting controls in context (policy buttons IN results) is more intuitive
+- Clear helper text ("Select a policy to...") guides users
+- Real-time updates feel more responsive than click-to-submit flows
+- Remove unnecessary manual steps - if we can auto-parse safely, do it!
