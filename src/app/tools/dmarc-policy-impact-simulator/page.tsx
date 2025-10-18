@@ -17,27 +17,24 @@ import {
   Key,
 } from "lucide-react";
 import Link from "next/link";
-import { Bar, Pie } from "react-chartjs-2";
 import {
-  Chart as ChartJS,
-  ArcElement,
-  Tooltip,
-  Legend,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title as ChartTitle,
-} from "chart.js";
-
-ChartJS.register(
-  ArcElement,
-  Tooltip,
-  Legend,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  ChartTitle
-);
+  PieChart,
+  Pie,
+  BarChart,
+  Bar,
+  Cell,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  ResponsiveContainer,
+} from "recharts";
+import {
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+  ChartLegend,
+  ChartLegendContent,
+} from "@/components/ui/Chart";
 
 // Mock sample DMARC XML data (for initial development)
 const sampleXML = `<feedback>
@@ -279,72 +276,49 @@ export default function DmarcPolicyImpactSimulator() {
     });
   }
 
-  const dispositionPie = {
-    labels: ["Allowed", "Quarantined", "Rejected"],
-    datasets: [
-      {
-        data: [
-          dispositionCounts.allowed,
-          dispositionCounts.quarantined,
-          dispositionCounts.rejected,
-        ],
-        backgroundColor: ["#22c55e", "#facc15", "#ef4444"],
-        borderWidth: 1,
-      },
-    ],
-  };
-  const dkimBar = {
-    labels: ["DKIM Pass", "DKIM Fail"],
-    datasets: [
-      {
-        label: "Messages",
-        data: [dkimCounts.pass, dkimCounts.fail],
-        backgroundColor: ["#2563eb", "#f87171"],
-      },
-    ],
-  };
-  const spfBar = {
-    labels: ["SPF Pass", "SPF Fail"],
-    datasets: [
-      {
-        label: "Messages",
-        data: [spfCounts.pass, spfCounts.fail],
-        backgroundColor: ["#2563eb", "#f87171"],
-      },
-    ],
-  };
+  // Recharts data format
+  const dispositionData = [
+    {
+      name: "Allowed",
+      value: dispositionCounts.allowed,
+      fill: "hsl(var(--success))",
+    },
+    {
+      name: "Quarantined",
+      value: dispositionCounts.quarantined,
+      fill: "hsl(var(--warning))",
+    },
+    {
+      name: "Rejected",
+      value: dispositionCounts.rejected,
+      fill: "hsl(var(--destructive))",
+    },
+  ].filter((item) => item.value > 0); // Only show non-zero values
+
+  const dkimData = [
+    { name: "Pass", value: dkimCounts.pass, fill: "hsl(var(--success))" },
+    { name: "Fail", value: dkimCounts.fail, fill: "hsl(var(--destructive))" },
+  ];
+
+  const spfData = [
+    { name: "Pass", value: spfCounts.pass, fill: "hsl(var(--success))" },
+    { name: "Fail", value: spfCounts.fail, fill: "hsl(var(--destructive))" },
+  ];
+
   const topSources = Object.entries(sourceCounts)
     .sort((a, b) => b[1] - a[1])
     .slice(0, 5);
-  const sourcesBar = {
-    labels: topSources.map(([ip]) => ip),
-    datasets: [
-      {
-        label: "Messages",
-        data: topSources.map(([, count]) => count),
-        backgroundColor: "#38bdf8",
-      },
-    ],
-  };
 
-  // Chart options for compactness
-  const compactOptions = {
-    plugins: {
-      legend: { display: false },
-      title: { display: false },
-      tooltip: { enabled: true },
-    },
-    responsive: true,
-    maintainAspectRatio: false,
-    scales: {
-      x: {
-        ticks: { font: { size: 11 } },
-        grid: { display: false },
-      },
-      y: {
-        ticks: { font: { size: 11 } },
-        grid: { color: "#f3f4f6" },
-      },
+  const sourcesData = topSources.map(([ip, count]) => ({
+    name: ip,
+    value: count,
+    fill: "hsl(var(--primary))",
+  }));
+
+  // Chart config for tooltips
+  const chartConfig = {
+    value: {
+      label: "Messages",
     },
   };
 
@@ -507,50 +481,133 @@ export default function DmarcPolicyImpactSimulator() {
               </div>
             </div>
             <div className="mb-8 grid grid-cols-1 gap-8 md:grid-cols-2">
-              <div className="flex min-h-[180px] flex-col justify-center">
+              <div className="flex min-h-[200px] flex-col justify-center">
                 <h3 className="text-foreground mb-2 text-sm font-semibold">
                   Disposition Breakdown
                 </h3>
-                <div className="h-[180px]">
-                  <Pie
-                    data={dispositionPie}
-                    options={{
-                      plugins: {
-                        legend: {
-                          position: "bottom",
-                          labels: { font: { size: 11 } },
-                        },
-                      },
-                      maintainAspectRatio: false,
-                    }}
-                  />
-                </div>
+                <ChartContainer config={chartConfig} className="h-[200px]">
+                  <PieChart>
+                    <ChartTooltip content={<ChartTooltipContent />} />
+                    <Pie
+                      data={dispositionData}
+                      dataKey="value"
+                      nameKey="name"
+                      cx="50%"
+                      cy="50%"
+                      innerRadius={50}
+                      outerRadius={80}
+                      paddingAngle={2}
+                      animationDuration={800}
+                      animationBegin={0}
+                    >
+                      {dispositionData.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={entry.fill} />
+                      ))}
+                    </Pie>
+                    <ChartLegend content={<ChartLegendContent />} />
+                  </PieChart>
+                </ChartContainer>
               </div>
-              <div className="flex min-h-[180px] flex-col justify-center">
+              <div className="flex min-h-[200px] flex-col justify-center">
                 <h3 className="text-foreground mb-2 text-sm font-semibold">
                   Top Source IPs
                 </h3>
-                <div className="h-[180px]">
-                  <Bar data={sourcesBar} options={compactOptions} />
-                </div>
+                <ChartContainer config={chartConfig} className="h-[200px]">
+                  <BarChart
+                    data={sourcesData}
+                    layout="vertical"
+                    margin={{ left: 20 }}
+                  >
+                    <CartesianGrid
+                      strokeDasharray="3 3"
+                      className="stroke-muted"
+                    />
+                    <XAxis type="number" className="text-xs" />
+                    <YAxis
+                      dataKey="name"
+                      type="category"
+                      width={100}
+                      className="text-xs"
+                    />
+                    <ChartTooltip content={<ChartTooltipContent />} />
+                    <Bar
+                      dataKey="value"
+                      fill="hsl(var(--primary))"
+                      radius={[0, 4, 4, 0]}
+                      animationDuration={800}
+                    />
+                  </BarChart>
+                </ChartContainer>
               </div>
             </div>
             <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-              <div className="flex min-h-[180px] flex-col justify-center">
+              <div className="flex min-h-[200px] flex-col justify-center">
                 <h3 className="text-foreground mb-2 text-sm font-semibold">
                   DKIM Pass/Fail
                 </h3>
-                <div className="h-[180px]">
-                  <Bar data={dkimBar} options={compactOptions} />
-                </div>
+                <ChartContainer config={chartConfig} className="h-[200px]">
+                  <BarChart data={dkimData}>
+                    <CartesianGrid
+                      strokeDasharray="3 3"
+                      className="stroke-muted"
+                    />
+                    <XAxis
+                      dataKey="name"
+                      className="text-xs"
+                      tickLine={false}
+                      axisLine={false}
+                    />
+                    <YAxis
+                      className="text-xs"
+                      tickLine={false}
+                      axisLine={false}
+                    />
+                    <ChartTooltip content={<ChartTooltipContent />} />
+                    <Bar
+                      dataKey="value"
+                      radius={[4, 4, 0, 0]}
+                      animationDuration={800}
+                    >
+                      {dkimData.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={entry.fill} />
+                      ))}
+                    </Bar>
+                  </BarChart>
+                </ChartContainer>
               </div>
-              <div className="flex min-h-[180px] flex-col justify-center">
+              <div className="flex min-h-[200px] flex-col justify-center">
                 <h3 className="text-foreground mb-2 text-sm font-semibold">
                   SPF Pass/Fail
                 </h3>
-                <div className="h-[180px]">
-                  <Bar data={spfBar} options={compactOptions} />
-                </div>
+                <ChartContainer config={chartConfig} className="h-[200px]">
+                  <BarChart data={spfData}>
+                    <CartesianGrid
+                      strokeDasharray="3 3"
+                      className="stroke-muted"
+                    />
+                    <XAxis
+                      dataKey="name"
+                      className="text-xs"
+                      tickLine={false}
+                      axisLine={false}
+                    />
+                    <YAxis
+                      className="text-xs"
+                      tickLine={false}
+                      axisLine={false}
+                    />
+                    <ChartTooltip content={<ChartTooltipContent />} />
+                    <Bar
+                      dataKey="value"
+                      radius={[4, 4, 0, 0]}
+                      animationDuration={800}
+                    >
+                      {spfData.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={entry.fill} />
+                      ))}
+                    </Bar>
+                  </BarChart>
+                </ChartContainer>
               </div>
             </div>
             <div className="mt-8 overflow-x-auto">
