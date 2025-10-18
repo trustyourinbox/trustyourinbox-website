@@ -34,7 +34,7 @@ const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
 const ACCEPTED_TYPES = ["application/xml", "text/xml", ".xml"];
 
 function getFileIcon(type: string) {
-  return <FaFileAlt className="h-5 w-5 text-primary" />;
+  return <FaFileAlt className="text-primary h-5 w-5" />;
 }
 
 function RelatedTools() {
@@ -43,7 +43,7 @@ function RelatedTools() {
       id: "dmarc-analyzer",
       name: "DMARC Analyzer",
       description: "Analyze your DMARC configuration and get detailed reports",
-      icon: <Shield className="h-6 w-6 text-primary" />,
+      icon: <Shield className="text-primary h-6 w-6" />,
       href: "/tools/dmarc-analyzer",
       color: "bg-secondary dark:bg-primary",
       borderColor: "border-primary/20 dark:border-primary",
@@ -53,7 +53,7 @@ function RelatedTools() {
       id: "spf-surveyor",
       name: "SPF Surveyor",
       description: "Validate and troubleshoot your SPF records",
-      icon: <Mail className="h-6 w-6 text-primary" />,
+      icon: <Mail className="text-primary h-6 w-6" />,
       href: "/tools/spf-surveyor",
       color: "bg-green-50 dark:bg-green-950",
       borderColor: "border-green-200 dark:border-green-800",
@@ -63,7 +63,7 @@ function RelatedTools() {
       id: "dkim-validator",
       name: "DKIM Validator",
       description: "Verify your DKIM signatures and configuration",
-      icon: <Key className="h-6 w-6 text-primary" />,
+      icon: <Key className="text-primary h-6 w-6" />,
       href: "/tools/dkim-validator",
       color: "bg-purple-50 dark:bg-purple-950",
       borderColor: "border-purple-200 dark:border-purple-800",
@@ -72,10 +72,10 @@ function RelatedTools() {
   ];
 
   return (
-    <div className="mb-8 mt-12">
+    <div className="mt-12 mb-8">
       <div className="mb-6">
         <h2 className="text-2xl font-bold tracking-tight">Related Tools</h2>
-        <p className="mt-1 text-muted-foreground">
+        <p className="text-muted-foreground mt-1">
           Explore more email authentication tools to secure your domain
         </p>
       </div>
@@ -95,12 +95,12 @@ function RelatedTools() {
                 <h3 className="text-lg font-semibold group-hover:underline">
                   {tool.name}
                 </h3>
-                <p className="mt-1 text-sm text-muted-foreground">
+                <p className="text-muted-foreground mt-1 text-sm">
                   {tool.description}
                 </p>
               </div>
             </div>
-            <div className="absolute bottom-0 left-0 h-1 w-0 bg-primary transition-all duration-300 group-hover:w-full"></div>
+            <div className="bg-primary absolute bottom-0 left-0 h-1 w-0 transition-all duration-300 group-hover:w-full"></div>
           </Link>
         ))}
       </div>
@@ -307,7 +307,7 @@ export default function ForensicReportViewerPage() {
         <Card>
           <div className="space-y-4">
             <div
-              className="flex cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed border-primary/30 bg-secondary p-8 transition hover:bg-primary/10"
+              className="border-primary/30 bg-secondary hover:bg-primary/10 flex cursor-pointer flex-col items-center justify-center rounded-md border-2 border-dashed p-8 transition"
               onDrop={handleDrop}
               onDragOver={(e) => e.preventDefault()}
               onClick={handleBrowse}
@@ -315,8 +315,8 @@ export default function ForensicReportViewerPage() {
               role="button"
               aria-label="Upload Forensic DMARC XML files"
             >
-              <FaUpload className="mb-2 h-10 w-10 text-primary" />
-              <span className="font-semibold text-primary">
+              <FaUpload className="text-primary mb-2 h-10 w-10" />
+              <span className="text-primary font-semibold">
                 Drag and drop Forensic DMARC XML files here
               </span>
               <span className="mt-1 text-sm text-gray-500">
@@ -383,7 +383,7 @@ export default function ForensicReportViewerPage() {
                     <button
                       aria-label={`Remove file ${file.name}`}
                       title="Remove file"
-                      className="ml-2 rounded-full border border-primary/20 p-2 text-primary transition hover:bg-secondary hover:text-foreground group-hover:shadow"
+                      className="border-primary/20 text-primary hover:bg-secondary hover:text-foreground ml-2 rounded-full border p-2 transition group-hover:shadow"
                       onClick={(e) => {
                         e.stopPropagation();
                         handleRemove(idx);
@@ -401,13 +401,13 @@ export default function ForensicReportViewerPage() {
         {/* Tabs for Table View and Dashboard */}
         <div className="mb-6 flex items-center gap-2">
           <button
-            className={`rounded-lg px-4 py-2 text-sm font-semibold transition-colors ${activeTab === "table" ? "bg-gray-100 text-primary" : "bg-white text-gray-500 hover:bg-gray-50"}`}
+            className={`rounded-lg px-4 py-2 text-sm font-semibold transition-colors ${activeTab === "table" ? "text-primary bg-gray-100" : "bg-white text-gray-500 hover:bg-gray-50"}`}
             onClick={() => setActiveTab("table")}
           >
             Table View
           </button>
           <button
-            className={`rounded-lg px-4 py-2 text-sm font-semibold transition-colors ${activeTab === "dashboard" ? "bg-gray-100 text-primary" : "bg-white text-gray-500 hover:bg-gray-50"}`}
+            className={`rounded-lg px-4 py-2 text-sm font-semibold transition-colors ${activeTab === "dashboard" ? "text-primary bg-gray-100" : "bg-white text-gray-500 hover:bg-gray-50"}`}
             onClick={() => setActiveTab("dashboard")}
           >
             Dashboard

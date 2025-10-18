@@ -113,7 +113,7 @@ export default function DemoPage() {
       {/* Video/Screenshot Placeholder */}
       <section className="-mt-8 py-12">
         <div className="container max-w-5xl">
-          <div className="border-primary/20 from-background/50 to-background relative overflow-hidden rounded-2xl border-2 bg-gradient-to-br shadow-2xl backdrop-blur-xl">
+          <div className="border-primary/20 from-background/50 to-background relative overflow-hidden rounded-lg border-2 bg-gradient-to-br shadow-2xl backdrop-blur-xl">
             {/* Video Placeholder */}
             <div className="from-muted/30 via-background to-background flex aspect-video items-center justify-center bg-gradient-to-br">
               <div className="text-center">
@@ -169,7 +169,7 @@ export default function DemoPage() {
                       <div className="text-primary/20 text-6xl font-bold">
                         {step.number}
                       </div>
-                      <div className="bg-primary/10 inline-flex rounded-xl p-3">
+                      <div className="bg-primary/10 inline-flex rounded-md p-3">
                         <Icon className="text-primary h-6 w-6" />
                       </div>
                     </div>
@@ -189,7 +189,7 @@ export default function DemoPage() {
 
                   {/* Screenshot Placeholder */}
                   <div className={index % 2 === 1 ? "md:order-1" : ""}>
-                    <div className="border-border from-muted/30 to-background flex aspect-video items-center justify-center rounded-xl border bg-gradient-to-br">
+                    <div className="border-border from-muted/30 to-background flex aspect-video items-center justify-center rounded-md border bg-gradient-to-br">
                       <Icon className="text-primary/20 h-16 w-16" />
                     </div>
                   </div>
@@ -216,7 +216,7 @@ export default function DemoPage() {
               return (
                 <div
                   key={feature.title}
-                  className="border-border bg-background rounded-xl border p-6"
+                  className="border-border bg-background rounded-md border p-6"
                 >
                   <div className="bg-primary/10 mb-4 inline-flex rounded-lg p-3">
                     <Icon className="text-primary h-6 w-6" />
@@ -235,7 +235,7 @@ export default function DemoPage() {
       {/* Interactive Demo Callout */}
       <section className="py-24">
         <div className="container max-w-4xl">
-          <div className="border-primary/20 from-primary/5 to-background rounded-2xl border-2 bg-gradient-to-br p-12 text-center">
+          <div className="border-primary/20 from-primary/5 to-background rounded-lg border-2 bg-gradient-to-br p-12 text-center">
             <div className="bg-primary/10 mb-6 inline-flex rounded-full p-4">
               <BarChart3 className="text-primary h-8 w-8" />
             </div>

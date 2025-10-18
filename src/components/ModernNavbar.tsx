@@ -382,7 +382,7 @@ function DropdownMenu({
 
       {isOpen && (
         <div
-          className="border-border bg-background/95 absolute top-full left-0 mt-2 w-80 rounded-xl border p-2 shadow-2xl backdrop-blur-xl"
+          className="border-border bg-background/95 absolute top-full left-0 mt-2 w-80 rounded-md border p-2 shadow-2xl backdrop-blur-xl"
           onMouseLeave={onToggle}
         >
           {items.map((item) => {
@@ -440,7 +440,7 @@ function CategorizedDropdownMenu({
 
       {isOpen && (
         <div
-          className="border-border bg-background/95 absolute top-full left-1/2 mt-2 w-[750px] -translate-x-1/2 rounded-xl border p-6 shadow-2xl backdrop-blur-xl"
+          className="border-border bg-background/95 absolute top-full left-1/2 mt-2 w-[750px] -translate-x-1/2 rounded-md border p-6 shadow-2xl backdrop-blur-xl"
           onMouseLeave={onToggle}
         >
           {/* Three-Column Grid */}

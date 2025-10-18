@@ -57,12 +57,12 @@ const complianceStandards = [
 
 export default function SecurityPage() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="bg-background min-h-screen">
       {/* Breadcrumb */}
-      <div className="border-b bg-secondary/30">
+      <div className="bg-secondary/30 border-b">
         <div className="container py-4">
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <Link href="/" className="transition-colors hover:text-foreground">
+          <div className="text-muted-foreground flex items-center gap-2 text-sm">
+            <Link href="/" className="hover:text-foreground transition-colors">
               Home
             </Link>
             <ChevronRight className="h-4 w-4" />
@@ -72,16 +72,16 @@ export default function SecurityPage() {
       </div>
 
       {/* Hero */}
-      <section className="bg-gradient-to-b from-background to-secondary/30 py-24 md:py-32">
+      <section className="from-background to-secondary/30 bg-gradient-to-b py-24 md:py-32">
         <div className="container">
           <div className="mx-auto max-w-3xl text-center">
-            <div className="mb-6 inline-flex rounded-full bg-primary/10 p-4">
-              <Shield className="h-8 w-8 text-primary" />
+            <div className="bg-primary/10 mb-6 inline-flex rounded-full p-4">
+              <Shield className="text-primary h-8 w-8" />
             </div>
             <h1 className="mb-6 text-4xl font-bold md:text-5xl">
               Security at <span className="text-primary">TrustYourInbox</span>
             </h1>
-            <p className="mb-8 text-xl leading-relaxed text-muted-foreground">
+            <p className="text-muted-foreground mb-8 text-xl leading-relaxed">
               Your security is our top priority. We implement industry-leading
               practices to protect your data and maintain the trust you place in
               us.
@@ -95,7 +95,7 @@ export default function SecurityPage() {
         <div className="container">
           <div className="mb-16 text-center">
             <h2 className="mb-4 text-3xl font-bold">Security Measures</h2>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-muted-foreground text-lg">
               Comprehensive security controls to protect your email
               authentication data
             </p>
@@ -107,13 +107,13 @@ export default function SecurityPage() {
               return (
                 <div
                   key={feature.title}
-                  className="rounded-xl border border-border bg-background p-6 transition-shadow hover:shadow-lg"
+                  className="border-border bg-background rounded-md border p-6 transition-shadow hover:shadow-lg"
                 >
-                  <div className="mb-4 inline-flex rounded-lg bg-primary/10 p-3">
-                    <Icon className="h-6 w-6 text-primary" />
+                  <div className="bg-primary/10 mb-4 inline-flex rounded-lg p-3">
+                    <Icon className="text-primary h-6 w-6" />
                   </div>
                   <h3 className="mb-2 text-lg font-bold">{feature.title}</h3>
-                  <p className="text-sm leading-relaxed text-muted-foreground">
+                  <p className="text-muted-foreground text-sm leading-relaxed">
                     {feature.description}
                   </p>
                 </div>
@@ -131,7 +131,7 @@ export default function SecurityPage() {
               <h2 className="mb-4 text-3xl font-bold">
                 Compliance & Certifications
               </h2>
-              <p className="text-lg text-muted-foreground">
+              <p className="text-muted-foreground text-lg">
                 We meet rigorous industry standards for security and privacy
               </p>
             </div>
@@ -140,15 +140,15 @@ export default function SecurityPage() {
               {complianceStandards.map((standard) => (
                 <div
                   key={standard.name}
-                  className="flex items-center justify-between rounded-xl border border-border bg-background p-6"
+                  className="border-border bg-background flex items-center justify-between rounded-md border p-6"
                 >
                   <div className="flex items-center gap-4">
-                    <div className="rounded-lg bg-primary/10 p-2">
-                      <CheckCircle className="h-5 w-5 text-primary" />
+                    <div className="bg-primary/10 rounded-lg p-2">
+                      <CheckCircle className="text-primary h-5 w-5" />
                     </div>
                     <div>
                       <h3 className="font-bold">{standard.name}</h3>
-                      <p className="text-sm text-muted-foreground">
+                      <p className="text-muted-foreground text-sm">
                         {standard.status}
                       </p>
                     </div>
@@ -169,7 +169,7 @@ export default function SecurityPage() {
             <div className="space-y-8">
               <div>
                 <h3 className="mb-3 text-xl font-bold">Cloud Infrastructure</h3>
-                <p className="leading-relaxed text-muted-foreground">
+                <p className="text-muted-foreground leading-relaxed">
                   Our services are hosted on enterprise-grade cloud
                   infrastructure with physically secure data centers, redundant
                   network connectivity, and DDoS protection. We leverage
@@ -180,7 +180,7 @@ export default function SecurityPage() {
 
               <div>
                 <h3 className="mb-3 text-xl font-bold">Network Security</h3>
-                <p className="leading-relaxed text-muted-foreground">
+                <p className="text-muted-foreground leading-relaxed">
                   All network traffic is protected by firewalls, intrusion
                   detection systems (IDS), and intrusion prevention systems
                   (IPS). We implement network segmentation to isolate critical
@@ -190,7 +190,7 @@ export default function SecurityPage() {
 
               <div>
                 <h3 className="mb-3 text-xl font-bold">Application Security</h3>
-                <p className="leading-relaxed text-muted-foreground">
+                <p className="text-muted-foreground leading-relaxed">
                   Our applications undergo regular security testing, including
                   static code analysis, dynamic application security testing
                   (DAST), and manual penetration testing by certified security
@@ -200,7 +200,7 @@ export default function SecurityPage() {
 
               <div>
                 <h3 className="mb-3 text-xl font-bold">Employee Security</h3>
-                <p className="leading-relaxed text-muted-foreground">
+                <p className="text-muted-foreground leading-relaxed">
                   All employees undergo background checks and security awareness
                   training. Access to production systems and customer data is
                   strictly limited on a need-to-know basis with comprehensive
@@ -221,7 +221,7 @@ export default function SecurityPage() {
             </h2>
 
             <div className="space-y-6">
-              <div className="rounded-xl border border-border bg-background p-6">
+              <div className="border-border bg-background rounded-md border p-6">
                 <h3 className="mb-2 text-lg font-bold">Encryption at Rest</h3>
                 <p className="text-muted-foreground">
                   All customer data is encrypted using AES-256 encryption.
@@ -230,7 +230,7 @@ export default function SecurityPage() {
                 </p>
               </div>
 
-              <div className="rounded-xl border border-border bg-background p-6">
+              <div className="border-border bg-background rounded-md border p-6">
                 <h3 className="mb-2 text-lg font-bold">
                   Encryption in Transit
                 </h3>
@@ -241,7 +241,7 @@ export default function SecurityPage() {
                 </p>
               </div>
 
-              <div className="rounded-xl border border-border bg-background p-6">
+              <div className="border-border bg-background rounded-md border p-6">
                 <h3 className="mb-2 text-lg font-bold">Data Residency</h3>
                 <p className="text-muted-foreground">
                   Customer data is stored in secure data centers with options
@@ -250,7 +250,7 @@ export default function SecurityPage() {
                 </p>
               </div>
 
-              <div className="rounded-xl border border-border bg-background p-6">
+              <div className="border-border bg-background rounded-md border p-6">
                 <h3 className="mb-2 text-lg font-bold">Data Retention</h3>
                 <p className="text-muted-foreground">
                   We retain customer data only as long as necessary to provide
@@ -267,14 +267,14 @@ export default function SecurityPage() {
       <section className="py-24">
         <div className="container">
           <div className="mx-auto max-w-4xl">
-            <div className="rounded-2xl border-2 border-primary/20 bg-gradient-to-br from-primary/5 to-background p-8">
-              <div className="mb-4 inline-flex rounded-lg bg-primary/10 p-3">
-                <AlertCircle className="h-6 w-6 text-primary" />
+            <div className="border-primary/20 from-primary/5 to-background rounded-lg border-2 bg-gradient-to-br p-8">
+              <div className="bg-primary/10 mb-4 inline-flex rounded-lg p-3">
+                <AlertCircle className="text-primary h-6 w-6" />
               </div>
               <h2 className="mb-4 text-2xl font-bold">
                 Responsible Disclosure
               </h2>
-              <p className="mb-6 leading-relaxed text-muted-foreground">
+              <p className="text-muted-foreground mb-6 leading-relaxed">
                 We welcome reports from security researchers who discover
                 potential vulnerabilities in our systems. If you believe
                 you&apos;ve found a security issue, please report it
@@ -284,7 +284,7 @@ export default function SecurityPage() {
               <div className="mb-6 space-y-4">
                 <div>
                   <h3 className="mb-2 font-bold">How to Report</h3>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-muted-foreground text-sm">
                     Email security issues to{" "}
                     <a
                       href="mailto:security@trustyourinbox.com"
@@ -298,7 +298,7 @@ export default function SecurityPage() {
 
                 <div>
                   <h3 className="mb-2 font-bold">Our Commitment</h3>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-muted-foreground text-sm">
                     We will acknowledge receipt within 24 hours, investigate
                     promptly, and work with you to address confirmed
                     vulnerabilities. We do not take legal action against
@@ -309,7 +309,7 @@ export default function SecurityPage() {
 
               <a
                 href="mailto:security@trustyourinbox.com"
-                className="inline-flex items-center justify-center rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
+                className="bg-primary text-primary-foreground hover:bg-primary/90 inline-flex items-center justify-center rounded-lg px-6 py-3 text-sm font-semibold transition-colors"
               >
                 Report Security Issue
               </a>
@@ -325,20 +325,20 @@ export default function SecurityPage() {
             <h2 className="mb-4 text-3xl font-bold">
               Questions About Security?
             </h2>
-            <p className="mb-8 text-lg text-muted-foreground">
+            <p className="text-muted-foreground mb-8 text-lg">
               For security inquiries, compliance questions, or to request our
               security documentation, please contact our security team.
             </p>
             <div className="flex flex-col justify-center gap-4 sm:flex-row">
               <a
                 href="mailto:security@trustyourinbox.com"
-                className="inline-flex items-center justify-center rounded-lg bg-primary px-8 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
+                className="bg-primary text-primary-foreground hover:bg-primary/90 inline-flex items-center justify-center rounded-lg px-8 py-3 text-sm font-semibold transition-colors"
               >
                 Contact Security Team
               </a>
               <Link
                 href="/privacy"
-                className="inline-flex items-center justify-center rounded-lg border border-border px-8 py-3 text-sm font-semibold transition-colors hover:bg-muted"
+                className="border-border hover:bg-muted inline-flex items-center justify-center rounded-lg border px-8 py-3 text-sm font-semibold transition-colors"
               >
                 View Privacy Policy
               </Link>

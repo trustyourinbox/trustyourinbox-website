@@ -42,7 +42,7 @@ export function MegaMenu({
   const toolCategories: ToolCategory[] = [
     {
       title: "Core Tools",
-      icon: <Shield className="h-5 w-5 text-primary" />,
+      icon: <Shield className="text-primary h-5 w-5" />,
       tools: [
         {
           name: "Domain Checker",
@@ -90,7 +90,7 @@ export function MegaMenu({
     },
     {
       title: "Authentication",
-      icon: <Lock className="h-5 w-5 text-primary" />,
+      icon: <Lock className="text-primary h-5 w-5" />,
       tools: [
         {
           name: "DKIM Validator",
@@ -114,7 +114,7 @@ export function MegaMenu({
     },
     {
       title: "Analysis",
-      icon: <BarChart2 className="h-5 w-5 text-primary" />,
+      icon: <BarChart2 className="text-primary h-5 w-5" />,
       tools: [
         {
           name: "Domain Security Checker",
@@ -135,7 +135,7 @@ export function MegaMenu({
   return (
     <div
       className={cn(
-        "absolute left-0 right-0 top-full z-50 w-full transform rounded-b-xl border-t bg-white shadow-lg transition-all duration-200 ease-in-out",
+        "absolute top-full right-0 left-0 z-50 w-full transform rounded-b-xl border-t bg-white shadow-lg transition-all duration-200 ease-in-out",
         isOpen
           ? "translate-y-0 opacity-100"
           : "pointer-events-none -translate-y-4 opacity-0"
@@ -160,11 +160,11 @@ export function MegaMenu({
                       onClick={onClose}
                       className="group flex items-start gap-2 rounded-lg p-1.5 transition-colors hover:bg-gray-50"
                     >
-                      <div className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-md bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-white">
+                      <div className="bg-primary/10 text-primary group-hover:bg-primary mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-md transition-colors group-hover:text-white">
                         {tool.icon}
                       </div>
                       <div>
-                        <div className="text-sm font-medium text-gray-900 transition-colors group-hover:text-primary">
+                        <div className="group-hover:text-primary text-sm font-medium text-gray-900 transition-colors">
                           {tool.name}
                         </div>
                         {tool.description && (
@@ -180,15 +180,15 @@ export function MegaMenu({
             ))}
           </div>
           {/* Right-side featured box */}
-          <div className="mt-4 flex w-full flex-shrink-0 flex-col justify-between rounded-xl border border-primary/10 bg-secondary p-5 shadow-sm lg:ml-2 lg:mt-0 lg:w-80">
+          <div className="border-primary/10 bg-secondary mt-4 flex w-full flex-shrink-0 flex-col justify-between rounded-md border p-5 shadow-sm lg:mt-0 lg:ml-2 lg:w-80">
             <div>
-              <span className="mb-2 inline-block rounded bg-primary px-2 py-0.5 text-xs font-semibold text-white">
+              <span className="bg-primary mb-2 inline-block rounded px-2 py-0.5 text-xs font-semibold text-white">
                 What&apos;s New
               </span>
-              <h4 className="mb-1 text-lg font-bold text-foreground">
+              <h4 className="text-foreground mb-1 text-lg font-bold">
                 Forensic DMARC Report Viewer
               </h4>
-              <p className="mb-4 text-sm text-foreground">
+              <p className="text-foreground mb-4 text-sm">
                 Upload and analyze forensic (ruf) DMARC reports to investigate
                 authentication failures.
               </p>
@@ -196,7 +196,7 @@ export function MegaMenu({
             <Link
               href="/tools/forensic-report-viewer"
               onClick={onClose}
-              className="inline-block rounded-lg bg-primary px-4 py-2 text-center text-sm font-semibold text-white transition-colors hover:bg-primary"
+              className="bg-primary hover:bg-primary inline-block rounded-lg px-4 py-2 text-center text-sm font-semibold text-white transition-colors"
             >
               Try it now
             </Link>

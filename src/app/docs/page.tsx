@@ -91,32 +91,32 @@ const quickStartSteps = [
 
 export default function DocsPage() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="bg-background min-h-screen">
       {/* Hero Section */}
-      <section className="bg-gradient-to-b from-background to-secondary/30 py-24 md:py-32">
+      <section className="from-background to-secondary/30 bg-gradient-to-b py-24 md:py-32">
         <div className="container">
           <div className="mx-auto max-w-3xl text-center">
-            <div className="mb-6 inline-flex items-center rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-sm font-medium">
-              <Code className="mr-2 h-4 w-4 text-primary" />
+            <div className="border-primary/20 bg-primary/5 mb-6 inline-flex items-center rounded-full border px-4 py-1.5 text-sm font-medium">
+              <Code className="text-primary mr-2 h-4 w-4" />
               <span className="text-primary">API Documentation</span>
             </div>
             <h1 className="mb-6 text-5xl font-bold tracking-tight md:text-6xl">
               Build with <span className="text-primary">TrustYourInbox</span>
             </h1>
-            <p className="mb-8 text-xl leading-relaxed text-muted-foreground">
+            <p className="text-muted-foreground mb-8 text-xl leading-relaxed">
               Integrate DMARC monitoring and email authentication into your
               applications with our powerful API
             </p>
             <div className="flex flex-col justify-center gap-4 sm:flex-row">
               <Link
                 href="#quickstart"
-                className="inline-flex items-center justify-center rounded-lg bg-primary px-8 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
+                className="bg-primary text-primary-foreground hover:bg-primary/90 inline-flex items-center justify-center rounded-lg px-8 py-3 text-sm font-semibold transition-colors"
               >
                 Get Started
               </Link>
               <Link
                 href="#endpoints"
-                className="inline-flex items-center justify-center rounded-lg border border-border px-8 py-3 text-sm font-semibold transition-colors hover:bg-muted"
+                className="border-border hover:bg-muted inline-flex items-center justify-center rounded-lg border px-8 py-3 text-sm font-semibold transition-colors"
               >
                 View Endpoints
               </Link>
@@ -134,13 +134,13 @@ export default function DocsPage() {
               return (
                 <div
                   key={feature.title}
-                  className="rounded-xl border border-border bg-background p-6"
+                  className="border-border bg-background rounded-md border p-6"
                 >
-                  <div className="mb-4 inline-flex rounded-lg bg-primary/10 p-3">
-                    <Icon className="h-6 w-6 text-primary" />
+                  <div className="bg-primary/10 mb-4 inline-flex rounded-lg p-3">
+                    <Icon className="text-primary h-6 w-6" />
                   </div>
                   <h3 className="mb-2 font-bold">{feature.title}</h3>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-muted-foreground text-sm">
                     {feature.description}
                   </p>
                 </div>
@@ -155,7 +155,7 @@ export default function DocsPage() {
         <div className="container max-w-4xl">
           <div className="mb-12 text-center">
             <h2 className="mb-4 text-4xl font-bold">Quick Start</h2>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-muted-foreground text-lg">
               Get up and running in minutes
             </p>
           </div>
@@ -164,9 +164,9 @@ export default function DocsPage() {
             {quickStartSteps.map((step, index) => (
               <div
                 key={index}
-                className="flex gap-6 rounded-xl border border-border bg-background p-6"
+                className="border-border bg-background flex gap-6 rounded-md border p-6"
               >
-                <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-primary/10 font-bold text-primary">
+                <div className="bg-primary/10 text-primary flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full font-bold">
                   {index + 1}
                 </div>
                 <div>
@@ -178,15 +178,15 @@ export default function DocsPage() {
           </div>
 
           {/* Code Example */}
-          <div className="mt-12 overflow-hidden rounded-xl border border-border bg-muted/30">
-            <div className="border-b border-border bg-muted/50 px-6 py-4">
+          <div className="border-border bg-muted/30 mt-12 overflow-hidden rounded-md border">
+            <div className="border-border bg-muted/50 border-b px-6 py-4">
               <div className="flex items-center gap-2">
                 <div className="flex gap-1.5">
                   <div className="h-3 w-3 rounded-full bg-red-500/80"></div>
                   <div className="h-3 w-3 rounded-full bg-yellow-500/80"></div>
                   <div className="h-3 w-3 rounded-full bg-green-500/80"></div>
                 </div>
-                <span className="ml-4 text-sm font-medium text-muted-foreground">
+                <span className="text-muted-foreground ml-4 text-sm font-medium">
                   Example Request
                 </span>
               </div>
@@ -207,7 +207,7 @@ export default function DocsPage() {
         <div className="container max-w-4xl">
           <div className="mb-12 text-center">
             <h2 className="mb-4 text-4xl font-bold">API Endpoints</h2>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-muted-foreground text-lg">
               Core endpoints for DMARC monitoring and management
             </p>
           </div>
@@ -216,7 +216,7 @@ export default function DocsPage() {
             {apiEndpoints.map((endpoint, index) => (
               <div
                 key={index}
-                className="group rounded-xl border border-border bg-background p-6 transition-all hover:border-primary/30 hover:shadow-lg"
+                className="group border-border bg-background hover:border-primary/30 rounded-md border p-6 transition-all hover:shadow-lg"
               >
                 <div className="flex items-start gap-4">
                   <div
@@ -233,15 +233,15 @@ export default function DocsPage() {
                       <code className="font-mono text-sm font-semibold">
                         {endpoint.endpoint}
                       </code>
-                      <span className="rounded border border-border px-2 py-1 text-xs text-muted-foreground">
+                      <span className="border-border text-muted-foreground rounded border px-2 py-1 text-xs">
                         {endpoint.auth}
                       </span>
                     </div>
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-muted-foreground text-sm">
                       {endpoint.description}
                     </p>
                   </div>
-                  <ArrowRight className="h-5 w-5 flex-shrink-0 text-muted-foreground transition-all group-hover:translate-x-1 group-hover:text-primary" />
+                  <ArrowRight className="text-muted-foreground group-hover:text-primary h-5 w-5 flex-shrink-0 transition-all group-hover:translate-x-1" />
                 </div>
               </div>
             ))}
@@ -253,37 +253,37 @@ export default function DocsPage() {
       <section className="bg-secondary/30 py-24">
         <div className="container max-w-4xl">
           <div className="mb-12 text-center">
-            <Key className="mx-auto mb-4 h-12 w-12 text-primary" />
+            <Key className="text-primary mx-auto mb-4 h-12 w-12" />
             <h2 className="mb-4 text-4xl font-bold">Authentication</h2>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-muted-foreground text-lg">
               Secure your API requests with API keys or OAuth 2.0
             </p>
           </div>
 
-          <div className="rounded-xl border border-border bg-background p-8">
+          <div className="border-border bg-background rounded-md border p-8">
             <h3 className="mb-4 text-xl font-bold">Using API Keys</h3>
-            <p className="mb-6 text-muted-foreground">
+            <p className="text-muted-foreground mb-6">
               Include your API key in the Authorization header of every request:
             </p>
-            <div className="mb-6 rounded-lg bg-muted/50 p-4 font-mono text-sm">
+            <div className="bg-muted/50 mb-6 rounded-lg p-4 font-mono text-sm">
               <code>Authorization: Bearer YOUR_API_KEY</code>
             </div>
             <div className="space-y-3">
               <div className="flex items-start gap-3">
-                <CheckCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary" />
-                <p className="text-sm text-muted-foreground">
+                <CheckCircle className="text-primary mt-0.5 h-5 w-5 flex-shrink-0" />
+                <p className="text-muted-foreground text-sm">
                   Generate API keys from your account settings
                 </p>
               </div>
               <div className="flex items-start gap-3">
-                <CheckCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary" />
-                <p className="text-sm text-muted-foreground">
+                <CheckCircle className="text-primary mt-0.5 h-5 w-5 flex-shrink-0" />
+                <p className="text-muted-foreground text-sm">
                   Keep your keys secure and never commit them to version control
                 </p>
               </div>
               <div className="flex items-start gap-3">
-                <CheckCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary" />
-                <p className="text-sm text-muted-foreground">
+                <CheckCircle className="text-primary mt-0.5 h-5 w-5 flex-shrink-0" />
+                <p className="text-muted-foreground text-sm">
                   Rotate keys regularly for enhanced security
                 </p>
               </div>
@@ -297,7 +297,7 @@ export default function DocsPage() {
         <div className="container max-w-4xl">
           <div className="mb-12 text-center">
             <h2 className="mb-4 text-4xl font-bold">SDKs & Libraries</h2>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-muted-foreground text-lg">
               Official client libraries for popular languages
             </p>
           </div>
@@ -311,16 +311,16 @@ export default function DocsPage() {
               <Link
                 key={sdk.name}
                 href="#"
-                className="group rounded-xl border border-border bg-background p-6 text-center transition-all hover:border-primary/30 hover:shadow-lg"
+                className="group border-border bg-background hover:border-primary/30 rounded-md border p-6 text-center transition-all hover:shadow-lg"
               >
                 <div className="mb-4 text-4xl">{sdk.icon}</div>
-                <h3 className="mb-2 font-bold transition-colors group-hover:text-primary">
+                <h3 className="group-hover:text-primary mb-2 font-bold transition-colors">
                   {sdk.name}
                 </h3>
-                <p className="mb-4 text-sm text-muted-foreground">
+                <p className="text-muted-foreground mb-4 text-sm">
                   {sdk.status}
                 </p>
-                <div className="inline-flex items-center text-sm font-medium text-primary">
+                <div className="text-primary inline-flex items-center text-sm font-medium">
                   <span>View Docs</span>
                   <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </div>
@@ -337,19 +337,19 @@ export default function DocsPage() {
             <h2 className="mb-4 text-3xl font-bold md:text-4xl">
               Ready to start building?
             </h2>
-            <p className="mb-8 text-lg text-muted-foreground">
+            <p className="text-muted-foreground mb-8 text-lg">
               Sign up for a free account and get your API key today
             </p>
             <div className="flex flex-col justify-center gap-4 sm:flex-row">
               <Link
                 href="/signup"
-                className="inline-flex items-center justify-center rounded-lg bg-primary px-8 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
+                className="bg-primary text-primary-foreground hover:bg-primary/90 inline-flex items-center justify-center rounded-lg px-8 py-3 text-sm font-semibold transition-colors"
               >
                 Get Started Free
               </Link>
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center rounded-lg border border-border px-8 py-3 text-sm font-semibold transition-colors hover:bg-muted"
+                className="border-border hover:bg-muted inline-flex items-center justify-center rounded-lg border px-8 py-3 text-sm font-semibold transition-colors"
               >
                 Contact Sales
               </Link>

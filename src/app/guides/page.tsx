@@ -180,19 +180,19 @@ const quickLinks = [
 
 export default function GuidesPage() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="bg-background min-h-screen">
       {/* Hero Section */}
-      <section className="bg-gradient-to-b from-background to-secondary/30 py-24 md:py-32">
+      <section className="from-background to-secondary/30 bg-gradient-to-b py-24 md:py-32">
         <div className="container">
           <div className="mx-auto max-w-3xl text-center">
-            <div className="mb-6 inline-flex items-center rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-sm font-medium">
-              <BookOpen className="mr-2 h-4 w-4 text-primary" />
+            <div className="border-primary/20 bg-primary/5 mb-6 inline-flex items-center rounded-full border px-4 py-1.5 text-sm font-medium">
+              <BookOpen className="text-primary mr-2 h-4 w-4" />
               <span className="text-primary">Learning Center</span>
             </div>
             <h1 className="mb-6 text-5xl font-bold tracking-tight md:text-6xl">
               <span className="text-primary">DMARC</span> Guides & Resources
             </h1>
-            <p className="mb-8 text-xl leading-relaxed text-muted-foreground">
+            <p className="text-muted-foreground mb-8 text-xl leading-relaxed">
               Learn everything you need to know about DMARC, SPF, DKIM, and
               email authentication. From beginner to advanced topics.
             </p>
@@ -200,11 +200,11 @@ export default function GuidesPage() {
             {/* Search Bar Placeholder */}
             <div className="mx-auto max-w-2xl">
               <div className="relative">
-                <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
+                <Search className="text-muted-foreground absolute top-1/2 left-4 h-5 w-5 -translate-y-1/2" />
                 <input
                   type="text"
                   placeholder="Search guides..."
-                  className="h-12 w-full rounded-lg border border-border bg-background pl-12 pr-4 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-primary"
+                  className="border-border bg-background focus:ring-primary h-12 w-full rounded-lg border pr-4 pl-12 focus:border-transparent focus:ring-2 focus:outline-none"
                 />
               </div>
             </div>
@@ -222,8 +222,8 @@ export default function GuidesPage() {
                 <div key={category.title}>
                   {/* Category Header */}
                   <div className="mb-8 flex items-center gap-3">
-                    <div className="inline-flex rounded-lg bg-primary/10 p-2">
-                      <Icon className="h-5 w-5 text-primary" />
+                    <div className="bg-primary/10 inline-flex rounded-lg p-2">
+                      <Icon className="text-primary h-5 w-5" />
                     </div>
                     <h2 className="text-3xl font-bold">{category.title}</h2>
                   </div>
@@ -234,20 +234,20 @@ export default function GuidesPage() {
                       <Link
                         key={guide.name}
                         href="#"
-                        className="group rounded-xl border border-border bg-background p-6 transition-all duration-300 hover:border-primary/30 hover:shadow-lg"
+                        className="group border-border bg-background hover:border-primary/30 rounded-md border p-6 transition-all duration-300 hover:shadow-lg"
                       >
                         <div className="mb-3 flex items-start justify-between">
-                          <h3 className="text-lg font-bold transition-colors group-hover:text-primary">
+                          <h3 className="group-hover:text-primary text-lg font-bold transition-colors">
                             {guide.name}
                           </h3>
-                          <ArrowRight className="ml-2 h-5 w-5 flex-shrink-0 text-muted-foreground transition-all group-hover:translate-x-1 group-hover:text-primary" />
+                          <ArrowRight className="text-muted-foreground group-hover:text-primary ml-2 h-5 w-5 flex-shrink-0 transition-all group-hover:translate-x-1" />
                         </div>
-                        <p className="mb-3 text-sm text-muted-foreground">
+                        <p className="text-muted-foreground mb-3 text-sm">
                           {guide.desc}
                         </p>
                         <div className="flex items-center gap-2">
-                          <div className="h-1 w-1 rounded-full bg-primary"></div>
-                          <span className="text-xs text-muted-foreground">
+                          <div className="bg-primary h-1 w-1 rounded-full"></div>
+                          <span className="text-muted-foreground text-xs">
                             {guide.time}
                           </span>
                         </div>
@@ -290,14 +290,14 @@ export default function GuidesPage() {
                   <Link
                     key={guide.name}
                     href="#"
-                    className="group flex items-start gap-4 rounded-lg border border-border bg-background p-4 transition-all hover:border-primary/30 hover:shadow-md"
+                    className="group border-border bg-background hover:border-primary/30 flex items-start gap-4 rounded-lg border p-4 transition-all hover:shadow-md"
                   >
-                    <CheckCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary" />
+                    <CheckCircle className="text-primary mt-0.5 h-5 w-5 flex-shrink-0" />
                     <div>
-                      <h3 className="mb-1 font-semibold transition-colors group-hover:text-primary">
+                      <h3 className="group-hover:text-primary mb-1 font-semibold transition-colors">
                         {guide.name}
                       </h3>
-                      <p className="text-sm text-muted-foreground">
+                      <p className="text-muted-foreground text-sm">
                         {guide.desc}
                       </p>
                     </div>
@@ -314,7 +314,7 @@ export default function GuidesPage() {
                   <Link
                     key={link.name}
                     href={link.href}
-                    className="block rounded-lg border border-border bg-background p-3 text-sm font-medium transition-all hover:border-primary/30 hover:shadow-md"
+                    className="border-border bg-background hover:border-primary/30 block rounded-lg border p-3 text-sm font-medium transition-all hover:shadow-md"
                   >
                     {link.name}
                   </Link>
@@ -322,15 +322,15 @@ export default function GuidesPage() {
               </div>
 
               {/* Help Card */}
-              <div className="mt-8 rounded-xl border border-primary/20 bg-primary/5 p-6">
+              <div className="border-primary/20 bg-primary/5 mt-8 rounded-md border p-6">
                 <h4 className="mb-2 font-bold">Need Help?</h4>
-                <p className="mb-4 text-sm text-muted-foreground">
+                <p className="text-muted-foreground mb-4 text-sm">
                   Can&apos;t find what you&apos;re looking for? Our support team
                   is here to help.
                 </p>
                 <Link
                   href="/contact"
-                  className="inline-flex items-center text-sm font-medium text-primary hover:underline"
+                  className="text-primary inline-flex items-center text-sm font-medium hover:underline"
                 >
                   Contact Support
                   <ArrowRight className="ml-1 h-4 w-4" />

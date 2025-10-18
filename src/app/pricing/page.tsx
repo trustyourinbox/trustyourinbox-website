@@ -186,25 +186,25 @@ export default function PricingPage() {
   );
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="bg-background min-h-screen">
       {/* Hero Section */}
-      <section className="bg-gradient-to-b from-background to-secondary/30 py-12 sm:py-16 md:py-24 lg:py-32">
+      <section className="from-background to-secondary/30 bg-gradient-to-b py-12 sm:py-16 md:py-24 lg:py-32">
         <div className="container">
           <div className="mx-auto max-w-3xl text-center">
-            <div className="mb-4 inline-flex items-center rounded-full border border-primary/20 bg-primary/5 px-3 py-1.5 text-xs font-medium sm:mb-6 sm:px-4 sm:text-sm">
-              <DollarSign className="mr-2 h-3 w-3 flex-shrink-0 text-primary sm:h-4 sm:w-4" />
+            <div className="border-primary/20 bg-primary/5 mb-4 inline-flex items-center rounded-full border px-3 py-1.5 text-xs font-medium sm:mb-6 sm:px-4 sm:text-sm">
+              <DollarSign className="text-primary mr-2 h-3 w-3 flex-shrink-0 sm:h-4 sm:w-4" />
               <span className="text-primary">Simple, Transparent Pricing</span>
             </div>
             <h1 className="mb-4 text-3xl font-bold tracking-tight sm:mb-6 sm:text-4xl md:text-5xl lg:text-6xl">
               Choose Your <span className="text-primary">Plan</span>
             </h1>
-            <p className="mb-6 text-base leading-relaxed text-muted-foreground sm:mb-8 sm:text-lg md:text-xl">
+            <p className="text-muted-foreground mb-6 text-base leading-relaxed sm:mb-8 sm:text-lg md:text-xl">
               Start free, upgrade as you grow. No credit card required for
               trial.
             </p>
 
             {/* Billing Toggle */}
-            <div className="inline-flex items-center gap-2 rounded-lg bg-secondary p-1 sm:gap-3">
+            <div className="bg-secondary inline-flex items-center gap-2 rounded-lg p-1 sm:gap-3">
               <button
                 onClick={() => setBillingPeriod("monthly")}
                 className={`touch-target rounded-md px-4 py-2 text-xs font-medium transition-all sm:px-6 sm:text-sm ${
@@ -224,7 +224,7 @@ export default function PricingPage() {
                 }`}
               >
                 Annual{" "}
-                <span className="ml-1 hidden text-primary sm:inline">
+                <span className="text-primary ml-1 hidden sm:inline">
                   (Save 20%)
                 </span>
               </button>
@@ -246,15 +246,15 @@ export default function PricingPage() {
               return (
                 <div
                   key={plan.name}
-                  className={`relative rounded-2xl border-2 bg-background p-8 transition-all duration-300 ${
+                  className={`bg-background relative rounded-lg border-2 p-8 transition-all duration-300 ${
                     plan.popular
-                      ? "scale-105 border-primary shadow-2xl lg:-translate-y-4"
+                      ? "border-primary scale-105 shadow-2xl lg:-translate-y-4"
                       : "border-border hover:border-primary/30 hover:shadow-xl"
                   }`}
                 >
                   {plan.popular && (
                     <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                      <div className="rounded-full bg-primary px-4 py-1 text-xs font-bold text-primary-foreground">
+                      <div className="bg-primary text-primary-foreground rounded-full px-4 py-1 text-xs font-bold">
                         MOST POPULAR
                       </div>
                     </div>
@@ -263,7 +263,7 @@ export default function PricingPage() {
                   {/* Plan Header */}
                   <div className="mb-6">
                     <h3 className="mb-2 text-2xl font-bold">{plan.name}</h3>
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-muted-foreground text-sm">
                       {plan.description}
                     </p>
                   </div>
@@ -284,7 +284,7 @@ export default function PricingPage() {
                       </span>
                     </div>
                     {billingPeriod === "annual" && plan.price > 0 && (
-                      <p className="mt-2 text-sm text-muted-foreground">
+                      <p className="text-muted-foreground mt-2 text-sm">
                         Billed ${displayPrice * 12}/year
                       </p>
                     )}
@@ -306,9 +306,9 @@ export default function PricingPage() {
                         className="flex items-start gap-3"
                       >
                         {feature.included ? (
-                          <Check className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary" />
+                          <Check className="text-primary mt-0.5 h-5 w-5 flex-shrink-0" />
                         ) : (
-                          <X className="mt-0.5 h-5 w-5 flex-shrink-0 text-muted-foreground/40" />
+                          <X className="text-muted-foreground/40 mt-0.5 h-5 w-5 flex-shrink-0" />
                         )}
                         <span
                           className={
@@ -334,20 +334,20 @@ export default function PricingPage() {
             <h2 className="mb-3 text-2xl font-bold sm:mb-4 sm:text-3xl md:text-4xl">
               Compare Plans
             </h2>
-            <p className="text-base text-muted-foreground sm:text-lg">
+            <p className="text-muted-foreground text-base sm:text-lg">
               Detailed feature breakdown across all plans
             </p>
           </div>
 
           <div className="scroll-container relative">
             {/* Scroll indicator for mobile */}
-            <div className="pointer-events-none absolute bottom-0 right-0 top-0 w-8 bg-gradient-to-l from-secondary/30 to-transparent md:hidden"></div>
+            <div className="from-secondary/30 pointer-events-none absolute top-0 right-0 bottom-0 w-8 bg-gradient-to-l to-transparent md:hidden"></div>
             <div className="min-w-[600px] pb-2">
               {/* Table Header */}
-              <div className="mb-6 grid grid-cols-4 gap-4 rounded-lg border border-border bg-background p-4">
+              <div className="border-border bg-background mb-6 grid grid-cols-4 gap-4 rounded-lg border p-4">
                 <div className="font-bold">Features</div>
                 <div className="text-center font-bold">Free</div>
-                <div className="text-center font-bold text-primary">
+                <div className="text-primary text-center font-bold">
                   Business
                 </div>
                 <div className="text-center font-bold">Enterprise</div>
@@ -363,15 +363,15 @@ export default function PricingPage() {
                     {category.features.map((feature) => (
                       <div
                         key={feature.name}
-                        className="grid grid-cols-4 gap-4 rounded-lg border border-border bg-background p-4 transition-colors hover:border-primary/30"
+                        className="border-border bg-background hover:border-primary/30 grid grid-cols-4 gap-4 rounded-lg border p-4 transition-colors"
                       >
                         <div>{feature.name}</div>
                         <div className="text-center">
                           {typeof feature.free === "boolean" ? (
                             feature.free ? (
-                              <Check className="mx-auto h-5 w-5 text-primary" />
+                              <Check className="text-primary mx-auto h-5 w-5" />
                             ) : (
-                              <X className="mx-auto h-5 w-5 text-muted-foreground/40" />
+                              <X className="text-muted-foreground/40 mx-auto h-5 w-5" />
                             )
                           ) : (
                             <span className="text-sm">{feature.free}</span>
@@ -380,9 +380,9 @@ export default function PricingPage() {
                         <div className="text-center">
                           {typeof feature.business === "boolean" ? (
                             feature.business ? (
-                              <Check className="mx-auto h-5 w-5 text-primary" />
+                              <Check className="text-primary mx-auto h-5 w-5" />
                             ) : (
-                              <X className="mx-auto h-5 w-5 text-muted-foreground/40" />
+                              <X className="text-muted-foreground/40 mx-auto h-5 w-5" />
                             )
                           ) : (
                             <span className="text-sm font-medium">
@@ -393,9 +393,9 @@ export default function PricingPage() {
                         <div className="text-center">
                           {typeof feature.enterprise === "boolean" ? (
                             feature.enterprise ? (
-                              <Check className="mx-auto h-5 w-5 text-primary" />
+                              <Check className="text-primary mx-auto h-5 w-5" />
                             ) : (
-                              <X className="mx-auto h-5 w-5 text-muted-foreground/40" />
+                              <X className="text-muted-foreground/40 mx-auto h-5 w-5" />
                             )
                           ) : (
                             <span className="text-sm font-medium">
@@ -447,7 +447,7 @@ export default function PricingPage() {
             ].map((faq, i) => (
               <div
                 key={i}
-                className="rounded-xl border border-border bg-background p-6"
+                className="border-border bg-background rounded-md border p-6"
               >
                 <h3 className="mb-2 font-bold">{faq.q}</h3>
                 <p className="text-muted-foreground">{faq.a}</p>
@@ -464,20 +464,20 @@ export default function PricingPage() {
             <h2 className="mb-4 text-3xl font-bold md:text-4xl">
               Ready to Get Started?
             </h2>
-            <p className="mb-8 text-lg text-muted-foreground">
+            <p className="text-muted-foreground mb-8 text-lg">
               Start protecting your domain today with a 14-day free trial. No
               credit card required.
             </p>
             <div className="flex flex-col justify-center gap-4 sm:flex-row">
               <Link
                 href="/signup"
-                className="inline-flex items-center justify-center rounded-lg bg-primary px-8 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
+                className="bg-primary text-primary-foreground hover:bg-primary/90 inline-flex items-center justify-center rounded-lg px-8 py-3 text-sm font-semibold transition-colors"
               >
                 Start Free Trial
               </Link>
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center rounded-lg border border-border px-8 py-3 text-sm font-semibold transition-colors hover:bg-muted"
+                className="border-border hover:bg-muted inline-flex items-center justify-center rounded-lg border px-8 py-3 text-sm font-semibold transition-colors"
               >
                 Contact Sales
               </Link>

@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { FaInfoCircle } from "react-icons/fa";
+import { Info, Sparkles } from "lucide-react";
 
 interface ToolLayoutProps {
   title: string;
@@ -15,83 +15,110 @@ export function ToolLayout({
   sidebarContent,
 }: ToolLayoutProps) {
   return (
-    <div className="min-h-screen bg-white dark:bg-background">
-      {/* Hero Section */}
-      <section className="relative overflow-hidden py-8 sm:py-12 md:py-16 lg:py-24">
-        <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-secondary to-white dark:from-secondary/20 dark:to-background">
-          <svg
-            className="absolute bottom-0 left-0 right-0 hidden sm:block"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 1440 320"
-          >
-            <path
-              fill="#0066FF"
-              fillOpacity="0.1"
-              d="M0,288L48,272C96,256,192,224,288,197.3C384,171,480,149,576,165.3C672,181,768,235,864,250.7C960,267,1056,245,1152,224C1248,203,1344,181,1392,170.7L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
-            ></path>
-          </svg>
-        </div>
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-3xl text-center">
-            <h1 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-foreground sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl">
-              {title.split(" ").map((word, index) => (
-                <span key={index}>
-                  {word.toUpperCase() === "DMARC" ||
+    <div className="bg-background min-h-screen">
+      {/* Hero Section - Matching Homepage Style */}
+      <section className="border-border/50 bg-background relative overflow-hidden border-b py-12 sm:py-16 md:py-20 lg:py-24">
+        {/* Gradient Mesh Background (like homepage) */}
+        <div
+          className="absolute inset-0 opacity-30"
+          style={{
+            backgroundImage: `radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+                              radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.15) 0%, transparent 50%)`,
+          }}
+        />
+
+        {/* Animated gradient border at bottom */}
+        <div className="via-primary/50 absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent to-transparent" />
+
+        <div className="relative z-10 container px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-4xl text-center">
+            {/* Badge - like homepage */}
+            <div className="border-primary/20 bg-primary/5 mb-6 inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-sm font-medium backdrop-blur-sm">
+              <Sparkles className="text-primary h-4 w-4" />
+              <span className="text-primary">Free Tool</span>
+            </div>
+
+            {/* Title with gradient effect */}
+            <h1 className="text-3xl leading-snug font-bold tracking-tight sm:text-4xl md:text-5xl lg:text-6xl">
+              {title.split(" ").map((word, index) => {
+                const isKeyword =
+                  word.toUpperCase() === "DMARC" ||
                   word.toUpperCase() === "SPF" ||
                   word.toUpperCase() === "DKIM" ||
                   word.toUpperCase() === "XML" ||
-                  word.toUpperCase() === "DOMAIN" ? (
-                    <span className="text-primary">{word}</span>
-                  ) : (
-                    <span className="text-gray-900">{word}</span>
-                  )}
-                  {index < title.split(" ").length - 1 ? " " : ""}
-                </span>
-              ))}
+                  word.toUpperCase() === "DOMAIN";
+
+                return (
+                  <span key={index}>
+                    {isKeyword ? (
+                      <span className="from-primary bg-gradient-to-r to-purple-500 bg-clip-text text-transparent">
+                        {word}
+                      </span>
+                    ) : (
+                      <span className="text-foreground">{word}</span>
+                    )}
+                    {index < title.split(" ").length - 1 ? " " : ""}
+                  </span>
+                );
+              })}
             </h1>
-            <p className="mt-6 text-xl text-gray-500">{description}</p>
+
+            <p className="text-muted-foreground mt-6 text-lg leading-relaxed sm:text-xl">
+              {description}
+            </p>
           </div>
         </div>
       </section>
 
       {/* Main Content */}
-      <section className="py-8 sm:py-12">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 gap-6 sm:gap-8 lg:grid-cols-3">
+      <section className="py-8 sm:py-12 lg:py-16">
+        <div className="container px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-3 lg:gap-12">
             {/* Main Content Area */}
             <div className="lg:col-span-2">{children}</div>
 
-            {/* Sidebar */}
+            {/* Sidebar - Modern Design */}
             {sidebarContent && (
               <div className="lg:col-span-1">
-                <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-border dark:bg-card sm:p-6 lg:sticky lg:top-24">
-                  <div className="mb-4 flex items-center gap-2 border-b border-gray-200 pb-3 dark:border-border sm:mb-6 sm:pb-4">
-                    <FaInfoCircle className="h-4 w-4 flex-shrink-0 text-primary sm:h-5 sm:w-5" />
-                    <h2 className="text-base font-semibold text-gray-900 dark:text-foreground sm:text-lg">
-                      Help & Resources
-                    </h2>
+                <div className="border-border/40 from-background/60 via-background/40 to-background/20 hover:border-primary/20 hover:shadow-primary/5 sticky top-24 overflow-hidden rounded-lg border bg-gradient-to-br p-6 backdrop-blur-xl transition-all duration-300 hover:shadow-2xl">
+                  {/* Hover glow effect */}
+                  <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 hover:opacity-100">
+                    <div className="from-primary/10 to-primary/10 absolute -inset-1 rounded-lg bg-gradient-to-r via-purple-500/10 blur-xl" />
                   </div>
-                  <div className="prose prose-sm dark:prose-invert max-w-none text-sm sm:text-base">
-                    {sidebarContent}
-                  </div>
-                  <div className="mt-4 border-t border-gray-200 pt-3 dark:border-border sm:mt-6 sm:pt-4">
-                    <p className="text-xs text-gray-500 dark:text-muted-foreground sm:text-sm">
-                      Need more help? Check out our{" "}
-                      <a
-                        href="/docs"
-                        className="font-medium text-primary underline-offset-4 hover:text-primary/80 hover:underline"
-                      >
-                        documentation
-                      </a>{" "}
-                      or{" "}
-                      <a
-                        href="/contact"
-                        className="font-medium text-primary underline-offset-4 hover:text-primary/80 hover:underline"
-                      >
-                        contact support
-                      </a>
-                      .
-                    </p>
+
+                  <div className="relative z-10">
+                    <div className="border-border/30 mb-6 flex items-center gap-2.5 border-b pb-4">
+                      <div className="from-primary/15 shadow-primary/5 rounded-md bg-gradient-to-br to-purple-500/15 p-2 shadow-lg">
+                        <Info className="text-primary h-5 w-5" />
+                      </div>
+                      <h2 className="text-foreground text-lg font-semibold tracking-wide">
+                        Help & Resources
+                      </h2>
+                    </div>
+
+                    <div className="prose prose-sm dark:prose-invert max-w-none">
+                      {sidebarContent}
+                    </div>
+
+                    <div className="border-border/30 mt-6 border-t pt-4">
+                      <p className="text-muted-foreground text-sm">
+                        Need more help? Check out our{" "}
+                        <a
+                          href="/docs"
+                          className="text-primary hover:text-primary/80 font-medium underline-offset-4 transition-colors hover:underline"
+                        >
+                          documentation
+                        </a>{" "}
+                        or{" "}
+                        <a
+                          href="/contact"
+                          className="text-primary hover:text-primary/80 font-medium underline-offset-4 transition-colors hover:underline"
+                        >
+                          contact support
+                        </a>
+                        .
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>

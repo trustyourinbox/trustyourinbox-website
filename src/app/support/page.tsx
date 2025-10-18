@@ -129,19 +129,19 @@ export default function SupportPage() {
   const [openFaq, setOpenFaq] = useState<string | null>(null);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="bg-background min-h-screen">
       {/* Hero Section */}
-      <section className="bg-gradient-to-b from-background to-secondary/30 py-24 md:py-32">
+      <section className="from-background to-secondary/30 bg-gradient-to-b py-24 md:py-32">
         <div className="container">
           <div className="mx-auto max-w-3xl text-center">
-            <div className="mb-6 inline-flex items-center rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-sm font-medium">
-              <HelpCircle className="mr-2 h-4 w-4 text-primary" />
+            <div className="border-primary/20 bg-primary/5 mb-6 inline-flex items-center rounded-full border px-4 py-1.5 text-sm font-medium">
+              <HelpCircle className="text-primary mr-2 h-4 w-4" />
               <span className="text-primary">Help Center</span>
             </div>
             <h1 className="mb-6 text-5xl font-bold tracking-tight md:text-6xl">
               How can we <span className="text-primary">help</span> you?
             </h1>
-            <p className="mb-8 text-xl leading-relaxed text-muted-foreground">
+            <p className="text-muted-foreground mb-8 text-xl leading-relaxed">
               Search our knowledge base or browse frequently asked questions
               below
             </p>
@@ -149,11 +149,11 @@ export default function SupportPage() {
             {/* Search Bar */}
             <div className="mx-auto max-w-2xl">
               <div className="relative">
-                <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
+                <Search className="text-muted-foreground absolute top-1/2 left-4 h-5 w-5 -translate-y-1/2" />
                 <input
                   type="text"
                   placeholder="Search for help..."
-                  className="h-14 w-full rounded-lg border border-border bg-background pl-12 pr-4 text-lg focus:border-transparent focus:outline-none focus:ring-2 focus:ring-primary"
+                  className="border-border bg-background focus:ring-primary h-14 w-full rounded-lg border pr-4 pl-12 text-lg focus:border-transparent focus:ring-2 focus:outline-none"
                 />
               </div>
             </div>
@@ -167,39 +167,39 @@ export default function SupportPage() {
           <div className="mx-auto grid max-w-4xl gap-6 md:grid-cols-3">
             <Link
               href="/guides"
-              className="group rounded-xl border border-border bg-background p-6 transition-all hover:border-primary/30 hover:shadow-lg"
+              className="group border-border bg-background hover:border-primary/30 rounded-md border p-6 transition-all hover:shadow-lg"
             >
-              <BookOpen className="mb-4 h-8 w-8 text-primary" />
-              <h3 className="mb-2 font-bold transition-colors group-hover:text-primary">
+              <BookOpen className="text-primary mb-4 h-8 w-8" />
+              <h3 className="group-hover:text-primary mb-2 font-bold transition-colors">
                 Documentation
               </h3>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-muted-foreground text-sm">
                 Comprehensive guides and tutorials
               </p>
             </Link>
 
             <Link
               href="/contact"
-              className="group rounded-xl border border-border bg-background p-6 transition-all hover:border-primary/30 hover:shadow-lg"
+              className="group border-border bg-background hover:border-primary/30 rounded-md border p-6 transition-all hover:shadow-lg"
             >
-              <Mail className="mb-4 h-8 w-8 text-primary" />
-              <h3 className="mb-2 font-bold transition-colors group-hover:text-primary">
+              <Mail className="text-primary mb-4 h-8 w-8" />
+              <h3 className="group-hover:text-primary mb-2 font-bold transition-colors">
                 Contact Support
               </h3>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-muted-foreground text-sm">
                 Get help from our team
               </p>
             </Link>
 
             <Link
               href="/tools"
-              className="group rounded-xl border border-border bg-background p-6 transition-all hover:border-primary/30 hover:shadow-lg"
+              className="group border-border bg-background hover:border-primary/30 rounded-md border p-6 transition-all hover:shadow-lg"
             >
-              <MessageCircle className="mb-4 h-8 w-8 text-primary" />
-              <h3 className="mb-2 font-bold transition-colors group-hover:text-primary">
+              <MessageCircle className="text-primary mb-4 h-8 w-8" />
+              <h3 className="group-hover:text-primary mb-2 font-bold transition-colors">
                 Free Tools
               </h3>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-muted-foreground text-sm">
                 DMARC & SPF analyzers
               </p>
             </Link>
@@ -214,7 +214,7 @@ export default function SupportPage() {
             <h2 className="mb-4 text-4xl font-bold">
               Frequently Asked Questions
             </h2>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-muted-foreground text-lg">
               Find answers to common questions about TrustYourInbox
             </p>
           </div>
@@ -223,7 +223,7 @@ export default function SupportPage() {
             {faqCategories.map((category) => (
               <div key={category.title}>
                 <h3 className="mb-6 flex items-center gap-3 text-2xl font-bold">
-                  <div className="h-1 w-8 rounded bg-primary"></div>
+                  <div className="bg-primary h-1 w-8 rounded"></div>
                   {category.title}
                 </h3>
                 <div className="space-y-4">
@@ -233,27 +233,27 @@ export default function SupportPage() {
                     return (
                       <div
                         key={index}
-                        className="overflow-hidden rounded-xl border border-border bg-background"
+                        className="border-border bg-background overflow-hidden rounded-md border"
                       >
                         <button
                           onClick={() => setOpenFaq(isOpen ? null : faqId)}
-                          className="flex w-full items-start justify-between gap-4 p-6 text-left transition-colors hover:bg-muted/50"
+                          className="hover:bg-muted/50 flex w-full items-start justify-between gap-4 p-6 text-left transition-colors"
                         >
                           <div className="flex flex-1 items-start gap-3">
-                            <CheckCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary" />
+                            <CheckCircle className="text-primary mt-0.5 h-5 w-5 flex-shrink-0" />
                             <span className="font-semibold">
                               {faq.question}
                             </span>
                           </div>
                           <ChevronDown
-                            className={`h-5 w-5 flex-shrink-0 text-muted-foreground transition-transform ${
+                            className={`text-muted-foreground h-5 w-5 flex-shrink-0 transition-transform ${
                               isOpen ? "rotate-180" : ""
                             }`}
                           />
                         </button>
                         {isOpen && (
                           <div className="px-6 pb-6 pl-14">
-                            <p className="leading-relaxed text-muted-foreground">
+                            <p className="text-muted-foreground leading-relaxed">
                               {faq.answer}
                             </p>
                           </div>
@@ -275,19 +275,19 @@ export default function SupportPage() {
             <h2 className="mb-4 text-3xl font-bold md:text-4xl">
               Still need help?
             </h2>
-            <p className="mb-8 text-lg text-muted-foreground">
+            <p className="text-muted-foreground mb-8 text-lg">
               Our support team is here to help you succeed
             </p>
             <div className="flex flex-col justify-center gap-4 sm:flex-row">
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center rounded-lg bg-primary px-8 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
+                className="bg-primary text-primary-foreground hover:bg-primary/90 inline-flex items-center justify-center rounded-lg px-8 py-3 text-sm font-semibold transition-colors"
               >
                 Contact Support
               </Link>
               <Link
                 href="/guides"
-                className="inline-flex items-center justify-center rounded-lg border border-border px-8 py-3 text-sm font-semibold transition-colors hover:bg-muted"
+                className="border-border hover:bg-muted inline-flex items-center justify-center rounded-lg border px-8 py-3 text-sm font-semibold transition-colors"
               >
                 Browse Guides
               </Link>

@@ -25,9 +25,9 @@ export default function HeroSection({
   return (
     <section className="relative overflow-hidden py-16 sm:py-24">
       {/* Background with animated wave effect */}
-      <div className="absolute inset-0 bg-gradient-to-b from-secondary to-white">
+      <div className="from-secondary absolute inset-0 bg-gradient-to-b to-white">
         <svg
-          className="absolute bottom-0 left-0 right-0"
+          className="absolute right-0 bottom-0 left-0"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 1440 320"
         >
@@ -47,7 +47,7 @@ export default function HeroSection({
         <div className="grid items-center gap-12 lg:grid-cols-2">
           <div>
             {badge && (
-              <div className="mb-6 inline-flex items-center rounded-full bg-primary/10 px-4 py-2 text-primary">
+              <div className="bg-primary/10 text-primary mb-6 inline-flex items-center rounded-full px-4 py-2">
                 {badge}
               </div>
             )}
@@ -65,8 +65,8 @@ export default function HeroSection({
                     href={btn.href}
                     className={
                       btn.variant === "secondary"
-                        ? "inline-flex items-center justify-center rounded-md border border-input bg-white px-6 py-3 text-base font-medium text-gray-700 shadow-sm hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
-                        : "inline-flex items-center justify-center rounded-md bg-primary px-6 py-3 text-base font-medium text-primary-foreground shadow-sm hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+                        ? "border-input hover:bg-secondary focus:ring-ring inline-flex items-center justify-center rounded-md border bg-white px-6 py-3 text-base font-medium text-gray-700 shadow-sm focus:ring-2 focus:ring-offset-2 focus:outline-none"
+                        : "bg-primary text-primary-foreground hover:bg-primary/90 focus:ring-ring inline-flex items-center justify-center rounded-md px-6 py-3 text-base font-medium shadow-sm focus:ring-2 focus:ring-offset-2 focus:outline-none"
                     }
                   >
                     {btn.label}
@@ -77,9 +77,9 @@ export default function HeroSection({
           </div>
           {illustrationSrc && (
             <div className="relative">
-              <div className="absolute -right-6 -top-6 h-64 w-64 rounded-full bg-primary/10 opacity-30 blur-3xl"></div>
-              <div className="absolute -bottom-8 -left-8 h-64 w-64 rounded-full bg-primary/20 opacity-30 blur-3xl"></div>
-              <div className="relative overflow-hidden rounded-xl shadow-2xl">
+              <div className="bg-primary/10 absolute -top-6 -right-6 h-64 w-64 rounded-full opacity-30 blur-3xl"></div>
+              <div className="bg-primary/20 absolute -bottom-8 -left-8 h-64 w-64 rounded-full opacity-30 blur-3xl"></div>
+              <div className="relative overflow-hidden rounded-md shadow-2xl">
                 <Image
                   src={illustrationSrc}
                   alt="Hero Illustration"
@@ -87,7 +87,7 @@ export default function HeroSection({
                   height={500}
                   className="w-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 to-transparent"></div>
+                <div className="from-primary/10 absolute inset-0 bg-gradient-to-tr to-transparent"></div>
               </div>
             </div>
           )}

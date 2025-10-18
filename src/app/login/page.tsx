@@ -7,7 +7,7 @@ export default function LoginPage() {
       <p className="mb-8 text-lg text-gray-600">
         Sign in to your TrustYourInbox account.
       </p>
-      <div className="rounded-xl border bg-secondary p-6 text-center shadow-sm">
+      <div className="bg-secondary rounded-md border p-6 text-center shadow-sm">
         <span className="font-semibold text-gray-700">
           Login functionality coming soon.
         </span>

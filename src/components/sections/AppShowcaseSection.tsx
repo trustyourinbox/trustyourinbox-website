@@ -61,7 +61,7 @@ const screenshots = [
 
 export default function AppShowcaseSection() {
   return (
-    <section className="bg-gradient-to-b from-secondary/30 via-secondary/20 to-background py-12 sm:py-16 md:py-20 lg:py-24">
+    <section className="from-secondary/30 via-secondary/20 to-background bg-gradient-to-b py-12 sm:py-16 md:py-20 lg:py-24">
       <div className="container">
         {/* Header */}
         <motion.div
@@ -71,15 +71,15 @@ export default function AppShowcaseSection() {
           transition={{ duration: 0.5 }}
           className="mx-auto mb-10 max-w-3xl text-center sm:mb-12 md:mb-16"
         >
-          <div className="mb-4 inline-flex items-center rounded-full border border-primary/20 bg-primary/5 px-3 py-1.5 text-xs font-medium sm:mb-6 sm:px-4 sm:text-sm">
-            <Shield className="mr-2 h-3 w-3 flex-shrink-0 text-primary sm:h-4 sm:w-4" />
+          <div className="border-primary/20 bg-primary/5 mb-4 inline-flex items-center rounded-full border px-3 py-1.5 text-xs font-medium sm:mb-6 sm:px-4 sm:text-sm">
+            <Shield className="text-primary mr-2 h-3 w-3 flex-shrink-0 sm:h-4 sm:w-4" />
             <span className="text-primary">See It In Action</span>
           </div>
           <h2 className="mb-4 text-3xl font-bold tracking-tight sm:mb-6 sm:text-4xl md:text-5xl lg:text-6xl">
             Powerful Features,{" "}
             <span className="text-primary">Beautiful UI</span>
           </h2>
-          <p className="text-base text-muted-foreground sm:text-lg md:text-xl">
+          <p className="text-muted-foreground text-base sm:text-lg md:text-xl">
             Experience the dashboard that makes DMARC management effortless for
             IT teams and MSPs.
           </p>
@@ -104,15 +104,15 @@ export default function AppShowcaseSection() {
               >
                 {/* Content */}
                 <div className={`space-y-6 ${isEven ? "" : "lg:col-start-2"}`}>
-                  <div className="inline-flex rounded-lg bg-primary/10 p-3 transition-all duration-300 hover:scale-110 hover:bg-primary/20">
-                    <Icon className="h-6 w-6 text-primary transition-transform duration-300 hover:rotate-12" />
+                  <div className="bg-primary/10 hover:bg-primary/20 inline-flex rounded-lg p-3 transition-all duration-300 hover:scale-110">
+                    <Icon className="text-primary h-6 w-6 transition-transform duration-300 hover:rotate-12" />
                   </div>
 
                   <div>
                     <h3 className="mb-3 text-2xl font-bold sm:text-3xl md:text-4xl">
                       {screenshot.title}
                     </h3>
-                    <p className="text-base leading-relaxed text-muted-foreground sm:text-lg">
+                    <p className="text-muted-foreground text-base leading-relaxed sm:text-lg">
                       {screenshot.description}
                     </p>
                   </div>
@@ -124,7 +124,7 @@ export default function AppShowcaseSection() {
                         className="flex items-center gap-2 text-sm sm:text-base"
                       >
                         <svg
-                          className="h-5 w-5 flex-shrink-0 text-primary"
+                          className="text-primary h-5 w-5 flex-shrink-0"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
@@ -148,10 +148,10 @@ export default function AppShowcaseSection() {
                 >
                   {/* Glow effect */}
                   <div
-                    className={`absolute ${isEven ? "-right-8" : "-left-8"} -top-8 h-64 w-64 rounded-full bg-primary/10 blur-3xl`}
+                    className={`absolute ${isEven ? "-right-8" : "-left-8"} bg-primary/10 -top-8 h-64 w-64 rounded-full blur-3xl`}
                   ></div>
 
-                  <div className="relative overflow-hidden rounded-xl border-2 border-primary/20 bg-background shadow-2xl transition-transform duration-300 hover:scale-[1.02]">
+                  <div className="border-primary/20 bg-background relative overflow-hidden rounded-md border-2 shadow-2xl transition-transform duration-300 hover:scale-[1.02]">
                     <Image
                       src={screenshot.image}
                       alt={`${screenshot.title} - ${screenshot.description}`}
@@ -172,23 +172,23 @@ export default function AppShowcaseSection() {
 
         {/* Bottom CTA */}
         <div className="mt-16 text-center sm:mt-20 md:mt-24">
-          <div className="mx-auto max-w-2xl rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/5 to-transparent p-8 sm:p-10 md:p-12">
+          <div className="border-primary/20 from-primary/5 mx-auto max-w-2xl rounded-2xl border bg-gradient-to-br to-transparent p-8 sm:p-10 md:p-12">
             <h3 className="mb-4 text-2xl font-bold sm:text-3xl">
               Ready to Experience It Yourself?
             </h3>
-            <p className="mb-6 text-base text-muted-foreground sm:text-lg">
+            <p className="text-muted-foreground mb-6 text-base sm:text-lg">
               Start your free 14-day trial and see why teams love TrustYourInbox
             </p>
             <div className="flex flex-col justify-center gap-3 sm:flex-row sm:gap-4">
               <a
                 href="/signup"
-                className="inline-flex items-center justify-center rounded-lg bg-primary px-8 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
+                className="bg-primary text-primary-foreground hover:bg-primary/90 inline-flex items-center justify-center rounded-lg px-8 py-3 text-sm font-semibold transition-colors"
               >
                 Start Free Trial
               </a>
               <a
                 href="/demo"
-                className="inline-flex items-center justify-center rounded-lg border border-border px-8 py-3 text-sm font-semibold transition-colors hover:bg-primary/10"
+                className="border-border hover:bg-primary/10 inline-flex items-center justify-center rounded-lg border px-8 py-3 text-sm font-semibold transition-colors"
               >
                 Request Demo
               </a>

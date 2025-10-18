@@ -60,7 +60,7 @@ export default function ProductPage() {
       {/* Bottom CTA */}
       <section className="from-secondary/30 to-background bg-gradient-to-b py-16 sm:py-20">
         <div className="container">
-          <div className="border-primary/20 from-primary/5 mx-auto max-w-3xl rounded-2xl border bg-gradient-to-br to-transparent p-8 text-center sm:p-12">
+          <div className="border-primary/20 from-primary/5 mx-auto max-w-3xl rounded-lg border bg-gradient-to-br to-transparent p-8 text-center sm:p-12">
             <h2 className="mb-4 text-3xl font-bold sm:text-4xl">
               Ready to Get Started?
             </h2>

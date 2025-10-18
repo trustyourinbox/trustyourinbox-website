@@ -3,12 +3,12 @@ import { Shield, ChevronRight } from "lucide-react";
 
 export default function PrivacyPage() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="bg-background min-h-screen">
       {/* Breadcrumb */}
-      <div className="border-b bg-secondary/30">
+      <div className="bg-secondary/30 border-b">
         <div className="container py-4">
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <Link href="/" className="transition-colors hover:text-foreground">
+          <div className="text-muted-foreground flex items-center gap-2 text-sm">
+            <Link href="/" className="hover:text-foreground transition-colors">
               Home
             </Link>
             <ChevronRight className="h-4 w-4" />
@@ -23,12 +23,12 @@ export default function PrivacyPage() {
           {/* Header */}
           <div className="mb-12">
             <div className="mb-6 inline-flex items-center gap-3">
-              <div className="rounded-xl bg-primary/10 p-3">
-                <Shield className="h-6 w-6 text-primary" />
+              <div className="bg-primary/10 rounded-md p-3">
+                <Shield className="text-primary h-6 w-6" />
               </div>
               <h1 className="text-4xl font-bold md:text-5xl">Privacy Policy</h1>
             </div>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-muted-foreground text-lg">
               Last updated: January 16, 2025
             </p>
           </div>
@@ -47,7 +47,7 @@ export default function PrivacyPage() {
               <h2 className="mb-4 text-2xl font-bold">
                 1. Information We Collect
               </h2>
-              <div className="space-y-4 text-muted-foreground">
+              <div className="text-muted-foreground space-y-4">
                 <p>
                   <strong className="text-foreground">
                     Account Information:
@@ -76,7 +76,7 @@ export default function PrivacyPage() {
               <h2 className="mb-4 text-2xl font-bold">
                 2. How We Use Your Information
               </h2>
-              <div className="space-y-4 text-muted-foreground">
+              <div className="text-muted-foreground space-y-4">
                 <p>We use the information we collect to:</p>
                 <ul className="list-disc space-y-2 pl-6">
                   <li>
@@ -104,7 +104,7 @@ export default function PrivacyPage() {
               <h2 className="mb-4 text-2xl font-bold">
                 3. Data Sharing and Disclosure
               </h2>
-              <div className="space-y-4 text-muted-foreground">
+              <div className="text-muted-foreground space-y-4">
                 <p>
                   We do not sell, rent, or trade your personal information. We
                   may share your information in the following limited
@@ -139,7 +139,7 @@ export default function PrivacyPage() {
             {/* Section 4 */}
             <section className="mb-12">
               <h2 className="mb-4 text-2xl font-bold">4. Data Security</h2>
-              <div className="space-y-4 text-muted-foreground">
+              <div className="text-muted-foreground space-y-4">
                 <p>
                   We implement industry-standard security measures to protect
                   your information, including:
@@ -167,7 +167,7 @@ export default function PrivacyPage() {
             {/* Section 5 */}
             <section className="mb-12">
               <h2 className="mb-4 text-2xl font-bold">5. Data Retention</h2>
-              <div className="space-y-4 text-muted-foreground">
+              <div className="text-muted-foreground space-y-4">
                 <p>
                   We retain your personal information and DMARC report data for
                   as long as your account is active or as needed to provide
@@ -192,7 +192,7 @@ export default function PrivacyPage() {
             {/* Section 6 */}
             <section className="mb-12">
               <h2 className="mb-4 text-2xl font-bold">6. Your Rights</h2>
-              <div className="space-y-4 text-muted-foreground">
+              <div className="text-muted-foreground space-y-4">
                 <p>
                   Depending on your location, you may have the following rights:
                 </p>
@@ -224,7 +224,7 @@ export default function PrivacyPage() {
               <h2 className="mb-4 text-2xl font-bold">
                 7. Cookies and Tracking
               </h2>
-              <div className="space-y-4 text-muted-foreground">
+              <div className="text-muted-foreground space-y-4">
                 <p>
                   We use cookies and similar tracking technologies to improve
                   your experience, analyze usage, and deliver personalized
@@ -239,7 +239,7 @@ export default function PrivacyPage() {
               <h2 className="mb-4 text-2xl font-bold">
                 8. International Data Transfers
               </h2>
-              <div className="space-y-4 text-muted-foreground">
+              <div className="text-muted-foreground space-y-4">
                 <p>
                   Your information may be transferred to and processed in
                   countries other than your country of residence. We ensure
@@ -254,7 +254,7 @@ export default function PrivacyPage() {
               <h2 className="mb-4 text-2xl font-bold">
                 9. Children&apos;s Privacy
               </h2>
-              <div className="space-y-4 text-muted-foreground">
+              <div className="text-muted-foreground space-y-4">
                 <p>
                   Our services are not intended for individuals under the age of
                   16. We do not knowingly collect personal information from
@@ -268,7 +268,7 @@ export default function PrivacyPage() {
               <h2 className="mb-4 text-2xl font-bold">
                 10. Changes to This Policy
               </h2>
-              <div className="space-y-4 text-muted-foreground">
+              <div className="text-muted-foreground space-y-4">
                 <p>
                   We may update this Privacy Policy from time to time. We will
                   notify you of significant changes by email or through our
@@ -281,7 +281,7 @@ export default function PrivacyPage() {
             {/* Contact */}
             <section className="mb-12">
               <h2 className="mb-4 text-2xl font-bold">Contact Us</h2>
-              <div className="space-y-4 text-muted-foreground">
+              <div className="text-muted-foreground space-y-4">
                 <p>
                   If you have questions about this Privacy Policy, please
                   contact us:

@@ -18,9 +18,9 @@ export default function FeatureGrid({ features }: FeatureGridProps) {
           {features.map((feature, i) => (
             <div
               key={feature.title + i}
-              className="group relative rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-all hover:shadow-md"
+              className="group relative rounded-lg border border-gray-200 bg-white p-6 shadow-sm transition-all hover:shadow-md"
             >
-              <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-secondary text-primary">
+              <div className="bg-secondary text-primary mb-6 flex h-12 w-12 items-center justify-center rounded-md">
                 {feature.icon}
               </div>
               <h3 className="text-xl font-semibold text-gray-900">

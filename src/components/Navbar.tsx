@@ -150,7 +150,7 @@ const resourcesMenu = [
 const toolsCategories = [
   {
     title: "Core Tools",
-    icon: <FaShieldAlt className="h-5 w-5 text-primary" />,
+    icon: <FaShieldAlt className="text-primary h-5 w-5" />,
     items: [
       {
         name: "Domain Checker",
@@ -198,7 +198,7 @@ const toolsCategories = [
   },
   {
     title: "Authentication",
-    icon: <FaKey className="h-5 w-5 text-primary" />,
+    icon: <FaKey className="text-primary h-5 w-5" />,
     items: [
       {
         name: "DKIM Validator",
@@ -222,7 +222,7 @@ const toolsCategories = [
   },
   {
     title: "Analysis",
-    icon: <FaStar className="h-5 w-5 text-primary" />,
+    icon: <FaStar className="text-primary h-5 w-5" />,
     items: [
       {
         name: "Domain Security Checker",
@@ -252,7 +252,7 @@ const toolsFeaturedBox = {
 const resourcesCategories = [
   {
     title: "Learn",
-    icon: <FaBookOpen className="h-5 w-5 text-primary" />,
+    icon: <FaBookOpen className="text-primary h-5 w-5" />,
     layout: "grid",
     items: [
       {
@@ -283,7 +283,7 @@ const resourcesCategories = [
   },
   {
     title: "Watch & Listen",
-    icon: <FaVideo className="h-5 w-5 text-primary" />,
+    icon: <FaVideo className="text-primary h-5 w-5" />,
     layout: "stack",
     items: [
       {
@@ -315,7 +315,7 @@ const resourcesFeaturedBox = {
 const companyCategories = [
   {
     title: "Company",
-    icon: <FaInfoCircle className="h-5 w-5 text-primary" />,
+    icon: <FaInfoCircle className="text-primary h-5 w-5" />,
     items: [
       {
         name: "About Us",
@@ -374,18 +374,18 @@ export default function Navbar() {
   const [isCompanyOpen, setIsCompanyOpen] = useState(false);
 
   return (
-    <nav className="hidden items-center gap-8 rounded-xl border border-white/40 bg-white/80 px-4 py-2 shadow-sm backdrop-blur supports-[backdrop-filter]:bg-white/60 md:flex">
+    <nav className="hidden items-center gap-8 rounded-md border border-white/40 bg-white/80 px-4 py-2 shadow-sm backdrop-blur supports-[backdrop-filter]:bg-white/60 md:flex">
       {navLinks.map((link) => {
         const isActive = pathname === link.href;
         return (
           <Link
             key={link.href}
             href={link.href}
-            className={`relative px-2 py-1 text-base font-semibold transition-colors duration-200 ${isActive ? "text-primary" : "text-gray-700 hover:text-primary"} `}
+            className={`relative px-2 py-1 text-base font-semibold transition-colors duration-200 ${isActive ? "text-primary" : "hover:text-primary text-gray-700"} `}
           >
             {link.label}
             <span
-              className={`absolute -bottom-1 left-0 h-0.5 w-full rounded bg-primary transition-all duration-300 ${isActive ? "scale-x-100 opacity-100" : "scale-x-0 opacity-0"} group-hover:scale-x-100 group-hover:opacity-100`}
+              className={`bg-primary absolute -bottom-1 left-0 h-0.5 w-full rounded transition-all duration-300 ${isActive ? "scale-x-100 opacity-100" : "scale-x-0 opacity-0"} group-hover:scale-x-100 group-hover:opacity-100`}
               aria-hidden="true"
             />
           </Link>
@@ -399,21 +399,21 @@ export default function Navbar() {
         onMouseLeave={() => setIsToolsOpen(false)}
       >
         <button
-          className={`relative px-2 py-1 text-base font-semibold transition-colors duration-200 ${isToolsOpen ? "text-primary" : "text-gray-700 hover:text-primary"} `}
+          className={`relative px-2 py-1 text-base font-semibold transition-colors duration-200 ${isToolsOpen ? "text-primary" : "hover:text-primary text-gray-700"} `}
         >
           Tools
           <span
-            className={`absolute -bottom-1 left-0 h-0.5 w-full rounded bg-primary transition-all duration-300 ${isToolsOpen ? "scale-x-100 opacity-100" : "scale-x-0 opacity-0"} `}
+            className={`bg-primary absolute -bottom-1 left-0 h-0.5 w-full rounded transition-all duration-300 ${isToolsOpen ? "scale-x-100 opacity-100" : "scale-x-0 opacity-0"} `}
             aria-hidden="true"
           />
         </button>
         {/* Hover Bridge */}
         {isToolsOpen && (
-          <div className="pointer-events-auto absolute left-1/2 top-full z-40 h-4 w-[1100px] -translate-x-1/2 bg-transparent" />
+          <div className="pointer-events-auto absolute top-full left-1/2 z-40 h-4 w-[1100px] -translate-x-1/2 bg-transparent" />
         )}
         {/* Mega Menu Dropdown */}
         {isToolsOpen && (
-          <div className="absolute left-1/2 top-full z-50 mt-0 flex w-[900px] -translate-x-1/2 gap-4 rounded-xl border border-border bg-gradient-to-br from-secondary via-white to-white px-4 py-4 shadow-xl">
+          <div className="border-border from-secondary absolute top-full left-1/2 z-50 mt-0 flex w-[900px] -translate-x-1/2 gap-4 rounded-md border bg-gradient-to-br via-white to-white px-4 py-4 shadow-xl">
             <MegaMenu
               isOpen={isToolsOpen}
               onClose={() => setIsToolsOpen(false)}
@@ -429,21 +429,21 @@ export default function Navbar() {
         onMouseLeave={() => setIsResourcesOpen(false)}
       >
         <button
-          className={`relative px-2 py-1 text-base font-semibold transition-colors duration-200 ${isResourcesOpen ? "text-primary" : "text-gray-700 hover:text-primary"} `}
+          className={`relative px-2 py-1 text-base font-semibold transition-colors duration-200 ${isResourcesOpen ? "text-primary" : "hover:text-primary text-gray-700"} `}
         >
           Resources
           <span
-            className={`absolute -bottom-1 left-0 h-0.5 w-full rounded bg-primary transition-all duration-300 ${isResourcesOpen ? "scale-x-100 opacity-100" : "scale-x-0 opacity-0"} `}
+            className={`bg-primary absolute -bottom-1 left-0 h-0.5 w-full rounded transition-all duration-300 ${isResourcesOpen ? "scale-x-100 opacity-100" : "scale-x-0 opacity-0"} `}
             aria-hidden="true"
           />
         </button>
         {/* Hover Bridge */}
         {isResourcesOpen && (
-          <div className="pointer-events-auto absolute left-1/2 top-full z-40 h-4 w-[1100px] -translate-x-1/2 bg-transparent" />
+          <div className="pointer-events-auto absolute top-full left-1/2 z-40 h-4 w-[1100px] -translate-x-1/2 bg-transparent" />
         )}
         {/* Resources Mega Menu Dropdown */}
         {isResourcesOpen && (
-          <div className="absolute left-1/2 top-full z-50 mt-0 flex w-[1100px] -translate-x-1/2 gap-8 rounded-2xl border border-border bg-gradient-to-br from-secondary via-white to-white px-10 py-10 pt-2 shadow-2xl">
+          <div className="border-border from-secondary absolute top-full left-1/2 z-50 mt-0 flex w-[1100px] -translate-x-1/2 gap-8 rounded-lg border bg-gradient-to-br via-white to-white px-10 py-10 pt-2 shadow-2xl">
             {/* Left: Columns */}
             <div className="grid min-w-0 flex-1 grid-cols-3 gap-8">
               {/* LEARN section spanning two columns */}
@@ -452,17 +452,17 @@ export default function Navbar() {
                   <div className="mb-1 text-base font-bold text-gray-900">
                     LEARN
                   </div>
-                  <div className="mb-2 h-0.5 w-10 rounded bg-primary" />
+                  <div className="bg-primary mb-2 h-0.5 w-10 rounded" />
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   {resourcesMenu[0].items.map((item) => (
                     <Link
                       key={item.label}
                       href={item.href}
-                      className="group block min-h-[140px] rounded-xl border border-gray-100 bg-white p-3 shadow-sm transition-all hover:border-primary/20 hover:bg-secondary hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-ring"
+                      className="group hover:border-primary/20 hover:bg-secondary focus:ring-ring block min-h-[140px] rounded-md border border-gray-100 bg-white p-3 shadow-sm transition-all hover:shadow-lg focus:ring-2 focus:outline-none"
                       onClick={() => setIsResourcesOpen(false)}
                     >
-                      <div className="mb-2 inline-block rounded-full bg-primary/10 p-2 transition-colors group-hover:bg-primary">
+                      <div className="bg-primary/10 group-hover:bg-primary mb-2 inline-block rounded-full p-2 transition-colors">
                         <span className="text-primary transition-colors group-hover:text-white">
                           {item.icon}
                         </span>
@@ -470,7 +470,7 @@ export default function Navbar() {
                       <div className="flex items-center gap-1 text-base font-semibold text-gray-900">
                         {item.label}
                         <svg
-                          className="h-4 w-4 text-primary/30 transition-colors group-hover:text-primary"
+                          className="text-primary/30 group-hover:text-primary h-4 w-4 transition-colors"
                           fill="none"
                           stroke="currentColor"
                           strokeWidth="2"
@@ -498,17 +498,17 @@ export default function Navbar() {
                   <div className="mb-1 text-base font-bold text-gray-900">
                     RESOURCES
                   </div>
-                  <div className="mb-2 h-0.5 w-10 rounded bg-primary" />
+                  <div className="bg-primary mb-2 h-0.5 w-10 rounded" />
                 </div>
                 <div className="flex h-full flex-col gap-2">
                   {resourcesMenu[1].items.map((item) => (
                     <Link
                       key={item.label}
                       href={item.href}
-                      className="group block min-h-[140px] rounded-xl border border-gray-100 bg-white p-3 shadow-sm transition-all hover:border-primary/20 hover:bg-secondary hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-ring"
+                      className="group hover:border-primary/20 hover:bg-secondary focus:ring-ring block min-h-[140px] rounded-md border border-gray-100 bg-white p-3 shadow-sm transition-all hover:shadow-lg focus:ring-2 focus:outline-none"
                       onClick={() => setIsResourcesOpen(false)}
                     >
-                      <div className="mb-2 inline-block rounded-full bg-primary/10 p-2 transition-colors group-hover:bg-primary">
+                      <div className="bg-primary/10 group-hover:bg-primary mb-2 inline-block rounded-full p-2 transition-colors">
                         <span className="text-primary transition-colors group-hover:text-white">
                           {item.icon}
                         </span>
@@ -516,7 +516,7 @@ export default function Navbar() {
                       <div className="flex items-center gap-1 text-base font-semibold text-gray-900">
                         {item.label}
                         <svg
-                          className="h-4 w-4 text-primary/30 transition-colors group-hover:text-primary"
+                          className="text-primary/30 group-hover:text-primary h-4 w-4 transition-colors"
                           fill="none"
                           stroke="currentColor"
                           strokeWidth="2"
@@ -540,21 +540,21 @@ export default function Navbar() {
               </div>
             </div>
             {/* Right: Promo card */}
-            <div className="to-accent-hover flex w-72 flex-shrink-0 flex-col justify-between rounded-2xl bg-gradient-to-br from-primary p-6 text-white shadow-lg">
+            <div className="to-accent-hover from-primary flex w-72 flex-shrink-0 flex-col justify-between rounded-lg bg-gradient-to-br p-6 text-white shadow-lg">
               <div>
-                <div className="mb-2 text-xs font-bold uppercase tracking-widest text-primary-foreground/80">
+                <div className="text-primary-foreground/80 mb-2 text-xs font-bold tracking-widest uppercase">
                   Featured
                 </div>
                 <div className="mb-2 text-lg font-semibold">
                   Explore Our Resources
                 </div>
-                <div className="mb-4 text-sm text-primary-foreground/80">
+                <div className="text-primary-foreground/80 mb-4 text-sm">
                   Discover guides, webinars, and more to help you master email
                   security.
                 </div>
                 <a
                   href="/guides"
-                  className="mt-2 inline-block rounded-full bg-white px-4 py-2 text-sm font-semibold text-primary shadow transition-colors hover:bg-secondary"
+                  className="text-primary hover:bg-secondary mt-2 inline-block rounded-full bg-white px-4 py-2 text-sm font-semibold shadow transition-colors"
                 >
                   Browse Guides
                 </a>
@@ -589,25 +589,25 @@ export default function Navbar() {
         onMouseLeave={() => setIsCompanyOpen(false)}
       >
         <button
-          className={`relative px-2 py-1 text-base font-semibold transition-colors duration-200 ${isCompanyOpen ? "text-primary" : "text-gray-700 hover:text-primary"} `}
+          className={`relative px-2 py-1 text-base font-semibold transition-colors duration-200 ${isCompanyOpen ? "text-primary" : "hover:text-primary text-gray-700"} `}
         >
           Company
           <span
-            className={`absolute -bottom-1 left-0 h-0.5 w-full rounded bg-primary transition-all duration-300 ${isCompanyOpen ? "scale-x-100 opacity-100" : "scale-x-0 opacity-0"} `}
+            className={`bg-primary absolute -bottom-1 left-0 h-0.5 w-full rounded transition-all duration-300 ${isCompanyOpen ? "scale-x-100 opacity-100" : "scale-x-0 opacity-0"} `}
             aria-hidden="true"
           />
         </button>
         {/* Hover Bridge */}
         {isCompanyOpen && (
-          <div className="pointer-events-auto absolute left-0 top-full z-40 ml-[-640px] h-4 w-[1100px] bg-transparent" />
+          <div className="pointer-events-auto absolute top-full left-0 z-40 ml-[-640px] h-4 w-[1100px] bg-transparent" />
         )}
         {/* Company Mega Menu Dropdown */}
         {isCompanyOpen && (
-          <div className="absolute left-0 top-full z-50 ml-[-640px] mt-0 flex w-[1100px] gap-8 rounded-2xl border border-border bg-gradient-to-br from-secondary via-white to-white px-10 py-10 pt-2 shadow-2xl">
+          <div className="border-border from-secondary absolute top-full left-0 z-50 mt-0 ml-[-640px] flex w-[1100px] gap-8 rounded-lg border bg-gradient-to-br via-white to-white px-10 py-10 pt-2 shadow-2xl">
             {/* Left: Menu grid */}
             <div className="min-w-0 flex-1">
               <div className="mb-6 flex items-center gap-2">
-                <span className="inline-block h-6 w-1.5 rounded-full bg-primary"></span>
+                <span className="bg-primary inline-block h-6 w-1.5 rounded-full"></span>
                 <span className="text-xl font-bold tracking-tight text-gray-900">
                   Explore TrustYourInbox
                 </span>
@@ -618,9 +618,9 @@ export default function Navbar() {
                     <Link
                       key={item.name}
                       href={item.href}
-                      className="group flex transform flex-col items-start gap-2 rounded-xl border border-gray-100 bg-white p-3 shadow-sm transition-all hover:scale-[1.04] hover:border-primary/20 hover:bg-secondary hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-ring"
+                      className="group hover:border-primary/20 hover:bg-secondary focus:ring-ring flex transform flex-col items-start gap-2 rounded-md border border-gray-100 bg-white p-3 shadow-sm transition-all hover:scale-[1.04] hover:shadow-lg focus:ring-2 focus:outline-none"
                     >
-                      <div className="mb-2 rounded-full bg-primary/10 p-2 transition-colors group-hover:bg-primary">
+                      <div className="bg-primary/10 group-hover:bg-primary mb-2 rounded-full p-2 transition-colors">
                         <span className="text-primary transition-colors group-hover:text-white">
                           {item.icon}
                         </span>
@@ -628,7 +628,7 @@ export default function Navbar() {
                       <div className="flex items-center gap-1 text-base font-semibold text-gray-900">
                         {item.name}
                         <svg
-                          className="h-4 w-4 text-primary/30 transition-colors group-hover:text-primary"
+                          className="text-primary/30 group-hover:text-primary h-4 w-4 transition-colors"
                           fill="none"
                           stroke="currentColor"
                           strokeWidth="2"
@@ -652,22 +652,22 @@ export default function Navbar() {
               </div>
             </div>
             {/* Right: Promo card */}
-            <div className="to-accent-hover flex w-72 flex-shrink-0 flex-col justify-between rounded-2xl bg-gradient-to-br from-primary p-6 text-white shadow-lg">
+            <div className="to-accent-hover from-primary flex w-72 flex-shrink-0 flex-col justify-between rounded-lg bg-gradient-to-br p-6 text-white shadow-lg">
               <div>
-                <div className="mb-2 text-xs font-bold uppercase tracking-widest text-primary-foreground/80">
+                <div className="text-primary-foreground/80 mb-2 text-xs font-bold tracking-widest uppercase">
                   Announcement
                 </div>
                 <div className="mb-2 text-lg font-semibold">
                   Securing Email in the AI Era
                 </div>
-                <div className="mb-4 text-sm text-primary-foreground/80">
+                <div className="text-primary-foreground/80 mb-4 text-sm">
                   Join our upcoming webinar to learn how AI is changing email
                   security. <br />{" "}
                   <span className="font-semibold">June 20, 2025</span>
                 </div>
                 <a
                   href="/events"
-                  className="mt-2 inline-block rounded-full bg-white px-4 py-2 text-sm font-semibold text-primary shadow transition-colors hover:bg-secondary"
+                  className="text-primary hover:bg-secondary mt-2 inline-block rounded-full bg-white px-4 py-2 text-sm font-semibold shadow transition-colors"
                 >
                   Register Now
                 </a>

@@ -7,7 +7,7 @@ export default function SignupPage() {
       <p className="mb-8 text-lg text-gray-600">
         Create your TrustYourInbox account.
       </p>
-      <div className="rounded-xl border bg-secondary p-6 text-center shadow-sm">
+      <div className="bg-secondary rounded-md border p-6 text-center shadow-sm">
         <span className="font-semibold text-gray-700">
           Signup functionality coming soon.
         </span>

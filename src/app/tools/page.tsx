@@ -121,20 +121,20 @@ const categories = ["All", "DMARC", "SPF", "DKIM", "Security", "Reports"];
 
 export default function ToolsPage() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="bg-background min-h-screen">
       {/* Hero Section */}
-      <section className="bg-gradient-to-b from-background to-secondary/30 py-24 md:py-32">
+      <section className="from-background to-secondary/30 bg-gradient-to-b py-24 md:py-32">
         <div className="container">
           <div className="mx-auto max-w-3xl text-center">
-            <div className="mb-6 inline-flex items-center rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-sm font-medium">
-              <Wrench className="mr-2 h-4 w-4 text-primary" />
+            <div className="border-primary/20 bg-primary/5 mb-6 inline-flex items-center rounded-full border px-4 py-1.5 text-sm font-medium">
+              <Wrench className="text-primary mr-2 h-4 w-4" />
               <span className="text-primary">Free Email Security Tools</span>
             </div>
             <h1 className="mb-6 text-5xl font-bold tracking-tight md:text-6xl">
               <span className="text-primary">Free DMARC</span> & Email Security
               Tools
             </h1>
-            <p className="text-xl leading-relaxed text-muted-foreground">
+            <p className="text-muted-foreground text-xl leading-relaxed">
               Professional-grade tools to analyze, validate, and generate DMARC,
               SPF, and DKIM records. All free, no signup required.
             </p>
@@ -148,7 +148,7 @@ export default function ToolsPage() {
           {/* Popular Tools First */}
           <div className="mb-16">
             <div className="mb-8 flex items-center gap-3">
-              <div className="h-1 w-12 rounded bg-primary"></div>
+              <div className="bg-primary h-1 w-12 rounded"></div>
               <h2 className="text-3xl font-bold">Most Popular</h2>
             </div>
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -160,33 +160,33 @@ export default function ToolsPage() {
                     <Link
                       key={tool.name}
                       href={tool.href}
-                      className="group relative overflow-hidden rounded-2xl border border-border bg-background p-8 transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-2xl"
+                      className="group border-border bg-background hover:border-primary/30 relative overflow-hidden rounded-lg border p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
                     >
                       {/* Gradient Background on Hover */}
-                      <div className="to-accent-hover/5 absolute inset-0 bg-gradient-to-br from-primary/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
+                      <div className="to-accent-hover/5 from-primary/5 absolute inset-0 bg-gradient-to-br opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
 
                       {/* Content */}
                       <div className="relative z-10">
                         {/* Icon & Badge */}
                         <div className="mb-4 flex items-start justify-between">
-                          <div className="inline-flex rounded-xl bg-primary/10 p-3 transition-colors group-hover:bg-primary/20">
-                            <Icon className="h-6 w-6 text-primary" />
+                          <div className="bg-primary/10 group-hover:bg-primary/20 inline-flex rounded-md p-3 transition-colors">
+                            <Icon className="text-primary h-6 w-6" />
                           </div>
-                          <div className="rounded-md bg-primary/10 px-2 py-1 text-xs font-medium text-primary">
+                          <div className="bg-primary/10 text-primary rounded-md px-2 py-1 text-xs font-medium">
                             {tool.category}
                           </div>
                         </div>
 
                         {/* Text */}
-                        <h3 className="mb-3 text-xl font-bold transition-colors group-hover:text-primary">
+                        <h3 className="group-hover:text-primary mb-3 text-xl font-bold transition-colors">
                           {tool.name}
                         </h3>
-                        <p className="mb-4 leading-relaxed text-muted-foreground">
+                        <p className="text-muted-foreground mb-4 leading-relaxed">
                           {tool.description}
                         </p>
 
                         {/* Arrow */}
-                        <div className="flex items-center text-sm font-medium text-primary opacity-0 transition-opacity group-hover:opacity-100">
+                        <div className="text-primary flex items-center text-sm font-medium opacity-0 transition-opacity group-hover:opacity-100">
                           <span>Try it now</span>
                           <svg
                             className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1"
@@ -212,7 +212,7 @@ export default function ToolsPage() {
           {/* All Tools */}
           <div>
             <div className="mb-8 flex items-center gap-3">
-              <div className="h-1 w-12 rounded bg-primary"></div>
+              <div className="bg-primary h-1 w-12 rounded"></div>
               <h2 className="text-3xl font-bold">All Tools</h2>
             </div>
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -222,25 +222,25 @@ export default function ToolsPage() {
                   <Link
                     key={tool.name}
                     href={tool.href}
-                    className="group relative overflow-hidden rounded-2xl border border-border bg-background p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-xl"
+                    className="group border-border bg-background hover:border-primary/30 relative overflow-hidden rounded-lg border p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
                   >
                     {/* Content */}
                     <div className="relative z-10">
                       {/* Icon & Badge */}
                       <div className="mb-4 flex items-start justify-between">
-                        <div className="inline-flex rounded-lg bg-primary/10 p-2 transition-colors group-hover:bg-primary/20">
-                          <Icon className="h-5 w-5 text-primary" />
+                        <div className="bg-primary/10 group-hover:bg-primary/20 inline-flex rounded-lg p-2 transition-colors">
+                          <Icon className="text-primary h-5 w-5" />
                         </div>
-                        <div className="rounded border border-border px-2 py-0.5 text-xs font-medium text-muted-foreground">
+                        <div className="border-border text-muted-foreground rounded border px-2 py-0.5 text-xs font-medium">
                           {tool.category}
                         </div>
                       </div>
 
                       {/* Text */}
-                      <h3 className="mb-2 text-lg font-bold transition-colors group-hover:text-primary">
+                      <h3 className="group-hover:text-primary mb-2 text-lg font-bold transition-colors">
                         {tool.name}
                       </h3>
-                      <p className="text-sm leading-relaxed text-muted-foreground">
+                      <p className="text-muted-foreground text-sm leading-relaxed">
                         {tool.description}
                       </p>
                     </div>
@@ -259,20 +259,20 @@ export default function ToolsPage() {
             <h2 className="mb-6 text-3xl font-bold md:text-4xl">
               Need More Than Free Tools?
             </h2>
-            <p className="mb-8 text-lg text-muted-foreground">
+            <p className="text-muted-foreground mb-8 text-lg">
               Get comprehensive DMARC monitoring, reporting, and analytics with
               TrustYourInbox
             </p>
             <div className="flex flex-col justify-center gap-4 sm:flex-row">
               <Link
                 href="/features"
-                className="inline-flex items-center justify-center rounded-lg bg-primary px-8 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
+                className="bg-primary text-primary-foreground hover:bg-primary/90 inline-flex items-center justify-center rounded-lg px-8 py-3 text-sm font-semibold transition-colors"
               >
                 View All Features
               </Link>
               <Link
                 href="/pricing"
-                className="inline-flex items-center justify-center rounded-lg border border-border px-8 py-3 text-sm font-semibold transition-colors hover:bg-muted"
+                className="border-border hover:bg-muted inline-flex items-center justify-center rounded-lg border px-8 py-3 text-sm font-semibold transition-colors"
               >
                 See Pricing
               </Link>

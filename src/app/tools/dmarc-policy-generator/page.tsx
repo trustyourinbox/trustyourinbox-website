@@ -122,24 +122,24 @@ export default function DmarcPolicyGenerator() {
 
   // Sidebar tab content
   const sidebarTabs = (
-    <div className="overflow-hidden rounded-xl border border-gray-200 bg-white p-0 shadow-md">
+    <div className="overflow-hidden rounded-md border border-gray-200 bg-white p-0 shadow-md">
       <Tabs value={sidebarTab} onValueChange={setSidebarTab} className="w-full">
         <TabsList className="flex border-b border-gray-200 bg-gray-50">
           <TabsTrigger
             value="help"
-            className="flex-1 rounded-none px-0 py-2 text-sm font-semibold transition-all data-[active=true]:bg-primary data-[active=true]:text-white data-[active=true]:shadow-inner"
+            className="data-[active=true]:bg-primary flex-1 rounded-none px-0 py-2 text-sm font-semibold transition-all data-[active=true]:text-white data-[active=true]:shadow-inner"
           >
             Help
           </TabsTrigger>
           <TabsTrigger
             value="best"
-            className="flex-1 rounded-none px-0 py-2 text-sm font-semibold transition-all data-[active=true]:bg-primary data-[active=true]:text-white data-[active=true]:shadow-inner"
+            className="data-[active=true]:bg-primary flex-1 rounded-none px-0 py-2 text-sm font-semibold transition-all data-[active=true]:text-white data-[active=true]:shadow-inner"
           >
             Best Practices
           </TabsTrigger>
           <TabsTrigger
             value="ref"
-            className="flex-1 rounded-none px-0 py-2 text-sm font-semibold transition-all data-[active=true]:bg-primary data-[active=true]:text-white data-[active=true]:shadow-inner"
+            className="data-[active=true]:bg-primary flex-1 rounded-none px-0 py-2 text-sm font-semibold transition-all data-[active=true]:text-white data-[active=true]:shadow-inner"
           >
             Reference
           </TabsTrigger>
@@ -147,10 +147,10 @@ export default function DmarcPolicyGenerator() {
         <TabsContent value="help">
           <div className="space-y-4 p-5">
             <div className="mb-1 flex items-center gap-2">
-              <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-primary/10">
-                <Shield className="h-4 w-4 text-primary" />
+              <span className="bg-primary/10 inline-flex h-7 w-7 items-center justify-center rounded-full">
+                <Shield className="text-primary h-4 w-4" />
               </span>
-              <h3 className="text-base font-bold text-foreground">
+              <h3 className="text-foreground text-base font-bold">
                 About DMARC Policy Generator
               </h3>
             </div>
@@ -160,10 +160,10 @@ export default function DmarcPolicyGenerator() {
               best practice recommendations.
             </p>
             <div className="mb-1 flex items-center gap-2">
-              <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-primary/10">
-                <Info className="h-4 w-4 text-primary" />
+              <span className="bg-primary/10 inline-flex h-7 w-7 items-center justify-center rounded-full">
+                <Info className="text-primary h-4 w-4" />
               </span>
-              <h3 className="text-base font-bold text-foreground">
+              <h3 className="text-foreground text-base font-bold">
                 What You Can Do
               </h3>
             </div>
@@ -176,14 +176,14 @@ export default function DmarcPolicyGenerator() {
             <div className="flex gap-2 border-t border-gray-100 pt-2">
               <a
                 href="/docs"
-                className="inline-flex items-center rounded-md border border-primary bg-white px-2.5 py-1.5 text-xs font-medium text-primary shadow-sm transition hover:bg-secondary"
+                className="border-primary text-primary hover:bg-secondary inline-flex items-center rounded-md border bg-white px-2.5 py-1.5 text-xs font-medium shadow-sm transition"
               >
                 <BookOpen className="mr-1 h-4 w-4" />
                 Documentation
               </a>
               <a
                 href="/contact"
-                className="inline-flex items-center rounded-md border border-primary bg-white px-2.5 py-1.5 text-xs font-medium text-primary shadow-sm transition hover:bg-secondary"
+                className="border-primary text-primary hover:bg-secondary inline-flex items-center rounded-md border bg-white px-2.5 py-1.5 text-xs font-medium shadow-sm transition"
               >
                 <Info className="mr-1 h-4 w-4" />
                 Contact Support
@@ -194,42 +194,42 @@ export default function DmarcPolicyGenerator() {
         <TabsContent value="best">
           <div className="space-y-4 p-5">
             <div className="mb-1 flex items-center gap-2">
-              <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-primary/10">
-                <Shield className="h-4 w-4 text-primary" />
+              <span className="bg-primary/10 inline-flex h-7 w-7 items-center justify-center rounded-full">
+                <Shield className="text-primary h-4 w-4" />
               </span>
-              <h3 className="text-base font-bold text-foreground">
+              <h3 className="text-foreground text-base font-bold">
                 Best Practices
               </h3>
             </div>
             <ul className="space-y-3 text-sm text-gray-700">
               <li>
-                <span className="font-semibold text-foreground">
+                <span className="text-foreground font-semibold">
                   Start with Monitoring:
                 </span>{" "}
                 Begin with p=none to monitor email authentication without
                 affecting delivery.
               </li>
               <li>
-                <span className="font-semibold text-foreground">
+                <span className="text-foreground font-semibold">
                   Gradual Enforcement:
                 </span>{" "}
                 Progress from quarantine to reject after monitoring results.
               </li>
               <li>
-                <span className="font-semibold text-foreground">
+                <span className="text-foreground font-semibold">
                   Separate Report Addresses:
                 </span>{" "}
                 Use different email addresses for aggregate (rua) and forensic
                 (ruf) reports.
               </li>
               <li>
-                <span className="font-semibold text-foreground">
+                <span className="text-foreground font-semibold">
                   Full Coverage Testing:
                 </span>{" "}
                 Only set pct=100 after thorough testing with lower percentages.
               </li>
               <li>
-                <span className="font-semibold text-foreground">
+                <span className="text-foreground font-semibold">
                   Strict Alignment:
                 </span>{" "}
                 Consider using strict alignment (s) for maximum security when
@@ -353,7 +353,7 @@ export default function DmarcPolicyGenerator() {
               <div>
                 <Label>
                   Percentage (pct):{" "}
-                  <span className="font-semibold text-primary">
+                  <span className="text-primary font-semibold">
                     {policy.pct}%
                   </span>
                 </Label>
@@ -363,7 +363,7 @@ export default function DmarcPolicyGenerator() {
                   value={Number(policy.pct)}
                   onChange={(v) => handlePolicyChange("pct", String(v))}
                 />
-                <p className="text-sm text-muted-foreground">
+                <p className="text-muted-foreground text-sm">
                   Percentage of messages to apply policy to
                 </p>
               </div>
@@ -495,7 +495,7 @@ export default function DmarcPolicyGenerator() {
             </Accordion>
             <Button
               onClick={generateRecord}
-              className="mt-8 w-full bg-primary text-white hover:bg-primary"
+              className="bg-primary hover:bg-primary mt-8 w-full text-white"
             >
               {generatedRecord
                 ? "Update DMARC Record"
@@ -504,7 +504,7 @@ export default function DmarcPolicyGenerator() {
           </Card>
           <Card className="p-6">
             <h2 className="mb-2 flex items-center gap-2 text-xl font-semibold">
-              <FileCode className="h-5 w-5 text-primary" />
+              <FileCode className="text-primary h-5 w-5" />
               Generated DMARC Record
             </h2>
             <p className="mb-4 text-gray-500">
@@ -512,7 +512,7 @@ export default function DmarcPolicyGenerator() {
             </p>
             {generatedRecord ? (
               <div className="mb-2 flex items-center gap-2">
-                <div className="flex-1 break-all rounded border border-gray-100 bg-gray-50 px-3 py-2 font-mono text-sm">
+                <div className="flex-1 rounded border border-gray-100 bg-gray-50 px-3 py-2 font-mono text-sm break-all">
                   {generatedRecord}
                 </div>
                 <Button
@@ -546,10 +546,10 @@ export default function DmarcPolicyGenerator() {
         </div>
       </div>
 
-      <div className="mb-8 mt-12">
+      <div className="mt-12 mb-8">
         <div className="mb-6">
           <h2 className="text-2xl font-bold tracking-tight">Related Tools</h2>
-          <p className="mt-1 text-muted-foreground">
+          <p className="text-muted-foreground mt-1">
             Explore more email authentication tools to secure your domain
           </p>
         </div>
@@ -557,22 +557,22 @@ export default function DmarcPolicyGenerator() {
         <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
           <Link
             href="/tools/dmarc-analyzer"
-            className="group relative overflow-hidden rounded-lg border border-primary/20 bg-secondary p-5 transition-all hover:shadow-md dark:border-primary dark:bg-primary"
+            className="group border-primary/20 bg-secondary dark:border-primary dark:bg-primary relative overflow-hidden rounded-lg border p-5 transition-all hover:shadow-md"
           >
             <div className="flex items-start gap-4">
-              <div className="rounded-full bg-primary/10 p-2 dark:bg-primary">
-                <Shield className="h-6 w-6 text-primary" />
+              <div className="bg-primary/10 dark:bg-primary rounded-full p-2">
+                <Shield className="text-primary h-6 w-6" />
               </div>
               <div>
                 <h3 className="text-lg font-semibold group-hover:underline">
                   DMARC Analyzer
                 </h3>
-                <p className="mt-1 text-sm text-muted-foreground">
+                <p className="text-muted-foreground mt-1 text-sm">
                   Analyze your DMARC configuration and get detailed reports
                 </p>
               </div>
             </div>
-            <div className="absolute bottom-0 left-0 h-1 w-0 bg-primary transition-all duration-300 group-hover:w-full"></div>
+            <div className="bg-primary absolute bottom-0 left-0 h-1 w-0 transition-all duration-300 group-hover:w-full"></div>
           </Link>
 
           <Link
@@ -581,18 +581,18 @@ export default function DmarcPolicyGenerator() {
           >
             <div className="flex items-start gap-4">
               <div className="rounded-full bg-green-100 p-2 dark:bg-green-900">
-                <Mail className="h-6 w-6 text-primary" />
+                <Mail className="text-primary h-6 w-6" />
               </div>
               <div>
                 <h3 className="text-lg font-semibold group-hover:underline">
                   SPF Surveyor
                 </h3>
-                <p className="mt-1 text-sm text-muted-foreground">
+                <p className="text-muted-foreground mt-1 text-sm">
                   Validate and troubleshoot your SPF records
                 </p>
               </div>
             </div>
-            <div className="absolute bottom-0 left-0 h-1 w-0 bg-primary transition-all duration-300 group-hover:w-full"></div>
+            <div className="bg-primary absolute bottom-0 left-0 h-1 w-0 transition-all duration-300 group-hover:w-full"></div>
           </Link>
 
           <Link
@@ -601,18 +601,18 @@ export default function DmarcPolicyGenerator() {
           >
             <div className="flex items-start gap-4">
               <div className="rounded-full bg-purple-100 p-2 dark:bg-purple-900">
-                <Key className="h-6 w-6 text-primary" />
+                <Key className="text-primary h-6 w-6" />
               </div>
               <div>
                 <h3 className="text-lg font-semibold group-hover:underline">
                   DKIM Validator
                 </h3>
-                <p className="mt-1 text-sm text-muted-foreground">
+                <p className="text-muted-foreground mt-1 text-sm">
                   Verify your DKIM signatures and configuration
                 </p>
               </div>
             </div>
-            <div className="absolute bottom-0 left-0 h-1 w-0 bg-primary transition-all duration-300 group-hover:w-full"></div>
+            <div className="bg-primary absolute bottom-0 left-0 h-1 w-0 transition-all duration-300 group-hover:w-full"></div>
           </Link>
         </div>
       </div>

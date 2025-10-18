@@ -280,7 +280,7 @@ export default function ProductShowcase() {
                       className={`absolute ${isEven ? "-right-8" : "-left-8"} bg-primary/10 -top-8 h-64 w-64 rounded-full blur-3xl`}
                     ></div>
 
-                    <div className="border-primary/20 bg-background relative overflow-hidden rounded-xl border-2 shadow-2xl transition-transform duration-300 hover:scale-[1.02]">
+                    <div className="border-primary/20 bg-background relative overflow-hidden rounded-md border-2 shadow-2xl transition-transform duration-300 hover:scale-[1.02]">
                       <div style={{ aspectRatio: "1200/750" }}>
                         <Image
                           src={feature.image}

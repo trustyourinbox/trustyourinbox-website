@@ -44,7 +44,7 @@ export default function ModernHeroSection() {
 
             {/* Headline */}
             <div className="space-y-3 sm:space-y-4">
-              <h1 className="text-3xl leading-tight font-bold tracking-tight sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl">
+              <h1 className="text-3xl leading-snug font-bold tracking-tight sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl">
                 Stop Email Spoofing in{" "}
                 <span className="text-primary">Minutes</span>, Not Months
               </h1>
@@ -128,7 +128,7 @@ export default function ModernHeroSection() {
 
             {/* Real Dashboard Screenshot */}
             <div className="relative">
-              <div className="border-primary/20 from-background/50 to-background overflow-hidden rounded-xl border-2 bg-gradient-to-br shadow-2xl backdrop-blur-xl sm:rounded-2xl">
+              <div className="border-primary/20 from-background/50 to-background overflow-hidden rounded-md border-2 bg-gradient-to-br shadow-2xl backdrop-blur-xl sm:rounded-lg">
                 <Image
                   src="/images/app-screenshots/dashboard-overview.png"
                   alt="TrustYourInbox Dashboard - Executive analytics showing DMARC score, authentication rates, email volume trends, and top sending sources"
@@ -144,7 +144,7 @@ export default function ModernHeroSection() {
               </div>
 
               {/* Floating badge */}
-              <div className="border-primary/20 bg-background absolute -right-2 -bottom-2 rounded-lg border-2 p-2.5 shadow-xl backdrop-blur-sm sm:-right-4 sm:-bottom-4 sm:rounded-xl sm:p-3 md:p-4">
+              <div className="border-primary/20 bg-background absolute -right-2 -bottom-2 rounded-md border-2 p-2.5 shadow-xl backdrop-blur-sm sm:-right-4 sm:-bottom-4 sm:rounded-md sm:p-3 md:p-4">
                 <div className="flex items-center gap-2 sm:gap-3">
                   <div className="to-accent-hover from-primary flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br sm:h-10 sm:w-10">
                     <Shield className="h-4 w-4 text-white sm:h-5 sm:w-5" />

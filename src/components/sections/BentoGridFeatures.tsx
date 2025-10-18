@@ -99,7 +99,7 @@ const features = [
 
 export default function BentoGridFeatures() {
   return (
-    <section className="bg-gradient-to-b from-background via-secondary/20 to-secondary/30 py-12 sm:py-16 md:py-20 lg:py-24">
+    <section className="from-background via-secondary/20 to-secondary/30 bg-gradient-to-b py-12 sm:py-16 md:py-20 lg:py-24">
       <div className="container">
         {/* Header */}
         <motion.div
@@ -109,14 +109,14 @@ export default function BentoGridFeatures() {
           transition={{ duration: 0.5 }}
           className="container-text mx-auto mb-10 text-center sm:mb-12 md:mb-16"
         >
-          <div className="mb-4 inline-flex items-center rounded-full border border-primary/20 bg-primary/5 px-3 py-1.5 text-xs font-medium sm:mb-6 sm:px-4 sm:text-sm">
-            <Shield className="mr-2 h-3 w-3 flex-shrink-0 text-primary sm:h-4 sm:w-4" />
+          <div className="border-primary/20 bg-primary/5 mb-4 inline-flex items-center rounded-full border px-3 py-1.5 text-xs font-medium sm:mb-6 sm:px-4 sm:text-sm">
+            <Shield className="text-primary mr-2 h-3 w-3 flex-shrink-0 sm:h-4 sm:w-4" />
             <span className="text-primary">Everything You Need</span>
           </div>
           <h2 className="mb-4 text-3xl font-bold tracking-tight sm:mb-6 sm:text-4xl md:text-5xl lg:text-6xl">
             Email Security, <span className="text-primary">Simplified</span>
           </h2>
-          <p className="text-base text-muted-foreground sm:text-lg md:text-xl">
+          <p className="text-muted-foreground text-base sm:text-lg md:text-xl">
             Professional-grade DMARC tools and analytics designed for teams that
             value both security and simplicity.
           </p>
@@ -157,7 +157,7 @@ export default function BentoGridFeatures() {
               >
                 <Link
                   href={feature.href}
-                  className={`group relative block overflow-hidden rounded-xl border border-border bg-background p-5 transition-all duration-300 hover:-translate-y-1 hover:cursor-pointer hover:border-primary/30 hover:shadow-2xl sm:rounded-2xl sm:p-6 md:p-8 ${getGridSpan()}`}
+                  className={`group border-border bg-background hover:border-primary/30 relative block overflow-hidden rounded-md border p-5 transition-all duration-300 hover:-translate-y-1 hover:cursor-pointer hover:shadow-2xl sm:rounded-lg sm:p-6 md:p-8 ${getGridSpan()}`}
                 >
                   {/* Gradient Background */}
                   <div
@@ -168,24 +168,24 @@ export default function BentoGridFeatures() {
                   <div className="relative z-10 flex flex-col">
                     {/* Icon */}
                     <div className="mb-4 sm:mb-6">
-                      <div className="inline-flex rounded-lg bg-primary/10 p-2.5 transition-all duration-300 group-hover:scale-110 group-hover:bg-primary/20 sm:rounded-xl sm:p-3">
-                        <Icon className="h-5 w-5 text-primary transition-transform duration-300 group-hover:rotate-6 sm:h-6 sm:w-6" />
+                      <div className="bg-primary/10 group-hover:bg-primary/20 inline-flex rounded-md p-2.5 transition-all duration-300 group-hover:scale-110 sm:rounded-md sm:p-3">
+                        <Icon className="text-primary h-5 w-5 transition-transform duration-300 group-hover:rotate-6 sm:h-6 sm:w-6" />
                       </div>
                     </div>
 
                     {/* Text */}
                     <div>
-                      <h3 className="mb-2 text-lg font-bold transition-colors group-hover:text-primary sm:mb-3 sm:text-xl">
+                      <h3 className="group-hover:text-primary mb-2 text-lg font-bold transition-colors sm:mb-3 sm:text-xl">
                         {feature.title}
                       </h3>
-                      <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
+                      <p className="text-muted-foreground text-sm leading-relaxed sm:text-base">
                         {feature.description}
                       </p>
                     </div>
 
                     {/* Screenshot */}
                     {feature.image && (
-                      <div className="mt-4 overflow-hidden rounded-lg border border-border bg-muted/30">
+                      <div className="border-border bg-muted/30 mt-4 overflow-hidden rounded-lg border">
                         <Image
                           src={feature.image}
                           alt={`${feature.title} screenshot`}
@@ -201,7 +201,7 @@ export default function BentoGridFeatures() {
                     )}
 
                     {/* Arrow indicator on hover */}
-                    <div className="absolute bottom-5 left-5 flex items-center text-sm font-medium text-primary opacity-0 transition-opacity group-hover:opacity-100 sm:bottom-6 sm:left-6 md:bottom-8 md:left-8">
+                    <div className="text-primary absolute bottom-5 left-5 flex items-center text-sm font-medium opacity-0 transition-opacity group-hover:opacity-100 sm:bottom-6 sm:left-6 md:bottom-8 md:left-8">
                       <span>Learn more</span>
                       <svg
                         className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1"
@@ -226,19 +226,19 @@ export default function BentoGridFeatures() {
 
         {/* Bottom CTA */}
         <div className="mt-10 text-center sm:mt-12 md:mt-16">
-          <p className="mb-4 text-sm text-muted-foreground sm:text-base">
+          <p className="text-muted-foreground mb-4 text-sm sm:text-base">
             Want to see it in action?
           </p>
           <div className="flex flex-col justify-center gap-3 sm:flex-row sm:gap-4">
             <a
               href="#demo"
-              className="touch-target inline-flex w-full items-center justify-center rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 sm:w-auto"
+              className="touch-target bg-primary text-primary-foreground hover:bg-primary/90 inline-flex w-full items-center justify-center rounded-lg px-6 py-3 text-sm font-semibold transition-colors sm:w-auto"
             >
               Try Live Demo
             </a>
             <a
               href="/features"
-              className="touch-target inline-flex w-full items-center justify-center rounded-lg border border-border px-6 py-3 text-sm font-semibold transition-colors hover:bg-primary/10 sm:w-auto"
+              className="touch-target border-border hover:bg-primary/10 inline-flex w-full items-center justify-center rounded-lg border px-6 py-3 text-sm font-semibold transition-colors sm:w-auto"
             >
               View All Features
             </a>

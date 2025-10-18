@@ -45,8 +45,8 @@ export default function AboutPage() {
               </p>
             </div>
             <div className="grid grid-cols-2 gap-6">
-              <div className="border-border bg-background rounded-2xl border p-6">
-                <div className="bg-primary/10 mb-4 inline-flex rounded-xl p-3">
+              <div className="border-border bg-background rounded-lg border p-6">
+                <div className="bg-primary/10 mb-4 inline-flex rounded-md p-3">
                   <Target className="text-primary h-6 w-6" />
                 </div>
                 <h3 className="mb-2 text-lg font-bold">Simplicity First</h3>
@@ -54,8 +54,8 @@ export default function AboutPage() {
                   Complex problems deserve elegant solutions
                 </p>
               </div>
-              <div className="border-border bg-background rounded-2xl border p-6">
-                <div className="bg-primary/10 mb-4 inline-flex rounded-xl p-3">
+              <div className="border-border bg-background rounded-lg border p-6">
+                <div className="bg-primary/10 mb-4 inline-flex rounded-md p-3">
                   <Shield className="text-primary h-6 w-6" />
                 </div>
                 <h3 className="mb-2 text-lg font-bold">Security Focus</h3>
@@ -63,8 +63,8 @@ export default function AboutPage() {
                   Protecting brands and building trust
                 </p>
               </div>
-              <div className="border-border bg-background rounded-2xl border p-6">
-                <div className="bg-primary/10 mb-4 inline-flex rounded-xl p-3">
+              <div className="border-border bg-background rounded-lg border p-6">
+                <div className="bg-primary/10 mb-4 inline-flex rounded-md p-3">
                   <Users className="text-primary h-6 w-6" />
                 </div>
                 <h3 className="mb-2 text-lg font-bold">Customer Success</h3>
@@ -72,8 +72,8 @@ export default function AboutPage() {
                   Your success is our success
                 </p>
               </div>
-              <div className="border-border bg-background rounded-2xl border p-6">
-                <div className="bg-primary/10 mb-4 inline-flex rounded-xl p-3">
+              <div className="border-border bg-background rounded-lg border p-6">
+                <div className="bg-primary/10 mb-4 inline-flex rounded-md p-3">
                   <Zap className="text-primary h-6 w-6" />
                 </div>
                 <h3 className="mb-2 text-lg font-bold">Fast Innovation</h3>

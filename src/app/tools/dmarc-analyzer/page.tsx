@@ -1,18 +1,20 @@
 "use client";
 
 import { useState } from "react";
-import {
-  FaCopy,
-  FaShieldAlt,
-  FaInfoCircle,
-  FaExclamationTriangle,
-  FaCheckCircle,
-  FaServer,
-  FaKey,
-} from "react-icons/fa";
 import { ToolLayout, Button, Input, Card } from "@/components/ui";
 import { DMARCStatus } from "@/components/ui/DMARCStatus";
-import { Shield, Mail, Key, FileText, ArrowRight } from "lucide-react";
+import {
+  Shield,
+  Mail,
+  Key,
+  FileText,
+  ArrowRight,
+  Copy,
+  Info,
+  AlertTriangle,
+  CheckCircle,
+  Sparkles,
+} from "lucide-react";
 import Link from "next/link";
 
 function parseDMARC(record: string) {
@@ -52,6 +54,8 @@ function getTagExplanation(tag: string, value: string) {
       return "Alignment mode for SPF (r=relaxed, s=strict).";
     case "fo":
       return "Failure reporting options.";
+    case "rf":
+      return "Format for forensic reports.";
     default:
       return "";
   }
@@ -166,59 +170,38 @@ export default function DMARCAnalyzerPage() {
   const sidebarContent = (
     <div className="space-y-6">
       <div>
-        <h3 className="flex items-center gap-1.5 text-sm font-medium text-gray-900">
-          <FaShieldAlt className="h-4 w-4 text-primary" />
+        <h3 className="text-foreground mb-3 flex items-center gap-2 text-sm font-semibold">
+          <Shield className="text-primary h-4 w-4" />
           About DMARC
         </h3>
-        <p className="mt-2 text-sm text-gray-500">
+        <p className="text-muted-foreground text-sm leading-relaxed">
           DMARC (Domain-based Message Authentication, Reporting, and
           Conformance) helps protect your domain from email spoofing and
-          phishing.
+          phishing attacks.
         </p>
       </div>
 
       <div>
-        <h3 className="flex items-center gap-1.5 text-sm font-medium text-gray-900">
-          <FaInfoCircle className="h-4 w-4 text-primary" />
+        <h3 className="text-foreground mb-3 flex items-center gap-2 text-sm font-semibold">
+          <Info className="text-primary h-4 w-4" />
           Common Tags
         </h3>
-        <ul className="mt-2 space-y-2 text-sm text-gray-500">
-          <li className="flex items-start gap-2">
-            <code className="rounded bg-gray-100 px-1.5 py-0.5 text-primary">
-              v=DMARC1
-            </code>
-            <span>Version</span>
-          </li>
-          <li className="flex items-start gap-2">
-            <code className="rounded bg-gray-100 px-1.5 py-0.5 text-primary">
-              p=none
-            </code>
-            <span>Monitoring only</span>
-          </li>
-          <li className="flex items-start gap-2">
-            <code className="rounded bg-gray-100 px-1.5 py-0.5 text-primary">
-              p=quarantine
-            </code>
-            <span>Send to spam</span>
-          </li>
-          <li className="flex items-start gap-2">
-            <code className="rounded bg-gray-100 px-1.5 py-0.5 text-primary">
-              p=reject
-            </code>
-            <span>Reject email</span>
-          </li>
-          <li className="flex items-start gap-2">
-            <code className="rounded bg-gray-100 px-1.5 py-0.5 text-primary">
-              rua=
-            </code>
-            <span>Aggregate reports</span>
-          </li>
-          <li className="flex items-start gap-2">
-            <code className="rounded bg-gray-100 px-1.5 py-0.5 text-primary">
-              ruf=
-            </code>
-            <span>Forensic reports</span>
-          </li>
+        <ul className="space-y-2.5 text-sm">
+          {[
+            { code: "v=DMARC1", desc: "Version" },
+            { code: "p=none", desc: "Monitoring only" },
+            { code: "p=quarantine", desc: "Send to spam" },
+            { code: "p=reject", desc: "Reject email" },
+            { code: "rua=", desc: "Aggregate reports" },
+            { code: "ruf=", desc: "Forensic reports" },
+          ].map((item) => (
+            <li key={item.code} className="flex items-start gap-2">
+              <code className="bg-primary/10 text-primary rounded px-2 py-0.5 font-mono text-xs">
+                {item.code}
+              </code>
+              <span className="text-muted-foreground">{item.desc}</span>
+            </li>
+          ))}
         </ul>
       </div>
     </div>
@@ -229,31 +212,44 @@ export default function DMARCAnalyzerPage() {
   return (
     <ToolLayout
       title="DMARC Analyzer"
-      description="Paste a DMARC record below to analyze its configuration and get best-practice advice."
+      description="Paste a DMARC record below to analyze its configuration and get best-practice recommendations."
       sidebarContent={sidebarContent}
     >
-      <Card className="w-full border-0 shadow-lg">
-        <div className="p-6">
-          <div className="mb-6 flex items-center gap-2">
-            <Shield className="h-6 w-6 text-primary" />
-            <h2 className="text-2xl font-bold">DMARC Analyzer</h2>
+      {/* Main Tool Card - Premium Design */}
+      <div className="group border-border/40 from-background/60 via-background/40 to-background/20 hover:border-primary/20 hover:shadow-primary/5 relative overflow-hidden rounded-lg border bg-gradient-to-br p-6 shadow-xl backdrop-blur-xl transition-all duration-300 hover:shadow-2xl sm:p-8">
+        {/* Hover glow effect */}
+        <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+          <div className="from-primary/10 to-primary/10 absolute -inset-1 rounded-lg bg-gradient-to-r via-purple-500/10 blur-xl" />
+        </div>
+
+        <div className="relative z-10">
+          <div className="mb-6 flex items-center gap-3">
+            <div className="from-primary/15 shadow-primary/5 rounded-md bg-gradient-to-br to-purple-500/15 p-2.5 shadow-lg">
+              <Shield className="text-primary h-6 w-6" />
+            </div>
+            <h2 className="text-foreground text-2xl font-bold tracking-tight">
+              Analyze DMARC Record
+            </h2>
           </div>
 
           <form onSubmit={handleAnalyze} className="space-y-4">
             <div className="space-y-2">
-              <label htmlFor="dmarc" className="text-sm font-medium">
+              <label
+                htmlFor="dmarc"
+                className="text-foreground text-sm font-medium"
+              >
                 DMARC Record
               </label>
-              <div className="flex gap-3">
+              <div className="flex flex-col gap-3 sm:flex-row">
                 <div className="relative flex-1">
                   <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                    <FileText className="h-5 w-5 text-gray-400" />
+                    <FileText className="text-muted-foreground h-5 w-5" />
                   </div>
                   <Input
                     id="dmarc"
                     type="text"
                     placeholder="v=DMARC1; p=reject; rua=mailto:reports@example.com; ..."
-                    className="h-11 border-gray-200 pl-10 focus:border-primary focus:ring-ring"
+                    className="h-11 pl-10"
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                     required
@@ -261,13 +257,13 @@ export default function DMARCAnalyzerPage() {
                 </div>
                 <Button
                   type="submit"
-                  className="min-w-[120px] bg-primary text-white hover:bg-primary"
+                  className="from-primary h-11 min-w-[140px] gap-2 bg-gradient-to-r to-purple-500 text-white hover:opacity-90"
                   disabled={loading || !input}
                 >
                   {loading ? (
-                    <span className="flex items-center gap-2">
+                    <>
                       <svg
-                        className="h-4 w-4 animate-spin text-white"
+                        className="h-4 w-4 animate-spin"
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"
@@ -287,46 +283,79 @@ export default function DMARCAnalyzerPage() {
                         ></path>
                       </svg>
                       Analyzing...
-                    </span>
+                    </>
                   ) : (
-                    <span className="flex items-center gap-2">
-                      Analyze <ArrowRight className="h-4 w-4" />
-                    </span>
+                    <>
+                      Analyze
+                      <ArrowRight className="h-4 w-4" />
+                    </>
                   )}
                 </Button>
               </div>
             </div>
           </form>
         </div>
-      </Card>
+      </div>
 
+      {/* DMARC Status Display */}
       {policyType && (
         <div className="mt-6">
           <DMARCStatus policy={policyType} />
         </div>
       )}
 
+      {/* Recommendations */}
       {recommendations.length > 0 && (
-        <Card className="mt-6" title="Recommendations">
-          <ul className="space-y-2">
-            {recommendations.map((rec, i) => (
-              <li key={i} className="flex items-start gap-2">
-                <FaInfoCircle className="mt-0.5 h-4 w-4 text-primary" />
-                <span>{rec.message}</span>
-              </li>
-            ))}
+        <div className="border-border/40 from-background/60 via-background/40 to-background/20 mt-6 rounded-lg border bg-gradient-to-br p-6 backdrop-blur-xl">
+          <h3 className="text-foreground mb-4 flex items-center gap-2 text-lg font-semibold">
+            <Sparkles className="text-primary h-5 w-5" />
+            Recommendations
+          </h3>
+          <ul className="space-y-3">
+            {recommendations.map((rec, i) => {
+              const Icon =
+                rec.type === "success"
+                  ? CheckCircle
+                  : rec.type === "warning"
+                    ? AlertTriangle
+                    : Info;
+              const iconColor =
+                rec.type === "success"
+                  ? "text-green-500"
+                  : rec.type === "warning"
+                    ? "text-amber-500"
+                    : "text-blue-500";
+
+              return (
+                <li key={i} className="flex items-start gap-3">
+                  <Icon
+                    className={`mt-0.5 h-5 w-5 flex-shrink-0 ${iconColor}`}
+                  />
+                  <span className="text-foreground text-sm leading-relaxed">
+                    {rec.message}
+                  </span>
+                </li>
+              );
+            })}
           </ul>
-        </Card>
+        </div>
       )}
 
+      {/* Tag Breakdown */}
       {tags && (
         <div className="mt-6 space-y-4">
+          <h3 className="text-foreground text-lg font-semibold">
+            Record Breakdown
+          </h3>
           {tags.map(({ tag, value }) => (
-            <Card key={tag}>
-              <div className="flex items-center justify-between">
-                <div>
-                  <h3 className="font-medium text-gray-900">{tag}</h3>
-                  <p className="text-sm text-gray-500">
+            <div
+              key={tag}
+              className="border-border/40 from-background/60 to-background/20 hover:border-primary/20 rounded-lg border bg-gradient-to-br p-4 backdrop-blur-xl transition-all"
+            >
+              <div className="flex items-start justify-between gap-4">
+                <div className="flex-1">
+                  <h4 className="text-foreground mb-1 font-semibold">{tag}</h4>
+                  <p className="text-muted-foreground text-sm">
                     {getTagExplanation(tag, value)}
                   </p>
                 </div>
@@ -336,86 +365,89 @@ export default function DMARCAnalyzerPage() {
                   onClick={() =>
                     navigator.clipboard.writeText(`${tag}=${value}`)
                   }
+                  className="flex-shrink-0"
                 >
-                  <FaCopy className="mr-2" />
-                  Copy
+                  <Copy className="h-4 w-4" />
                 </Button>
               </div>
-              <div className="mt-2 rounded bg-gray-50 p-3 font-mono text-sm">
+              <div className="bg-muted/50 text-foreground mt-3 rounded-md p-3 font-mono text-sm">
                 {value}
               </div>
-            </Card>
+            </div>
           ))}
         </div>
       )}
 
-      <div className="mb-8 mt-12">
+      {/* Related Tools - FIXED COLORS! */}
+      <div className="mt-12">
         <div className="mb-6">
-          <h2 className="text-2xl font-bold tracking-tight">Related Tools</h2>
-          <p className="mt-1 text-muted-foreground">
+          <h2 className="text-foreground text-2xl font-bold tracking-tight">
+            Related Tools
+          </h2>
+          <p className="text-muted-foreground mt-2">
             Explore more email authentication tools to secure your domain
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+          {/* SPF Surveyor - Primary Color */}
           <Link
             href="/tools/spf-surveyor"
-            className="group relative overflow-hidden rounded-lg border border-green-200 bg-green-50 p-5 transition-all hover:shadow-md dark:border-green-800 dark:bg-green-950"
+            className="group border-border/40 from-primary/5 to-background/20 hover:border-primary/30 hover:shadow-primary/5 relative overflow-hidden rounded-lg border bg-gradient-to-br p-6 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
           >
-            <div className="flex items-start gap-4">
-              <div className="rounded-full bg-green-100 p-2 dark:bg-green-900">
-                <Mail className="h-6 w-6 text-primary" />
+            <div className="from-primary/10 absolute inset-0 bg-gradient-to-br to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+            <div className="relative z-10">
+              <div className="from-primary/15 to-primary/10 shadow-primary/5 mb-4 inline-flex rounded-md bg-gradient-to-br p-3 shadow-lg transition-transform duration-300 group-hover:scale-110">
+                <Mail className="text-primary h-6 w-6" />
               </div>
-              <div>
-                <h3 className="text-lg font-semibold group-hover:underline">
-                  SPF Surveyor
-                </h3>
-                <p className="mt-1 text-sm text-muted-foreground">
-                  Validate and troubleshoot your SPF records
-                </p>
-              </div>
+              <h3 className="text-foreground group-hover:text-primary mb-2 text-lg font-semibold transition-colors">
+                SPF Surveyor
+              </h3>
+              <p className="text-muted-foreground text-sm">
+                Validate and troubleshoot your SPF records
+              </p>
             </div>
-            <div className="absolute bottom-0 left-0 h-1 w-0 bg-primary transition-all duration-300 group-hover:w-full"></div>
+            <div className="from-primary absolute bottom-0 left-0 h-1 w-0 bg-gradient-to-r to-purple-500 transition-all duration-300 group-hover:w-full" />
           </Link>
 
+          {/* DKIM Validator - Purple Color */}
           <Link
             href="/tools/dkim-validator"
-            className="group relative overflow-hidden rounded-lg border border-purple-200 bg-purple-50 p-5 transition-all hover:shadow-md dark:border-purple-800 dark:bg-purple-950"
+            className="group border-border/40 to-background/20 relative overflow-hidden rounded-lg border bg-gradient-to-br from-purple-500/5 p-6 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-purple-500/30 hover:shadow-2xl hover:shadow-purple-500/5"
           >
-            <div className="flex items-start gap-4">
-              <div className="rounded-full bg-purple-100 p-2 dark:bg-purple-900">
-                <Key className="h-6 w-6 text-primary" />
+            <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+            <div className="relative z-10">
+              <div className="mb-4 inline-flex rounded-md bg-gradient-to-br from-purple-500/15 to-purple-500/10 p-3 shadow-lg shadow-purple-500/5 transition-transform duration-300 group-hover:scale-110">
+                <Key className="h-6 w-6 text-purple-500" />
               </div>
-              <div>
-                <h3 className="text-lg font-semibold group-hover:underline">
-                  DKIM Validator
-                </h3>
-                <p className="mt-1 text-sm text-muted-foreground">
-                  Verify your DKIM signatures and configuration
-                </p>
-              </div>
+              <h3 className="text-foreground mb-2 text-lg font-semibold transition-colors group-hover:text-purple-500">
+                DKIM Validator
+              </h3>
+              <p className="text-muted-foreground text-sm">
+                Verify your DKIM signatures and configuration
+              </p>
             </div>
-            <div className="absolute bottom-0 left-0 h-1 w-0 bg-primary transition-all duration-300 group-hover:w-full"></div>
+            <div className="to-primary absolute bottom-0 left-0 h-1 w-0 bg-gradient-to-r from-purple-500 transition-all duration-300 group-hover:w-full" />
           </Link>
 
+          {/* Domain Security Checker - Gradient */}
           <Link
             href="/tools/domain-security-checker"
-            className="group relative overflow-hidden rounded-lg border border-primary/20 bg-secondary p-5 transition-all hover:shadow-md dark:border-primary dark:bg-primary"
+            className="group border-border/40 from-primary/5 to-background/20 hover:border-primary/30 hover:shadow-primary/5 relative overflow-hidden rounded-lg border bg-gradient-to-br via-purple-500/5 p-6 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
           >
-            <div className="flex items-start gap-4">
-              <div className="rounded-full bg-primary/10 p-2 dark:bg-primary">
-                <Shield className="h-6 w-6 text-primary" />
+            <div className="from-primary/10 absolute inset-0 bg-gradient-to-br via-purple-500/10 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+            <div className="relative z-10">
+              <div className="from-primary/15 shadow-primary/5 mb-4 inline-flex rounded-md bg-gradient-to-br to-purple-500/15 p-3 shadow-lg transition-transform duration-300 group-hover:scale-110">
+                <Shield className="text-primary h-6 w-6" />
               </div>
-              <div>
-                <h3 className="text-lg font-semibold group-hover:underline">
-                  Domain Security Checker
-                </h3>
-                <p className="mt-1 text-sm text-muted-foreground">
-                  Comprehensive security analysis for your domain
-                </p>
-              </div>
+              <h3 className="text-foreground group-hover:from-primary mb-2 text-lg font-semibold transition-all group-hover:bg-gradient-to-r group-hover:to-purple-500 group-hover:bg-clip-text group-hover:text-transparent">
+                Domain Security Checker
+              </h3>
+              <p className="text-muted-foreground text-sm">
+                Comprehensive security analysis for your domain
+              </p>
             </div>
-            <div className="absolute bottom-0 left-0 h-1 w-0 bg-primary transition-all duration-300 group-hover:w-full"></div>
+            <div className="from-primary to-primary absolute bottom-0 left-0 h-1 w-0 bg-gradient-to-r via-purple-500 transition-all duration-300 group-hover:w-full" />
           </Link>
         </div>
       </div>

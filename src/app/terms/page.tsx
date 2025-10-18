@@ -3,12 +3,12 @@ import { FileText, ChevronRight } from "lucide-react";
 
 export default function TermsPage() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="bg-background min-h-screen">
       {/* Breadcrumb */}
-      <div className="border-b bg-secondary/30">
+      <div className="bg-secondary/30 border-b">
         <div className="container py-4">
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <Link href="/" className="transition-colors hover:text-foreground">
+          <div className="text-muted-foreground flex items-center gap-2 text-sm">
+            <Link href="/" className="hover:text-foreground transition-colors">
               Home
             </Link>
             <ChevronRight className="h-4 w-4" />
@@ -23,14 +23,14 @@ export default function TermsPage() {
           {/* Header */}
           <div className="mb-12">
             <div className="mb-6 inline-flex items-center gap-3">
-              <div className="rounded-xl bg-primary/10 p-3">
-                <FileText className="h-6 w-6 text-primary" />
+              <div className="bg-primary/10 rounded-md p-3">
+                <FileText className="text-primary h-6 w-6" />
               </div>
               <h1 className="text-4xl font-bold md:text-5xl">
                 Terms of Service
               </h1>
             </div>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-muted-foreground text-lg">
               Last updated: January 16, 2025
             </p>
           </div>
@@ -49,7 +49,7 @@ export default function TermsPage() {
               <h2 className="mb-4 text-2xl font-bold">
                 1. Acceptance of Terms
               </h2>
-              <div className="space-y-4 text-muted-foreground">
+              <div className="text-muted-foreground space-y-4">
                 <p>
                   By creating an account or using our Services, you acknowledge
                   that you have read, understood, and agree to be bound by these
@@ -70,7 +70,7 @@ export default function TermsPage() {
               <h2 className="mb-4 text-2xl font-bold">
                 2. Service Description
               </h2>
-              <div className="space-y-4 text-muted-foreground">
+              <div className="text-muted-foreground space-y-4">
                 <p>TrustYourInbox provides:</p>
                 <ul className="list-disc space-y-2 pl-6">
                   <li>DMARC aggregate report (RUA) processing and analysis</li>
@@ -92,7 +92,7 @@ export default function TermsPage() {
               <h2 className="mb-4 text-2xl font-bold">
                 3. Account Registration
               </h2>
-              <div className="space-y-4 text-muted-foreground">
+              <div className="text-muted-foreground space-y-4">
                 <p>
                   <strong className="text-foreground">Account Creation:</strong>{" "}
                   You must provide accurate, current, and complete information
@@ -120,7 +120,7 @@ export default function TermsPage() {
               <h2 className="mb-4 text-2xl font-bold">
                 4. Subscription Plans and Payment
               </h2>
-              <div className="space-y-4 text-muted-foreground">
+              <div className="text-muted-foreground space-y-4">
                 <p>
                   <strong className="text-foreground">Free Plan:</strong> Our
                   free plan provides limited access to our Services with usage
@@ -155,7 +155,7 @@ export default function TermsPage() {
             {/* Section 5 */}
             <section className="mb-12">
               <h2 className="mb-4 text-2xl font-bold">5. Acceptable Use</h2>
-              <div className="space-y-4 text-muted-foreground">
+              <div className="text-muted-foreground space-y-4">
                 <p>You agree not to:</p>
                 <ul className="list-disc space-y-2 pl-6">
                   <li>Violate any applicable laws or regulations</li>
@@ -194,7 +194,7 @@ export default function TermsPage() {
             {/* Section 6 */}
             <section className="mb-12">
               <h2 className="mb-4 text-2xl font-bold">6. Data and Privacy</h2>
-              <div className="space-y-4 text-muted-foreground">
+              <div className="text-muted-foreground space-y-4">
                 <p>
                   <strong className="text-foreground">Your Data:</strong> You
                   retain ownership of all data you submit to our Services. You
@@ -220,7 +220,7 @@ export default function TermsPage() {
               <h2 className="mb-4 text-2xl font-bold">
                 7. Intellectual Property
               </h2>
-              <div className="space-y-4 text-muted-foreground">
+              <div className="text-muted-foreground space-y-4">
                 <p>
                   All content, features, and functionality of our Services,
                   including but not limited to text, graphics, logos, icons,
@@ -241,7 +241,7 @@ export default function TermsPage() {
               <h2 className="mb-4 text-2xl font-bold">
                 8. Service Availability
               </h2>
-              <div className="space-y-4 text-muted-foreground">
+              <div className="text-muted-foreground space-y-4">
                 <p>
                   We strive to provide reliable Services with minimal downtime.
                   However, we do not guarantee uninterrupted or error-free
@@ -262,7 +262,7 @@ export default function TermsPage() {
               <h2 className="mb-4 text-2xl font-bold">
                 9. Limitation of Liability
               </h2>
-              <div className="space-y-4 text-muted-foreground">
+              <div className="text-muted-foreground space-y-4">
                 <p>
                   TO THE MAXIMUM EXTENT PERMITTED BY LAW, TRUSTYOURINBOX SHALL
                   NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL,
@@ -281,7 +281,7 @@ export default function TermsPage() {
             {/* Section 10 */}
             <section className="mb-12">
               <h2 className="mb-4 text-2xl font-bold">10. Indemnification</h2>
-              <div className="space-y-4 text-muted-foreground">
+              <div className="text-muted-foreground space-y-4">
                 <p>
                   You agree to indemnify, defend, and hold harmless
                   TrustYourInbox and its officers, directors, employees, and
@@ -295,7 +295,7 @@ export default function TermsPage() {
             {/* Section 11 */}
             <section className="mb-12">
               <h2 className="mb-4 text-2xl font-bold">11. Termination</h2>
-              <div className="space-y-4 text-muted-foreground">
+              <div className="text-muted-foreground space-y-4">
                 <p>
                   We may suspend or terminate your access to our Services at any
                   time, with or without cause, with or without notice. Reasons
@@ -315,7 +315,7 @@ export default function TermsPage() {
               <h2 className="mb-4 text-2xl font-bold">
                 12. Governing Law and Disputes
               </h2>
-              <div className="space-y-4 text-muted-foreground">
+              <div className="text-muted-foreground space-y-4">
                 <p>
                   These Terms are governed by the laws of [Jurisdiction],
                   without regard to its conflict of law provisions. Any disputes
@@ -329,7 +329,7 @@ export default function TermsPage() {
             {/* Section 13 */}
             <section className="mb-12">
               <h2 className="mb-4 text-2xl font-bold">13. Changes to Terms</h2>
-              <div className="space-y-4 text-muted-foreground">
+              <div className="text-muted-foreground space-y-4">
                 <p>
                   We may update these Terms from time to time. We will notify
                   you of material changes by email or through our platform. Your
@@ -342,7 +342,7 @@ export default function TermsPage() {
             {/* Contact */}
             <section className="mb-12">
               <h2 className="mb-4 text-2xl font-bold">Contact Us</h2>
-              <div className="space-y-4 text-muted-foreground">
+              <div className="text-muted-foreground space-y-4">
                 <p>
                   If you have questions about these Terms of Service, please
                   contact us:

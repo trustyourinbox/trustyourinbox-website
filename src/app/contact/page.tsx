@@ -28,19 +28,19 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="bg-background min-h-screen">
       {/* Hero Section */}
-      <section className="bg-gradient-to-b from-background to-secondary/30 py-24 md:py-32">
+      <section className="from-background to-secondary/30 bg-gradient-to-b py-24 md:py-32">
         <div className="container">
           <div className="mx-auto max-w-3xl text-center">
-            <div className="mb-6 inline-flex items-center rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-sm font-medium">
-              <Mail className="mr-2 h-4 w-4 text-primary" />
+            <div className="border-primary/20 bg-primary/5 mb-6 inline-flex items-center rounded-full border px-4 py-1.5 text-sm font-medium">
+              <Mail className="text-primary mr-2 h-4 w-4" />
               <span className="text-primary">Get In Touch</span>
             </div>
             <h1 className="mb-6 text-5xl font-bold tracking-tight md:text-6xl">
               Contact <span className="text-primary">Our Team</span>
             </h1>
-            <p className="text-xl leading-relaxed text-muted-foreground">
+            <p className="text-muted-foreground text-xl leading-relaxed">
               Have questions about TrustYourInbox? We&apos;re here to help.
               Reach out to our team and we&apos;ll get back to you as soon as
               possible.
@@ -144,14 +144,14 @@ export default function ContactPage() {
               <h2 className="mb-6 text-3xl font-bold">Get In Touch</h2>
               <div className="mb-12 space-y-6">
                 <div className="flex items-start gap-4">
-                  <div className="inline-flex rounded-xl bg-primary/10 p-3">
-                    <Mail className="h-5 w-5 text-primary" />
+                  <div className="bg-primary/10 inline-flex rounded-md p-3">
+                    <Mail className="text-primary h-5 w-5" />
                   </div>
                   <div>
                     <h3 className="mb-1 font-semibold">Email</h3>
                     <a
                       href="mailto:support@trustyourinbox.com"
-                      className="text-muted-foreground transition-colors hover:text-primary"
+                      className="text-muted-foreground hover:text-primary transition-colors"
                     >
                       support@trustyourinbox.com
                     </a>
@@ -159,14 +159,14 @@ export default function ContactPage() {
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="inline-flex rounded-xl bg-primary/10 p-3">
-                    <Phone className="h-5 w-5 text-primary" />
+                  <div className="bg-primary/10 inline-flex rounded-md p-3">
+                    <Phone className="text-primary h-5 w-5" />
                   </div>
                   <div>
                     <h3 className="mb-1 font-semibold">Phone</h3>
                     <a
                       href="tel:+1-800-123-4567"
-                      className="text-muted-foreground transition-colors hover:text-primary"
+                      className="text-muted-foreground hover:text-primary transition-colors"
                     >
                       +1 (800) 123-4567
                     </a>
@@ -174,8 +174,8 @@ export default function ContactPage() {
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="inline-flex rounded-xl bg-primary/10 p-3">
-                    <MapPin className="h-5 w-5 text-primary" />
+                  <div className="bg-primary/10 inline-flex rounded-md p-3">
+                    <MapPin className="text-primary h-5 w-5" />
                   </div>
                   <div>
                     <h3 className="mb-1 font-semibold">Office</h3>
@@ -191,29 +191,29 @@ export default function ContactPage() {
               </div>
 
               {/* FAQ Quick Links */}
-              <div className="rounded-2xl border border-border bg-secondary/30 p-8">
+              <div className="border-border bg-secondary/30 rounded-lg border p-8">
                 <h3 className="mb-4 text-xl font-bold">
                   Looking for Quick Answers?
                 </h3>
-                <p className="mb-6 text-muted-foreground">
+                <p className="text-muted-foreground mb-6">
                   Check out our resources for immediate help:
                 </p>
                 <div className="space-y-3">
                   <a
                     href="/docs"
-                    className="block text-sm font-medium text-primary hover:underline"
+                    className="text-primary block text-sm font-medium hover:underline"
                   >
                     → Documentation
                   </a>
                   <a
                     href="/guides"
-                    className="block text-sm font-medium text-primary hover:underline"
+                    className="text-primary block text-sm font-medium hover:underline"
                   >
                     → DMARC Guides
                   </a>
                   <a
                     href="/support"
-                    className="block text-sm font-medium text-primary hover:underline"
+                    className="text-primary block text-sm font-medium hover:underline"
                   >
                     → Support Center
                   </a>

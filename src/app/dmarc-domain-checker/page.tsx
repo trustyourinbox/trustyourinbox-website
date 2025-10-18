@@ -76,7 +76,7 @@ function DmarcDomainCheckerInner() {
     return (
       <div className="min-h-screen bg-gray-50 px-4 py-12 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-3xl text-center">
-          <Loader2 className="mx-auto mb-4 h-12 w-12 animate-spin text-primary" />
+          <Loader2 className="text-primary mx-auto mb-4 h-12 w-12 animate-spin" />
           <h1 className="mb-4 text-3xl font-bold text-gray-900">
             Checking Domain
           </h1>
@@ -121,10 +121,10 @@ function DmarcDomainCheckerInner() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="rounded-xl bg-white p-6 shadow-lg"
+            className="rounded-md bg-white p-6 shadow-lg"
           >
-            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
-              <Shield className="h-6 w-6 text-primary" />
+            <div className="bg-primary/10 mb-4 flex h-12 w-12 items-center justify-center rounded-full">
+              <Shield className="text-primary h-6 w-6" />
             </div>
             <h3 className="mb-2 text-lg font-semibold">DMARC</h3>
             <div className="space-y-2">
@@ -152,10 +152,10 @@ function DmarcDomainCheckerInner() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="rounded-xl bg-white p-6 shadow-lg"
+            className="rounded-md bg-white p-6 shadow-lg"
           >
-            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
-              <Mail className="h-6 w-6 text-primary" />
+            <div className="bg-primary/10 mb-4 flex h-12 w-12 items-center justify-center rounded-full">
+              <Mail className="text-primary h-6 w-6" />
             </div>
             <h3 className="mb-2 text-lg font-semibold">SPF</h3>
             <div className="space-y-2">
@@ -165,7 +165,7 @@ function DmarcDomainCheckerInner() {
                   {results.spf.status}
                 </span>
               </div>
-              <div className="break-all text-sm text-gray-600">
+              <div className="text-sm break-all text-gray-600">
                 <span className="mb-1 block font-medium">Record:</span>
                 {results.spf.record}
               </div>
@@ -177,10 +177,10 @@ function DmarcDomainCheckerInner() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="rounded-xl bg-white p-6 shadow-lg"
+            className="rounded-md bg-white p-6 shadow-lg"
           >
-            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
-              <Lock className="h-6 w-6 text-primary" />
+            <div className="bg-primary/10 mb-4 flex h-12 w-12 items-center justify-center rounded-full">
+              <Lock className="text-primary h-6 w-6" />
             </div>
             <h3 className="mb-2 text-lg font-semibold">DKIM</h3>
             <div className="space-y-2">
@@ -190,7 +190,7 @@ function DmarcDomainCheckerInner() {
                   {results.dkim.status}
                 </span>
               </div>
-              <div className="break-all text-sm text-gray-600">
+              <div className="text-sm break-all text-gray-600">
                 <span className="mb-1 block font-medium">Record:</span>
                 {results.dkim.record}
               </div>
@@ -203,12 +203,12 @@ function DmarcDomainCheckerInner() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="mt-12 rounded-xl bg-white p-6 shadow-lg"
+          className="mt-12 rounded-md bg-white p-6 shadow-lg"
         >
           <h3 className="mb-4 text-lg font-semibold">Recommendations</h3>
           <div className="space-y-4">
             <div className="flex items-start">
-              <CheckCircle className="mr-3 mt-0.5 h-5 w-5 text-green-600" />
+              <CheckCircle className="mt-0.5 mr-3 h-5 w-5 text-green-600" />
               <div>
                 <p className="font-medium text-gray-900">
                   DMARC is properly configured
@@ -220,7 +220,7 @@ function DmarcDomainCheckerInner() {
               </div>
             </div>
             <div className="flex items-start">
-              <CheckCircle className="mr-3 mt-0.5 h-5 w-5 text-green-600" />
+              <CheckCircle className="mt-0.5 mr-3 h-5 w-5 text-green-600" />
               <div>
                 <p className="font-medium text-gray-900">SPF record is valid</p>
                 <p className="mt-1 text-sm text-gray-600">
@@ -229,7 +229,7 @@ function DmarcDomainCheckerInner() {
               </div>
             </div>
             <div className="flex items-start">
-              <CheckCircle className="mr-3 mt-0.5 h-5 w-5 text-green-600" />
+              <CheckCircle className="mt-0.5 mr-3 h-5 w-5 text-green-600" />
               <div>
                 <p className="font-medium text-gray-900">
                   DKIM is properly configured
@@ -246,7 +246,7 @@ function DmarcDomainCheckerInner() {
         <div className="mt-12 text-center">
           <a
             href="/tools/dmarc-domain-checker"
-            className="inline-flex items-center justify-center rounded-md bg-primary px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-primary focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+            className="bg-primary hover:bg-primary focus:ring-ring inline-flex items-center justify-center rounded-md px-6 py-3 text-base font-medium text-white shadow-sm focus:ring-2 focus:ring-offset-2 focus:outline-none"
           >
             Check Another Domain
           </a>
@@ -261,7 +261,7 @@ export default function DmarcDomainChecker() {
     <Suspense
       fallback={
         <div className="flex min-h-screen items-center justify-center">
-          <Loader2 className="h-12 w-12 animate-spin text-primary" />
+          <Loader2 className="text-primary h-12 w-12 animate-spin" />
         </div>
       }
     >

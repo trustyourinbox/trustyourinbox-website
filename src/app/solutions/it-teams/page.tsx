@@ -131,7 +131,7 @@ export default function ITTeamsSolutionPage() {
       {/* CTA Section */}
       <section className="bg-background py-16 md:py-24">
         <div className="container">
-          <div className="border-primary/20 from-primary/5 mx-auto max-w-3xl rounded-2xl border bg-gradient-to-br to-transparent p-8 text-center sm:p-12">
+          <div className="border-primary/20 from-primary/5 mx-auto max-w-3xl rounded-lg border bg-gradient-to-br to-transparent p-8 text-center sm:p-12">
             <h2 className="mb-4 text-3xl font-bold sm:text-4xl">
               Ready to Simplify DMARC?
             </h2>
