@@ -127,6 +127,7 @@ export default function ModernHeroSection() {
                       width={logo.width}
                       height={logo.height}
                       className="h-8 w-auto object-contain sm:h-10"
+                      style={{ height: "auto" }}
                     />
                   </div>
                 ))}
@@ -173,6 +174,7 @@ export default function ModernHeroSection() {
                   height={750}
                   className="h-auto w-full"
                   priority
+                  fetchPriority="high"
                   quality={90}
                   placeholder="blur"
                   blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="

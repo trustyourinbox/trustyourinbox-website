@@ -6,7 +6,6 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import ModernNavbar from "@/components/ModernNavbar";
 import Footer from "@/components/Footer";
 import "./globals.css";
-import "../styles/fonts.css";
 
 const averta = localFont({
   src: [
@@ -27,7 +26,7 @@ const averta = localFont({
     },
   ],
   variable: "--font-sans",
-  display: "swap",
+  display: "optional",
 });
 
 export const metadata: Metadata = {
@@ -147,6 +146,8 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${averta.variable}`} suppressHydrationWarning>
       <head>
+        <link rel="preconnect" href="https://va.vercel-scripts.com" />
+        <link rel="dns-prefetch" href="https://va.vercel-scripts.com" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}

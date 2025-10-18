@@ -278,17 +278,19 @@ export default function ProductShowcase() {
                   ></div>
 
                   <div className="border-primary/20 bg-background relative overflow-hidden rounded-xl border-2 shadow-2xl transition-transform duration-300 hover:scale-[1.02]">
-                    <Image
-                      src={feature.image}
-                      alt={`${feature.title} screenshot`}
-                      width={1200}
-                      height={750}
-                      className="h-auto w-full"
-                      quality={90}
-                      loading="lazy"
-                      placeholder="blur"
-                      blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
-                    />
+                    <div style={{ aspectRatio: "1200/750" }}>
+                      <Image
+                        src={feature.image}
+                        alt={`${feature.title} screenshot`}
+                        width={1200}
+                        height={750}
+                        className="h-auto w-full"
+                        quality={90}
+                        loading="lazy"
+                        placeholder="blur"
+                        blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
