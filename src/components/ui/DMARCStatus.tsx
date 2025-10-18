@@ -21,7 +21,9 @@ export function DMARCStatus({ policy, className }: DMARCStatusProps) {
         "This is the most secure configuration. Unauthorized emails will be rejected at the SMTP level.",
       rating: "5/5",
       label: "Excellent",
-      color: "bg-emerald-50 border-emerald-200 text-emerald-800",
+      color:
+        "bg-emerald-50 dark:bg-emerald-950/30 border-emerald-200 dark:border-emerald-800",
+      textColor: "text-emerald-800",
       icon: <ShieldCheck className="h-6 w-6 text-emerald-500" />,
       dots: 5,
       activeColor: "bg-emerald-500",
@@ -34,7 +36,8 @@ export function DMARCStatus({ policy, className }: DMARCStatusProps) {
       rating: "3/5",
       label: "Good",
       color: "bg-secondary border-primary/20 text-foreground",
-      icon: <Shield className="h-6 w-6 text-primary" />,
+      textColor: "",
+      icon: <Shield className="text-primary h-6 w-6" />,
       dots: 3,
       activeColor: "bg-primary",
       inactiveColor: "bg-primary/20",
@@ -45,7 +48,9 @@ export function DMARCStatus({ policy, className }: DMARCStatusProps) {
         "This is a monitoring-only configuration. No action is taken on suspicious emails.",
       rating: "1/5",
       label: "Poor",
-      color: "bg-amber-50 border-amber-200 text-amber-800",
+      color:
+        "bg-amber-50 dark:bg-amber-950/30 border-amber-200 dark:border-amber-800",
+      textColor: "text-amber-800",
       icon: <ShieldAlert className="h-6 w-6 text-amber-500" />,
       dots: 1,
       activeColor: "bg-amber-500",
@@ -57,7 +62,8 @@ export function DMARCStatus({ policy, className }: DMARCStatusProps) {
         "Your domain is vulnerable to email spoofing attacks. Implementing DMARC is strongly recommended.",
       rating: "0/5",
       label: "Critical",
-      color: "bg-red-50 border-red-200 text-red-800",
+      color: "bg-red-50 dark:bg-red-950/30 border-red-200 dark:border-red-800",
+      textColor: "text-red-800",
       icon: <ShieldX className="h-6 w-6 text-red-500" />,
       dots: 0,
       activeColor: "bg-red-500",
@@ -80,7 +86,11 @@ export function DMARCStatus({ policy, className }: DMARCStatusProps) {
         <div className="flex-1 space-y-3">
           <div>
             <div className="flex items-center gap-2">
-              <h3 className="text-base font-medium">{details.title}</h3>
+              <h3
+                className={`text-base font-medium ${details.textColor || ""}`}
+              >
+                {details.title}
+              </h3>
               <button
                 onClick={() => setShowInfo(!showInfo)}
                 className="rounded-full p-1 transition-colors hover:bg-black/5"
@@ -89,7 +99,9 @@ export function DMARCStatus({ policy, className }: DMARCStatusProps) {
                 <Info className="h-4 w-4 opacity-60" />
               </button>
             </div>
-            <p className="mt-1 text-sm opacity-80">{details.description}</p>
+            <p className={`mt-1 text-sm ${details.textColor || ""}`}>
+              {details.description}
+            </p>
           </div>
 
           {showInfo && (

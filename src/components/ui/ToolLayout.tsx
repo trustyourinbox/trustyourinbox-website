@@ -38,29 +38,9 @@ export function ToolLayout({
               <span className="text-primary">Free Tool</span>
             </div>
 
-            {/* Title with gradient effect */}
-            <h1 className="text-3xl leading-snug font-bold tracking-tight sm:text-4xl md:text-5xl lg:text-6xl">
-              {title.split(" ").map((word, index) => {
-                const isKeyword =
-                  word.toUpperCase() === "DMARC" ||
-                  word.toUpperCase() === "SPF" ||
-                  word.toUpperCase() === "DKIM" ||
-                  word.toUpperCase() === "XML" ||
-                  word.toUpperCase() === "DOMAIN";
-
-                return (
-                  <span key={index}>
-                    {isKeyword ? (
-                      <span className="from-primary bg-gradient-to-r to-purple-500 bg-clip-text text-transparent">
-                        {word}
-                      </span>
-                    ) : (
-                      <span className="text-foreground">{word}</span>
-                    )}
-                    {index < title.split(" ").length - 1 ? " " : ""}
-                  </span>
-                );
-              })}
+            {/* Title - matching homepage style with single accent word */}
+            <h1 className="text-foreground text-3xl leading-snug font-bold tracking-tight sm:text-4xl md:text-5xl lg:text-6xl">
+              {title}
             </h1>
 
             <p className="text-muted-foreground mt-6 text-lg leading-relaxed sm:text-xl">

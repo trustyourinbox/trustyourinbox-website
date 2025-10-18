@@ -70,7 +70,7 @@ export function AccordionTrigger({
   return (
     <button
       type="button"
-      className={`flex w-full items-center justify-between px-2 py-3 text-left font-medium text-gray-900 transition-colors focus:outline-none ${isOpen ? "bg-secondary" : "bg-white"} ${className || ""}`}
+      className={`text-foreground flex w-full items-center justify-between px-2 py-3 text-left font-medium transition-colors focus:outline-none ${isOpen ? "bg-muted" : "bg-card"} ${className || ""}`}
       onClick={() => context.toggleItem(itemValue)}
       aria-expanded={isOpen}
     >

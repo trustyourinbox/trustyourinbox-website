@@ -236,7 +236,7 @@ export default function DMARCAnalyzerPage() {
             <div className="space-y-2">
               <label
                 htmlFor="dmarc"
-                className="text-foreground text-sm font-medium"
+                className="text-foreground mb-2 block text-sm font-medium"
               >
                 DMARC Record
               </label>
@@ -378,76 +378,73 @@ export default function DMARCAnalyzerPage() {
         </div>
       )}
 
-      {/* Related Tools - FIXED COLORS! */}
-      <div className="mt-12">
-        <div className="mb-6">
-          <h2 className="text-foreground text-2xl font-bold tracking-tight">
+      {/* Related Tools */}
+      <div className="mt-8 mb-8">
+        <div className="mb-4">
+          <h2 className="text-foreground text-xl font-bold tracking-tight">
             Related Tools
           </h2>
-          <p className="text-muted-foreground mt-2">
-            Explore more email authentication tools to secure your domain
+          <p className="text-muted-foreground mt-1 text-sm">
+            More email authentication tools
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-          {/* SPF Surveyor - Primary Color */}
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
           <Link
             href="/tools/spf-surveyor"
-            className="group border-border/40 from-primary/5 to-background/20 hover:border-primary/30 hover:shadow-primary/5 relative overflow-hidden rounded-lg border bg-gradient-to-br p-6 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
+            className="group border-border/40 bg-card hover:border-primary/30 relative overflow-hidden rounded-lg border p-4 transition-all duration-200 hover:shadow-lg"
           >
-            <div className="from-primary/10 absolute inset-0 bg-gradient-to-br to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-            <div className="relative z-10">
-              <div className="from-primary/15 to-primary/10 shadow-primary/5 mb-4 inline-flex rounded-md bg-gradient-to-br p-3 shadow-lg transition-transform duration-300 group-hover:scale-110">
-                <Mail className="text-primary h-6 w-6" />
+            <div className="flex items-start gap-3">
+              <div className="bg-primary/10 flex-shrink-0 rounded-md p-2">
+                <Mail className="text-primary h-4 w-4" />
               </div>
-              <h3 className="text-foreground group-hover:text-primary mb-2 text-lg font-semibold transition-colors">
-                SPF Surveyor
-              </h3>
-              <p className="text-muted-foreground text-sm">
-                Validate and troubleshoot your SPF records
-              </p>
+              <div className="min-w-0 flex-1">
+                <h3 className="text-foreground group-hover:text-primary text-sm font-semibold transition-colors">
+                  SPF Surveyor
+                </h3>
+                <p className="text-muted-foreground mt-0.5 line-clamp-2 text-xs">
+                  Validate and troubleshoot SPF records
+                </p>
+              </div>
             </div>
-            <div className="from-primary absolute bottom-0 left-0 h-1 w-0 bg-gradient-to-r to-purple-500 transition-all duration-300 group-hover:w-full" />
           </Link>
 
-          {/* DKIM Validator - Purple Color */}
           <Link
             href="/tools/dkim-validator"
-            className="group border-border/40 to-background/20 relative overflow-hidden rounded-lg border bg-gradient-to-br from-purple-500/5 p-6 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-purple-500/30 hover:shadow-2xl hover:shadow-purple-500/5"
+            className="group border-border/40 bg-card hover:border-primary/30 relative overflow-hidden rounded-lg border p-4 transition-all duration-200 hover:shadow-lg"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-            <div className="relative z-10">
-              <div className="mb-4 inline-flex rounded-md bg-gradient-to-br from-purple-500/15 to-purple-500/10 p-3 shadow-lg shadow-purple-500/5 transition-transform duration-300 group-hover:scale-110">
-                <Key className="h-6 w-6 text-purple-500" />
+            <div className="flex items-start gap-3">
+              <div className="bg-primary/10 flex-shrink-0 rounded-md p-2">
+                <Key className="text-primary h-4 w-4" />
               </div>
-              <h3 className="text-foreground mb-2 text-lg font-semibold transition-colors group-hover:text-purple-500">
-                DKIM Validator
-              </h3>
-              <p className="text-muted-foreground text-sm">
-                Verify your DKIM signatures and configuration
-              </p>
+              <div className="min-w-0 flex-1">
+                <h3 className="text-foreground group-hover:text-primary text-sm font-semibold transition-colors">
+                  DKIM Validator
+                </h3>
+                <p className="text-muted-foreground mt-0.5 line-clamp-2 text-xs">
+                  Verify DKIM signatures and configuration
+                </p>
+              </div>
             </div>
-            <div className="to-primary absolute bottom-0 left-0 h-1 w-0 bg-gradient-to-r from-purple-500 transition-all duration-300 group-hover:w-full" />
           </Link>
 
-          {/* Domain Security Checker - Gradient */}
           <Link
             href="/tools/domain-security-checker"
-            className="group border-border/40 from-primary/5 to-background/20 hover:border-primary/30 hover:shadow-primary/5 relative overflow-hidden rounded-lg border bg-gradient-to-br via-purple-500/5 p-6 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
+            className="group border-border/40 bg-card hover:border-primary/30 relative overflow-hidden rounded-lg border p-4 transition-all duration-200 hover:shadow-lg"
           >
-            <div className="from-primary/10 absolute inset-0 bg-gradient-to-br via-purple-500/10 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-            <div className="relative z-10">
-              <div className="from-primary/15 shadow-primary/5 mb-4 inline-flex rounded-md bg-gradient-to-br to-purple-500/15 p-3 shadow-lg transition-transform duration-300 group-hover:scale-110">
-                <Shield className="text-primary h-6 w-6" />
+            <div className="flex items-start gap-3">
+              <div className="bg-primary/10 flex-shrink-0 rounded-md p-2">
+                <Shield className="text-primary h-4 w-4" />
               </div>
-              <h3 className="text-foreground group-hover:from-primary mb-2 text-lg font-semibold transition-all group-hover:bg-gradient-to-r group-hover:to-purple-500 group-hover:bg-clip-text group-hover:text-transparent">
-                Domain Security Checker
-              </h3>
-              <p className="text-muted-foreground text-sm">
-                Comprehensive security analysis for your domain
-              </p>
+              <div className="min-w-0 flex-1">
+                <h3 className="text-foreground group-hover:text-primary text-sm font-semibold transition-colors">
+                  Domain Security Checker
+                </h3>
+                <p className="text-muted-foreground mt-0.5 line-clamp-2 text-xs">
+                  Comprehensive security analysis for your domain
+                </p>
+              </div>
             </div>
-            <div className="from-primary to-primary absolute bottom-0 left-0 h-1 w-0 bg-gradient-to-r via-purple-500 transition-all duration-300 group-hover:w-full" />
           </Link>
         </div>
       </div>

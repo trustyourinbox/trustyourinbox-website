@@ -13,7 +13,10 @@ import {
   Info,
   UploadCloud,
   XCircle,
+  Mail,
+  Key,
 } from "lucide-react";
+import Link from "next/link";
 import { Bar, Pie } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -197,8 +200,8 @@ export default function DmarcPolicyImpactSimulator() {
   const sidebar = (
     <div className="space-y-6">
       <div>
-        <h3 className="mb-1 flex items-center gap-2 text-sm font-bold text-foreground">
-          <Shield className="h-4 w-4 text-primary" />
+        <h3 className="text-foreground mb-1 flex items-center gap-2 text-sm font-bold">
+          <Shield className="text-primary h-4 w-4" />
           DMARC Policy Impact Simulator
         </h3>
         <p className="text-xs text-gray-600">
@@ -209,7 +212,7 @@ export default function DmarcPolicyImpactSimulator() {
       </div>
       <div>
         <h4 className="mb-1 flex items-center gap-1 text-xs font-semibold text-gray-800">
-          <Info className="h-3 w-3 text-primary" />
+          <Info className="text-primary h-3 w-3" />
           How it works
         </h4>
         <ul className="list-disc space-y-1 pl-4 text-xs text-gray-600">
@@ -221,7 +224,7 @@ export default function DmarcPolicyImpactSimulator() {
       </div>
       <div>
         <h4 className="mb-1 flex items-center gap-1 text-xs font-semibold text-gray-800">
-          <BarChart2 className="h-3 w-3 text-primary" />
+          <BarChart2 className="text-primary h-3 w-3" />
           Best Practices
         </h4>
         <ul className="list-disc space-y-1 pl-4 text-xs text-gray-600">
@@ -354,13 +357,13 @@ export default function DmarcPolicyImpactSimulator() {
       <div className="container space-y-8">
         <Card className="p-6">
           <h2 className="mb-4 flex items-center gap-2 text-xl font-bold">
-            <FileText className="h-5 w-5 text-primary" />
+            <FileText className="text-primary h-5 w-5" />
             Upload DMARC XML Report
           </h2>
           <div className="flex flex-col gap-4">
             <label
               htmlFor="dmarc-upload"
-              className="group flex cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-primary/20 bg-secondary p-6 transition hover:bg-primary/10"
+              className="group border-primary/20 bg-secondary hover:bg-primary/10 flex cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed p-6 transition"
               style={{ minHeight: 120 }}
               onDragOver={(e) => e.preventDefault()}
               onDrop={(e) => {
@@ -378,8 +381,8 @@ export default function DmarcPolicyImpactSimulator() {
                 }
               }}
             >
-              <UploadCloud className="mb-2 h-10 w-10 text-primary/70 group-hover:text-primary" />
-              <span className="mb-1 text-sm font-medium text-foreground">
+              <UploadCloud className="text-primary/70 group-hover:text-primary mb-2 h-10 w-10" />
+              <span className="text-foreground mb-1 text-sm font-medium">
                 Drag & drop DMARC XML here, or click to select
               </span>
               <span className="text-xs text-gray-500">
@@ -394,9 +397,9 @@ export default function DmarcPolicyImpactSimulator() {
               />
             </label>
             {(xml || showSample) && (
-              <div className="flex items-center gap-2 rounded border border-primary/10 bg-white px-3 py-2">
-                <FileText className="h-4 w-4 text-primary" />
-                <span className="truncate text-xs font-medium text-foreground">
+              <div className="border-primary/10 flex items-center gap-2 rounded border bg-white px-3 py-2">
+                <FileText className="text-primary h-4 w-4" />
+                <span className="text-foreground truncate text-xs font-medium">
                   {showSample ? "Sample Data Loaded" : "File Loaded"}
                 </span>
                 <button
@@ -438,7 +441,7 @@ export default function DmarcPolicyImpactSimulator() {
 
         <Card className="p-6">
           <h2 className="mb-4 flex items-center gap-2 text-xl font-bold">
-            <Shield className="h-5 w-5 text-primary" />
+            <Shield className="text-primary h-5 w-5" />
             Simulate Policy
           </h2>
           <div className="mb-4 flex gap-4">
@@ -463,7 +466,7 @@ export default function DmarcPolicyImpactSimulator() {
           </div>
           <Button
             onClick={handleSimulate}
-            className="bg-primary text-white hover:bg-primary"
+            className="bg-primary hover:bg-primary text-white"
           >
             Simulate Impact
           </Button>
@@ -472,12 +475,12 @@ export default function DmarcPolicyImpactSimulator() {
         {impact && (
           <Card className="p-6">
             <h2 className="mb-4 flex items-center gap-2 text-xl font-bold">
-              <BarChart2 className="h-5 w-5 text-primary" />
+              <BarChart2 className="text-primary h-5 w-5" />
               Impact Visualization
             </h2>
             <div className="mb-6 grid grid-cols-1 gap-6 md:grid-cols-3">
-              <div className="rounded-lg bg-secondary p-4 text-center">
-                <div className="text-2xl font-bold text-foreground">
+              <div className="bg-secondary rounded-lg p-4 text-center">
+                <div className="text-foreground text-2xl font-bold">
                   {impact.total}
                 </div>
                 <div className="text-xs text-gray-600">Total Messages</div>
@@ -582,7 +585,7 @@ export default function DmarcPolicyImpactSimulator() {
         {impact && (
           <Card className="p-6">
             <h2 className="mb-4 flex items-center gap-2 text-xl font-bold">
-              <Info className="h-5 w-5 text-primary" />
+              <Info className="text-primary h-5 w-5" />
               Recommendations
             </h2>
             <ul className="list-disc space-y-2 pl-5 text-sm text-gray-700">
@@ -611,6 +614,75 @@ export default function DmarcPolicyImpactSimulator() {
             </ul>
           </Card>
         )}
+
+        {/* Related Tools */}
+        <div className="mt-8 mb-8">
+          <div className="mb-4">
+            <h2 className="text-xl font-bold tracking-tight">Related Tools</h2>
+            <p className="text-muted-foreground mt-1 text-sm">
+              More email authentication tools
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+            <Link
+              href="/tools/dmarc-analyzer"
+              className="group border-border/40 bg-card hover:border-primary/30 relative overflow-hidden rounded-lg border p-4 transition-all duration-200 hover:shadow-lg"
+            >
+              <div className="flex items-start gap-3">
+                <div className="bg-primary/10 flex-shrink-0 rounded-md p-2">
+                  <Shield className="text-primary h-4 w-4" />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <h3 className="text-foreground group-hover:text-primary text-sm font-semibold transition-colors">
+                    DMARC Analyzer
+                  </h3>
+                  <p className="text-muted-foreground mt-0.5 line-clamp-2 text-xs">
+                    Analyze DMARC configuration and get detailed reports
+                  </p>
+                </div>
+              </div>
+            </Link>
+
+            <Link
+              href="/tools/spf-surveyor"
+              className="group border-border/40 bg-card hover:border-primary/30 relative overflow-hidden rounded-lg border p-4 transition-all duration-200 hover:shadow-lg"
+            >
+              <div className="flex items-start gap-3">
+                <div className="bg-primary/10 flex-shrink-0 rounded-md p-2">
+                  <Mail className="text-primary h-4 w-4" />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <h3 className="text-foreground group-hover:text-primary text-sm font-semibold transition-colors">
+                    SPF Surveyor
+                  </h3>
+                  <p className="text-muted-foreground mt-0.5 line-clamp-2 text-xs">
+                    Validate and troubleshoot SPF records
+                  </p>
+                </div>
+              </div>
+            </Link>
+
+            <Link
+              href="/tools/dkim-validator"
+              className="group border-border/40 bg-card hover:border-primary/30 relative overflow-hidden rounded-lg border p-4 transition-all duration-200 hover:shadow-lg"
+            >
+              <div className="flex items-start gap-3">
+                <div className="bg-primary/10 flex-shrink-0 rounded-md p-2">
+                  <Key className="text-primary h-4 w-4" />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <h3 className="text-foreground group-hover:text-primary text-sm font-semibold transition-colors">
+                    DKIM Validator
+                  </h3>
+                  <p className="text-muted-foreground mt-0.5 line-clamp-2 text-xs">
+                    Verify DKIM signatures and configuration
+                  </p>
+                </div>
+              </div>
+            </Link>
+          </div>
+        </div>
       </div>
     </ToolLayout>
   );
