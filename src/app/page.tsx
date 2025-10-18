@@ -1,7 +1,6 @@
 import ModernHeroSection from "@/components/sections/ModernHeroSection";
 import ProductShowcase from "@/components/sections/ProductShowcase";
 import HowItWorksSection from "@/components/sections/HowItWorksSection";
-import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import FinalCtaSection from "@/components/sections/FinalCtaSection";
 
 export default function Home() {
@@ -10,7 +9,6 @@ export default function Home() {
       <ModernHeroSection />
       <ProductShowcase />
       <HowItWorksSection />
-      <TestimonialsSection />
       <FinalCtaSection />
     </div>
   );

@@ -93,7 +93,7 @@ const socialLinks = [
 
 export default function Footer() {
   return (
-    <footer className="relative overflow-hidden border-t border-border/50 bg-gradient-to-b from-background to-secondary/50">
+    <footer className="border-border/50 from-background to-secondary/50 relative overflow-hidden border-t bg-gradient-to-b">
       {/* Gradient Mesh Background */}
       <div
         className="absolute inset-0 opacity-30"
@@ -101,12 +101,12 @@ export default function Footer() {
       />
 
       {/* Bottom Accent Border */}
-      <div className="via-accent-hover absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-primary to-primary" />
+      <div className="via-accent-hover from-primary to-primary absolute right-0 bottom-0 left-0 h-1 bg-gradient-to-r" />
 
-      <div className="container relative z-10 py-12 md:py-16">
+      <div className="relative z-10 container py-12 md:py-16">
         {/* Logo & Brand Statement */}
         <div className="mb-12 md:mb-16">
-          <Link href="/" className="group mb-4 inline-flex items-center">
+          <Link href="/" className="group mb-4 inline-flex items-center gap-3">
             <div className="relative">
               <svg
                 width="36"
@@ -147,10 +147,13 @@ export default function Footer() {
                   strokeLinejoin="round"
                 />
               </svg>
-              <div className="absolute inset-0 bg-primary/20 blur-lg transition-all group-hover:bg-primary/30"></div>
+              <div className="bg-primary/20 group-hover:bg-primary/30 absolute inset-0 blur-lg transition-all"></div>
             </div>
+            <span className="text-foreground group-hover:text-primary text-2xl font-bold transition-colors">
+              TrustYourInbox
+            </span>
           </Link>
-          <p className="max-w-md text-base leading-relaxed text-muted-foreground">
+          <p className="text-muted-foreground max-w-md text-base leading-relaxed">
             Simplifying DMARC implementation and email security for
             organizations worldwide.
           </p>
@@ -159,10 +162,10 @@ export default function Footer() {
         {/* Main 4-Column Grid with Cards */}
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
           {/* Product Column */}
-          <div className="group relative overflow-hidden rounded-xl border border-border/50 bg-background/30 p-6 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/10">
-            <div className="mb-4 flex items-center gap-2 border-b border-border/30 pb-4">
-              <div className="rounded-lg bg-primary/10 p-1.5">
-                <Sparkles className="h-4 w-4 text-primary" />
+          <div className="group border-border/50 bg-background/30 hover:border-primary/30 hover:shadow-primary/10 relative overflow-hidden rounded-xl border p-6 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+            <div className="border-border/30 mb-4 flex items-center gap-2 border-b pb-4">
+              <div className="bg-primary/10 rounded-lg p-1.5">
+                <Sparkles className="text-primary h-4 w-4" />
               </div>
               <h3 className="text-sm font-semibold">Product</h3>
             </div>
@@ -173,7 +176,7 @@ export default function Footer() {
                   <li key={link.name}>
                     <Link
                       href={link.href}
-                      className="group/link flex items-center gap-2 text-muted-foreground transition-colors hover:text-primary"
+                      className="group/link text-muted-foreground hover:text-primary flex items-center gap-2 transition-colors"
                     >
                       <Icon className="h-4 w-4 transition-transform group-hover/link:scale-110" />
                       {link.name}
@@ -185,10 +188,10 @@ export default function Footer() {
           </div>
 
           {/* Tools Column */}
-          <div className="group relative overflow-hidden rounded-xl border border-border/50 bg-background/30 p-6 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/10">
-            <div className="mb-4 flex items-center gap-2 border-b border-border/30 pb-4">
-              <div className="rounded-lg bg-primary/10 p-1.5">
-                <Wrench className="h-4 w-4 text-primary" />
+          <div className="group border-border/50 bg-background/30 hover:border-primary/30 hover:shadow-primary/10 relative overflow-hidden rounded-xl border p-6 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+            <div className="border-border/30 mb-4 flex items-center gap-2 border-b pb-4">
+              <div className="bg-primary/10 rounded-lg p-1.5">
+                <Wrench className="text-primary h-4 w-4" />
               </div>
               <h3 className="text-sm font-semibold">Tools</h3>
             </div>
@@ -199,7 +202,7 @@ export default function Footer() {
                   <li key={tool.name}>
                     <Link
                       href={tool.href}
-                      className="group/link flex items-center gap-2 text-muted-foreground transition-colors hover:text-primary"
+                      className="group/link text-muted-foreground hover:text-primary flex items-center gap-2 transition-colors"
                     >
                       <Icon className="h-4 w-4 transition-transform group-hover/link:scale-110" />
                       {tool.name}
@@ -210,7 +213,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/tools"
-                  className="font-medium text-primary transition-colors hover:text-primary/80"
+                  className="text-primary hover:text-primary/80 font-medium transition-colors"
                 >
                   View All Tools →
                 </Link>
@@ -219,10 +222,10 @@ export default function Footer() {
           </div>
 
           {/* Resources Column */}
-          <div className="group relative overflow-hidden rounded-xl border border-border/50 bg-background/30 p-6 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/10">
-            <div className="mb-4 flex items-center gap-2 border-b border-border/30 pb-4">
-              <div className="rounded-lg bg-primary/10 p-1.5">
-                <BookOpen className="h-4 w-4 text-primary" />
+          <div className="group border-border/50 bg-background/30 hover:border-primary/30 hover:shadow-primary/10 relative overflow-hidden rounded-xl border p-6 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+            <div className="border-border/30 mb-4 flex items-center gap-2 border-b pb-4">
+              <div className="bg-primary/10 rounded-lg p-1.5">
+                <BookOpen className="text-primary h-4 w-4" />
               </div>
               <h3 className="text-sm font-semibold">Resources</h3>
             </div>
@@ -233,7 +236,7 @@ export default function Footer() {
                   <li key={link.name}>
                     <Link
                       href={link.href}
-                      className="group/link flex items-center gap-2 text-muted-foreground transition-colors hover:text-primary"
+                      className="group/link text-muted-foreground hover:text-primary flex items-center gap-2 transition-colors"
                     >
                       <Icon className="h-4 w-4 transition-transform group-hover/link:scale-110" />
                       {link.name}
@@ -245,10 +248,10 @@ export default function Footer() {
           </div>
 
           {/* Company & Legal Column */}
-          <div className="group relative overflow-hidden rounded-xl border border-border/50 bg-background/30 p-6 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/10">
-            <div className="mb-4 flex items-center gap-2 border-b border-border/30 pb-4">
-              <div className="rounded-lg bg-primary/10 p-1.5">
-                <Building2 className="h-4 w-4 text-primary" />
+          <div className="group border-border/50 bg-background/30 hover:border-primary/30 hover:shadow-primary/10 relative overflow-hidden rounded-xl border p-6 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+            <div className="border-border/30 mb-4 flex items-center gap-2 border-b pb-4">
+              <div className="bg-primary/10 rounded-lg p-1.5">
+                <Building2 className="text-primary h-4 w-4" />
               </div>
               <h3 className="text-sm font-semibold">Company</h3>
             </div>
@@ -259,7 +262,7 @@ export default function Footer() {
                   <li key={link.name}>
                     <Link
                       href={link.href}
-                      className="group/link flex items-center gap-2 text-muted-foreground transition-colors hover:text-primary"
+                      className="group/link text-muted-foreground hover:text-primary flex items-center gap-2 transition-colors"
                     >
                       <Icon className="h-4 w-4 transition-transform group-hover/link:scale-110" />
                       {link.name}
@@ -277,7 +280,7 @@ export default function Footer() {
                   <li key={link.name}>
                     <Link
                       href={link.href}
-                      className="group/link flex items-center gap-2 text-muted-foreground transition-colors hover:text-primary"
+                      className="group/link text-muted-foreground hover:text-primary flex items-center gap-2 transition-colors"
                     >
                       <Icon className="h-4 w-4 transition-transform group-hover/link:scale-110" />
                       {link.name}
@@ -290,8 +293,8 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-12 flex flex-col items-center justify-between gap-6 border-t border-border/50 bg-gradient-to-r from-transparent via-primary/5 to-transparent pt-8 sm:flex-row md:mt-16">
-          <p className="text-sm text-muted-foreground">
+        <div className="border-border/50 via-primary/5 mt-12 flex flex-col items-center justify-between gap-6 border-t bg-gradient-to-r from-transparent to-transparent pt-8 sm:flex-row md:mt-16">
+          <p className="text-muted-foreground text-sm">
             © {new Date().getFullYear()} TrustYourInbox. All rights reserved.
           </p>
 
@@ -306,25 +309,25 @@ export default function Footer() {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group relative rounded-lg bg-background/50 p-2 text-muted-foreground transition-all hover:scale-110 hover:bg-primary/10 hover:text-primary"
+                    className="group bg-background/50 text-muted-foreground hover:bg-primary/10 hover:text-primary relative rounded-lg p-2 transition-all hover:scale-110"
                     aria-label={social.name}
                   >
                     <Icon className="h-5 w-5" />
-                    <div className="absolute inset-0 rounded-lg bg-primary/20 opacity-0 blur transition-opacity group-hover:opacity-100"></div>
+                    <div className="bg-primary/20 absolute inset-0 rounded-lg opacity-0 blur transition-opacity group-hover:opacity-100"></div>
                   </a>
                 );
               })}
             </div>
 
             {/* Divider */}
-            <div className="h-6 w-px bg-gradient-to-b from-transparent via-border to-transparent"></div>
+            <div className="via-border h-6 w-px bg-gradient-to-b from-transparent to-transparent"></div>
 
             {/* Status Link */}
             <a
               href="https://status.trustyourinbox.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm text-muted-foreground transition-colors hover:text-primary"
+              className="text-muted-foreground hover:text-primary text-sm transition-colors"
             >
               Status
             </a>

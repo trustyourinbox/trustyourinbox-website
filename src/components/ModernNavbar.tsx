@@ -175,16 +175,19 @@ export default function ModernNavbar() {
 
   return (
     <nav
-      className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 right-0 left-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "border-b border-border bg-background/80 shadow-sm backdrop-blur-xl"
+          ? "border-border bg-background/80 border-b shadow-sm backdrop-blur-xl"
           : "bg-transparent"
       }`}
     >
       <div className="container">
         <div className="flex h-14 items-center justify-between gap-4 sm:h-16">
           {/* Logo */}
-          <Link href="/" className="group flex flex-shrink-0 items-center">
+          <Link
+            href="/"
+            className="group flex flex-shrink-0 items-center gap-2"
+          >
             <div className="relative">
               <svg
                 width="28"
@@ -228,8 +231,11 @@ export default function ModernNavbar() {
                   strokeLinejoin="round"
                 />
               </svg>
-              <div className="absolute inset-0 bg-primary/20 blur-lg transition-all group-hover:bg-primary/30"></div>
+              <div className="bg-primary/20 group-hover:bg-primary/30 absolute inset-0 blur-lg transition-all"></div>
             </div>
+            <span className="text-foreground group-hover:text-primary text-lg font-bold transition-colors sm:text-xl">
+              TrustYourInbox
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -257,7 +263,7 @@ export default function ModernNavbar() {
             {/* Pricing */}
             <Link
               href="/pricing"
-              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+              className="text-muted-foreground hover:text-foreground text-sm font-medium transition-colors"
             >
               Pricing
             </Link>
@@ -290,7 +296,7 @@ export default function ModernNavbar() {
             <ThemeToggle />
             <Link
               href="/login"
-              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+              className="text-muted-foreground hover:text-foreground text-sm font-medium transition-colors"
             >
               Login
             </Link>
@@ -303,7 +309,7 @@ export default function ModernNavbar() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="touch-target flex-shrink-0 rounded-lg p-2 transition-colors hover:bg-primary/10 md:hidden"
+            className="touch-target hover:bg-primary/10 flex-shrink-0 rounded-lg p-2 transition-colors md:hidden"
             aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
           >
             {mobileMenuOpen ? (
@@ -317,7 +323,7 @@ export default function ModernNavbar() {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="max-h-[calc(100vh-3.5rem)] overflow-y-auto border-t border-border bg-background md:hidden">
+        <div className="border-border bg-background max-h-[calc(100vh-3.5rem)] overflow-y-auto border-t md:hidden">
           <div className="container space-y-3 py-4">
             <MobileSection title="Product" items={productItems} />
             <MobileCategorizedSection
@@ -329,14 +335,14 @@ export default function ModernNavbar() {
             </Link>
             <MobileSection title="Resources" items={resourcesItems} />
             <MobileSection title="Company" items={companyItems} />
-            <div className="space-y-3 border-t border-border pt-4">
+            <div className="border-border space-y-3 border-t pt-4">
               <div className="flex items-center justify-between py-2">
                 <span className="text-sm font-medium">Theme</span>
                 <ThemeToggle />
               </div>
               <Link
                 href="/login"
-                className="block py-2 text-sm font-medium text-muted-foreground"
+                className="text-muted-foreground block py-2 text-sm font-medium"
               >
                 Login
               </Link>
@@ -366,7 +372,7 @@ function DropdownMenu({
       <button
         onClick={onToggle}
         onMouseEnter={onToggle}
-        className="flex items-center gap-1 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+        className="text-muted-foreground hover:text-foreground flex items-center gap-1 text-sm font-medium transition-colors"
       >
         {label}
         <ChevronDown
@@ -376,7 +382,7 @@ function DropdownMenu({
 
       {isOpen && (
         <div
-          className="absolute left-0 top-full mt-2 w-80 rounded-xl border border-border bg-background/95 p-2 shadow-2xl backdrop-blur-xl"
+          className="border-border bg-background/95 absolute top-full left-0 mt-2 w-80 rounded-xl border p-2 shadow-2xl backdrop-blur-xl"
           onMouseLeave={onToggle}
         >
           {items.map((item) => {
@@ -385,16 +391,16 @@ function DropdownMenu({
               <Link
                 key={item.name}
                 href={item.href}
-                className="group flex items-start gap-3 rounded-lg p-3 transition-colors hover:bg-primary/10"
+                className="group hover:bg-primary/10 flex items-start gap-3 rounded-lg p-3 transition-colors"
               >
-                <div className="mt-0.5 rounded-lg bg-primary/10 p-2 transition-colors group-hover:bg-primary/20">
-                  <Icon className="h-4 w-4 text-primary" />
+                <div className="bg-primary/10 group-hover:bg-primary/20 mt-0.5 rounded-lg p-2 transition-colors">
+                  <Icon className="text-primary h-4 w-4" />
                 </div>
                 <div>
-                  <div className="text-sm font-medium text-foreground">
+                  <div className="text-foreground text-sm font-medium">
                     {item.name}
                   </div>
-                  <div className="text-xs text-muted-foreground">
+                  <div className="text-muted-foreground text-xs">
                     {item.desc}
                   </div>
                 </div>
@@ -424,7 +430,7 @@ function CategorizedDropdownMenu({
       <button
         onClick={onToggle}
         onMouseEnter={onToggle}
-        className="flex items-center gap-1 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+        className="text-muted-foreground hover:text-foreground flex items-center gap-1 text-sm font-medium transition-colors"
       >
         {label}
         <ChevronDown
@@ -434,7 +440,7 @@ function CategorizedDropdownMenu({
 
       {isOpen && (
         <div
-          className="absolute left-1/2 top-full mt-2 w-[750px] -translate-x-1/2 rounded-xl border border-border bg-background/95 p-6 shadow-2xl backdrop-blur-xl"
+          className="border-border bg-background/95 absolute top-full left-1/2 mt-2 w-[750px] -translate-x-1/2 rounded-xl border p-6 shadow-2xl backdrop-blur-xl"
           onMouseLeave={onToggle}
         >
           {/* Three-Column Grid */}
@@ -442,7 +448,7 @@ function CategorizedDropdownMenu({
             {sections.map((section) => (
               <div key={section.category}>
                 {/* Category Header */}
-                <div className="mb-3 border-b border-border px-2 py-2 text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                <div className="border-border text-muted-foreground mb-3 border-b px-2 py-2 text-xs font-bold tracking-wider uppercase">
                   {section.category}
                 </div>
 
@@ -454,23 +460,23 @@ function CategorizedDropdownMenu({
                       <Link
                         key={tool.name}
                         href={tool.href}
-                        className="group flex items-start gap-2.5 rounded-lg p-2 transition-colors hover:bg-primary/10"
+                        className="group hover:bg-primary/10 flex items-start gap-2.5 rounded-lg p-2 transition-colors"
                       >
-                        <div className="mt-0.5 flex-shrink-0 rounded-lg bg-primary/10 p-1.5 transition-colors group-hover:bg-primary/20">
-                          <Icon className="h-3.5 w-3.5 text-primary" />
+                        <div className="bg-primary/10 group-hover:bg-primary/20 mt-0.5 flex-shrink-0 rounded-lg p-1.5 transition-colors">
+                          <Icon className="text-primary h-3.5 w-3.5" />
                         </div>
                         <div className="min-w-0 flex-1">
                           <div className="flex items-center gap-1.5">
-                            <span className="text-sm font-medium text-foreground">
+                            <span className="text-foreground text-sm font-medium">
                               {tool.name}
                             </span>
                             {tool.popular && (
-                              <span className="text-[10px] font-bold text-primary">
+                              <span className="text-primary text-[10px] font-bold">
                                 ⭐
                               </span>
                             )}
                           </div>
-                          <div className="text-xs leading-snug text-muted-foreground">
+                          <div className="text-muted-foreground text-xs leading-snug">
                             {tool.desc}
                           </div>
                         </div>
@@ -483,15 +489,15 @@ function CategorizedDropdownMenu({
           </div>
 
           {/* View All Tools Link */}
-          <div className="mt-4 border-t border-border pt-4">
+          <div className="border-border mt-4 border-t pt-4">
             <Link
               href="/tools"
-              className="group flex items-center justify-between rounded-lg p-2.5 transition-colors hover:bg-primary/10"
+              className="group hover:bg-primary/10 flex items-center justify-between rounded-lg p-2.5 transition-colors"
             >
-              <span className="text-sm font-medium text-primary">
+              <span className="text-primary text-sm font-medium">
                 View All Tools
               </span>
-              <ChevronDown className="h-4 w-4 rotate-[-90deg] text-primary transition-transform group-hover:translate-x-0.5" />
+              <ChevronDown className="text-primary h-4 w-4 rotate-[-90deg] transition-transform group-hover:translate-x-0.5" />
             </Link>
           </div>
         </div>
@@ -505,7 +511,7 @@ function MobileSection({ title, items }: { title: string; items: any[] }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="border-b border-border last:border-0">
+    <div className="border-border border-b last:border-0">
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="touch-target flex w-full items-center justify-between py-3 text-sm font-medium"
@@ -523,7 +529,7 @@ function MobileSection({ title, items }: { title: string; items: any[] }) {
               <Link
                 key={item.name}
                 href={item.href}
-                className="touch-target flex items-center gap-3 rounded-lg px-2 py-2.5 text-sm text-muted-foreground transition-colors hover:bg-primary/5 active:bg-primary/10"
+                className="touch-target text-muted-foreground hover:bg-primary/5 active:bg-primary/10 flex items-center gap-3 rounded-lg px-2 py-2.5 text-sm transition-colors"
               >
                 <Icon className="h-4 w-4 flex-shrink-0" />
                 <span>{item.name}</span>
@@ -547,7 +553,7 @@ function MobileCategorizedSection({
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="border-b border-border last:border-0">
+    <div className="border-border border-b last:border-0">
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="touch-target flex w-full items-center justify-between py-3 text-sm font-medium"
@@ -561,7 +567,7 @@ function MobileCategorizedSection({
         <div className="space-y-4 pb-3 pl-2">
           {sections.map((section) => (
             <div key={section.category}>
-              <div className="mb-2 px-2 text-xs font-bold uppercase tracking-wider text-muted-foreground">
+              <div className="text-muted-foreground mb-2 px-2 text-xs font-bold tracking-wider uppercase">
                 {section.category}
               </div>
               <div className="space-y-1">
@@ -571,7 +577,7 @@ function MobileCategorizedSection({
                     <Link
                       key={tool.name}
                       href={tool.href}
-                      className="touch-target flex items-center gap-3 rounded-lg px-2 py-2.5 text-sm text-muted-foreground transition-colors hover:bg-primary/5 active:bg-primary/10"
+                      className="touch-target text-muted-foreground hover:bg-primary/5 active:bg-primary/10 flex items-center gap-3 rounded-lg px-2 py-2.5 text-sm transition-colors"
                     >
                       <Icon className="h-4 w-4 flex-shrink-0" />
                       <span className="flex-1">{tool.name}</span>
@@ -584,7 +590,7 @@ function MobileCategorizedSection({
           ))}
           <Link
             href="/tools"
-            className="touch-target mt-2 flex items-center gap-3 rounded-lg px-2 py-2.5 text-sm font-medium text-primary transition-colors hover:bg-primary/5 active:bg-primary/10"
+            className="touch-target text-primary hover:bg-primary/5 active:bg-primary/10 mt-2 flex items-center gap-3 rounded-lg px-2 py-2.5 text-sm font-medium transition-colors"
           >
             <Wrench className="h-4 w-4" />
             View All Tools
