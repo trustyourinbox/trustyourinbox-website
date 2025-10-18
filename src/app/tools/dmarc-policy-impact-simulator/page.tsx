@@ -611,28 +611,45 @@ export default function DmarcPolicyImpactSimulator() {
               </div>
             </div>
             <div className="mt-8 overflow-x-auto">
-              <table className="min-w-full text-xs">
+              <table className="border-border min-w-full border-collapse border text-xs">
                 <thead>
-                  <tr className="bg-muted">
-                    <th className="px-2 py-1 text-left font-semibold">
+                  <tr className="border-border bg-muted border-b-2">
+                    <th className="border-border border-r px-3 py-2 text-left font-semibold">
                       Source IP
                     </th>
-                    <th className="px-2 py-1 text-left font-semibold">Count</th>
-                    <th className="px-2 py-1 text-left font-semibold">DKIM</th>
-                    <th className="px-2 py-1 text-left font-semibold">SPF</th>
-                    <th className="px-2 py-1 text-left font-semibold">
+                    <th className="border-border border-r px-3 py-2 text-left font-semibold">
+                      Count
+                    </th>
+                    <th className="border-border border-r px-3 py-2 text-left font-semibold">
+                      DKIM
+                    </th>
+                    <th className="border-border border-r px-3 py-2 text-left font-semibold">
+                      SPF
+                    </th>
+                    <th className="px-3 py-2 text-left font-semibold">
                       Disposition
                     </th>
                   </tr>
                 </thead>
                 <tbody>
                   {parsed.map((rec, i) => (
-                    <tr key={i} className="border-t">
-                      <td className="px-2 py-1">{rec.source_ip}</td>
-                      <td className="px-2 py-1">{rec.count}</td>
-                      <td className="px-2 py-1">{rec.dkim}</td>
-                      <td className="px-2 py-1">{rec.spf}</td>
-                      <td className="px-2 py-1">{rec.disposition}</td>
+                    <tr
+                      key={i}
+                      className="border-border hover:bg-muted/50 border-b"
+                    >
+                      <td className="border-border border-r px-3 py-2">
+                        {rec.source_ip}
+                      </td>
+                      <td className="border-border border-r px-3 py-2">
+                        {rec.count}
+                      </td>
+                      <td className="border-border border-r px-3 py-2">
+                        {rec.dkim}
+                      </td>
+                      <td className="border-border border-r px-3 py-2">
+                        {rec.spf}
+                      </td>
+                      <td className="px-3 py-2">{rec.disposition}</td>
                     </tr>
                   ))}
                 </tbody>
