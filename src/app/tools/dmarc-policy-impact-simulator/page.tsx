@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ToolLayout } from "@/components/ui/ToolLayout";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
@@ -189,6 +189,7 @@ export default function DmarcPolicyImpactSimulator() {
           const decompressed = gunzipSync(uint8Array);
           const xmlText = new TextDecoder().decode(decompressed);
           setXml(xmlText);
+          setParsed(parseXml(xmlText)); // Auto-parse immediately
           setError(null);
         } catch (err) {
           setError(
@@ -219,6 +220,7 @@ export default function DmarcPolicyImpactSimulator() {
 
           const xmlText = new TextDecoder().decode(unzipped[xmlFileName]);
           setXml(xmlText);
+          setParsed(parseXml(xmlText)); // Auto-parse immediately
           setError(null);
         } catch (err) {
           setError(
@@ -232,7 +234,9 @@ export default function DmarcPolicyImpactSimulator() {
     // Handle .xml files (plain text)
     else if (fileName.endsWith(".xml")) {
       reader.onload = (ev) => {
-        setXml(ev.target?.result as string);
+        const xmlText = ev.target?.result as string;
+        setXml(xmlText);
+        setParsed(parseXml(xmlText)); // Auto-parse immediately
         setError(null);
       };
       reader.onerror = () => setError("Failed to read .xml file.");
@@ -276,8 +280,8 @@ export default function DmarcPolicyImpactSimulator() {
         </h4>
         <ul className="text-muted-foreground list-disc space-y-1 pl-4 text-xs">
           <li>Upload a DMARC XML report or use sample data</li>
-          <li>Select a stricter policy to simulate</li>
-          <li>View the impact on message disposition</li>
+          <li>View instant analysis with default p=none policy</li>
+          <li>Switch between policies to see impact changes</li>
           <li>Get actionable recommendations</li>
         </ul>
       </div>
@@ -299,37 +303,64 @@ export default function DmarcPolicyImpactSimulator() {
     </div>
   );
 
-  // Calculate impact (mock logic for now)
+  // Calculate impact using real DMARC alignment logic
   const impact = parsed.length
-    ? {
-        total: parsed.reduce((a, b) => a + b.count, 0),
-        rejected:
-          policy === "reject"
-            ? parsed.reduce((a, b) => a + b.count, 0)
-            : policy === "quarantine"
-              ? Math.round(parsed.reduce((a, b) => a + b.count, 0) * 0.7)
-              : 0,
-        quarantined:
-          policy === "quarantine"
-            ? Math.round(parsed.reduce((a, b) => a + b.count, 0) * 0.3)
-            : 0,
-        allowed:
-          policy === "none" ? parsed.reduce((a, b) => a + b.count, 0) : 0,
-      }
+    ? (() => {
+        let allowed = 0;
+        let quarantined = 0;
+        let rejected = 0;
+
+        parsed.forEach((rec) => {
+          // DMARC alignment: pass if DKIM OR SPF passes
+          const dmarcAligned = rec.dkim === "pass" || rec.spf === "pass";
+
+          if (dmarcAligned) {
+            // Messages that pass DMARC are always allowed
+            allowed += rec.count;
+          } else {
+            // Messages that fail DMARC are subject to policy
+            if (policy === "reject") {
+              rejected += rec.count;
+            } else if (policy === "quarantine") {
+              quarantined += rec.count;
+            } else {
+              // policy === "none" - monitored only, still allowed
+              allowed += rec.count;
+            }
+          }
+        });
+
+        const total = allowed + quarantined + rejected;
+        return { total, allowed, quarantined, rejected };
+      })()
     : null;
 
-  // Chart data generation
+  // Chart data generation using real DMARC logic
   const dispositionCounts = { allowed: 0, quarantined: 0, rejected: 0 };
   const dkimCounts = { pass: 0, fail: 0 };
   const spfCounts = { pass: 0, fail: 0 };
   const sourceCounts: Record<string, number> = {};
   if (parsed.length) {
     parsed.forEach((rec) => {
-      // Disposition logic based on simulated policy
+      // DMARC alignment: pass if DKIM OR SPF passes
+      const dmarcAligned = rec.dkim === "pass" || rec.spf === "pass";
+
       let disp: keyof typeof dispositionCounts = "allowed";
-      if (policy === "reject") disp = "rejected";
-      else if (policy === "quarantine") disp = "quarantined";
-      else disp = "allowed";
+      if (dmarcAligned) {
+        // Messages that pass DMARC are always allowed
+        disp = "allowed";
+      } else {
+        // Messages that fail DMARC are subject to policy
+        if (policy === "reject") {
+          disp = "rejected";
+        } else if (policy === "quarantine") {
+          disp = "quarantined";
+        } else {
+          // policy === "none" - monitored only, still allowed
+          disp = "allowed";
+        }
+      }
+
       dispositionCounts[disp] = (dispositionCounts[disp] || 0) + rec.count;
       dkimCounts[rec.dkim === "pass" ? "pass" : "fail"] += rec.count;
       spfCounts[rec.spf === "pass" ? "pass" : "fail"] += rec.count;
@@ -418,6 +449,7 @@ export default function DmarcPolicyImpactSimulator() {
                         const decompressed = gunzipSync(uint8Array);
                         const xmlText = new TextDecoder().decode(decompressed);
                         setXml(xmlText);
+                        setParsed(parseXml(xmlText)); // Auto-parse immediately
                         setShowSample(false);
                         setError(null);
                       } catch (err) {
@@ -451,6 +483,7 @@ export default function DmarcPolicyImpactSimulator() {
                           unzipped[xmlFileName]
                         );
                         setXml(xmlText);
+                        setParsed(parseXml(xmlText)); // Auto-parse immediately
                         setShowSample(false);
                         setError(null);
                       } catch (err) {
@@ -466,7 +499,9 @@ export default function DmarcPolicyImpactSimulator() {
                   // Handle .xml files (plain text)
                   else if (fileName.endsWith(".xml")) {
                     reader.onload = (ev) => {
-                      setXml(ev.target?.result as string);
+                      const xmlText = ev.target?.result as string;
+                      setXml(xmlText);
+                      setParsed(parseXml(xmlText)); // Auto-parse immediately
                       setShowSample(false);
                       setError(null);
                     };
@@ -522,6 +557,7 @@ export default function DmarcPolicyImpactSimulator() {
                 variant="outline"
                 onClick={() => {
                   setXml(sampleXML);
+                  setParsed(parseXml(sampleXML)); // Auto-parse immediately
                   setShowSample(true);
                   setError(null);
                 }}
@@ -541,45 +577,39 @@ export default function DmarcPolicyImpactSimulator() {
           </div>
         </Card>
 
-        <Card className="p-6">
-          <h2 className="mb-4 flex items-center gap-2 text-xl font-bold">
-            <Shield className="text-primary h-5 w-5" />
-            Simulate Policy
-          </h2>
-          <div className="mb-4 flex gap-4">
-            <Button
-              variant={policy === "none" ? "default" : "outline"}
-              onClick={() => setPolicy("none")}
-            >
-              p=none
-            </Button>
-            <Button
-              variant={policy === "quarantine" ? "default" : "outline"}
-              onClick={() => setPolicy("quarantine")}
-            >
-              p=quarantine
-            </Button>
-            <Button
-              variant={policy === "reject" ? "default" : "outline"}
-              onClick={() => setPolicy("reject")}
-            >
-              p=reject
-            </Button>
-          </div>
-          <Button
-            onClick={handleSimulate}
-            className="bg-primary hover:bg-primary text-white"
-          >
-            Simulate Impact
-          </Button>
-        </Card>
-
         {impact && (
           <Card className="p-6">
-            <h2 className="mb-4 flex items-center gap-2 text-xl font-bold">
-              <BarChart2 className="text-primary h-5 w-5" />
-              Impact Visualization
-            </h2>
+            <div className="mb-6 flex items-start justify-between">
+              <div>
+                <h2 className="mb-2 flex items-center gap-2 text-xl font-bold">
+                  <BarChart2 className="text-primary h-5 w-5" />
+                  Impact Visualization
+                </h2>
+                <p className="text-muted-foreground text-sm">
+                  Select a policy to see how it would affect your email traffic
+                </p>
+              </div>
+            </div>
+            <div className="mb-6 flex gap-4">
+              <Button
+                variant={policy === "none" ? "default" : "outline"}
+                onClick={() => setPolicy("none")}
+              >
+                p=none
+              </Button>
+              <Button
+                variant={policy === "quarantine" ? "default" : "outline"}
+                onClick={() => setPolicy("quarantine")}
+              >
+                p=quarantine
+              </Button>
+              <Button
+                variant={policy === "reject" ? "default" : "outline"}
+                onClick={() => setPolicy("reject")}
+              >
+                p=reject
+              </Button>
+            </div>
             <div className="mb-6 grid grid-cols-1 gap-6 md:grid-cols-3">
               <div className="bg-secondary rounded-lg p-4 text-center">
                 <div className="text-foreground text-2xl font-bold">
