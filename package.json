@@ -19,6 +19,7 @@
     "@radix-ui/react-slot": "^1.2.3",
     "@sendgrid/mail": "^8.1.6",
     "@tailwindcss/postcss": "^4.1.14",
+    "@vercel/speed-insights": "^1.2.0",
     "adm-zip": "^0.5.16",
     "asn1.js": "^5.4.1",
     "chart.js": "^4.5.1",

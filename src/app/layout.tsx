@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import localFont from "next/font/local";
 import { ThemeProvider } from "next-themes";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import ModernNavbar from "@/components/ModernNavbar";
 import Footer from "@/components/Footer";
 import "./globals.css";
@@ -168,6 +169,7 @@ export default function RootLayout({
           <main className="pt-16">{children}</main>
           <Footer />
         </ThemeProvider>
+        <SpeedInsights />
       </body>
     </html>
   );
