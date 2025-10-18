@@ -1,0 +1,425 @@
+/* Critical CSS for Above-the-Fold Content - Inline in <head> */
+/* This CSS is inlined to eliminate render-blocking and improve FCP */
+
+/* CSS Custom Properties - Essential Colors & Gradients */
+:root {
+  --color-background: hsl(0 0% 100%);
+  --color-foreground: hsl(220 26% 14%);
+  --color-primary: hsl(239 84% 67%);
+  --color-primary-foreground: hsl(0 0% 100%);
+  --color-muted-foreground: hsl(220 9% 46%);
+  --color-border: hsl(220 13% 91%);
+  --color-accent-hover: hsl(243 75% 59%);
+
+  --gradient-mesh:
+    radial-gradient(at 40% 20%, hsla(239, 84%, 67%, 0.3) 0px, transparent 50%),
+    radial-gradient(at 80% 0%, hsla(243, 75%, 59%, 0.2) 0px, transparent 50%),
+    radial-gradient(at 0% 50%, hsla(210, 100%, 56%, 0.2) 0px, transparent 50%);
+}
+
+/* Dark mode - Essential colors only */
+:is(.dark *) {
+  --color-background: hsl(220 15% 10%);
+  --color-foreground: hsl(210 20% 98%);
+  --color-primary: hsl(239 84% 67%);
+  --color-muted-foreground: hsl(220 10% 65%);
+  --color-border: hsl(220 15% 30%);
+
+  --gradient-mesh:
+    radial-gradient(at 40% 20%, hsla(239, 84%, 67%, 0.18) 0px, transparent 50%),
+    radial-gradient(at 80% 0%, hsla(243, 75%, 60%, 0.12) 0px, transparent 50%),
+    radial-gradient(at 0% 50%, hsla(210, 100%, 56%, 0.12) 0px, transparent 50%);
+}
+
+/* Minimal CSS Reset */
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  border-width: 0;
+  border-style: solid;
+  border-color: var(--color-border);
+}
+html {
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+  tab-size: 4;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+}
+body {
+  margin: 0;
+  line-height: inherit;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Essential Typography */
+.font-sans {
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+}
+.font-bold {
+  font-weight: 700;
+}
+.font-semibold {
+  font-weight: 600;
+}
+.font-medium {
+  font-weight: 500;
+}
+.antialiased {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Text Sizes - Hero Section */
+.text-xs {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+.text-base {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+.text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+.text-3xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+}
+
+/* Colors */
+.bg-background {
+  background-color: var(--color-background);
+}
+.text-foreground {
+  color: var(--color-foreground);
+}
+.text-primary {
+  color: var(--color-primary);
+}
+.text-muted-foreground {
+  color: var(--color-muted-foreground);
+}
+.bg-primary {
+  background-color: var(--color-primary);
+}
+.bg-primary\/5 {
+  background-color: hsl(239 84% 67% / 0.05);
+}
+.bg-primary\/20 {
+  background-color: hsl(239 84% 67% / 0.2);
+}
+.border-primary\/20 {
+  border-color: hsl(239 84% 67% / 0.2);
+}
+
+/* Layout - Container, Grid, Flex */
+.container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+@media (min-width: 640px) {
+  .container {
+    max-width: 640px;
+  }
+}
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px;
+  }
+}
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px;
+  }
+}
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px;
+  }
+}
+@media (min-width: 1536px) {
+  .container {
+    max-width: 1536px;
+  }
+}
+
+.grid {
+  display: grid;
+}
+.flex {
+  display: flex;
+}
+.hidden {
+  display: none;
+}
+.grid-cols-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+.items-center {
+  align-items: center;
+}
+.justify-center {
+  justify-content: center;
+}
+.justify-between {
+  justify-content: space-between;
+}
+.gap-2 {
+  gap: 0.5rem;
+}
+.gap-4 {
+  gap: 1rem;
+}
+.gap-8 {
+  gap: 2rem;
+}
+.space-y-3 > * + * {
+  margin-top: 0.75rem;
+}
+.space-y-4 > * + * {
+  margin-top: 1rem;
+}
+.space-y-6 > * + * {
+  margin-top: 1.5rem;
+}
+
+/* Positioning */
+.relative {
+  position: relative;
+}
+.absolute {
+  position: absolute;
+}
+.fixed {
+  position: fixed;
+}
+.inset-0 {
+  inset: 0;
+}
+.top-0 {
+  top: 0;
+}
+.right-0 {
+  right: 0;
+}
+.left-0 {
+  left: 0;
+}
+.z-10 {
+  z-index: 10;
+}
+.z-50 {
+  z-index: 50;
+}
+
+/* Sizing */
+.h-2 {
+  height: 0.5rem;
+}
+.h-4 {
+  height: 1rem;
+}
+.h-5 {
+  height: 1.25rem;
+}
+.h-14 {
+  height: 3.5rem;
+}
+.h-16 {
+  height: 4rem;
+}
+.h-auto {
+  height: auto;
+}
+.w-2 {
+  width: 0.5rem;
+}
+.w-4 {
+  width: 1rem;
+}
+.w-5 {
+  width: 1.25rem;
+}
+.w-full {
+  width: 100%;
+}
+.min-h-screen {
+  min-height: 100vh;
+}
+
+/* Spacing */
+.p-2 {
+  padding: 0.5rem;
+}
+.px-3 {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+.px-6 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+.py-1\.5 {
+  padding-top: 0.375rem;
+  padding-bottom: 0.375rem;
+}
+.py-12 {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+.pt-2 {
+  padding-top: 0.5rem;
+}
+.pt-16 {
+  padding-top: 4rem;
+}
+
+/* Borders & Radius */
+.rounded-full {
+  border-radius: 9999px;
+}
+.rounded-lg {
+  border-radius: 0.5rem;
+}
+.rounded-md {
+  border-radius: 0.375rem;
+}
+.border {
+  border-width: 1px;
+}
+
+/* Overflow */
+.overflow-hidden {
+  overflow: hidden;
+}
+
+/* Transitions */
+.transition-all {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 0.15s;
+}
+.transition-colors {
+  transition-property: color, background-color, border-color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 0.15s;
+}
+
+/* Opacity */
+.opacity-40 {
+  opacity: 0.4;
+}
+
+/* Flexbox Utilities */
+.flex-shrink-0 {
+  flex-shrink: 0;
+}
+.flex-wrap {
+  flex-wrap: wrap;
+}
+.inline-flex {
+  display: inline-flex;
+}
+
+/* Text */
+.text-center {
+  text-align: center;
+}
+.tracking-tight {
+  letter-spacing: -0.025em;
+}
+.leading-tight {
+  line-height: 1.25;
+}
+.leading-relaxed {
+  line-height: 1.625;
+}
+
+/* Animations */
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Responsive Typography */
+@media (min-width: 640px) {
+  .sm\:text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+  .sm\:text-lg {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
+  .sm\:text-4xl {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+  }
+  .sm\:px-4 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .sm\:py-2 {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+  .sm\:h-16 {
+    height: 4rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .md\:text-5xl {
+    font-size: 3rem;
+    line-height: 1;
+  }
+  .md\:flex {
+    display: flex;
+  }
+  .md\:hidden {
+    display: none;
+  }
+}
+
+@media (min-width: 1024px) {
+  .lg\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .lg\:text-6xl {
+    font-size: 3.75rem;
+    line-height: 1;
+  }
+}
+
+@media (min-width: 1280px) {
+  .xl\:text-7xl {
+    font-size: 4.5rem;
+    line-height: 1;
+  }
+}

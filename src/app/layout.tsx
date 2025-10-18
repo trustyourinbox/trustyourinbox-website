@@ -5,7 +5,15 @@ import { ThemeProvider } from "next-themes";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import ModernNavbar from "@/components/ModernNavbar";
 import Footer from "@/components/Footer";
+import fs from "fs";
+import path from "path";
 import "./globals.css";
+
+// Read critical CSS at build time for inlining
+const criticalCSS = fs.readFileSync(
+  path.join(process.cwd(), "src/app/critical.css"),
+  "utf8"
+);
 
 const averta = localFont({
   src: [
@@ -146,6 +154,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${averta.variable}`} suppressHydrationWarning>
       <head>
+        {/* Inline Critical CSS for instant FCP */}
+        <style dangerouslySetInnerHTML={{ __html: criticalCSS }} />
+
         <link rel="preconnect" href="https://va.vercel-scripts.com" />
         <link rel="dns-prefetch" href="https://va.vercel-scripts.com" />
         <script
