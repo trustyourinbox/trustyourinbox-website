@@ -72,38 +72,38 @@ function getGradeAndScore(fields: Record<string, string>) {
   if (fields.v === "DKIM1") {
     score += 40;
     badges.push("Valid Version");
-    dots.push({ color: "bg-green-500", label: "Valid DKIM version" });
+    dots.push({ color: "bg-success", label: "Valid DKIM version" });
   } else {
     badges.push("Invalid Version");
-    dots.push({ color: "bg-red-500", label: "Invalid DKIM version" });
+    dots.push({ color: "bg-destructive", label: "Invalid DKIM version" });
   }
 
   // Check key type
   if (fields.k === "rsa" || !fields.k) {
     score += 20;
     badges.push("RSA Key");
-    dots.push({ color: "bg-green-500", label: "RSA key type" });
+    dots.push({ color: "bg-success", label: "RSA key type" });
   } else {
-    dots.push({ color: "bg-red-500", label: "Non-RSA key type" });
+    dots.push({ color: "bg-destructive", label: "Non-RSA key type" });
   }
 
   // Check public key
   if (fields.p && fields.p.length > 200) {
     score += 30;
     badges.push("Public Key Present");
-    dots.push({ color: "bg-green-500", label: "Strong public key" });
+    dots.push({ color: "bg-success", label: "Strong public key" });
   } else {
-    dots.push({ color: "bg-red-500", label: "Weak or missing public key" });
+    dots.push({ color: "bg-destructive", label: "Weak or missing public key" });
   }
 
   // Check testing mode
   if (!fields.t) {
     score += 10;
     badges.push("No Testing Flag");
-    dots.push({ color: "bg-green-500", label: "Production mode" });
+    dots.push({ color: "bg-success", label: "Production mode" });
   } else if (fields.t.includes("y")) {
     badges.push("Testing Mode");
-    dots.push({ color: "bg-yellow-500", label: "Testing mode enabled" });
+    dots.push({ color: "bg-warning", label: "Testing mode enabled" });
   }
 
   // Calculate rating (1-5 dots)
@@ -124,28 +124,28 @@ function getWarnings(fields: Record<string, string>) {
   }[] = [];
   if (!fields.v || fields.v !== "DKIM1") {
     warnings.push({
-      icon: <FaTimesCircle className="h-4 w-4 text-red-500" />,
-      color: "text-red-700 bg-red-50 border-red-200",
+      icon: <FaTimesCircle className="text-destructive h-4 w-4" />,
+      color: "text-destructive bg-destructive/10 border-destructive/20",
       message: "Missing or invalid version (v=DKIM1) field.",
     });
   }
   if (!fields.p) {
     warnings.push({
-      icon: <FaTimesCircle className="h-4 w-4 text-red-500" />,
-      color: "text-red-700 bg-red-50 border-red-200",
+      icon: <FaTimesCircle className="text-destructive h-4 w-4" />,
+      color: "text-destructive bg-destructive/10 border-destructive/20",
       message: "Missing public key (p) field.",
     });
   } else if (fields.p.length < 200) {
     warnings.push({
-      icon: <FaExclamationTriangle className="h-4 w-4 text-yellow-500" />,
-      color: "text-yellow-700 bg-yellow-50 border-yellow-200",
+      icon: <FaExclamationTriangle className="text-warning h-4 w-4" />,
+      color: "text-warning bg-warning/10 border-warning/20",
       message: "Public key is unusually short. Should be at least 1024 bits.",
     });
   }
   if (fields.t && fields.t.includes("y")) {
     warnings.push({
-      icon: <FaInfoCircle className="h-4 w-4 text-yellow-500" />,
-      color: "text-yellow-700 bg-yellow-50 border-yellow-200",
+      icon: <FaInfoCircle className="text-warning h-4 w-4" />,
+      color: "text-warning bg-warning/10 border-warning/20",
       message:
         "Testing mode is enabled (t=y). DKIM signature may not be enforced.",
     });
@@ -289,29 +289,14 @@ export default function DKIMValidatorPage() {
     setLoading(false);
   }
 
-  const getStatusColor = (rating: number) => {
-    switch (rating) {
-      case 5:
-        return "text-green-600";
-      case 4:
-        return "text-primary";
-      case 3:
-        return "text-yellow-600";
-      case 2:
-        return "text-orange-600";
-      default:
-        return "text-red-600";
-    }
-  };
-
   const sidebarContent = (
     <div className="space-y-6">
       <div>
-        <h3 className="flex items-center gap-1.5 text-sm font-medium text-gray-900">
+        <h3 className="text-foreground flex items-center gap-1.5 text-sm font-medium">
           <FaShieldAlt className="text-primary h-4 w-4" />
           About DKIM
         </h3>
-        <p className="mt-2 text-sm text-gray-500">
+        <p className="text-muted-foreground mt-2 text-sm">
           DKIM (DomainKeys Identified Mail) adds a digital signature to your
           emails, allowing recipients to verify the message hasn&apos;t been
           tampered with.
@@ -319,14 +304,14 @@ export default function DKIMValidatorPage() {
       </div>
 
       <div>
-        <h3 className="flex items-center gap-1.5 text-sm font-medium text-gray-900">
+        <h3 className="text-foreground flex items-center gap-1.5 text-sm font-medium">
           <FaInfoCircle className="text-primary h-4 w-4" />
           Common Tags
         </h3>
-        <ul className="mt-2 space-y-2 text-sm text-gray-500">
+        <ul className="text-muted-foreground mt-2 space-y-2 text-sm">
           {DKIM_TAG_LEGEND.slice(0, 5).map(({ tag, name, desc }) => (
             <li key={tag} className="flex items-start gap-2">
-              <code className="text-primary rounded bg-gray-100 px-1.5 py-0.5">
+              <code className="text-primary bg-muted rounded px-1.5 py-0.5">
                 {tag}=
               </code>
               <span>{desc}</span>
@@ -352,18 +337,18 @@ export default function DKIMValidatorPage() {
 
           <form onSubmit={handleValidate} className="space-y-4">
             <div className="space-y-2">
-              <label htmlFor="dkim" className="text-sm font-medium">
+              <label htmlFor="dkim" className="mb-2 block text-sm font-medium">
                 DKIM Record
               </label>
               <div className="relative flex-1">
                 <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                  <FaFileAlt className="h-5 w-5 text-gray-400" />
+                  <FaFileAlt className="text-muted-foreground h-5 w-5" />
                 </div>
                 <Input
                   id="dkim"
                   type="text"
                   placeholder="v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA..."
-                  className="focus:border-primary focus:ring-ring h-11 border-gray-200 pl-10"
+                  className="focus:border-primary focus:ring-ring border-border h-11 pl-10"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   required
@@ -417,31 +402,31 @@ export default function DKIMValidatorPage() {
         <div className="mt-6 space-y-6">
           {/* Rating and Score Card */}
           <Card>
-            <div className="mb-6 flex items-center justify-between">
-              <div className="flex items-center gap-4">
-                <div className="flex items-center gap-1">
-                  {[...Array(5)].map((_, i) => (
-                    <div
-                      key={i}
-                      className={`h-2 w-2 rounded-full ${
-                        i < getGradeAndScore(fields).rating
-                          ? "bg-primary"
-                          : "bg-gray-200"
-                      }`}
-                    />
-                  ))}
-                </div>
+            <div className="p-6">
+              <div className="flex items-center justify-between">
                 <div>
-                  <h3 className="font-medium text-gray-900">
+                  <h3 className="text-foreground font-medium">
                     DKIM Configuration Score
                   </h3>
-                  <p className="text-sm text-gray-500">
+                  <p className="text-muted-foreground mt-1 text-sm">
                     Based on best practices and security standards
                   </p>
+                  <div className="mt-2 flex items-center gap-1">
+                    {[...Array(5)].map((_, i) => (
+                      <div
+                        key={i}
+                        className={`h-2 w-2 rounded-full ${
+                          i < getGradeAndScore(fields).rating
+                            ? "bg-primary"
+                            : "bg-muted"
+                        }`}
+                      />
+                    ))}
+                  </div>
                 </div>
-              </div>
-              <div className="text-primary text-3xl font-bold">
-                {getGradeAndScore(fields).score}%
+                <div className="text-primary text-3xl font-bold">
+                  {getGradeAndScore(fields).score}%
+                </div>
               </div>
             </div>
           </Card>
@@ -449,16 +434,21 @@ export default function DKIMValidatorPage() {
           {/* Warnings Card */}
           {getWarnings(fields).length > 0 && (
             <Card>
-              <div className="space-y-4">
-                {getWarnings(fields).map((warning, idx) => (
-                  <div
-                    key={idx}
-                    className={`flex items-start gap-3 rounded-lg p-3 ${warning.color}`}
-                  >
-                    {warning.icon}
-                    <p className="text-sm">{warning.message}</p>
-                  </div>
-                ))}
+              <div className="p-6">
+                <h3 className="text-foreground mb-4 text-lg font-semibold">
+                  Warnings
+                </h3>
+                <div className="space-y-3">
+                  {getWarnings(fields).map((warning, idx) => (
+                    <div
+                      key={idx}
+                      className={`flex items-start gap-2.5 rounded-lg px-3 py-2.5 ${warning.color}`}
+                    >
+                      {warning.icon}
+                      <p className="text-sm">{warning.message}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
             </Card>
           )}
@@ -466,88 +456,90 @@ export default function DKIMValidatorPage() {
           {/* Recommendations Card */}
           {getRecommendations(fields, getKeyLength(fields.p)).length > 0 && (
             <Card>
-              <div className="space-y-4">
-                {getRecommendations(fields, getKeyLength(fields.p)).map(
-                  (rec, idx) => (
-                    <div key={idx} className="flex items-start gap-2">
-                      <FaInfoCircle className="text-primary mt-0.5 h-4 w-4" />
-                      <span>{rec.message}</span>
-                    </div>
-                  )
-                )}
+              <div className="p-6">
+                <h3 className="text-foreground mb-4 text-lg font-semibold">
+                  Recommendations
+                </h3>
+                <div className="space-y-4">
+                  {getRecommendations(fields, getKeyLength(fields.p)).map(
+                    (rec, idx) => (
+                      <div key={idx} className="flex items-start gap-2">
+                        <FaInfoCircle className="text-primary mt-0.5 h-4 w-4" />
+                        <span>{rec.message}</span>
+                      </div>
+                    )
+                  )}
+                </div>
               </div>
             </Card>
           )}
         </div>
       )}
 
-      <div className="mt-12 mb-8">
-        <div className="mb-6">
-          <h2 className="text-2xl font-bold tracking-tight">Related Tools</h2>
-          <p className="text-muted-foreground mt-1">
-            Explore more email authentication tools to secure your domain
+      <div className="mt-8 mb-8">
+        <div className="mb-4">
+          <h2 className="text-xl font-bold tracking-tight">Related Tools</h2>
+          <p className="text-muted-foreground mt-1 text-sm">
+            More email authentication tools
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
           <Link
             href="/tools/dmarc-analyzer"
-            className="group border-primary/20 bg-secondary dark:border-primary dark:bg-primary relative overflow-hidden rounded-lg border p-5 transition-all hover:shadow-md"
+            className="group border-border/40 bg-card hover:border-primary/30 relative overflow-hidden rounded-lg border p-4 transition-all duration-200 hover:shadow-lg"
           >
-            <div className="flex items-start gap-4">
-              <div className="bg-primary/10 dark:bg-primary rounded-full p-2">
-                <Shield className="text-primary h-6 w-6" />
+            <div className="flex items-start gap-3">
+              <div className="bg-primary/10 flex-shrink-0 rounded-md p-2">
+                <Shield className="text-primary h-4 w-4" />
               </div>
-              <div>
-                <h3 className="text-lg font-semibold group-hover:underline">
+              <div className="min-w-0 flex-1">
+                <h3 className="text-foreground group-hover:text-primary text-sm font-semibold transition-colors">
                   DMARC Analyzer
                 </h3>
-                <p className="text-muted-foreground mt-1 text-sm">
-                  Analyze your DMARC configuration and get detailed reports
+                <p className="text-muted-foreground mt-0.5 line-clamp-2 text-xs">
+                  Analyze DMARC configuration and get detailed reports
                 </p>
               </div>
             </div>
-            <div className="bg-primary absolute bottom-0 left-0 h-1 w-0 transition-all duration-300 group-hover:w-full"></div>
           </Link>
 
           <Link
             href="/tools/spf-surveyor"
-            className="group relative overflow-hidden rounded-lg border border-green-200 bg-green-50 p-5 transition-all hover:shadow-md dark:border-green-800 dark:bg-green-950"
+            className="group border-border/40 bg-card hover:border-primary/30 relative overflow-hidden rounded-lg border p-4 transition-all duration-200 hover:shadow-lg"
           >
-            <div className="flex items-start gap-4">
-              <div className="rounded-full bg-green-100 p-2 dark:bg-green-900">
-                <Mail className="text-primary h-6 w-6" />
+            <div className="flex items-start gap-3">
+              <div className="bg-primary/10 flex-shrink-0 rounded-md p-2">
+                <Mail className="text-primary h-4 w-4" />
               </div>
-              <div>
-                <h3 className="text-lg font-semibold group-hover:underline">
+              <div className="min-w-0 flex-1">
+                <h3 className="text-foreground group-hover:text-primary text-sm font-semibold transition-colors">
                   SPF Surveyor
                 </h3>
-                <p className="text-muted-foreground mt-1 text-sm">
-                  Validate and troubleshoot your SPF records
+                <p className="text-muted-foreground mt-0.5 line-clamp-2 text-xs">
+                  Validate and troubleshoot SPF records
                 </p>
               </div>
             </div>
-            <div className="bg-primary absolute bottom-0 left-0 h-1 w-0 transition-all duration-300 group-hover:w-full"></div>
           </Link>
 
           <Link
             href="/tools/dmarc-subdomain-policy-checker"
-            className="group relative overflow-hidden rounded-lg border border-purple-200 bg-purple-50 p-5 transition-all hover:shadow-md dark:border-purple-800 dark:bg-purple-950"
+            className="group border-border/40 bg-card hover:border-primary/30 relative overflow-hidden rounded-lg border p-4 transition-all duration-200 hover:shadow-lg"
           >
-            <div className="flex items-start gap-4">
-              <div className="rounded-full bg-purple-100 p-2 dark:bg-purple-900">
-                <Key className="text-primary h-6 w-6" />
+            <div className="flex items-start gap-3">
+              <div className="bg-primary/10 flex-shrink-0 rounded-md p-2">
+                <Key className="text-primary h-4 w-4" />
               </div>
-              <div>
-                <h3 className="text-lg font-semibold group-hover:underline">
+              <div className="min-w-0 flex-1">
+                <h3 className="text-foreground group-hover:text-primary text-sm font-semibold transition-colors">
                   DMARC Subdomain Policy Checker
                 </h3>
-                <p className="text-muted-foreground mt-1 text-sm">
+                <p className="text-muted-foreground mt-0.5 line-clamp-2 text-xs">
                   Check DMARC policy coverage across your subdomains
                 </p>
               </div>
             </div>
-            <div className="bg-primary absolute bottom-0 left-0 h-1 w-0 transition-all duration-300 group-hover:w-full"></div>
           </Link>
         </div>
       </div>
