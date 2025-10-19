@@ -25,67 +25,43 @@ const featuredPost = {
 
 const blogPosts = [
   {
-    title: "How to Fix SPF 10 DNS Lookup Limit Errors",
+    title: "PCI DSS 4.0 & DMARC Compliance 2025: Email Security Requirements",
+    slug: "pci-dss-dmarc-compliance-2025",
     excerpt:
-      "SPF records hitting the 10 DNS lookup limit? Here's how to optimize your SPF configuration and avoid authentication failures.",
-    date: "2025-01-10",
-    readTime: "6 min read",
-    category: "Technical Guide",
-    icon: AlertTriangle,
+      "Complete guide to PCI DSS 4.0 DMARC requirements. Learn how DMARC aligns with PCI requirements, implementation steps, compliance deadlines (March 31, 2025), and avoid non-compliance penalties up to $100K/month.",
+    date: "2025-01-19",
+    readTime: "14 min read",
+    category: "Compliance",
+    icon: Shield,
   },
   {
-    title: "Understanding DMARC Aggregate Reports",
+    title: "How to Implement DMARC in Large Organizations: Enterprise Guide",
+    slug: "implement-dmarc-large-organizations",
     excerpt:
-      "Learn how to read and interpret DMARC aggregate reports to identify legitimate senders and potential threats.",
-    date: "2025-01-05",
+      "Enterprise DMARC deployment guide for organizations with 1,000+ employees. Learn phased rollout strategies, multi-domain management, stakeholder coordination, and how to reach p=reject in 1-2 weeks vs 6+ months.",
+    date: "2025-01-19",
+    readTime: "13 min read",
+    category: "Implementation Guide",
+    icon: TrendingUp,
+  },
+  {
+    title: "DMARC Policy Comparison: p=none vs p=quarantine vs p=reject",
+    slug: "dmarc-policy-comparison",
+    excerpt:
+      "Complete comparison of DMARC policies. Learn when to use p=none, p=quarantine, or p=reject, understand the pct tag for gradual rollout, and follow our recommended deployment timeline to reach full protection in 2-3 weeks.",
+    date: "2025-01-19",
     readTime: "10 min read",
-    category: "Best Practices",
-    icon: Shield,
-  },
-  {
-    title: "Email Authentication Trends 2025",
-    excerpt:
-      "The latest statistics on DMARC adoption, email spoofing attacks, and what businesses are doing to protect their domains.",
-    date: "2024-12-28",
-    readTime: "7 min read",
-    category: "Industry News",
-    icon: TrendingUp,
-  },
-  {
-    title: "DKIM Signature Failures: Common Causes",
-    excerpt:
-      "Troubleshoot DKIM authentication failures with our comprehensive guide to common configuration mistakes and fixes.",
-    date: "2024-12-20",
-    readTime: "9 min read",
     category: "Technical Guide",
     icon: AlertTriangle,
-  },
-  {
-    title: "Moving to DMARC p=reject: A Step-by-Step Guide",
-    excerpt:
-      "Ready to enforce DMARC? Follow our proven process to move from p=none to p=reject without breaking legitimate email flow.",
-    date: "2024-12-15",
-    readTime: "12 min read",
-    category: "Best Practices",
-    icon: Shield,
-  },
-  {
-    title: "Third-Party Email Services and DMARC",
-    excerpt:
-      "Configure your marketing automation, CRM, and support platforms to work seamlessly with DMARC authentication.",
-    date: "2024-12-10",
-    readTime: "8 min read",
-    category: "Technical Guide",
-    icon: TrendingUp,
   },
 ];
 
 const categories = [
   "All Posts",
   "Industry News",
+  "Compliance",
+  "Implementation Guide",
   "Technical Guide",
-  "Best Practices",
-  "Case Studies",
 ];
 
 export default function BlogPage() {
@@ -192,7 +168,7 @@ export default function BlogPage() {
               return (
                 <Link
                   key={post.title}
-                  href="#"
+                  href={`/blog/${post.slug}`}
                   className="group border-border bg-background hover:border-primary/30 flex flex-col rounded-lg border p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
                 >
                   {/* Icon & Category */}
