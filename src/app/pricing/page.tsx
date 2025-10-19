@@ -473,6 +473,23 @@ export default function PricingPage() {
         </div>
       </section>
 
+      {/* Comparison Link Section */}
+      <section className="border-border border-t py-12">
+        <div className="container">
+          <div className="mx-auto max-w-4xl text-center">
+            <p className="text-muted-foreground text-sm">
+              Comparing DMARC solutions?{" "}
+              <Link
+                href="/vs/powerdmarc"
+                className="text-primary font-medium hover:underline"
+              >
+                See how we compare to PowerDMARC
+              </Link>
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="bg-secondary/30 py-24">
         <div className="container">
