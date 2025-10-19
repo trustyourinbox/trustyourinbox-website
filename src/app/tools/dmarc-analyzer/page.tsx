@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ToolLayout, Button, Input, Card } from "@/components/ui";
 import { DMARCStatus } from "@/components/ui/DMARCStatus";
+import FAQSchema from "@/components/FAQSchema";
 import {
   Shield,
   Mail,
@@ -378,6 +379,88 @@ export default function DMARCAnalyzerPage() {
           ))}
         </div>
       )}
+
+      {/* FAQ Section for SEO */}
+      <FAQSchema
+        faqs={[
+          {
+            question: "What is a DMARC record?",
+            answer:
+              "A DMARC record is a DNS TXT record published at _dmarc.yourdomain.com that tells email receivers how to handle messages that fail SPF or DKIM authentication. It helps prevent email spoofing, phishing, and domain impersonation attacks by specifying your policy (none, quarantine, or reject) and reporting preferences.",
+          },
+          {
+            question: "How do I check my DMARC record?",
+            answer:
+              "You can check your DMARC record by using our free DMARC Analyzer tool above. Simply paste your DMARC record or look it up via DNS query at _dmarc.yourdomain.com, and we'll analyze it for syntax errors, policy recommendations, and compliance issues.",
+          },
+          {
+            question: "What does p=none mean in DMARC?",
+            answer:
+              "p=none is the monitoring-only DMARC policy. It means email receivers should not take any action on messages that fail DMARC authentication, but should send reports to the domain owner. This is the recommended starting policy when first implementing DMARC to understand your email ecosystem without risking delivery issues.",
+          },
+          {
+            question:
+              "What is the difference between p=quarantine and p=reject?",
+            answer:
+              "p=quarantine tells email receivers to send failed messages to spam/junk folders, while p=reject instructs receivers to block the messages entirely. p=reject is the strictest and most secure policy, providing maximum protection against email spoofing, but requires careful implementation to avoid blocking legitimate email.",
+          },
+          {
+            question: "How often should I check my DMARC record?",
+            answer:
+              "You should check your DMARC record whenever you make changes to your email infrastructure, add new sending services, or modify SPF/DKIM settings. We recommend automated monitoring with our platform to get real-time alerts when issues arise, rather than manual checks.",
+          },
+        ]}
+      />
+
+      {/* FAQ Display Section */}
+      <div className="mt-8 mb-8">
+        <div className="mb-4">
+          <h2 className="text-foreground text-xl font-bold tracking-tight">
+            Frequently Asked Questions
+          </h2>
+          <p className="text-muted-foreground mt-1 text-sm">
+            Common questions about DMARC records and analysis
+          </p>
+        </div>
+
+        <div className="space-y-4">
+          <details className="border-border bg-card group rounded-lg border p-4">
+            <summary className="text-foreground cursor-pointer text-sm font-semibold">
+              What is a DMARC record?
+            </summary>
+            <p className="text-muted-foreground mt-2 text-sm">
+              A DMARC record is a DNS TXT record published at
+              _dmarc.yourdomain.com that tells email receivers how to handle
+              messages that fail SPF or DKIM authentication. It helps prevent
+              email spoofing, phishing, and domain impersonation attacks.
+            </p>
+          </details>
+
+          <details className="border-border bg-card group rounded-lg border p-4">
+            <summary className="text-foreground cursor-pointer text-sm font-semibold">
+              What does p=none mean in DMARC?
+            </summary>
+            <p className="text-muted-foreground mt-2 text-sm">
+              p=none is the monitoring-only DMARC policy. Email receivers
+              don&apos;t take action on failures but send reports to your
+              domain. This is the recommended starting policy to understand your
+              email ecosystem without risking delivery issues.
+            </p>
+          </details>
+
+          <details className="border-border bg-card group rounded-lg border p-4">
+            <summary className="text-foreground cursor-pointer text-sm font-semibold">
+              What is the difference between p=quarantine and p=reject?
+            </summary>
+            <p className="text-muted-foreground mt-2 text-sm">
+              p=quarantine sends failed messages to spam/junk, while p=reject
+              blocks them entirely. p=reject provides maximum protection but
+              requires careful implementation to avoid blocking legitimate
+              email.
+            </p>
+          </details>
+        </div>
+      </div>
 
       {/* Related Tools */}
       <div className="mt-8 mb-8">

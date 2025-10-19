@@ -1,0 +1,47 @@
+# TrustYourInbox robots.txt
+# Updated: January 2025
+
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /login
+Disallow: /signup
+Disallow: /_next/
+Disallow: /static/
+
+# Allow crawling of tools and public pages
+Allow: /tools/
+Allow: /solutions/
+Allow: /blog/
+Allow: /guides/
+Allow: /pricing
+Allow: /product
+Allow: /about
+Allow: /contact
+
+# Sitemaps
+Sitemap: https://trustyourinbox.com/sitemap.xml
+
+# Crawl-delay for aggressive bots (prevent server overload)
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Crawl-delay: 10
+
+User-agent: MJ12bot
+Crawl-delay: 10
+
+# Block AI scrapers (optional - uncomment if desired)
+# User-agent: GPTBot
+# Disallow: /
+
+# User-agent: ChatGPT-User
+# Disallow: /
+
+# User-agent: CCBot
+# Disallow: /
+
+# User-agent: anthropic-ai
+# Disallow: /

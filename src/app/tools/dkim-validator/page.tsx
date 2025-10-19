@@ -18,6 +18,7 @@ import { Buffer } from "buffer";
 // @ts-expect-error: asn1.js has no types
 import asn1 from "asn1.js";
 import { ToolLayout, Button, Input, Card, Alert } from "@/components/ui";
+import FAQSchema from "@/components/FAQSchema";
 import { Shield, Mail, Key, ArrowRight } from "lucide-react";
 import Link from "next/link";
 
@@ -475,6 +476,86 @@ export default function DKIMValidatorPage() {
           )}
         </div>
       )}
+
+      {/* FAQ Schema for SEO */}
+      <FAQSchema
+        faqs={[
+          {
+            question: "What is DKIM?",
+            answer:
+              "DKIM (DomainKeys Identified Mail) is an email authentication method that uses cryptographic signatures to verify that an email message was sent by an authorized server and wasn't altered in transit. It adds a digital signature to the email header using a private key, which receiving servers verify using the public key published in your DNS records.",
+          },
+          {
+            question: "How do I check my DKIM record?",
+            answer:
+              "You can check your DKIM record using our free DKIM Validator tool above. You'll need your domain name and DKIM selector (usually 'default', 'google', or 'k1'). We'll query your DNS at selector._domainkey.yourdomain.com to retrieve and validate your DKIM public key, checking for common issues like missing records, syntax errors, or weak key lengths.",
+          },
+          {
+            question: "What is a DKIM selector?",
+            answer:
+              "A DKIM selector is a unique identifier that allows you to have multiple DKIM keys for the same domain. It's part of the DNS record name (selector._domainkey.domain.com) and appears in the DKIM-Signature header of signed emails. Common selectors include 'default', 'google', 'k1', or custom names. You can have different selectors for different email services or servers.",
+          },
+          {
+            question: "What key length should I use for DKIM?",
+            answer:
+              "For DKIM, use at least 1024-bit RSA keys, though 2048-bit keys are recommended for better security. Keys shorter than 1024 bits are considered weak and may be rejected by some email receivers. While 4096-bit keys offer more security, they can cause DNS record size issues and aren't widely necessary. 2048-bit provides the best balance of security and compatibility.",
+          },
+          {
+            question: "Why is my DKIM record failing validation?",
+            answer:
+              "Common DKIM validation failures include: no DKIM record published in DNS, incorrect selector name, syntax errors in the DNS record, missing required tags (v=DKIM1; k=rsa; p=publickey), key size too small (<1024 bits), or DNS propagation delays after recent changes. Our DKIM Validator identifies the specific issue and provides recommendations to fix it.",
+          },
+        ]}
+      />
+
+      {/* FAQ Display Section */}
+      <div className="mt-8 mb-8">
+        <div className="mb-4">
+          <h2 className="text-foreground text-xl font-bold tracking-tight">
+            Frequently Asked Questions
+          </h2>
+          <p className="text-muted-foreground mt-1 text-sm">
+            Common questions about DKIM validation
+          </p>
+        </div>
+
+        <div className="space-y-4">
+          <details className="border-border bg-card group rounded-lg border p-4">
+            <summary className="text-foreground cursor-pointer text-sm font-semibold">
+              What is DKIM?
+            </summary>
+            <p className="text-muted-foreground mt-2 text-sm">
+              DKIM is an email authentication method using cryptographic
+              signatures to verify emails weren&apos;t altered and came from
+              authorized servers. It adds a digital signature verified by
+              receiving servers.
+            </p>
+          </details>
+
+          <details className="border-border bg-card group rounded-lg border p-4">
+            <summary className="text-foreground cursor-pointer text-sm font-semibold">
+              What is a DKIM selector?
+            </summary>
+            <p className="text-muted-foreground mt-2 text-sm">
+              A DKIM selector is a unique identifier allowing multiple DKIM keys
+              per domain. It&apos;s part of the DNS record name
+              (selector._domainkey.domain.com). Common selectors:
+              &apos;default&apos;, &apos;google&apos;, &apos;k1&apos;.
+            </p>
+          </details>
+
+          <details className="border-border bg-card group rounded-lg border p-4">
+            <summary className="text-foreground cursor-pointer text-sm font-semibold">
+              What key length should I use for DKIM?
+            </summary>
+            <p className="text-muted-foreground mt-2 text-sm">
+              Use 2048-bit RSA keys for DKIM (recommended). Minimum 1024-bit,
+              though keys under 1024 are weak. 2048-bit provides best
+              security/compatibility balance.
+            </p>
+          </details>
+        </div>
+      </div>
 
       <div className="mt-8 mb-8">
         <div className="mb-4">

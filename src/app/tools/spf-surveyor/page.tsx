@@ -18,6 +18,7 @@ import {
   FaFileAlt,
 } from "react-icons/fa";
 import { ToolLayout, Button, Input, Card, Alert } from "@/components/ui";
+import FAQSchema from "@/components/FAQSchema";
 import Link from "next/link";
 import { Shield, Key, Mail, ArrowRight, Globe } from "lucide-react";
 
@@ -688,6 +689,84 @@ export default function SPFSurveyorPage() {
           </Card>
         </div>
       )}
+
+      {/* FAQ Schema for SEO */}
+      <FAQSchema
+        faqs={[
+          {
+            question: "What is an SPF record?",
+            answer:
+              "SPF (Sender Policy Framework) is a DNS TXT record that lists all IP addresses and domains authorized to send email on behalf of your domain. It helps prevent email spoofing by allowing receiving mail servers to verify that incoming email from your domain was sent from an authorized server.",
+          },
+          {
+            question: "How do I check my SPF record?",
+            answer:
+              "You can check your SPF record using our free SPF Surveyor tool above. Simply enter your domain name, and we'll query your DNS to retrieve and analyze your SPF record, showing all authorized senders, includes, and potential issues like exceeding the 10 DNS lookup limit.",
+          },
+          {
+            question: "What is the SPF 10 lookup limit?",
+            answer:
+              "SPF has a maximum of 10 DNS lookups to prevent infinite loops and excessive DNS queries. Each 'include:', 'a:', 'mx:', 'ptr:', and 'exists:' mechanism counts as one lookup. If you exceed 10 lookups, your SPF record will fail validation (PermError), potentially causing email delivery issues. Use SPF flattening to stay under the limit.",
+          },
+          {
+            question: "What does SPF ~all vs -all mean?",
+            answer:
+              "The 'all' mechanism determines what happens to emails that don't match your SPF record. ~all (soft fail) marks non-matching emails as suspicious but allows delivery, while -all (hard fail) instructs receiving servers to reject non-matching emails. +all allows all senders (not recommended), and ?all is neutral (rarely used).",
+          },
+          {
+            question: "How do I fix SPF record errors?",
+            answer:
+              "Common SPF fixes include: reducing DNS lookups by using IP ranges instead of includes, removing unused sending services, implementing SPF flattening for services that require many lookups, fixing syntax errors in mechanisms, and ensuring your record starts with 'v=spf1'. Our SPF Surveyor identifies these issues and provides specific recommendations.",
+          },
+        ]}
+      />
+
+      {/* FAQ Display Section */}
+      <div className="mt-8 mb-8">
+        <div className="mb-4">
+          <h2 className="text-foreground text-xl font-bold tracking-tight">
+            Frequently Asked Questions
+          </h2>
+          <p className="text-muted-foreground mt-1 text-sm">
+            Common questions about SPF records
+          </p>
+        </div>
+
+        <div className="space-y-4">
+          <details className="border-border bg-card group rounded-lg border p-4">
+            <summary className="text-foreground cursor-pointer text-sm font-semibold">
+              What is an SPF record?
+            </summary>
+            <p className="text-muted-foreground mt-2 text-sm">
+              SPF (Sender Policy Framework) is a DNS TXT record that lists all
+              IP addresses authorized to send email for your domain. It prevents
+              email spoofing by verifying senders.
+            </p>
+          </details>
+
+          <details className="border-border bg-card group rounded-lg border p-4">
+            <summary className="text-foreground cursor-pointer text-sm font-semibold">
+              What is the SPF 10 lookup limit?
+            </summary>
+            <p className="text-muted-foreground mt-2 text-sm">
+              SPF allows maximum 10 DNS lookups. Each include, a, mx mechanism
+              counts as one lookup. Exceeding this limit causes SPF validation
+              to fail. Use SPF flattening to stay under the limit.
+            </p>
+          </details>
+
+          <details className="border-border bg-card group rounded-lg border p-4">
+            <summary className="text-foreground cursor-pointer text-sm font-semibold">
+              What does SPF ~all vs -all mean?
+            </summary>
+            <p className="text-muted-foreground mt-2 text-sm">
+              ~all (soft fail) marks non-matching emails as suspicious, -all
+              (hard fail) rejects them. -all provides stronger protection but
+              requires careful testing to avoid blocking legitimate email.
+            </p>
+          </details>
+        </div>
+      </div>
 
       {/* Related Tools */}
       <div className="mt-8 mb-8">

@@ -4,6 +4,7 @@ import { ToolLayout } from "@/components/ui/ToolLayout";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
+import FAQSchema from "@/components/FAQSchema";
 import {
   FaShieldAlt,
   FaCheckCircle,
@@ -568,6 +569,84 @@ export default function DomainSecurityCheckerPage() {
           </Card>
         </div>
       )}
+
+      {/* FAQ Schema for SEO */}
+      <FAQSchema
+        faqs={[
+          {
+            question: "What is domain security?",
+            answer:
+              "Domain security refers to protecting your domain from email-based threats like spoofing, phishing, and impersonation attacks. It includes implementing email authentication protocols (SPF, DKIM, DMARC) that verify sender identity, prevent unauthorized use of your domain, and ensure emails reach recipients' inboxes rather than spam folders.",
+          },
+          {
+            question: "How do I check my domain's email security?",
+            answer:
+              "You can check your domain's email security using our free Domain Security Checker tool above. Simply enter your domain name, and we'll scan your DNS records for SPF, DKIM, and DMARC configurations, providing a comprehensive security score and specific recommendations to fix any issues found.",
+          },
+          {
+            question: "What are SPF, DKIM, and DMARC?",
+            answer:
+              "SPF (Sender Policy Framework) lists authorized email servers for your domain. DKIM (DomainKeys Identified Mail) adds cryptographic signatures to verify email authenticity. DMARC (Domain-based Message Authentication, Reporting and Conformance) builds on SPF and DKIM to tell receivers how to handle authentication failures. Together, these three protocols provide comprehensive email security.",
+          },
+          {
+            question: "Why is email authentication important?",
+            answer:
+              "Email authentication is critical because it prevents cybercriminals from impersonating your domain in phishing attacks, protects your brand reputation, improves email deliverability (emails reach inboxes not spam), meets compliance requirements (PCI DSS, Google/Yahoo 2025 mandates), and provides visibility into who's sending email on your behalf through DMARC reports.",
+          },
+          {
+            question: "What's a good domain security score?",
+            answer:
+              "A good domain security score is 80% or higher, indicating you have SPF, DKIM, and DMARC properly configured. Scores below 50% suggest critical security gaps. A perfect 100% score means you have all three protocols implemented with enforcement policies (DMARC p=quarantine or p=reject), proper SPF/DKIM alignment, and no configuration errors.",
+          },
+        ]}
+      />
+
+      {/* FAQ Display Section */}
+      <div className="mt-8 mb-8">
+        <div className="mb-4">
+          <h2 className="text-foreground text-xl font-bold tracking-tight">
+            Frequently Asked Questions
+          </h2>
+          <p className="text-muted-foreground mt-1 text-sm">
+            Common questions about domain security
+          </p>
+        </div>
+
+        <div className="space-y-4">
+          <details className="border-border bg-card group rounded-lg border p-4">
+            <summary className="text-foreground cursor-pointer text-sm font-semibold">
+              What is domain security?
+            </summary>
+            <p className="text-muted-foreground mt-2 text-sm">
+              Domain security protects your domain from email threats using SPF,
+              DKIM, and DMARC protocols to verify sender identity and prevent
+              unauthorized domain use.
+            </p>
+          </details>
+
+          <details className="border-border bg-card group rounded-lg border p-4">
+            <summary className="text-foreground cursor-pointer text-sm font-semibold">
+              What are SPF, DKIM, and DMARC?
+            </summary>
+            <p className="text-muted-foreground mt-2 text-sm">
+              SPF lists authorized email servers, DKIM adds cryptographic
+              signatures, and DMARC tells receivers how to handle authentication
+              failures. Together they provide comprehensive email security.
+            </p>
+          </details>
+
+          <details className="border-border bg-card group rounded-lg border p-4">
+            <summary className="text-foreground cursor-pointer text-sm font-semibold">
+              Why is email authentication important?
+            </summary>
+            <p className="text-muted-foreground mt-2 text-sm">
+              Email authentication prevents phishing, protects brand reputation,
+              improves deliverability, meets 2025 compliance mandates, and
+              provides visibility into email sending.
+            </p>
+          </details>
+        </div>
+      </div>
 
       <div className="mt-8 mb-8">
         <div className="mb-4">

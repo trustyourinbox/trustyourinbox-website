@@ -12,6 +12,7 @@ import {
   SelectValue,
 } from "@/components/ui/Select";
 import { Label } from "@/components/ui/Label";
+import FAQSchema from "@/components/FAQSchema";
 import {
   Copy,
   Info,
@@ -551,6 +552,84 @@ export default function DmarcPolicyGenerator() {
               Record&quot; to create your DMARC record.
             </p>
           </Card>
+        </div>
+      </div>
+
+      {/* FAQ Schema for SEO */}
+      <FAQSchema
+        faqs={[
+          {
+            question: "How do I create a DMARC record?",
+            answer:
+              "Use our free DMARC Policy Generator tool above to create a DMARC record. Enter your domain, select your policy level (none, quarantine, or reject), add email addresses for reports, and we'll generate the proper DNS TXT record format (v=DMARC1; p=...). Start with p=none for monitoring, then move to p=quarantine or p=reject for enforcement.",
+          },
+          {
+            question: "What DMARC policy should I use?",
+            answer:
+              "Start with p=none to monitor your email authentication without affecting delivery. After analyzing reports for 2-4 weeks and fixing any issues, move to p=quarantine (sends failed emails to spam). Once confident all legitimate email passes, implement p=reject for maximum protection. Never start with p=reject without monitoring first, as it can block legitimate email.",
+          },
+          {
+            question: "What is the difference between RUA and RUF in DMARC?",
+            answer:
+              "RUA (rua=) specifies where to send aggregate reports - daily XML summaries of all authentication results across your email traffic. RUF (ruf=) specifies where to send forensic reports - individual failure samples with message details. RUA is essential for monitoring, while RUF is optional and contains sensitive data. Most organizations only use RUA reports.",
+          },
+          {
+            question: "Do I need separate DMARC records for subdomains?",
+            answer:
+              "No, by default your main domain's DMARC policy applies to all subdomains. However, you can create separate DMARC records for specific subdomains if needed, or use the sp= tag in your main record to set a different policy for subdomains. For example: v=DMARC1; p=reject; sp=quarantine applies reject to the main domain but quarantine to subdomains.",
+          },
+          {
+            question: "Where do I publish my DMARC record?",
+            answer:
+              "Publish your DMARC record as a DNS TXT record at _dmarc.yourdomain.com. In your DNS provider's control panel, create a new TXT record with the name '_dmarc' and paste the generated DMARC record as the value. DNS propagation typically takes 15 minutes to 48 hours. Use our DMARC Analyzer to verify it's published correctly.",
+          },
+        ]}
+      />
+
+      {/* FAQ Display Section */}
+      <div className="mt-8 mb-8">
+        <div className="mb-4">
+          <h2 className="text-foreground text-xl font-bold tracking-tight">
+            Frequently Asked Questions
+          </h2>
+          <p className="text-muted-foreground mt-1 text-sm">
+            Common questions about DMARC policy generation
+          </p>
+        </div>
+
+        <div className="space-y-4">
+          <details className="border-border bg-card group rounded-lg border p-4">
+            <summary className="text-foreground cursor-pointer text-sm font-semibold">
+              What DMARC policy should I use?
+            </summary>
+            <p className="text-muted-foreground mt-2 text-sm">
+              Start with p=none to monitor without affecting delivery. After 2-4
+              weeks of analysis, move to p=quarantine, then p=reject for maximum
+              protection. Never start with p=reject without monitoring first.
+            </p>
+          </details>
+
+          <details className="border-border bg-card group rounded-lg border p-4">
+            <summary className="text-foreground cursor-pointer text-sm font-semibold">
+              What is the difference between RUA and RUF?
+            </summary>
+            <p className="text-muted-foreground mt-2 text-sm">
+              RUA sends daily aggregate report summaries (essential). RUF sends
+              individual forensic failure samples (optional, contains sensitive
+              data). Most organizations only use RUA.
+            </p>
+          </details>
+
+          <details className="border-border bg-card group rounded-lg border p-4">
+            <summary className="text-foreground cursor-pointer text-sm font-semibold">
+              Where do I publish my DMARC record?
+            </summary>
+            <p className="text-muted-foreground mt-2 text-sm">
+              Publish as a DNS TXT record at _dmarc.yourdomain.com in your DNS
+              provider. Propagation takes 15 min to 48 hours. Use our DMARC
+              Analyzer to verify.
+            </p>
+          </details>
         </div>
       </div>
 

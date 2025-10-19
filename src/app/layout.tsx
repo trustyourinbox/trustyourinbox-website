@@ -40,11 +40,11 @@ const averta = localFont({
 export const metadata: Metadata = {
   title: {
     default:
-      "Free DMARC Checker & Monitoring Tool | Stop Email Spoofing | TrustYourInbox",
+      "DMARC Software: Free Tools + Enterprise Monitoring | TrustYourInbox",
     template: "%s | TrustYourInbox",
   },
   description:
-    "Implement DMARC easily with our free checker. Stop email spoofing, protect your domain, and monitor authentication. Perfect for IT teams, MSPs, and small businesses.",
+    "Enterprise DMARC monitoring platform with free tools. Deploy DMARC 4x faster with automated reporting, white-label MSP solutions, and 24/7 support. Trusted by 1,200+ organizations.",
   keywords: [
     "DMARC checker",
     "DMARC monitoring",
@@ -65,9 +65,9 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title:
-      "Free DMARC Checker & Monitoring Tool | Stop Email Spoofing | TrustYourInbox",
+      "DMARC Software: Free Tools + Enterprise Monitoring | TrustYourInbox",
     description:
-      "Implement DMARC easily with our free checker. Stop email spoofing, protect your domain, and monitor authentication. Perfect for IT teams, MSPs, and small businesses.",
+      "Enterprise DMARC monitoring platform with free tools. Deploy DMARC 4x faster with automated reporting, white-label MSP solutions, and 24/7 support. Trusted by 1,200+ organizations.",
     url: "https://trustyourinbox.com",
     siteName: "TrustYourInbox",
     images: [
@@ -84,9 +84,9 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title:
-      "Free DMARC Checker & Monitoring Tool | Stop Email Spoofing | TrustYourInbox",
+      "DMARC Software: Free Tools + Enterprise Monitoring | TrustYourInbox",
     description:
-      "Implement DMARC easily with our free checker. Stop email spoofing, protect your domain, and monitor authentication.",
+      "Enterprise DMARC monitoring platform with free tools. Deploy DMARC 4x faster with automated reporting, white-label MSP solutions, and 24/7 support. Trusted by 1,200+ organizations.",
     images: ["/images/og-image.png"],
   },
   robots: {

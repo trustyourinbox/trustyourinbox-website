@@ -13,9 +13,24 @@ import {
 import Image from "next/image";
 
 export const metadata = {
-  title: "DMARC Solution for MSPs - TrustYourInbox",
+  title: "White-Label DMARC for MSPs: Resell Under Your Brand | TrustYourInbox",
   description:
-    "Scale your DMARC services with multi-domain management, team collaboration, and bulk operations designed specifically for Managed Service Providers.",
+    "White-label DMARC platform for MSPs. Manage 100+ client domains, custom branding, reseller pricing, dedicated support. Grow MRR with DMARC services.",
+  keywords: [
+    "MSP DMARC white label",
+    "DMARC for managed service providers",
+    "white label DMARC solution",
+    "MSP email security",
+    "reseller DMARC platform",
+    "multi-tenant DMARC",
+  ],
+  openGraph: {
+    title:
+      "White-Label DMARC for MSPs: Resell Under Your Brand | TrustYourInbox",
+    description:
+      "White-label DMARC platform for MSPs. Manage 100+ client domains, custom branding, reseller pricing, dedicated support.",
+    type: "website",
+  },
 };
 
 export default function MSPSolutionPage() {
@@ -31,14 +46,16 @@ export default function MSPSolutionPage() {
             </div>
 
             <h1 className="mb-6 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
-              DMARC Management{" "}
-              <span className="text-primary">Built for MSPs</span>
+              White-Label DMARC Platform{" "}
+              <span className="text-primary">
+                for Managed Service Providers
+              </span>
             </h1>
 
             <p className="text-muted-foreground mb-8 text-lg sm:text-xl md:text-2xl">
-              Scale your email security services with multi-client management,
-              white-label capabilities, and automation tools designed for
-              service providers.
+              Grow your MRR with DMARC services. Manage 100+ client domains
+              under your brand with white-label dashboards, reseller pricing,
+              and 80%+ profit margins.
             </p>
 
             <div className="flex flex-col justify-center gap-4 sm:flex-row">
