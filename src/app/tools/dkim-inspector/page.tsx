@@ -126,17 +126,17 @@ function getGradeAndScore(
 ) {
   let score = 0;
   const dots: { color: string; message: string }[] = [];
-  let color = "bg-red-50 text-red-700 border-red-200";
-  let icon = <FaTimesCircle className="h-7 w-7 text-red-600" />;
+  let color = "bg-destructive/10 text-destructive border-destructive/20";
+  let icon = <FaTimesCircle className="text-destructive h-7 w-7" />;
   let message = "High risk: DKIM configuration needs improvement.";
 
   // Check version
   if (fields.v === "DKIM1") {
     score += 1;
-    dots.push({ color: "bg-green-500", message: "Valid DKIM version" });
+    dots.push({ color: "bg-success", message: "Valid DKIM version" });
   } else {
     dots.push({
-      color: "bg-red-500",
+      color: "bg-destructive",
       message: "Invalid or missing DKIM version",
     });
   }
@@ -144,56 +144,59 @@ function getGradeAndScore(
   // Check key type
   if (fields.k === "rsa") {
     score += 1;
-    dots.push({ color: "bg-green-500", message: "RSA key type" });
+    dots.push({ color: "bg-success", message: "RSA key type" });
   } else {
-    dots.push({ color: "bg-red-500", message: "Invalid or missing key type" });
+    dots.push({
+      color: "bg-destructive",
+      message: "Invalid or missing key type",
+    });
   }
 
   // Check key length
   if (keyLength) {
     if (keyLength >= 2048) {
       score += 1;
-      dots.push({ color: "bg-green-500", message: "Strong key (2048+ bits)" });
+      dots.push({ color: "bg-success", message: "Strong key (2048+ bits)" });
     } else if (keyLength >= 1024) {
       score += 1;
       dots.push({
-        color: "bg-yellow-500",
+        color: "bg-warning",
         message: "Standard key (1024 bits)",
       });
     } else {
-      dots.push({ color: "bg-red-500", message: "Weak key (<1024 bits)" });
+      dots.push({ color: "bg-destructive", message: "Weak key (<1024 bits)" });
     }
   } else {
     dots.push({
-      color: "bg-red-500",
+      color: "bg-destructive",
       message: "Invalid or missing public key",
     });
   }
 
   // Check testing mode
   if (fields.t === "y") {
-    dots.push({ color: "bg-yellow-500", message: "Testing mode enabled" });
+    dots.push({ color: "bg-warning", message: "Testing mode enabled" });
   } else {
     score += 1;
-    dots.push({ color: "bg-green-500", message: "Testing mode disabled" });
+    dots.push({ color: "bg-success", message: "Testing mode disabled" });
   }
 
   // Check hash algorithms
   if (fields.h?.includes("sha256")) {
     score += 1;
-    dots.push({ color: "bg-green-500", message: "SHA-256 support" });
+    dots.push({ color: "bg-success", message: "SHA-256 support" });
   } else {
-    dots.push({ color: "bg-red-500", message: "Missing SHA-256 support" });
+    dots.push({ color: "bg-destructive", message: "Missing SHA-256 support" });
   }
 
   // Calculate color based on score
   if (score >= 4) {
-    color = "bg-green-100 text-green-800 border-green-200";
-    icon = <FaTrophy className="h-7 w-7 text-yellow-500" />;
+    color = "bg-success/10 text-success border-success/20";
+    icon = <FaTrophy className="text-warning h-7 w-7" />;
     message = "Excellent! DKIM is well configured.";
   } else if (score >= 3) {
-    color = "bg-yellow-100 text-yellow-800 border-yellow-200";
-    icon = <FaCheckCircle className="h-7 w-7 text-yellow-500" />;
+    color = "bg-warning/10 text-warning border-warning/20";
+    icon = <FaCheckCircle className="text-warning h-7 w-7" />;
     message = "Fair. DKIM needs some improvements.";
   }
 
@@ -315,8 +318,8 @@ export default function DKIMInspectorPage() {
     : {
         score: 0,
         dots: [],
-        color: "bg-red-50 text-red-700 border-red-200",
-        icon: <FaTimesCircle className="h-7 w-7 text-red-600" />,
+        color: "bg-destructive/10 text-destructive border-destructive/20",
+        icon: <FaTimesCircle className="text-destructive h-7 w-7" />,
         message: "High risk: DKIM configuration needs improvement.",
       };
   const recommendations = record
@@ -326,11 +329,11 @@ export default function DKIMInspectorPage() {
   const sidebarContent = (
     <div className="space-y-6">
       <div>
-        <h3 className="flex items-center gap-1.5 text-sm font-medium text-gray-900">
+        <h3 className="text-foreground flex items-center gap-1.5 text-sm font-medium">
           <FaShieldAlt className="text-primary h-4 w-4" />
           About DKIM
         </h3>
-        <p className="mt-2 text-sm text-gray-500">
+        <p className="text-muted-foreground mt-2 text-sm">
           DKIM (DomainKeys Identified Mail) is an email authentication method
           that allows the receiver to verify that an email was indeed sent and
           authorized by the owner of the domain.
@@ -338,11 +341,11 @@ export default function DKIMInspectorPage() {
       </div>
 
       <div>
-        <h3 className="flex items-center gap-1.5 text-sm font-medium text-gray-900">
+        <h3 className="text-foreground flex items-center gap-1.5 text-sm font-medium">
           <FaInfoCircle className="text-primary h-4 w-4" />
           What We Check
         </h3>
-        <ul className="mt-2 space-y-2 text-sm text-gray-500">
+        <ul className="text-muted-foreground mt-2 space-y-2 text-sm">
           <li className="flex items-start gap-2">
             <FaKey className="text-primary mt-0.5 h-4 w-4" />
             <span>DKIM record version and format</span>
@@ -376,18 +379,21 @@ export default function DKIMInspectorPage() {
           <form onSubmit={handleCheck} className="space-y-4">
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               <div className="space-y-2">
-                <label htmlFor="domain" className="text-sm font-medium">
+                <label
+                  htmlFor="domain"
+                  className="mb-2 block text-sm font-medium"
+                >
                   Domain Name
                 </label>
                 <div className="relative flex-1">
                   <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                    <Globe className="h-5 w-5 text-gray-400" />
+                    <Globe className="text-muted-foreground h-5 w-5" />
                   </div>
                   <Input
                     id="domain"
                     type="text"
                     placeholder="yourdomain.com"
-                    className="focus:border-primary focus:ring-ring h-11 border-gray-200 pl-10"
+                    className="focus:border-primary focus:ring-ring border-border h-11 pl-10"
                     value={domain}
                     onChange={(e) => setDomain(e.target.value)}
                     required
@@ -397,18 +403,21 @@ export default function DKIMInspectorPage() {
               </div>
 
               <div className="space-y-2">
-                <label htmlFor="selector" className="text-sm font-medium">
+                <label
+                  htmlFor="selector"
+                  className="mb-2 block text-sm font-medium"
+                >
                   DKIM Selector
                 </label>
                 <div className="relative flex-1">
                   <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                    <FaFileAlt className="h-5 w-5 text-gray-400" />
+                    <FaFileAlt className="text-muted-foreground h-5 w-5" />
                   </div>
                   <Input
                     id="selector"
                     type="text"
                     placeholder="selector (e.g., google, default)"
-                    className="focus:border-primary focus:ring-ring h-11 border-gray-200 pl-10"
+                    className="focus:border-primary focus:ring-ring border-border h-11 pl-10"
                     value={selector}
                     onChange={(e) => setSelector(e.target.value)}
                     required
@@ -463,135 +472,157 @@ export default function DKIMInspectorPage() {
         <div className="mt-6 space-y-6">
           {/* Status Card */}
           <Card className={color}>
-            <div className="mb-4 flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <FaShieldAlt className="text-primary/70 h-6 w-6" />
-                <span className="text-xl font-bold text-gray-900">Status</span>
-              </div>
-              {icon}
-            </div>
-
-            <p className="mb-4 text-sm">{message}</p>
-
-            {/* Status Dots */}
-            <div className="flex flex-wrap gap-4">
-              {dots.map((dot, i) => (
-                <div key={i} className="flex items-center gap-2">
-                  <div className={`h-3 w-3 rounded-full ${dot.color}`} />
-                  <span className="text-sm text-gray-600">{dot.message}</span>
+            <div className="p-6">
+              <div className="mb-4 flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <FaShieldAlt className="text-primary/70 h-6 w-6" />
+                  <span className="text-foreground text-xl font-bold">
+                    Status
+                  </span>
                 </div>
-              ))}
+                {icon}
+              </div>
+
+              <p className="mb-4 text-sm">{message}</p>
+
+              {/* Status Dots */}
+              <div className="flex flex-wrap gap-4">
+                {dots.map((dot, i) => (
+                  <div key={i} className="flex items-center gap-2">
+                    <div className={`h-3 w-3 rounded-full ${dot.color}`} />
+                    <span className="text-muted-foreground text-sm">
+                      {dot.message}
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
           </Card>
 
           {/* Recommendations Section */}
           <Card>
-            <h3 className="mb-3 font-semibold text-gray-900">
-              Recommendations
-            </h3>
-            <div className="space-y-3">
-              {recommendations.map((rec, i) => (
-                <div
-                  key={i}
-                  className={`flex items-start gap-3 rounded-lg border p-3 ${
-                    rec.type === "warning"
-                      ? "border-red-200"
-                      : rec.type === "info"
-                        ? "border-primary/20"
-                        : "border-green-200"
-                  }`}
-                >
+            <div className="p-6">
+              <h3 className="text-foreground mb-3 font-semibold">
+                Recommendations
+              </h3>
+              <div className="space-y-3">
+                {recommendations.map((rec, i) => (
                   <div
-                    className={`mt-0.5 ${
+                    key={i}
+                    className={`flex items-start gap-3 rounded-lg border p-3 ${
                       rec.type === "warning"
-                        ? "text-red-600"
+                        ? "border-destructive/20"
                         : rec.type === "info"
-                          ? "text-primary"
-                          : "text-green-600"
+                          ? "border-primary/20"
+                          : "border-success/20"
                     }`}
                   >
-                    {rec.type === "warning" ? (
-                      <FaExclamationTriangle className="h-5 w-5" />
-                    ) : rec.type === "info" ? (
-                      <FaInfoCircle className="h-5 w-5" />
-                    ) : (
-                      <FaCheckCircle className="h-5 w-5" />
-                    )}
+                    <div
+                      className={`mt-0.5 ${
+                        rec.type === "warning"
+                          ? "text-destructive"
+                          : rec.type === "info"
+                            ? "text-primary"
+                            : "text-success"
+                      }`}
+                    >
+                      {rec.type === "warning" ? (
+                        <FaExclamationTriangle className="h-5 w-5" />
+                      ) : rec.type === "info" ? (
+                        <FaInfoCircle className="h-5 w-5" />
+                      ) : (
+                        <FaCheckCircle className="h-5 w-5" />
+                      )}
+                    </div>
+                    <p
+                      className={`text-sm ${
+                        rec.type === "warning"
+                          ? "text-destructive"
+                          : rec.type === "info"
+                            ? "text-primary"
+                            : "text-success"
+                      }`}
+                    >
+                      {rec.message}
+                    </p>
                   </div>
-                  <p
-                    className={`text-sm ${
-                      rec.type === "warning"
-                        ? "text-red-700"
-                        : rec.type === "info"
-                          ? "text-primary"
-                          : "text-green-700"
-                    }`}
-                  >
-                    {rec.message}
-                  </p>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </Card>
 
           {/* DKIM Record Card */}
           <Card>
-            <div className="mb-4 flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <FaKey className="text-primary/70 h-6 w-6" />
-                <span className="text-xl font-bold text-gray-900">
-                  DKIM Record
-                </span>
-                {keyLength && (
-                  <span
-                    className={`ml-2 rounded-full border px-2 py-0.5 text-xs font-semibold ${keyLength < 1024 ? "border-red-200 bg-red-100 text-red-800" : "border-green-200 bg-green-100 text-green-800"}`}
-                    title="Bit length of the DKIM public key"
-                  >
-                    {keyLength} bits
+            <div className="p-6">
+              <div className="mb-4 flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <FaKey className="text-primary/70 h-6 w-6" />
+                  <span className="text-foreground text-xl font-bold">
+                    DKIM Record
                   </span>
-                )}
+                  {keyLength && (
+                    <span
+                      className={`ml-2 rounded-full border px-2 py-0.5 text-xs font-semibold ${keyLength < 1024 ? "border-destructive/20 bg-destructive/10 text-destructive" : "border-success/20 bg-success/10 text-success"}`}
+                      title="Bit length of the DKIM public key"
+                    >
+                      {keyLength} bits
+                    </span>
+                  )}
+                </div>
               </div>
-            </div>
-            <div className="flex items-center gap-2">
-              <pre className="flex-1 rounded border border-gray-100 bg-gray-50 p-2 text-xs break-all whitespace-pre-wrap text-gray-800">
-                {record}
-              </pre>
-              <CopyButton value={record} />
+              <div className="flex items-center gap-2">
+                <pre className="border-border bg-muted text-foreground flex-1 rounded border p-2 text-xs break-all whitespace-pre-wrap">
+                  {record}
+                </pre>
+                <CopyButton value={record} />
+              </div>
             </div>
           </Card>
 
           {/* Parsed Fields */}
           <Card>
-            <h3 className="mb-4 font-semibold text-gray-900">Parsed Fields</h3>
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-              {Object.entries(fields).map(([k, v]) => (
-                <div key={k} className="flex items-center gap-2">
-                  <span className="bg-secondary text-primary rounded px-2 py-0.5 font-mono text-xs">
-                    {k}
-                  </span>
-                  <span className="text-xs break-all text-gray-800">{v}</span>
-                </div>
-              ))}
+            <div className="p-6">
+              <h3 className="text-foreground mb-4 font-semibold">
+                Parsed Fields
+              </h3>
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                {Object.entries(fields).map(([k, v]) => (
+                  <div key={k} className="flex items-center gap-2">
+                    <span className="bg-secondary text-primary rounded px-2 py-0.5 font-mono text-xs">
+                      {k}
+                    </span>
+                    <span className="text-foreground text-xs break-all">
+                      {v}
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
           </Card>
 
           {/* DKIM Tag Legend */}
           <Card>
-            <h3 className="mb-4 font-semibold text-gray-900">
-              DKIM Tag Legend
-            </h3>
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-              {DKIM_TAG_LEGEND.map(({ tag, name, desc }) => (
-                <div key={tag} className="flex items-start gap-3">
-                  <span className="bg-primary/10 text-primary mt-0.5 rounded px-2 py-0.5 font-mono text-xs">
-                    {tag}
-                  </span>
-                  <div>
-                    <span className="font-semibold text-gray-900">{name}</span>
-                    <span className="block text-sm text-gray-600">{desc}</span>
+            <div className="p-6">
+              <h3 className="text-foreground mb-4 font-semibold">
+                DKIM Tag Legend
+              </h3>
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                {DKIM_TAG_LEGEND.map(({ tag, name, desc }) => (
+                  <div key={tag} className="flex items-start gap-3">
+                    <span className="bg-primary/10 text-primary mt-0.5 rounded px-2 py-0.5 font-mono text-xs">
+                      {tag}
+                    </span>
+                    <div>
+                      <span className="text-foreground font-semibold">
+                        {name}
+                      </span>
+                      <span className="text-muted-foreground block text-sm">
+                        {desc}
+                      </span>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </Card>
         </div>
@@ -603,73 +634,70 @@ export default function DKIMInspectorPage() {
         </Alert>
       )}
 
-      <div className="mt-12 mb-8">
-        <div className="mb-6">
-          <h2 className="text-2xl font-bold tracking-tight">Related Tools</h2>
-          <p className="text-muted-foreground mt-1">
-            Explore more email authentication tools to secure your domain
+      <div className="mt-8 mb-8">
+        <div className="mb-4">
+          <h2 className="text-xl font-bold tracking-tight">Related Tools</h2>
+          <p className="text-muted-foreground mt-1 text-sm">
+            More email authentication tools
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
           <Link
             href="/tools/dmarc-analyzer"
-            className="group border-primary/20 bg-secondary dark:border-primary dark:bg-primary relative overflow-hidden rounded-lg border p-5 transition-all hover:shadow-md"
+            className="group border-border/40 bg-card hover:border-primary/30 relative overflow-hidden rounded-lg border p-4 transition-all duration-200 hover:shadow-lg"
           >
-            <div className="flex items-start gap-4">
-              <div className="bg-primary/10 dark:bg-primary rounded-full p-2">
-                <Shield className="text-primary h-6 w-6" />
+            <div className="flex items-start gap-3">
+              <div className="bg-primary/10 flex-shrink-0 rounded-md p-2">
+                <Shield className="text-primary h-4 w-4" />
               </div>
-              <div>
-                <h3 className="text-lg font-semibold group-hover:underline">
+              <div className="min-w-0 flex-1">
+                <h3 className="text-foreground group-hover:text-primary text-sm font-semibold transition-colors">
                   DMARC Analyzer
                 </h3>
-                <p className="text-muted-foreground mt-1 text-sm">
-                  Analyze your DMARC configuration and get detailed reports
+                <p className="text-muted-foreground mt-0.5 line-clamp-2 text-xs">
+                  Analyze DMARC configuration and get detailed reports
                 </p>
               </div>
             </div>
-            <div className="bg-primary absolute bottom-0 left-0 h-1 w-0 transition-all duration-300 group-hover:w-full"></div>
           </Link>
 
           <Link
             href="/tools/spf-surveyor"
-            className="group relative overflow-hidden rounded-lg border border-green-200 bg-green-50 p-5 transition-all hover:shadow-md dark:border-green-800 dark:bg-green-950"
+            className="group border-border/40 bg-card hover:border-primary/30 relative overflow-hidden rounded-lg border p-4 transition-all duration-200 hover:shadow-lg"
           >
-            <div className="flex items-start gap-4">
-              <div className="rounded-full bg-green-100 p-2 dark:bg-green-900">
-                <Mail className="text-primary h-6 w-6" />
+            <div className="flex items-start gap-3">
+              <div className="bg-primary/10 flex-shrink-0 rounded-md p-2">
+                <Mail className="text-primary h-4 w-4" />
               </div>
-              <div>
-                <h3 className="text-lg font-semibold group-hover:underline">
+              <div className="min-w-0 flex-1">
+                <h3 className="text-foreground group-hover:text-primary text-sm font-semibold transition-colors">
                   SPF Surveyor
                 </h3>
-                <p className="text-muted-foreground mt-1 text-sm">
-                  Validate and troubleshoot your SPF records
+                <p className="text-muted-foreground mt-0.5 line-clamp-2 text-xs">
+                  Validate and troubleshoot SPF records
                 </p>
               </div>
             </div>
-            <div className="bg-primary absolute bottom-0 left-0 h-1 w-0 transition-all duration-300 group-hover:w-full"></div>
           </Link>
 
           <Link
             href="/tools/domain-security-checker"
-            className="group relative overflow-hidden rounded-lg border border-purple-200 bg-purple-50 p-5 transition-all hover:shadow-md dark:border-purple-800 dark:bg-purple-950"
+            className="group border-border/40 bg-card hover:border-primary/30 relative overflow-hidden rounded-lg border p-4 transition-all duration-200 hover:shadow-lg"
           >
-            <div className="flex items-start gap-4">
-              <div className="rounded-full bg-purple-100 p-2 dark:bg-purple-900">
-                <Key className="text-primary h-6 w-6" />
+            <div className="flex items-start gap-3">
+              <div className="bg-primary/10 flex-shrink-0 rounded-md p-2">
+                <Key className="text-primary h-4 w-4" />
               </div>
-              <div>
-                <h3 className="text-lg font-semibold group-hover:underline">
+              <div className="min-w-0 flex-1">
+                <h3 className="text-foreground group-hover:text-primary text-sm font-semibold transition-colors">
                   Domain Security Checker
                 </h3>
-                <p className="text-muted-foreground mt-1 text-sm">
+                <p className="text-muted-foreground mt-0.5 line-clamp-2 text-xs">
                   Check your domain&apos;s overall email security configuration
                 </p>
               </div>
             </div>
-            <div className="bg-primary absolute bottom-0 left-0 h-1 w-0 transition-all duration-300 group-hover:w-full"></div>
           </Link>
         </div>
       </div>
