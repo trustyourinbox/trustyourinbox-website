@@ -5,6 +5,7 @@ import { ThemeProvider } from "next-themes";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import ModernNavbar from "@/components/ModernNavbar";
 import Footer from "@/components/Footer";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 import fs from "fs";
 import path from "path";
 import "./globals.css";
@@ -171,6 +172,9 @@ export default function RootLayout({
         />
       </head>
       <body className="font-sans antialiased">
+        {process.env.NEXT_PUBLIC_GA4_ID && (
+          <GoogleAnalytics ga4Id={process.env.NEXT_PUBLIC_GA4_ID} />
+        )}
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

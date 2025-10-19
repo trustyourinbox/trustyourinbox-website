@@ -40,6 +40,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Tool pages (high priority for SEO)
   const toolPages = [
     "/tools",
+    "/tools/overview",
     "/tools/dmarc-analyzer",
     "/tools/dmarc-domain-checker",
     "/tools/dmarc-subdomain-policy-checker",
@@ -55,7 +56,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
     changeFrequency: "weekly" as const,
-    priority: route === "/tools" ? 0.9 : 0.95,
+    priority: route === "/tools" || route === "/tools/overview" ? 0.9 : 0.95,
   }));
 
   // Resource pages
