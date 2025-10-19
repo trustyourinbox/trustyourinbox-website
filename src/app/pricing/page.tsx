@@ -293,35 +293,46 @@ export default function PricingPage() {
 
                   {/* CTA */}
                   <Button
-                    className={`mb-8 w-full ${plan.popular ? "to-accent-hover from-primary gap-2 bg-gradient-to-r text-white hover:opacity-90" : ""}`}
+                    className={`mb-6 w-full ${plan.popular ? "to-accent-hover from-primary gap-2 bg-gradient-to-r text-white hover:opacity-90" : ""}`}
                     variant={plan.popular ? "default" : "outline"}
                     size="lg"
                   >
                     {plan.cta}
                   </Button>
 
-                  {/* Features */}
+                  {/* Divider */}
+                  <div className="border-border mb-6 border-t"></div>
+
+                  {/* Included Features */}
                   <div className="space-y-3">
-                    {plan.features.map((feature) => (
-                      <div
-                        key={feature.name}
-                        className="flex items-start gap-3"
-                      >
-                        {feature.included ? (
-                          <Check className="text-primary mt-0.5 h-5 w-5 flex-shrink-0" />
-                        ) : (
-                          <X className="text-muted-foreground/40 mt-0.5 h-5 w-5 flex-shrink-0" />
-                        )}
-                        <span
-                          className={
-                            feature.included ? "" : "text-muted-foreground/60"
-                          }
+                    {plan.features
+                      .filter((f) => f.included)
+                      .map((feature) => (
+                        <div
+                          key={feature.name}
+                          className="flex items-start gap-3"
                         >
-                          {feature.name}
-                        </span>
-                      </div>
-                    ))}
+                          <Check className="text-primary mt-0.5 h-5 w-5 flex-shrink-0" />
+                          <span>{feature.name}</span>
+                        </div>
+                      ))}
                   </div>
+
+                  {/* Excluded Features */}
+                  {plan.features.filter((f) => !f.included).length > 0 && (
+                    <div className="border-border mt-6 border-t pt-4">
+                      <p className="text-muted-foreground mb-2 text-xs font-medium">
+                        Not included:
+                      </p>
+                      <div className="text-muted-foreground/60 flex flex-wrap gap-x-3 gap-y-1 text-xs">
+                        {plan.features
+                          .filter((f) => !f.included)
+                          .map((feature) => (
+                            <span key={feature.name}>• {feature.name}</span>
+                          ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
               );
             })}
@@ -343,10 +354,10 @@ export default function PricingPage() {
 
           <div className="scroll-container relative">
             {/* Scroll indicator for mobile */}
-            <div className="from-secondary/30 pointer-events-none absolute top-0 right-0 bottom-0 w-8 bg-gradient-to-l to-transparent md:hidden"></div>
-            <div className="min-w-[600px] pb-2">
-              {/* Table Header */}
-              <div className="border-border bg-background mb-6 grid grid-cols-4 gap-4 rounded-lg border p-4">
+            <div className="from-secondary/30 via-secondary/60 pointer-events-none absolute top-0 right-0 bottom-0 w-12 bg-gradient-to-l to-transparent md:hidden"></div>
+            <div className="bg-card min-w-[600px] overflow-hidden rounded-xl shadow-lg">
+              {/* Table Header - Sticky */}
+              <div className="bg-card/95 border-border sticky top-0 z-10 grid grid-cols-4 gap-4 border-b-2 p-4 backdrop-blur-sm">
                 <div className="font-bold">Features</div>
                 <div className="text-center font-bold">Free</div>
                 <div className="text-primary text-center font-bold">
@@ -357,15 +368,21 @@ export default function PricingPage() {
 
               {/* Table Body */}
               {comparisonFeatures.map((category) => (
-                <div key={category.category} className="mb-8">
-                  <h3 className="mb-4 px-4 text-lg font-bold">
-                    {category.category}
-                  </h3>
-                  <div className="space-y-2">
-                    {category.features.map((feature) => (
+                <div key={category.category}>
+                  <div className="bg-muted/50 border-border sticky top-[73px] z-[9] border-y px-4 py-3">
+                    <h3 className="text-base font-bold sm:text-lg">
+                      {category.category}
+                    </h3>
+                  </div>
+                  <div>
+                    {category.features.map((feature, idx) => (
                       <div
                         key={feature.name}
-                        className="border-border bg-background hover:border-primary/30 grid grid-cols-4 gap-4 rounded-lg border p-4 transition-colors"
+                        className={`hover:bg-muted/30 border-border grid grid-cols-4 gap-4 border-b p-3.5 transition-colors sm:p-4 ${
+                          idx === category.features.length - 1
+                            ? "border-b-0"
+                            : ""
+                        }`}
                       >
                         <div>{feature.name}</div>
                         <div className="text-center">
