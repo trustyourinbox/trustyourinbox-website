@@ -21,21 +21,25 @@ const guideCategories = [
         name: "What is DMARC?",
         desc: "Understanding email authentication",
         time: "5 min read",
+        href: "/guides/what-is-dmarc",
       },
       {
         name: "Why DMARC Matters",
         desc: "Protect your domain from spoofing",
         time: "4 min read",
+        href: "/guides/why-dmarc-matters",
       },
       {
         name: "DMARC Quick Start Guide",
         desc: "Get started in 15 minutes",
         time: "15 min read",
+        href: "/guides/dmarc-quick-start-guide",
       },
       {
         name: "Understanding Email Authentication",
         desc: "SPF, DKIM, and DMARC explained",
         time: "8 min read",
+        href: "/guides/understanding-email-authentication",
       },
     ],
   },
@@ -47,21 +51,25 @@ const guideCategories = [
         name: "Creating Your First DMARC Record",
         desc: "Step-by-step implementation",
         time: "10 min read",
+        href: "#",
       },
       {
         name: "DMARC Policy Levels Explained",
         desc: "None, Quarantine, and Reject",
         time: "6 min read",
+        href: "/guides/dmarc-policy-levels-explained",
       },
       {
         name: "Subdomain DMARC Policies",
         desc: "Protecting all your domains",
         time: "7 min read",
+        href: "#",
       },
       {
         name: "Moving to p=reject Safely",
         desc: "Progressive enforcement guide",
         time: "12 min read",
+        href: "#",
       },
     ],
   },
@@ -73,21 +81,25 @@ const guideCategories = [
         name: "SPF Record Basics",
         desc: "Authorize your email senders",
         time: "6 min read",
+        href: "/guides/spf-record-basics",
       },
       {
         name: "SPF Include Chains",
         desc: "Managing complex SPF setups",
         time: "8 min read",
+        href: "#",
       },
       {
         name: "SPF 10 DNS Lookup Limit",
         desc: "Avoid SPF failures",
         time: "5 min read",
+        href: "#",
       },
       {
         name: "SPF Best Practices",
         desc: "Optimize your SPF records",
         time: "9 min read",
+        href: "#",
       },
     ],
   },
@@ -99,21 +111,25 @@ const guideCategories = [
         name: "What is DKIM?",
         desc: "Digital signatures for emails",
         time: "5 min read",
+        href: "/guides/what-is-dkim",
       },
       {
         name: "Generating DKIM Keys",
         desc: "Create strong signatures",
         time: "7 min read",
+        href: "#",
       },
       {
         name: "DKIM Selector Strategy",
         desc: "Managing multiple selectors",
         time: "6 min read",
+        href: "#",
       },
       {
         name: "DKIM Troubleshooting",
         desc: "Fix common DKIM issues",
         time: "10 min read",
+        href: "#",
       },
     ],
   },
@@ -125,21 +141,25 @@ const guideCategories = [
         name: "Understanding DMARC Reports",
         desc: "RUA and RUF explained",
         time: "8 min read",
+        href: "#",
       },
       {
         name: "Reading Aggregate Reports",
         desc: "Interpret XML data",
         time: "10 min read",
+        href: "#",
       },
       {
         name: "Forensic Report Analysis",
         desc: "Deep dive into failures",
         time: "12 min read",
+        href: "#",
       },
       {
         name: "Identifying Legitimate Senders",
         desc: "Whitelist vs blocklist",
         time: "7 min read",
+        href: "#",
       },
     ],
   },
@@ -151,21 +171,25 @@ const guideCategories = [
         name: "BIMI Implementation",
         desc: "Brand indicators in email",
         time: "15 min read",
+        href: "#",
       },
       {
         name: "Multi-Tenant DMARC",
         desc: "Enterprise deployment",
         time: "20 min read",
+        href: "/guides/multi-tenant-dmarc",
       },
       {
         name: "Third-Party Email Services",
         desc: "Configure providers correctly",
         time: "12 min read",
+        href: "#",
       },
       {
         name: "DMARC for Email Marketing",
         desc: "Best practices for bulk email",
         time: "10 min read",
+        href: "#",
       },
     ],
   },
@@ -233,7 +257,7 @@ export default function GuidesPage() {
                     {category.guides.map((guide) => (
                       <Link
                         key={guide.name}
-                        href="#"
+                        href={guide.href}
                         className="group border-border bg-background hover:border-primary/30 rounded-md border p-6 transition-all duration-300 hover:shadow-lg"
                       >
                         <div className="mb-3 flex items-start justify-between">
