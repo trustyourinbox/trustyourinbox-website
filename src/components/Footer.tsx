@@ -224,18 +224,10 @@ export default function Footer() {
           </p>
         </div>
 
-        {/* Main 4-Column Footer Grid */}
-        <div className="mb-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-5 lg:gap-12">
+        {/* Main Footer Grid */}
+        <div className="mb-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-12">
           {/* Product Column */}
           <FooterSection title="Product" links={productLinks} />
-
-          {/* Tools Column */}
-          <FooterSection
-            title="Tools"
-            links={popularTools}
-            showViewAll
-            viewAllHref="/tools"
-          />
 
           {/* Resources Column */}
           <FooterSection title="Resources" links={resourceLinks} />
