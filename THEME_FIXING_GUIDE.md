@@ -233,6 +233,7 @@ grep -rn "bg-white[^-]" src/app/tools/[tool-name]/
 - `gap-2` - Spacing for icon
 - `hover:opacity-90` - Consistent hover effect
 - Include `<ArrowRight>` icon from `lucide-react`
+- **NO `rounded-full`** - Use default button radius (matches homepage)
 
 ### 5. Secondary Buttons and Links
 
@@ -244,11 +245,104 @@ grep -rn "bg-white[^-]" src/app/tools/[tool-name]/
 <button className="bg-card border-border text-primary">
 ```
 
-### 6. Input Fields - Usually Already Correct
+**Ghost Button Pitfalls:**
+
+Ghost buttons (like "Learn more" links) often have critical UX issues:
+
+```jsx
+// WRONG - Invisible with no padding and no hover feedback
+<Button
+  variant="ghost"
+  className="text-primary hover:text-primary h-auto p-0"
+>
+  Learn more <ArrowRight className="ml-1 h-4 w-4" />
+</Button>
+
+// CORRECT - Proper padding and clear hover state
+<Button
+  variant="ghost"
+  className="text-primary hover:bg-primary/10"
+>
+  Learn more <ArrowRight className="ml-1 h-4 w-4" />
+</Button>
+```
+
+**Common Ghost Button Mistakes:**
+
+1. **`p-0` removes all padding** - Creates tiny, nearly invisible click targets
+2. **`h-auto` removes height** - Makes buttons render as thin slivers
+3. **`hover:text-{color}` when already `text-{color}`** - No visible hover feedback
+4. **Missing hover state entirely** - Users can't tell if button is interactive
+
+**Correct Hover States for Ghost Buttons:**
+
+Use background highlights that match the button's semantic color:
+
+```jsx
+// Primary/Analytics buttons
+className = "text-primary hover:bg-primary/10";
+
+// Success/Compliance buttons
+className = "text-success hover:bg-success/10";
+
+// Warning buttons
+className = "text-warning hover:bg-warning/10";
+
+// Destructive/Error buttons
+className = "text-destructive hover:bg-destructive/10";
+
+// Muted/Neutral buttons
+className = "text-muted-foreground hover:bg-muted";
+```
+
+**Why this matters:**
+
+- Provides clear visual feedback on hover
+- Maintains semantic color consistency with feature icons
+- Creates sufficient clickable area for accessibility
+- Works properly in both light and dark modes
+
+### 6. Border Radius Consistency
+
+**ALWAYS match the homepage border radius patterns for visual consistency:**
+
+**Border Radius Standards:**
+
+| Element Type                | Border Radius                | Example                                |
+| --------------------------- | ---------------------------- | -------------------------------------- |
+| Badges/Pills                | `rounded-full`               | Status badges, tags                    |
+| Buttons (Primary/Secondary) | Default (none specified)     | CTA buttons, action buttons            |
+| Cards                       | `rounded-md` or `rounded-lg` | Feature cards, result cards            |
+| Screenshots/Images          | `rounded-md` or `rounded-lg` | Dashboard previews                     |
+| Tab Buttons                 | `rounded-lg`                 | Navigation tabs                        |
+| Icon Containers (square)    | `rounded-lg`                 | Feature icons backgrounds              |
+| Icon Containers (circle)    | `rounded-full`               | Avatar placeholders, badge icons       |
+| Large CTA Containers        | `rounded-2xl`                | Bottom CTA sections, feature showcases |
+| Tab Content Panels          | `rounded-lg`                 | Content areas within tabs              |
+
+**Common Mistakes:**
+
+```jsx
+// WRONG - Hero buttons with rounded-full (pill shape)
+<Button size="lg" className="... rounded-full">Get Started</Button>
+
+// CORRECT - Hero buttons use default radius
+<Button size="lg" className="...">Get Started</Button>
+
+// WRONG - Large container with tight radius
+<div className="rounded-md p-8">
+
+// CORRECT - Large CTA containers use rounded-2xl
+<div className="rounded-2xl p-8">
+```
+
+**Key Principle:** Buttons should NOT use `rounded-full` unless they are icon-only buttons. Text buttons use the default Button component radius which matches the homepage.
+
+### 7. Input Fields - Usually Already Correct
 
 Input, Select, and Textarea components from `/src/components/ui` are typically already theme-aware. Only check if you see visual issues.
 
-### 7. Semantic Headings for Result Sections
+### 8. Semantic Headings for Result Sections
 
 **Issue:** Result sections (Recommendations, Status, Output, etc.) may be missing proper semantic headings, making them harder to navigate and less accessible.
 
@@ -290,7 +384,7 @@ Input, Select, and Textarea components from `/src/components/ui` are typically a
 - Analysis/Breakdown
 - Error Messages (when shown conditionally)
 
-### 8. Text Contrast on Colored Backgrounds
+### 9. Text Contrast on Colored Backgrounds
 
 **Issue:** Text with reduced opacity or light color shades on colored alert/status backgrounds can have poor contrast, especially in light mode.
 
@@ -562,7 +656,7 @@ className =
 
 **Last Updated:** January 2025
 
-**Tools Fixed Using This Guide:**
+**Pages Fixed Using This Guide:**
 
 - ✅ DMARC Policy Generator (/tools/dmarc-policy-generator) - Full fix with accordion, slider, spacing, and color fixes
 - ✅ DMARC Analyzer (/tools/dmarc-analyzer) - Updated button to homepage style (size="lg", to-accent-hover gradient)
@@ -573,6 +667,7 @@ className =
 - ✅ DKIM Inspector (/tools/dkim-inspector) - Updated button from solid bg-primary to homepage gradient style
 - ✅ Domain Security Checker (/tools/domain-security-checker) - Updated button from solid bg-primary to homepage gradient style
 - ✅ DMARC Policy Impact Simulator (/tools/dmarc-policy-impact-simulator) - Fixed 19 hardcoded colors + standardized status colors + fixed critical DMARC logic bug
+- ✅ Features Page (/features) - Fixed 30+ hardcoded colors, standardized semantic colors, updated CTA buttons to homepage style, fixed border radius consistency (removed rounded-full from buttons, updated analytics card to rounded-2xl), fixed 7 ghost "Learn more" buttons (removed p-0/h-auto, added proper hover states with background highlights)
 
 ## DMARC Analyzer Notes
 

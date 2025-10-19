@@ -47,11 +47,14 @@ export default function FeaturesPage() {
               spoofing and ensure secure email delivery.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Button size="lg" className="rounded-full">
+              <Button
+                size="lg"
+                className="to-accent-hover from-primary gap-2 bg-gradient-to-r text-white hover:opacity-90"
+              >
                 Get Started
-                <ArrowRight className="ml-2 h-4 w-4" />
+                <ArrowRight className="h-4 w-4" />
               </Button>
-              <Button size="lg" variant="outline" className="rounded-full">
+              <Button size="lg" variant="outline">
                 Schedule Demo
               </Button>
             </div>
@@ -68,7 +71,7 @@ export default function FeaturesPage() {
           </h2>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
             {/* Feature 1 */}
-            <Card className="border border-slate-200 shadow-sm transition-shadow duration-300 hover:shadow-md">
+            <Card className="border-border border shadow-sm transition-shadow duration-300 hover:shadow-md">
               <CardHeader className="pb-2">
                 <div className="bg-secondary mb-3 flex h-10 w-10 items-center justify-center rounded-lg">
                   <Shield className="text-primary h-5 w-5" />
@@ -84,7 +87,7 @@ export default function FeaturesPage() {
               <CardFooter>
                 <Button
                   variant="ghost"
-                  className="text-primary hover:text-primary h-auto p-0"
+                  className="text-primary hover:bg-primary/10"
                 >
                   Learn more <ArrowRight className="ml-1 h-4 w-4" />
                 </Button>
@@ -92,10 +95,10 @@ export default function FeaturesPage() {
             </Card>
 
             {/* Feature 2 */}
-            <Card className="border border-slate-200 shadow-sm transition-shadow duration-300 hover:shadow-md">
+            <Card className="border-border border shadow-sm transition-shadow duration-300 hover:shadow-md">
               <CardHeader className="pb-2">
-                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-purple-50">
-                  <BarChart3 className="h-5 w-5 text-purple-600" />
+                <div className="bg-primary/10 mb-3 flex h-10 w-10 items-center justify-center rounded-lg">
+                  <BarChart3 className="text-primary h-5 w-5" />
                 </div>
                 <CardTitle className="text-lg">Real-time Analytics</CardTitle>
               </CardHeader>
@@ -108,7 +111,7 @@ export default function FeaturesPage() {
               <CardFooter>
                 <Button
                   variant="ghost"
-                  className="h-auto p-0 text-purple-600 hover:text-purple-700"
+                  className="text-primary hover:bg-primary/10"
                 >
                   Learn more <ArrowRight className="ml-1 h-4 w-4" />
                 </Button>
@@ -116,10 +119,10 @@ export default function FeaturesPage() {
             </Card>
 
             {/* Feature 3 */}
-            <Card className="border border-slate-200 shadow-sm transition-shadow duration-300 hover:shadow-md">
+            <Card className="border-border border shadow-sm transition-shadow duration-300 hover:shadow-md">
               <CardHeader className="pb-2">
-                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-red-50">
-                  <AlertTriangle className="h-5 w-5 text-red-600" />
+                <div className="bg-destructive/10 mb-3 flex h-10 w-10 items-center justify-center rounded-lg">
+                  <AlertTriangle className="text-destructive h-5 w-5" />
                 </div>
                 <CardTitle className="text-lg">Threat Detection</CardTitle>
               </CardHeader>
@@ -132,7 +135,7 @@ export default function FeaturesPage() {
               <CardFooter>
                 <Button
                   variant="ghost"
-                  className="h-auto p-0 text-red-600 hover:text-red-700"
+                  className="text-destructive hover:bg-destructive/10"
                 >
                   Learn more <ArrowRight className="ml-1 h-4 w-4" />
                 </Button>
@@ -140,10 +143,10 @@ export default function FeaturesPage() {
             </Card>
 
             {/* Feature 4 */}
-            <Card className="border border-slate-200 shadow-sm transition-shadow duration-300 hover:shadow-md">
+            <Card className="border-border border shadow-sm transition-shadow duration-300 hover:shadow-md">
               <CardHeader className="pb-2">
-                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-amber-50">
-                  <Zap className="h-5 w-5 text-amber-600" />
+                <div className="bg-warning/10 mb-3 flex h-10 w-10 items-center justify-center rounded-lg">
+                  <Zap className="text-warning h-5 w-5" />
                 </div>
                 <CardTitle className="text-lg">Automated Monitoring</CardTitle>
               </CardHeader>
@@ -156,7 +159,7 @@ export default function FeaturesPage() {
               <CardFooter>
                 <Button
                   variant="ghost"
-                  className="h-auto p-0 text-amber-600 hover:text-amber-700"
+                  className="text-warning hover:bg-warning/10"
                 >
                   Learn more <ArrowRight className="ml-1 h-4 w-4" />
                 </Button>
@@ -164,10 +167,10 @@ export default function FeaturesPage() {
             </Card>
 
             {/* Feature 5 */}
-            <Card className="border border-slate-200 shadow-sm transition-shadow duration-300 hover:shadow-md">
+            <Card className="border-border border shadow-sm transition-shadow duration-300 hover:shadow-md">
               <CardHeader className="pb-2">
-                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-emerald-50">
-                  <Lock className="h-5 w-5 text-emerald-600" />
+                <div className="bg-success/10 mb-3 flex h-10 w-10 items-center justify-center rounded-lg">
+                  <Lock className="text-success h-5 w-5" />
                 </div>
                 <CardTitle className="text-lg">Security Compliance</CardTitle>
               </CardHeader>
@@ -180,7 +183,7 @@ export default function FeaturesPage() {
               <CardFooter>
                 <Button
                   variant="ghost"
-                  className="h-auto p-0 text-emerald-600 hover:text-emerald-700"
+                  className="text-success hover:bg-success/10"
                 >
                   Learn more <ArrowRight className="ml-1 h-4 w-4" />
                 </Button>
@@ -188,10 +191,10 @@ export default function FeaturesPage() {
             </Card>
 
             {/* Feature 6 */}
-            <Card className="border border-slate-200 shadow-sm transition-shadow duration-300 hover:shadow-md">
+            <Card className="border-border border shadow-sm transition-shadow duration-300 hover:shadow-md">
               <CardHeader className="pb-2">
-                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-cyan-50">
-                  <Users className="h-5 w-5 text-cyan-600" />
+                <div className="bg-primary/10 mb-3 flex h-10 w-10 items-center justify-center rounded-lg">
+                  <Users className="text-primary h-5 w-5" />
                 </div>
                 <CardTitle className="text-lg">Team Collaboration</CardTitle>
               </CardHeader>
@@ -204,7 +207,7 @@ export default function FeaturesPage() {
               <CardFooter>
                 <Button
                   variant="ghost"
-                  className="h-auto p-0 text-cyan-600 hover:text-cyan-700"
+                  className="text-primary hover:bg-primary/10"
                 >
                   Learn more <ArrowRight className="ml-1 h-4 w-4" />
                 </Button>
@@ -212,10 +215,10 @@ export default function FeaturesPage() {
             </Card>
 
             {/* Feature 7 */}
-            <Card className="border border-slate-200 shadow-sm transition-shadow duration-300 hover:shadow-md">
+            <Card className="border-border border shadow-sm transition-shadow duration-300 hover:shadow-md">
               <CardHeader className="pb-2">
-                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-slate-50">
-                  <History className="h-5 w-5 text-slate-600" />
+                <div className="bg-muted mb-3 flex h-10 w-10 items-center justify-center rounded-lg">
+                  <History className="text-muted-foreground h-5 w-5" />
                 </div>
                 <CardTitle className="text-lg">Historical Analysis</CardTitle>
               </CardHeader>
@@ -228,7 +231,7 @@ export default function FeaturesPage() {
               <CardFooter>
                 <Button
                   variant="ghost"
-                  className="h-auto p-0 text-slate-600 hover:text-slate-700"
+                  className="text-muted-foreground hover:bg-muted"
                 >
                   Learn more <ArrowRight className="ml-1 h-4 w-4" />
                 </Button>
@@ -318,8 +321,8 @@ export default function FeaturesPage() {
             >
               <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
                 <div className="bg-background flex items-start gap-3 rounded-lg p-4 shadow-sm">
-                  <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-purple-100">
-                    <FileCheck className="h-5 w-5 text-purple-600" />
+                  <div className="bg-primary/10 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full">
+                    <FileCheck className="text-primary h-5 w-5" />
                   </div>
                   <div>
                     <h3 className="mb-1 text-base font-semibold">
@@ -331,8 +334,8 @@ export default function FeaturesPage() {
                   </div>
                 </div>
                 <div className="bg-background flex items-start gap-3 rounded-lg p-4 shadow-sm">
-                  <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-purple-100">
-                    <Calculator className="h-5 w-5 text-purple-600" />
+                  <div className="bg-primary/10 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full">
+                    <Calculator className="text-primary h-5 w-5" />
                   </div>
                   <div>
                     <h3 className="mb-1 text-base font-semibold">
@@ -345,8 +348,8 @@ export default function FeaturesPage() {
                   </div>
                 </div>
                 <div className="bg-background flex items-start gap-3 rounded-lg p-4 shadow-sm">
-                  <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-purple-100">
-                    <Calculator className="h-5 w-5 text-purple-600" />
+                  <div className="bg-primary/10 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full">
+                    <Calculator className="text-primary h-5 w-5" />
                   </div>
                   <div>
                     <h3 className="mb-1 text-base font-semibold">
@@ -366,8 +369,8 @@ export default function FeaturesPage() {
             >
               <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
                 <div className="bg-background flex items-start gap-3 rounded-lg p-4 shadow-sm">
-                  <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-emerald-100">
-                    <FileCheck className="h-5 w-5 text-emerald-600" />
+                  <div className="bg-success/10 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full">
+                    <FileCheck className="text-success h-5 w-5" />
                   </div>
                   <div>
                     <h3 className="mb-1 text-base font-semibold">
@@ -379,8 +382,8 @@ export default function FeaturesPage() {
                   </div>
                 </div>
                 <div className="bg-background flex items-start gap-3 rounded-lg p-4 shadow-sm">
-                  <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-emerald-100">
-                    <FileCheck className="h-5 w-5 text-emerald-600" />
+                  <div className="bg-success/10 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full">
+                    <FileCheck className="text-success h-5 w-5" />
                   </div>
                   <div>
                     <h3 className="mb-1 text-base font-semibold">
@@ -392,8 +395,8 @@ export default function FeaturesPage() {
                   </div>
                 </div>
                 <div className="bg-background flex items-start gap-3 rounded-lg p-4 shadow-sm">
-                  <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-emerald-100">
-                    <Lock className="h-5 w-5 text-emerald-600" />
+                  <div className="bg-success/10 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full">
+                    <Lock className="text-success h-5 w-5" />
                   </div>
                   <div>
                     <h3 className="mb-1 text-base font-semibold">
@@ -405,8 +408,8 @@ export default function FeaturesPage() {
                   </div>
                 </div>
                 <div className="bg-background flex items-start gap-3 rounded-lg p-4 shadow-sm">
-                  <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-emerald-100">
-                    <CheckCircle className="h-5 w-5 text-emerald-600" />
+                  <div className="bg-success/10 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full">
+                    <CheckCircle className="text-success h-5 w-5" />
                   </div>
                   <div>
                     <h3 className="mb-1 text-base font-semibold">
@@ -440,7 +443,7 @@ export default function FeaturesPage() {
                     reducing our email spoofing incidents.&rdquo;
                   </p>
                   <div className="flex items-center">
-                    <div className="mr-3 h-10 w-10 rounded-full bg-slate-200"></div>
+                    <div className="bg-muted mr-3 h-10 w-10 rounded-full"></div>
                     <div>
                       <p className="font-medium">Financial Services Company</p>
                     </div>
@@ -452,7 +455,7 @@ export default function FeaturesPage() {
                     invaluable in protecting our brand reputation.&rdquo;
                   </p>
                   <div className="flex items-center">
-                    <div className="mr-3 h-10 w-10 rounded-full bg-slate-200"></div>
+                    <div className="bg-muted mr-3 h-10 w-10 rounded-full"></div>
                     <div>
                       <p className="font-medium">E-commerce Platform</p>
                     </div>
@@ -523,24 +526,27 @@ export default function FeaturesPage() {
               </p>
               <ul className="space-y-4">
                 <li className="flex items-start">
-                  <CheckCircle className="mr-2 h-6 w-6 flex-shrink-0 text-green-500" />
+                  <CheckCircle className="text-success mr-2 h-6 w-6 flex-shrink-0" />
                   <span>Real-time authentication analysis</span>
                 </li>
                 <li className="flex items-start">
-                  <CheckCircle className="mr-2 h-6 w-6 flex-shrink-0 text-green-500" />
+                  <CheckCircle className="text-success mr-2 h-6 w-6 flex-shrink-0" />
                   <span>Detailed delivery metrics</span>
                 </li>
                 <li className="flex items-start">
-                  <CheckCircle className="mr-2 h-6 w-6 flex-shrink-0 text-green-500" />
+                  <CheckCircle className="text-success mr-2 h-6 w-6 flex-shrink-0" />
                   <span>Automated security recommendations</span>
                 </li>
               </ul>
-              <Button size="lg" className="rounded-full">
+              <Button
+                size="lg"
+                className="to-accent-hover from-primary gap-2 bg-gradient-to-r text-white hover:opacity-90"
+              >
                 Start Monitoring
-                <ArrowRight className="ml-2 h-4 w-4" />
+                <ArrowRight className="h-4 w-4" />
               </Button>
             </div>
-            <div className="bg-background rounded-md p-8 shadow-lg">
+            <div className="bg-background rounded-2xl p-8 shadow-lg">
               <div className="bg-muted mb-6 flex h-64 w-full items-center justify-center rounded-lg">
                 <BarChart3 className="text-muted-foreground h-16 w-16" />
               </div>
