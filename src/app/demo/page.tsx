@@ -96,7 +96,10 @@ export default function DemoPage() {
               reports, and protect your email domain from spoofing.
             </p>
             <div className="flex flex-col justify-center gap-4 sm:flex-row">
-              <Button size="lg" className="gap-2">
+              <Button
+                size="lg"
+                className="to-accent-hover from-primary gap-2 bg-gradient-to-r text-white hover:opacity-90"
+              >
                 <Play className="h-5 w-5" />
                 Watch Video Demo
               </Button>
@@ -235,7 +238,7 @@ export default function DemoPage() {
       {/* Interactive Demo Callout */}
       <section className="py-24">
         <div className="container max-w-4xl">
-          <div className="border-primary/20 from-primary/5 to-background rounded-lg border-2 bg-gradient-to-br p-12 text-center">
+          <div className="border-primary/20 from-primary/5 to-background rounded-2xl border-2 bg-gradient-to-br p-12 text-center">
             <div className="bg-primary/10 mb-6 inline-flex rounded-full p-4">
               <BarChart3 className="text-primary h-8 w-8" />
             </div>
@@ -248,9 +251,12 @@ export default function DemoPage() {
             </p>
             <div className="flex flex-col justify-center gap-4 sm:flex-row">
               <Link href="/signup">
-                <Button size="lg">
+                <Button
+                  size="lg"
+                  className="to-accent-hover from-primary gap-2 bg-gradient-to-r text-white hover:opacity-90"
+                >
                   Start Free Trial
-                  <ArrowRight className="ml-2 h-5 w-5" />
+                  <ArrowRight className="h-5 w-5" />
                 </Button>
               </Link>
               <Link href="/tools">
@@ -296,7 +302,13 @@ export default function DemoPage() {
             </p>
             <div className="flex flex-col justify-center gap-4 sm:flex-row">
               <Link href="/signup">
-                <Button size="lg">Start Free Trial</Button>
+                <Button
+                  size="lg"
+                  className="to-accent-hover from-primary gap-2 bg-gradient-to-r text-white hover:opacity-90"
+                >
+                  Start Free Trial
+                  <ArrowRight className="h-5 w-5" />
+                </Button>
               </Link>
               <Link href="/contact">
                 <Button size="lg" variant="outline">
