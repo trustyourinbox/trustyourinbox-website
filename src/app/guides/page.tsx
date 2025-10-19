@@ -99,7 +99,7 @@ const guideCategories = [
         name: "SPF Best Practices",
         desc: "Optimize your SPF records",
         time: "9 min read",
-        href: "#",
+        href: "/guides/spf-best-practices",
       },
     ],
   },
