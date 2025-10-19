@@ -144,9 +144,13 @@ function SPFTreeNode({ node, level = 0 }: { node: SPFNode; level?: number }) {
             )}
           </div>
 
-          {node.includes.map((include, i) => (
-            <SPFTreeNode key={i} node={include} level={level + 1} />
-          ))}
+          {node.includes.length > 0 && (
+            <div className="border-border ml-2 border-l-2 pl-2">
+              {node.includes.map((include, i) => (
+                <SPFTreeNode key={i} node={include} level={level + 1} />
+              ))}
+            </div>
+          )}
         </div>
       )}
     </div>
