@@ -42,65 +42,55 @@ function RelatedTools() {
     {
       id: "dmarc-analyzer",
       name: "DMARC Analyzer",
-      description: "Analyze your DMARC configuration and get detailed reports",
-      icon: <Shield className="text-primary h-6 w-6" />,
+      description: "Analyze DMARC configuration and get detailed reports",
+      icon: <Shield className="text-primary h-4 w-4" />,
       href: "/tools/dmarc-analyzer",
-      color: "bg-secondary dark:bg-primary",
-      borderColor: "border-primary/20 dark:border-primary",
-      iconBg: "bg-primary/10 dark:bg-primary",
     },
     {
       id: "spf-surveyor",
       name: "SPF Surveyor",
       description: "Validate and troubleshoot your SPF records",
-      icon: <Mail className="text-primary h-6 w-6" />,
+      icon: <Mail className="text-primary h-4 w-4" />,
       href: "/tools/spf-surveyor",
-      color: "bg-green-50 dark:bg-green-950",
-      borderColor: "border-green-200 dark:border-green-800",
-      iconBg: "bg-green-100 dark:bg-green-900",
     },
     {
       id: "dkim-validator",
       name: "DKIM Validator",
       description: "Verify your DKIM signatures and configuration",
-      icon: <Key className="text-primary h-6 w-6" />,
+      icon: <Key className="text-primary h-4 w-4" />,
       href: "/tools/dkim-validator",
-      color: "bg-purple-50 dark:bg-purple-950",
-      borderColor: "border-purple-200 dark:border-purple-800",
-      iconBg: "bg-purple-100 dark:bg-purple-900",
     },
   ];
 
   return (
-    <div className="mt-12 mb-8">
-      <div className="mb-6">
-        <h2 className="text-2xl font-bold tracking-tight">Related Tools</h2>
-        <p className="text-muted-foreground mt-1">
-          Explore more email authentication tools to secure your domain
+    <div className="mt-8 mb-8">
+      <div className="mb-4">
+        <h2 className="text-xl font-bold tracking-tight">Related Tools</h2>
+        <p className="text-muted-foreground mt-1 text-sm">
+          More email authentication tools
         </p>
       </div>
 
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
         {tools.map((tool) => (
           <Link
             key={tool.id}
             href={tool.href}
-            className={`group relative overflow-hidden rounded-lg border p-5 transition-all hover:shadow-md ${tool.borderColor} ${tool.color}`}
+            className="group border-border/40 bg-card hover:border-primary/30 relative overflow-hidden rounded-lg border p-4 transition-all duration-200 hover:shadow-lg"
           >
-            <div className="flex items-start gap-4">
-              <div className={`rounded-full p-2 ${tool.iconBg}`}>
+            <div className="flex items-start gap-3">
+              <div className="bg-primary/10 flex-shrink-0 rounded-md p-2">
                 {tool.icon}
               </div>
-              <div>
-                <h3 className="text-lg font-semibold group-hover:underline">
+              <div className="min-w-0 flex-1">
+                <h3 className="text-foreground group-hover:text-primary text-sm font-semibold transition-colors">
                   {tool.name}
                 </h3>
-                <p className="text-muted-foreground mt-1 text-sm">
+                <p className="text-muted-foreground mt-0.5 line-clamp-2 text-xs">
                   {tool.description}
                 </p>
               </div>
             </div>
-            <div className="bg-primary absolute bottom-0 left-0 h-1 w-0 transition-all duration-300 group-hover:w-full"></div>
           </Link>
         ))}
       </div>
@@ -268,10 +258,10 @@ export default function ForensicReportViewerPage() {
         <li>Search, filter, and export results as needed.</li>
       </ol>
       <div className="mb-3">
-        <span className="mb-1 inline-block rounded bg-yellow-100 px-2 py-0.5 text-xs font-semibold text-yellow-800">
+        <span className="bg-warning/10 text-warning mb-1 inline-block rounded px-2 py-0.5 text-xs font-semibold">
           Privacy
         </span>
-        <p className="text-xs text-gray-600">
+        <p className="text-muted-foreground text-xs">
           Forensic reports may contain sensitive message data. Handle and store
           them securely.
         </p>
@@ -304,7 +294,7 @@ export default function ForensicReportViewerPage() {
       sidebarContent={sidebarContent}
     >
       <div className="container">
-        <Card>
+        <Card className="mt-8 mb-8">
           <div className="space-y-4">
             <div
               className="border-primary/30 bg-secondary hover:bg-primary/10 flex cursor-pointer flex-col items-center justify-center rounded-md border-2 border-dashed p-8 transition"
@@ -319,10 +309,10 @@ export default function ForensicReportViewerPage() {
               <span className="text-primary font-semibold">
                 Drag and drop Forensic DMARC XML files here
               </span>
-              <span className="mt-1 text-sm text-gray-500">
+              <span className="text-muted-foreground mt-1 text-sm">
                 or click to browse
               </span>
-              <span className="mt-2 text-xs text-gray-400">
+              <span className="text-muted-foreground mt-2 text-xs">
                 Maximum file size: 10MB. Multiple files supported.
               </span>
               <input
@@ -335,45 +325,45 @@ export default function ForensicReportViewerPage() {
               />
             </div>
             {uploadError && (
-              <div className="mt-4 text-red-600">{uploadError}</div>
+              <div className="text-destructive mt-4">{uploadError}</div>
             )}
           </div>
         </Card>
         {files.length > 0 && (
-          <Card className="mb-8">
-            <div className="mb-4 flex items-center justify-between">
-              <span className="text-lg font-bold text-gray-900">
+          <Card className="mt-8 mb-8 p-6">
+            <div className="mb-6 flex items-center justify-between">
+              <span className="text-foreground text-lg font-bold">
                 Uploaded Files
               </span>
-              <span className="ml-4 flex-1 border-b border-gray-200" />
+              <span className="border-border ml-4 flex-1 border-b" />
             </div>
-            <ul className="divide-y divide-gray-100">
+            <ul className="divide-border divide-y">
               {files.map((file, idx) => {
                 const ext = file.name.split(".").pop()?.toUpperCase() || "FILE";
                 return (
                   <li
                     key={file.name + idx}
-                    className="group mb-2 flex items-center gap-4 rounded-lg bg-white px-3 py-4 transition-shadow hover:shadow-md"
+                    className="group bg-card mb-2 flex items-center gap-4 rounded-lg px-4 py-4 transition-shadow hover:shadow-md"
                     style={{ minHeight: 64 }}
                   >
-                    <div className="mr-2 flex h-10 w-10 items-center justify-center rounded-full bg-gray-100">
+                    <div className="bg-muted mr-2 flex h-10 w-10 items-center justify-center rounded-full">
                       {getFileIcon(file.type || file.name)}
                     </div>
                     <div className="min-w-0 flex-1">
                       <div className="flex items-center gap-2">
-                        <span className="max-w-xs truncate font-medium text-gray-900">
+                        <span className="text-foreground max-w-xs truncate font-medium">
                           {file.name}
                         </span>
                         <span
-                          className={`inline-block rounded border px-2 py-0.5 text-xs font-semibold ${ext === "XML" ? "border-primary/20 bg-secondary text-primary" : "border-gray-200 bg-gray-50 text-gray-600"}`}
+                          className={`inline-block rounded border px-2 py-0.5 text-xs font-semibold ${ext === "XML" ? "border-primary/20 bg-secondary text-primary" : "border-border bg-muted text-muted-foreground"}`}
                         >
                           {ext}
                         </span>
-                        <span className="text-xs text-gray-400">
+                        <span className="text-muted-foreground text-xs">
                           {(file.size / 1024).toFixed(1)} KB
                         </span>
                         <span
-                          className="ml-1 text-green-500"
+                          className="text-success ml-1"
                           aria-label="File added"
                         >
                           ✓
@@ -401,13 +391,13 @@ export default function ForensicReportViewerPage() {
         {/* Tabs for Table View and Dashboard */}
         <div className="mb-6 flex items-center gap-2">
           <button
-            className={`rounded-lg px-4 py-2 text-sm font-semibold transition-colors ${activeTab === "table" ? "text-primary bg-gray-100" : "bg-white text-gray-500 hover:bg-gray-50"}`}
+            className={`rounded-lg px-4 py-2 text-sm font-semibold transition-colors ${activeTab === "table" ? "text-primary bg-muted" : "bg-card text-muted-foreground hover:bg-muted/50"}`}
             onClick={() => setActiveTab("table")}
           >
             Table View
           </button>
           <button
-            className={`rounded-lg px-4 py-2 text-sm font-semibold transition-colors ${activeTab === "dashboard" ? "text-primary bg-gray-100" : "bg-white text-gray-500 hover:bg-gray-50"}`}
+            className={`rounded-lg px-4 py-2 text-sm font-semibold transition-colors ${activeTab === "dashboard" ? "text-primary bg-muted" : "bg-card text-muted-foreground hover:bg-muted/50"}`}
             onClick={() => setActiveTab("dashboard")}
           >
             Dashboard
@@ -419,45 +409,55 @@ export default function ForensicReportViewerPage() {
             <h2 className="mb-4 text-2xl font-bold">DMARC Summary Dashboard</h2>
             <div className="mb-6 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
               <Card className="flex flex-col items-start justify-center p-4">
-                <div className="mb-1 text-xs text-gray-500">Total Reports</div>
+                <div className="text-muted-foreground mb-1 text-xs">
+                  Total Reports
+                </div>
                 <div className="text-3xl font-bold">{totalReports}</div>
-                <div className="mt-1 text-xs text-gray-400">From 5/31/2024</div>
+                <div className="text-muted-foreground mt-1 text-xs">
+                  From 5/31/2024
+                </div>
               </Card>
               <Card className="flex flex-col items-start justify-center p-4">
-                <div className="mb-1 text-xs text-gray-500">DKIM Pass Rate</div>
+                <div className="text-muted-foreground mb-1 text-xs">
+                  DKIM Pass Rate
+                </div>
                 <div className="text-3xl font-bold">{dkimPassRate}%</div>
-                <div className="mt-2 h-2 w-full rounded bg-gray-200">
+                <div className="bg-muted mt-2 h-2 w-full rounded">
                   <div
-                    className="h-2 rounded bg-green-500"
+                    className="bg-success h-2 rounded"
                     style={{ width: `${dkimPassRate}%` }}
                   />
                 </div>
-                <div className="mt-1 text-xs text-gray-400">
+                <div className="text-muted-foreground mt-1 text-xs">
                   ({dkimPass}/{totalReports})
                 </div>
               </Card>
               <Card className="flex flex-col items-start justify-center p-4">
-                <div className="mb-1 text-xs text-gray-500">SPF Pass Rate</div>
+                <div className="text-muted-foreground mb-1 text-xs">
+                  SPF Pass Rate
+                </div>
                 <div className="text-3xl font-bold">{spfPassRate}%</div>
-                <div className="mt-2 h-2 w-full rounded bg-gray-200">
+                <div className="bg-muted mt-2 h-2 w-full rounded">
                   <div
-                    className="h-2 rounded bg-green-500"
+                    className="bg-success h-2 rounded"
                     style={{ width: `${spfPassRate}%` }}
                   />
                 </div>
-                <div className="mt-1 text-xs text-gray-400">
+                <div className="text-muted-foreground mt-1 text-xs">
                   ({spfPass}/{totalReports})
                 </div>
               </Card>
               <Card className="flex flex-col items-start justify-center p-4">
-                <div className="mb-1 text-xs text-gray-500">Policy Actions</div>
+                <div className="text-muted-foreground mb-1 text-xs">
+                  Policy Actions
+                </div>
                 <div className="mt-2 flex gap-4">
                   <div className="flex flex-col items-center">
-                    <span className="text-lg font-bold text-yellow-700">
+                    <span className="text-warning text-lg font-bold">
                       {quarantined}
                     </span>
-                    <span className="text-xs text-yellow-700">Quarantined</span>
-                    <span className="text-xs text-gray-400">
+                    <span className="text-warning text-xs">Quarantined</span>
+                    <span className="text-muted-foreground text-xs">
                       {totalReports
                         ? Math.round((quarantined / totalReports) * 100)
                         : 0}
@@ -465,11 +465,11 @@ export default function ForensicReportViewerPage() {
                     </span>
                   </div>
                   <div className="flex flex-col items-center">
-                    <span className="text-lg font-bold text-red-700">
+                    <span className="text-destructive text-lg font-bold">
                       {rejected}
                     </span>
-                    <span className="text-xs text-red-700">Rejected</span>
-                    <span className="text-xs text-gray-400">
+                    <span className="text-destructive text-xs">Rejected</span>
+                    <span className="text-muted-foreground text-xs">
                       {totalReports
                         ? Math.round((rejected / totalReports) * 100)
                         : 0}
@@ -484,20 +484,20 @@ export default function ForensicReportViewerPage() {
                 <div className="mb-2 text-lg font-semibold">
                   Top Sender Domains
                 </div>
-                <div className="mb-2 text-xs text-gray-500">
+                <div className="text-muted-foreground mb-2 text-xs">
                   Domains with the most email reports
                 </div>
                 {topSenderDomains.map(([domain, count]) => (
                   <div key={domain} className="mb-1 flex items-center gap-2">
-                    <span className="font-mono text-sm text-gray-900">
+                    <span className="text-foreground font-mono text-sm">
                       {domain}
                     </span>
-                    <span className="ml-auto text-xs font-semibold text-gray-700">
+                    <span className="text-foreground ml-auto text-xs font-semibold">
                       {count}
                     </span>
-                    <div className="h-2 w-24 rounded bg-gray-200">
+                    <div className="bg-muted h-2 w-24 rounded">
                       <div
-                        className="h-2 rounded bg-gray-900"
+                        className="bg-foreground h-2 rounded"
                         style={{
                           width: `${(Number(count) / totalReports) * 100}%`,
                         }}
@@ -510,46 +510,50 @@ export default function ForensicReportViewerPage() {
                 <div className="mb-2 text-lg font-semibold">
                   Authentication Results
                 </div>
-                <div className="mb-2 text-xs text-gray-500">
+                <div className="text-muted-foreground mb-2 text-xs">
                   DKIM and SPF authentication status
                 </div>
                 <div className="mb-2">DKIM Results</div>
                 <div className="mb-2 flex items-center gap-2">
-                  <span className="font-semibold text-green-600">Pass</span>
-                  <div className="h-2 w-24 rounded bg-gray-200">
+                  <span className="text-success font-semibold">Pass</span>
+                  <div className="bg-muted h-2 w-24 rounded">
                     <div
-                      className="h-2 rounded bg-green-500"
+                      className="bg-success h-2 rounded"
                       style={{ width: `${(dkimPass / totalReports) * 100}%` }}
                     />
                   </div>
-                  <span className="text-xs text-gray-700">{dkimPass}</span>
-                  <span className="ml-4 font-semibold text-red-600">Fail</span>
-                  <div className="h-2 w-24 rounded bg-gray-200">
+                  <span className="text-foreground text-xs">{dkimPass}</span>
+                  <span className="text-destructive ml-4 font-semibold">
+                    Fail
+                  </span>
+                  <div className="bg-muted h-2 w-24 rounded">
                     <div
-                      className="h-2 rounded bg-red-500"
+                      className="bg-destructive h-2 rounded"
                       style={{ width: `${(dkimFail / totalReports) * 100}%` }}
                     />
                   </div>
-                  <span className="text-xs text-gray-700">{dkimFail}</span>
+                  <span className="text-foreground text-xs">{dkimFail}</span>
                 </div>
                 <div className="mb-2">SPF Results</div>
                 <div className="flex items-center gap-2">
-                  <span className="font-semibold text-green-600">Pass</span>
-                  <div className="h-2 w-24 rounded bg-gray-200">
+                  <span className="text-success font-semibold">Pass</span>
+                  <div className="bg-muted h-2 w-24 rounded">
                     <div
-                      className="h-2 rounded bg-green-500"
+                      className="bg-success h-2 rounded"
                       style={{ width: `${(spfPass / totalReports) * 100}%` }}
                     />
                   </div>
-                  <span className="text-xs text-gray-700">{spfPass}</span>
-                  <span className="ml-4 font-semibold text-red-600">Fail</span>
-                  <div className="h-2 w-24 rounded bg-gray-200">
+                  <span className="text-foreground text-xs">{spfPass}</span>
+                  <span className="text-destructive ml-4 font-semibold">
+                    Fail
+                  </span>
+                  <div className="bg-muted h-2 w-24 rounded">
                     <div
-                      className="h-2 rounded bg-red-500"
+                      className="bg-destructive h-2 rounded"
                       style={{ width: `${(spfFail / totalReports) * 100}%` }}
                     />
                   </div>
-                  <span className="text-xs text-gray-700">{spfFail}</span>
+                  <span className="text-foreground text-xs">{spfFail}</span>
                 </div>
               </Card>
             </div>
@@ -577,30 +581,32 @@ export default function ForensicReportViewerPage() {
               <Button
                 onClick={handleExport}
                 disabled={filteredReports.length === 0}
-                className="ml-4 bg-black text-white hover:bg-gray-900"
+                className="bg-foreground text-background hover:bg-foreground/90 ml-4"
               >
                 Export CSV
               </Button>
             </div>
             <Card>
-              <div className="overflow-x-auto">
-                <table className="min-w-full text-sm">
+              <div className="border-border overflow-x-auto border">
+                <table className="min-w-full border-collapse text-sm">
                   <thead>
-                    <tr className="bg-gray-50">
-                      <th className="px-3 py-2 text-left font-semibold">
+                    <tr className="border-border bg-muted border-b-2">
+                      <th className="border-border border-r px-4 py-3 text-left font-semibold">
                         Date
                       </th>
-                      <th className="px-3 py-2 text-left font-semibold">
+                      <th className="border-border border-r px-4 py-3 text-left font-semibold">
                         Source IP
                       </th>
-                      <th className="px-3 py-2 text-left font-semibold">
+                      <th className="border-border border-r px-4 py-3 text-left font-semibold">
                         From
                       </th>
-                      <th className="px-3 py-2 text-left font-semibold">To</th>
-                      <th className="px-3 py-2 text-left font-semibold">
+                      <th className="border-border border-r px-4 py-3 text-left font-semibold">
+                        To
+                      </th>
+                      <th className="border-border border-r px-4 py-3 text-left font-semibold">
                         Subject
                       </th>
-                      <th className="px-3 py-2 text-left font-semibold">
+                      <th className="px-4 py-3 text-left font-semibold">
                         Disposition
                       </th>
                     </tr>
@@ -610,33 +616,37 @@ export default function ForensicReportViewerPage() {
                       <tr>
                         <td
                           colSpan={8}
-                          className="py-8 text-center text-gray-400"
+                          className="text-muted-foreground py-8 text-center"
                         >
                           No reports to display.
                         </td>
                       </tr>
                     ) : (
-                      filteredReports.map((report) => (
+                      filteredReports.map((report, idx) => (
                         <tr
                           key={report.id}
-                          className="border-b hover:bg-gray-50"
+                          className={`border-border hover:bg-muted/70 border-b ${idx % 2 === 0 ? "bg-muted/20" : ""}`}
                         >
-                          <td className="px-3 py-2 font-mono text-xs text-gray-700">
+                          <td className="border-border text-muted-foreground border-r px-4 py-3 font-mono text-xs">
                             {report.date}
                           </td>
-                          <td className="rounded bg-gray-100 px-3 py-2 font-mono text-xs text-gray-900">
+                          <td className="border-border bg-muted text-foreground border-r px-4 py-3 font-mono text-xs">
                             {report.sourceIp}
                           </td>
-                          <td className="px-3 py-2 text-sm">{report.from}</td>
-                          <td className="px-3 py-2 text-sm">{report.to}</td>
-                          <td className="px-3 py-2 text-sm">
+                          <td className="border-border border-r px-4 py-3 text-sm">
+                            {report.from}
+                          </td>
+                          <td className="border-border border-r px-4 py-3 text-sm">
+                            {report.to}
+                          </td>
+                          <td className="border-border border-r px-4 py-3 text-sm">
                             {report.subject}
                           </td>
-                          <td className="px-3 py-2">
+                          <td className="px-4 py-3">
                             {report.disposition === "quarantine" && (
-                              <span className="inline-flex items-center gap-1 rounded-full border border-yellow-200 bg-yellow-50 px-2 py-0.5 text-xs font-semibold text-yellow-800">
+                              <span className="border-warning/20 bg-warning/10 text-warning inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-xs font-semibold">
                                 <svg
-                                  className="h-3 w-3 text-yellow-500"
+                                  className="text-warning h-3 w-3"
                                   fill="none"
                                   stroke="currentColor"
                                   strokeWidth="2"
@@ -649,9 +659,9 @@ export default function ForensicReportViewerPage() {
                               </span>
                             )}
                             {report.disposition === "reject" && (
-                              <span className="inline-flex items-center gap-1 rounded-full border border-red-200 bg-red-50 px-2 py-0.5 text-xs font-semibold text-red-800">
+                              <span className="border-destructive/20 bg-destructive/10 text-destructive inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-xs font-semibold">
                                 <svg
-                                  className="h-3 w-3 text-red-500"
+                                  className="text-destructive h-3 w-3"
                                   fill="none"
                                   stroke="currentColor"
                                   strokeWidth="2"
@@ -664,7 +674,7 @@ export default function ForensicReportViewerPage() {
                               </span>
                             )}
                             {report.disposition === "none" && (
-                              <span className="inline-flex items-center gap-1 rounded-full border border-gray-200 bg-gray-100 px-2 py-0.5 text-xs font-semibold text-gray-700">
+                              <span className="border-border bg-muted text-muted-foreground inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-xs font-semibold">
                                 None
                               </span>
                             )}
@@ -675,7 +685,7 @@ export default function ForensicReportViewerPage() {
                   </tbody>
                 </table>
               </div>
-              <div className="mt-2 text-xs text-gray-400">
+              <div className="text-muted-foreground mt-4 px-4 pb-4 text-xs">
                 Showing {filteredReports.length} of {reports.length} records
               </div>
             </Card>
