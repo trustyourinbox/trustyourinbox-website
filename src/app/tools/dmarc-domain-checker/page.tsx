@@ -459,7 +459,8 @@ export default function DMARCDomainCheckerPage() {
                 </div>
                 <Button
                   type="submit"
-                  className="from-primary min-w-[120px] bg-gradient-to-r to-purple-500 text-white hover:opacity-90"
+                  size="lg"
+                  className="to-accent-hover from-primary min-w-[120px] gap-2 bg-gradient-to-r text-white hover:opacity-90"
                   disabled={loading}
                 >
                   {loading ? (

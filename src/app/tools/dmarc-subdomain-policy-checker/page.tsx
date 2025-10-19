@@ -283,7 +283,8 @@ export default function DMARCSubdomainPolicyCheckerPage() {
               disabled={
                 !domain || subdomains.every((s) => !s.trim()) || loading
               }
-              className="from-primary min-w-[120px] bg-gradient-to-r to-purple-500 text-white hover:opacity-90"
+              size="lg"
+              className="to-accent-hover from-primary min-w-[120px] gap-2 bg-gradient-to-r text-white hover:opacity-90"
             >
               {loading ? (
                 <span className="flex items-center gap-2">

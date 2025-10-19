@@ -374,7 +374,8 @@ export default function DKIMValidatorPage() {
             <div>
               <Button
                 type="submit"
-                className="bg-primary hover:bg-primary min-w-[120px] text-white"
+                size="lg"
+                className="to-accent-hover from-primary min-w-[120px] gap-2 bg-gradient-to-r text-white hover:opacity-90"
                 disabled={loading || !input}
               >
                 {loading ? (

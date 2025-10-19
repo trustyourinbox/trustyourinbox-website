@@ -66,7 +66,7 @@ export default function DomainSecurityCheckerPage() {
       setResults([
         {
           name: "Email Authentication",
-          icon: <FaEnvelope className="h-5 w-5 text-primary" />,
+          icon: <FaEnvelope className="text-primary h-5 w-5" />,
           checks: [
             {
               name: "DMARC",
@@ -195,7 +195,7 @@ export default function DomainSecurityCheckerPage() {
       <Card className="w-full border-0 shadow-lg">
         <div className="p-6">
           <div className="mb-6 flex items-center gap-2">
-            <Shield className="h-6 w-6 text-primary" />
+            <Shield className="text-primary h-6 w-6" />
             <h2 className="text-2xl font-bold">Domain Security Checker</h2>
           </div>
 
@@ -218,7 +218,7 @@ export default function DomainSecurityCheckerPage() {
                   id="domain"
                   type="text"
                   placeholder="yourdomain.com"
-                  className="h-11 border-gray-200 pl-10 focus:border-primary focus:ring-ring"
+                  className="focus:border-primary focus:ring-ring h-11 border-gray-200 pl-10"
                   value={domain}
                   onChange={(e) => setDomain(e.target.value)}
                   required
@@ -230,7 +230,8 @@ export default function DomainSecurityCheckerPage() {
             <div>
               <Button
                 type="submit"
-                className="min-w-[120px] bg-primary text-white hover:bg-primary"
+                size="lg"
+                className="to-accent-hover from-primary min-w-[120px] gap-2 bg-gradient-to-r text-white hover:opacity-90"
                 disabled={loading || !domain}
               >
                 {loading ? (
@@ -271,7 +272,7 @@ export default function DomainSecurityCheckerPage() {
       {results.length > 0 && (
         <div className="container mx-auto max-w-5xl px-4 py-8">
           <Card className="overflow-hidden border border-gray-200 shadow-sm">
-            <CardHeader className="to-accent-hover bg-gradient-to-r from-primary p-6 text-white">
+            <CardHeader className="to-accent-hover from-primary bg-gradient-to-r p-6 text-white">
               <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                 <div className="flex items-center gap-3">
                   <div className="rounded-lg bg-white/20 p-2">
@@ -314,7 +315,7 @@ export default function DomainSecurityCheckerPage() {
                 {/* Email Authentication */}
                 <div className="rounded-lg border border-gray-200 bg-white shadow-sm">
                   <div className="flex items-center gap-2 rounded-t-lg border-b border-gray-100 bg-slate-50 px-4 py-2">
-                    <Mail className="h-4 w-4 text-primary" />
+                    <Mail className="text-primary h-4 w-4" />
                     <span className="text-sm font-semibold">
                       Email Authentication
                     </span>
@@ -326,7 +327,7 @@ export default function DomainSecurityCheckerPage() {
                         <div className="text-xs font-medium">DMARC</div>
                         {getStatusBadge(results[0].checks[0].status)}
                       </div>
-                      <p className="text-xs text-muted-foreground">
+                      <p className="text-muted-foreground text-xs">
                         {results[0].checks[0].description}
                       </p>
                       {results[0].checks[0].details && (
@@ -334,7 +335,7 @@ export default function DomainSecurityCheckerPage() {
                           {results[0].checks[0].details}
                         </div>
                       )}
-                      <p className="text-xs text-primary">
+                      <p className="text-primary text-xs">
                         Recommendation: {results[0].checks[0].recommendation}
                       </p>
                     </div>
@@ -345,7 +346,7 @@ export default function DomainSecurityCheckerPage() {
                         <div className="text-xs font-medium">SPF</div>
                         {getStatusBadge(results[0].checks[1].status)}
                       </div>
-                      <p className="text-xs text-muted-foreground">
+                      <p className="text-muted-foreground text-xs">
                         {results[0].checks[1].description}
                       </p>
                       {results[0].checks[1].details && (
@@ -353,7 +354,7 @@ export default function DomainSecurityCheckerPage() {
                           {results[0].checks[1].details}
                         </div>
                       )}
-                      <p className="text-xs text-primary">
+                      <p className="text-primary text-xs">
                         Recommendation: {results[0].checks[1].recommendation}
                       </p>
                     </div>
@@ -364,10 +365,10 @@ export default function DomainSecurityCheckerPage() {
                         <div className="text-xs font-medium">DKIM</div>
                         {getStatusBadge(results[0].checks[2].status)}
                       </div>
-                      <p className="text-xs text-muted-foreground">
+                      <p className="text-muted-foreground text-xs">
                         {results[0].checks[2].description}
                       </p>
-                      <p className="text-xs text-primary">
+                      <p className="text-primary text-xs">
                         Recommendation: {results[0].checks[2].recommendation}
                       </p>
                     </div>
@@ -376,7 +377,7 @@ export default function DomainSecurityCheckerPage() {
                 {/* Transport Security */}
                 <div className="rounded-lg border border-gray-200 bg-white shadow-sm">
                   <div className="flex items-center gap-2 rounded-t-lg border-b border-gray-100 bg-slate-50 px-4 py-2">
-                    <Lock className="h-4 w-4 text-primary" />
+                    <Lock className="text-primary h-4 w-4" />
                     <span className="text-sm font-semibold">
                       Transport Security
                     </span>
@@ -388,7 +389,7 @@ export default function DomainSecurityCheckerPage() {
                         <div className="text-xs font-medium">MTA-STS</div>
                         {getStatusBadge(results[1].checks[0].status)}
                       </div>
-                      <p className="text-xs text-muted-foreground">
+                      <p className="text-muted-foreground text-xs">
                         {results[1].checks[0].description}
                       </p>
                       {results[1].checks[0].details && (
@@ -396,7 +397,7 @@ export default function DomainSecurityCheckerPage() {
                           {results[1].checks[0].details}
                         </div>
                       )}
-                      <p className="text-xs text-primary">
+                      <p className="text-primary text-xs">
                         Recommendation: {results[1].checks[0].recommendation}
                       </p>
                     </div>
@@ -407,10 +408,10 @@ export default function DomainSecurityCheckerPage() {
                         <div className="text-xs font-medium">TLS-RPT</div>
                         {getStatusBadge(results[1].checks[1].status)}
                       </div>
-                      <p className="text-xs text-muted-foreground">
+                      <p className="text-muted-foreground text-xs">
                         {results[1].checks[1].description}
                       </p>
-                      <p className="text-xs text-primary">
+                      <p className="text-primary text-xs">
                         Recommendation: {results[1].checks[1].recommendation}
                       </p>
                     </div>
@@ -419,7 +420,7 @@ export default function DomainSecurityCheckerPage() {
                 {/* DNS Security */}
                 <div className="rounded-lg border border-gray-200 bg-white shadow-sm">
                   <div className="flex items-center gap-2 rounded-t-lg border-b border-gray-100 bg-slate-50 px-4 py-2">
-                    <Database className="h-4 w-4 text-primary" />
+                    <Database className="text-primary h-4 w-4" />
                     <span className="text-sm font-semibold">DNS Security</span>
                   </div>
                   <div className="space-y-3 p-3">
@@ -429,10 +430,10 @@ export default function DomainSecurityCheckerPage() {
                         <div className="text-xs font-medium">DNSSEC</div>
                         {getStatusBadge(results[2].checks[0].status)}
                       </div>
-                      <p className="text-xs text-muted-foreground">
+                      <p className="text-muted-foreground text-xs">
                         {results[2].checks[0].description}
                       </p>
-                      <p className="text-xs text-primary">
+                      <p className="text-primary text-xs">
                         Recommendation: {results[2].checks[0].recommendation}
                       </p>
                     </div>
@@ -443,10 +444,10 @@ export default function DomainSecurityCheckerPage() {
                         <div className="text-xs font-medium">FCrDNS</div>
                         {getStatusBadge(results[2].checks[1].status)}
                       </div>
-                      <p className="text-xs text-muted-foreground">
+                      <p className="text-muted-foreground text-xs">
                         {results[2].checks[1].description}
                       </p>
-                      <p className="text-xs text-primary">
+                      <p className="text-primary text-xs">
                         Recommendation: {results[2].checks[1].recommendation}
                       </p>
                     </div>
@@ -487,7 +488,7 @@ export default function DomainSecurityCheckerPage() {
                     </h3>
                     <Tooltip>
                       <TooltipTrigger>
-                        <Info className="h-4 w-4 text-muted-foreground" />
+                        <Info className="text-muted-foreground h-4 w-4" />
                       </TooltipTrigger>
                       <TooltipContent>
                         <p className="max-w-xs text-xs">
@@ -506,7 +507,7 @@ export default function DomainSecurityCheckerPage() {
                     </div>
                     <div>
                       <h4 className="text-xs font-medium">Configure MTA-STS</h4>
-                      <p className="text-xs text-muted-foreground">
+                      <p className="text-muted-foreground text-xs">
                         MTA-STS helps ensure that emails are only delivered over
                         secure connections.
                       </p>
@@ -518,7 +519,7 @@ export default function DomainSecurityCheckerPage() {
                     </div>
                     <div>
                       <h4 className="text-xs font-medium">Add TLS-RPT</h4>
-                      <p className="text-xs text-muted-foreground">
+                      <p className="text-muted-foreground text-xs">
                         TLS-RPT allows you to receive reports about TLS
                         connectivity issues.
                       </p>
@@ -532,7 +533,7 @@ export default function DomainSecurityCheckerPage() {
                       <h4 className="text-xs font-medium">
                         Improve SPF Record
                       </h4>
-                      <p className="text-xs text-muted-foreground">
+                      <p className="text-muted-foreground text-xs">
                         Add more specific IP ranges to your SPF record for
                         better security.
                       </p>
@@ -540,11 +541,11 @@ export default function DomainSecurityCheckerPage() {
                   </div>
                   <div className="flex items-start gap-2">
                     <div className="mt-0.5">
-                      <Info className="h-4 w-4 text-primary" />
+                      <Info className="text-primary h-4 w-4" />
                     </div>
                     <div>
                       <h4 className="text-xs font-medium">Implement DNSSEC</h4>
-                      <p className="text-xs text-muted-foreground">
+                      <p className="text-muted-foreground text-xs">
                         DNSSEC adds an additional layer of security to your DNS
                         records.
                       </p>
@@ -557,10 +558,10 @@ export default function DomainSecurityCheckerPage() {
         </div>
       )}
 
-      <div className="mb-8 mt-12">
+      <div className="mt-12 mb-8">
         <div className="mb-6">
           <h2 className="text-2xl font-bold tracking-tight">Related Tools</h2>
-          <p className="mt-1 text-muted-foreground">
+          <p className="text-muted-foreground mt-1">
             Explore more email authentication tools to secure your domain
           </p>
         </div>
@@ -568,22 +569,22 @@ export default function DomainSecurityCheckerPage() {
         <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
           <Link
             href="/tools/dmarc-analyzer"
-            className="group relative overflow-hidden rounded-lg border border-primary/20 bg-secondary p-5 transition-all hover:shadow-md dark:border-primary dark:bg-primary"
+            className="group border-primary/20 bg-secondary dark:border-primary dark:bg-primary relative overflow-hidden rounded-lg border p-5 transition-all hover:shadow-md"
           >
             <div className="flex items-start gap-4">
-              <div className="rounded-full bg-primary/10 p-2 dark:bg-primary">
-                <Shield className="h-6 w-6 text-primary" />
+              <div className="bg-primary/10 dark:bg-primary rounded-full p-2">
+                <Shield className="text-primary h-6 w-6" />
               </div>
               <div>
                 <h3 className="text-lg font-semibold group-hover:underline">
                   DMARC Analyzer
                 </h3>
-                <p className="mt-1 text-sm text-muted-foreground">
+                <p className="text-muted-foreground mt-1 text-sm">
                   Analyze your DMARC configuration and get detailed reports
                 </p>
               </div>
             </div>
-            <div className="absolute bottom-0 left-0 h-1 w-0 bg-primary transition-all duration-300 group-hover:w-full"></div>
+            <div className="bg-primary absolute bottom-0 left-0 h-1 w-0 transition-all duration-300 group-hover:w-full"></div>
           </Link>
 
           <Link
@@ -592,18 +593,18 @@ export default function DomainSecurityCheckerPage() {
           >
             <div className="flex items-start gap-4">
               <div className="rounded-full bg-green-100 p-2 dark:bg-green-900">
-                <Mail className="h-6 w-6 text-primary" />
+                <Mail className="text-primary h-6 w-6" />
               </div>
               <div>
                 <h3 className="text-lg font-semibold group-hover:underline">
                   SPF Surveyor
                 </h3>
-                <p className="mt-1 text-sm text-muted-foreground">
+                <p className="text-muted-foreground mt-1 text-sm">
                   Validate and troubleshoot your SPF records
                 </p>
               </div>
             </div>
-            <div className="absolute bottom-0 left-0 h-1 w-0 bg-primary transition-all duration-300 group-hover:w-full"></div>
+            <div className="bg-primary absolute bottom-0 left-0 h-1 w-0 transition-all duration-300 group-hover:w-full"></div>
           </Link>
 
           <Link
@@ -612,18 +613,18 @@ export default function DomainSecurityCheckerPage() {
           >
             <div className="flex items-start gap-4">
               <div className="rounded-full bg-purple-100 p-2 dark:bg-purple-900">
-                <Key className="h-6 w-6 text-primary" />
+                <Key className="text-primary h-6 w-6" />
               </div>
               <div>
                 <h3 className="text-lg font-semibold group-hover:underline">
                   DKIM Validator
                 </h3>
-                <p className="mt-1 text-sm text-muted-foreground">
+                <p className="text-muted-foreground mt-1 text-sm">
                   Verify your DKIM signatures and configuration
                 </p>
               </div>
             </div>
-            <div className="absolute bottom-0 left-0 h-1 w-0 bg-primary transition-all duration-300 group-hover:w-full"></div>
+            <div className="bg-primary absolute bottom-0 left-0 h-1 w-0 transition-all duration-300 group-hover:w-full"></div>
           </Link>
         </div>
       </div>

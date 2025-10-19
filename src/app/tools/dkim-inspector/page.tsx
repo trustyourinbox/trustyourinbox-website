@@ -327,7 +327,7 @@ export default function DKIMInspectorPage() {
     <div className="space-y-6">
       <div>
         <h3 className="flex items-center gap-1.5 text-sm font-medium text-gray-900">
-          <FaShieldAlt className="h-4 w-4 text-primary" />
+          <FaShieldAlt className="text-primary h-4 w-4" />
           About DKIM
         </h3>
         <p className="mt-2 text-sm text-gray-500">
@@ -339,20 +339,20 @@ export default function DKIMInspectorPage() {
 
       <div>
         <h3 className="flex items-center gap-1.5 text-sm font-medium text-gray-900">
-          <FaInfoCircle className="h-4 w-4 text-primary" />
+          <FaInfoCircle className="text-primary h-4 w-4" />
           What We Check
         </h3>
         <ul className="mt-2 space-y-2 text-sm text-gray-500">
           <li className="flex items-start gap-2">
-            <FaKey className="mt-0.5 h-4 w-4 text-primary" />
+            <FaKey className="text-primary mt-0.5 h-4 w-4" />
             <span>DKIM record version and format</span>
           </li>
           <li className="flex items-start gap-2">
-            <FaKey className="mt-0.5 h-4 w-4 text-primary" />
+            <FaKey className="text-primary mt-0.5 h-4 w-4" />
             <span>Public key presence and length</span>
           </li>
           <li className="flex items-start gap-2">
-            <FaKey className="mt-0.5 h-4 w-4 text-primary" />
+            <FaKey className="text-primary mt-0.5 h-4 w-4" />
             <span>Testing mode flags</span>
           </li>
         </ul>
@@ -369,7 +369,7 @@ export default function DKIMInspectorPage() {
       <Card className="w-full border-0 shadow-lg">
         <div className="p-6">
           <div className="mb-6 flex items-center gap-2">
-            <Shield className="h-6 w-6 text-primary" />
+            <Shield className="text-primary h-6 w-6" />
             <h2 className="text-2xl font-bold">DKIM Inspector</h2>
           </div>
 
@@ -387,7 +387,7 @@ export default function DKIMInspectorPage() {
                     id="domain"
                     type="text"
                     placeholder="yourdomain.com"
-                    className="h-11 border-gray-200 pl-10 focus:border-primary focus:ring-ring"
+                    className="focus:border-primary focus:ring-ring h-11 border-gray-200 pl-10"
                     value={domain}
                     onChange={(e) => setDomain(e.target.value)}
                     required
@@ -408,7 +408,7 @@ export default function DKIMInspectorPage() {
                     id="selector"
                     type="text"
                     placeholder="selector (e.g., google, default)"
-                    className="h-11 border-gray-200 pl-10 focus:border-primary focus:ring-ring"
+                    className="focus:border-primary focus:ring-ring h-11 border-gray-200 pl-10"
                     value={selector}
                     onChange={(e) => setSelector(e.target.value)}
                     required
@@ -420,7 +420,8 @@ export default function DKIMInspectorPage() {
             <div>
               <Button
                 type="submit"
-                className="min-w-[120px] bg-primary text-white hover:bg-primary"
+                size="lg"
+                className="to-accent-hover from-primary min-w-[120px] gap-2 bg-gradient-to-r text-white hover:opacity-90"
                 disabled={loading || !domain || !selector}
               >
                 {loading ? (
@@ -464,7 +465,7 @@ export default function DKIMInspectorPage() {
           <Card className={color}>
             <div className="mb-4 flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <FaShieldAlt className="h-6 w-6 text-primary/70" />
+                <FaShieldAlt className="text-primary/70 h-6 w-6" />
                 <span className="text-xl font-bold text-gray-900">Status</span>
               </div>
               {icon}
@@ -537,7 +538,7 @@ export default function DKIMInspectorPage() {
           <Card>
             <div className="mb-4 flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <FaKey className="h-6 w-6 text-primary/70" />
+                <FaKey className="text-primary/70 h-6 w-6" />
                 <span className="text-xl font-bold text-gray-900">
                   DKIM Record
                 </span>
@@ -552,7 +553,7 @@ export default function DKIMInspectorPage() {
               </div>
             </div>
             <div className="flex items-center gap-2">
-              <pre className="flex-1 whitespace-pre-wrap break-all rounded border border-gray-100 bg-gray-50 p-2 text-xs text-gray-800">
+              <pre className="flex-1 rounded border border-gray-100 bg-gray-50 p-2 text-xs break-all whitespace-pre-wrap text-gray-800">
                 {record}
               </pre>
               <CopyButton value={record} />
@@ -565,10 +566,10 @@ export default function DKIMInspectorPage() {
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               {Object.entries(fields).map(([k, v]) => (
                 <div key={k} className="flex items-center gap-2">
-                  <span className="rounded bg-secondary px-2 py-0.5 font-mono text-xs text-primary">
+                  <span className="bg-secondary text-primary rounded px-2 py-0.5 font-mono text-xs">
                     {k}
                   </span>
-                  <span className="break-all text-xs text-gray-800">{v}</span>
+                  <span className="text-xs break-all text-gray-800">{v}</span>
                 </div>
               ))}
             </div>
@@ -582,7 +583,7 @@ export default function DKIMInspectorPage() {
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               {DKIM_TAG_LEGEND.map(({ tag, name, desc }) => (
                 <div key={tag} className="flex items-start gap-3">
-                  <span className="mt-0.5 rounded bg-primary/10 px-2 py-0.5 font-mono text-xs text-primary">
+                  <span className="bg-primary/10 text-primary mt-0.5 rounded px-2 py-0.5 font-mono text-xs">
                     {tag}
                   </span>
                   <div>
@@ -602,10 +603,10 @@ export default function DKIMInspectorPage() {
         </Alert>
       )}
 
-      <div className="mb-8 mt-12">
+      <div className="mt-12 mb-8">
         <div className="mb-6">
           <h2 className="text-2xl font-bold tracking-tight">Related Tools</h2>
-          <p className="mt-1 text-muted-foreground">
+          <p className="text-muted-foreground mt-1">
             Explore more email authentication tools to secure your domain
           </p>
         </div>
@@ -613,22 +614,22 @@ export default function DKIMInspectorPage() {
         <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
           <Link
             href="/tools/dmarc-analyzer"
-            className="group relative overflow-hidden rounded-lg border border-primary/20 bg-secondary p-5 transition-all hover:shadow-md dark:border-primary dark:bg-primary"
+            className="group border-primary/20 bg-secondary dark:border-primary dark:bg-primary relative overflow-hidden rounded-lg border p-5 transition-all hover:shadow-md"
           >
             <div className="flex items-start gap-4">
-              <div className="rounded-full bg-primary/10 p-2 dark:bg-primary">
-                <Shield className="h-6 w-6 text-primary" />
+              <div className="bg-primary/10 dark:bg-primary rounded-full p-2">
+                <Shield className="text-primary h-6 w-6" />
               </div>
               <div>
                 <h3 className="text-lg font-semibold group-hover:underline">
                   DMARC Analyzer
                 </h3>
-                <p className="mt-1 text-sm text-muted-foreground">
+                <p className="text-muted-foreground mt-1 text-sm">
                   Analyze your DMARC configuration and get detailed reports
                 </p>
               </div>
             </div>
-            <div className="absolute bottom-0 left-0 h-1 w-0 bg-primary transition-all duration-300 group-hover:w-full"></div>
+            <div className="bg-primary absolute bottom-0 left-0 h-1 w-0 transition-all duration-300 group-hover:w-full"></div>
           </Link>
 
           <Link
@@ -637,18 +638,18 @@ export default function DKIMInspectorPage() {
           >
             <div className="flex items-start gap-4">
               <div className="rounded-full bg-green-100 p-2 dark:bg-green-900">
-                <Mail className="h-6 w-6 text-primary" />
+                <Mail className="text-primary h-6 w-6" />
               </div>
               <div>
                 <h3 className="text-lg font-semibold group-hover:underline">
                   SPF Surveyor
                 </h3>
-                <p className="mt-1 text-sm text-muted-foreground">
+                <p className="text-muted-foreground mt-1 text-sm">
                   Validate and troubleshoot your SPF records
                 </p>
               </div>
             </div>
-            <div className="absolute bottom-0 left-0 h-1 w-0 bg-primary transition-all duration-300 group-hover:w-full"></div>
+            <div className="bg-primary absolute bottom-0 left-0 h-1 w-0 transition-all duration-300 group-hover:w-full"></div>
           </Link>
 
           <Link
@@ -657,18 +658,18 @@ export default function DKIMInspectorPage() {
           >
             <div className="flex items-start gap-4">
               <div className="rounded-full bg-purple-100 p-2 dark:bg-purple-900">
-                <Key className="h-6 w-6 text-primary" />
+                <Key className="text-primary h-6 w-6" />
               </div>
               <div>
                 <h3 className="text-lg font-semibold group-hover:underline">
                   Domain Security Checker
                 </h3>
-                <p className="mt-1 text-sm text-muted-foreground">
+                <p className="text-muted-foreground mt-1 text-sm">
                   Check your domain&apos;s overall email security configuration
                 </p>
               </div>
             </div>
-            <div className="absolute bottom-0 left-0 h-1 w-0 bg-primary transition-all duration-300 group-hover:w-full"></div>
+            <div className="bg-primary absolute bottom-0 left-0 h-1 w-0 transition-all duration-300 group-hover:w-full"></div>
           </Link>
         </div>
       </div>

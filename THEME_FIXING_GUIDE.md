@@ -191,7 +191,50 @@ grep -rn "bg-white[^-]" src/app/tools/[tool-name]/
 </div>
 ```
 
-### 4. Buttons and Links
+### 4. Primary Action Buttons (Submit/Analyze/Check)
+
+**ALWAYS use the homepage button styling for consistency across all tools:**
+
+```jsx
+// WRONG - Old solid color or purple gradient
+<Button
+  type="submit"
+  className="bg-primary hover:bg-primary min-w-[120px] text-white"
+/>
+
+<Button
+  type="submit"
+  className="from-primary min-w-[120px] bg-gradient-to-r to-purple-500 text-white hover:opacity-90"
+/>
+
+// CORRECT - Homepage button style
+<Button
+  type="submit"
+  size="lg"
+  className="to-accent-hover from-primary min-w-[120px] gap-2 bg-gradient-to-r text-white hover:opacity-90"
+>
+  {loading ? (
+    <span className="flex items-center gap-2">
+      <svg className="h-4 w-4 animate-spin text-white" {/* spinner SVG */}>
+      Analyzing...
+    </span>
+  ) : (
+    <span className="flex items-center gap-2">
+      Analyze <ArrowRight className="h-4 w-4" />
+    </span>
+  )}
+</Button>
+```
+
+**Key Requirements:**
+
+- `size="lg"` - Larger button size matching homepage
+- `to-accent-hover from-primary` - Correct gradient (NOT `to-purple-500`)
+- `gap-2` - Spacing for icon
+- `hover:opacity-90` - Consistent hover effect
+- Include `<ArrowRight>` icon from `lucide-react`
+
+### 5. Secondary Buttons and Links
 
 ```jsx
 // WRONG
@@ -201,11 +244,11 @@ grep -rn "bg-white[^-]" src/app/tools/[tool-name]/
 <button className="bg-card border-border text-primary">
 ```
 
-### 5. Input Fields - Usually Already Correct
+### 6. Input Fields - Usually Already Correct
 
 Input, Select, and Textarea components from `/src/components/ui` are typically already theme-aware. Only check if you see visual issues.
 
-### 6. Semantic Headings for Result Sections
+### 7. Semantic Headings for Result Sections
 
 **Issue:** Result sections (Recommendations, Status, Output, etc.) may be missing proper semantic headings, making them harder to navigate and less accessible.
 
@@ -247,7 +290,7 @@ Input, Select, and Textarea components from `/src/components/ui` are typically a
 - Analysis/Breakdown
 - Error Messages (when shown conditionally)
 
-### 7. Text Contrast on Colored Backgrounds
+### 8. Text Contrast on Colored Backgrounds
 
 **Issue:** Text with reduced opacity or light color shades on colored alert/status backgrounds can have poor contrast, especially in light mode.
 
@@ -522,8 +565,13 @@ className =
 **Tools Fixed Using This Guide:**
 
 - ✅ DMARC Policy Generator (/tools/dmarc-policy-generator) - Full fix with accordion, slider, spacing, and color fixes
-- ✅ DMARC Analyzer (/tools/dmarc-analyzer) - Already properly themed, only needed label spacing fix
-- ✅ DMARC Domain Checker (/tools/dmarc-domain-checker) - Already properly themed, needed label spacing and semantic heading fix
+- ✅ DMARC Analyzer (/tools/dmarc-analyzer) - Updated button to homepage style (size="lg", to-accent-hover gradient)
+- ✅ DMARC Domain Checker (/tools/dmarc-domain-checker) - Updated button to homepage style + label spacing and semantic heading fix
+- ✅ DMARC Subdomain Policy Checker (/tools/dmarc-subdomain-policy-checker) - Updated button to homepage style
+- ✅ SPF Surveyor (/tools/spf-surveyor) - Updated button from solid bg-primary to homepage gradient style
+- ✅ DKIM Validator (/tools/dkim-validator) - Updated button from solid bg-primary to homepage gradient style
+- ✅ DKIM Inspector (/tools/dkim-inspector) - Updated button from solid bg-primary to homepage gradient style
+- ✅ Domain Security Checker (/tools/domain-security-checker) - Updated button from solid bg-primary to homepage gradient style
 - ✅ DMARC Policy Impact Simulator (/tools/dmarc-policy-impact-simulator) - Fixed 19 hardcoded colors + standardized status colors + fixed critical DMARC logic bug
 
 ## DMARC Analyzer Notes
