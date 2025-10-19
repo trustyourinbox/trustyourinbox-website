@@ -325,7 +325,7 @@ export default function DomainSecurityCheckerPage() {
                 <div className="border-border bg-card rounded-lg border shadow-sm">
                   <div className="border-border bg-muted flex items-center gap-2 rounded-t-lg border-b px-4 py-2">
                     <Mail className="text-primary h-4 w-4" />
-                    <span className="text-sm font-semibold">
+                    <span className="text-foreground text-sm font-semibold">
                       Email Authentication
                     </span>
                   </div>
@@ -387,7 +387,7 @@ export default function DomainSecurityCheckerPage() {
                 <div className="border-border bg-card rounded-lg border shadow-sm">
                   <div className="border-border bg-muted flex items-center gap-2 rounded-t-lg border-b px-4 py-2">
                     <Lock className="text-primary h-4 w-4" />
-                    <span className="text-sm font-semibold">
+                    <span className="text-foreground text-sm font-semibold">
                       Transport Security
                     </span>
                   </div>
@@ -430,7 +430,9 @@ export default function DomainSecurityCheckerPage() {
                 <div className="border-border bg-card rounded-lg border shadow-sm">
                   <div className="border-border bg-muted flex items-center gap-2 rounded-t-lg border-b px-4 py-2">
                     <Database className="text-primary h-4 w-4" />
-                    <span className="text-sm font-semibold">DNS Security</span>
+                    <span className="text-foreground text-sm font-semibold">
+                      DNS Security
+                    </span>
                   </div>
                   <div className="space-y-3 p-3">
                     {/* DNSSEC */}
