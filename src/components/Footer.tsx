@@ -174,98 +174,57 @@ export default function Footer() {
       </h2>
 
       <div className="container px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
-        {/* Logo & Brand Section */}
-        <div className="mb-12 md:mb-14">
-          <Link
-            href="/"
-            className="mb-4 inline-flex items-center gap-2.5 transition-opacity duration-200 hover:opacity-80"
-          >
-            {/* Shield Logo */}
-            <svg
-              width="32"
-              height="32"
-              viewBox="0 0 100 100"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <defs>
-                <linearGradient
-                  id="footerShieldGradient"
-                  x1="0%"
-                  y1="0%"
-                  x2="100%"
-                  y2="100%"
-                >
-                  <stop offset="0%" stopColor="#6366f1" stopOpacity={1} />
-                  <stop offset="100%" stopColor="#8b5cf6" stopOpacity={1} />
-                </linearGradient>
-              </defs>
-              <path
-                d="M50 5 L85 20 L85 45 Q85 70 50 90 Q15 70 15 45 L15 20 Z"
-                fill="url(#footerShieldGradient)"
-              />
-              <path
-                d="M35 48 L44 57 L65 36"
-                fill="none"
-                stroke="white"
-                strokeWidth="6"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-
-            <span className="text-foreground text-xl font-semibold">
-              TrustYourInbox
-            </span>
-          </Link>
-
-          <p className="text-muted-foreground max-w-md text-sm">
-            Simplifying DMARC implementation and email security for
-            organizations worldwide.
-          </p>
-        </div>
-
-        {/* Main Footer Grid */}
+        {/* Main Footer Grid - 4 Columns */}
         <div className="mb-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-12">
-          {/* Product Column */}
-          <FooterSection title="Product" links={productLinks} />
-
-          {/* Resources Column */}
-          <FooterSection title="Resources" links={resourceLinks} />
-
-          {/* Company Column */}
-          <FooterSection title="Company" links={companyLinks} />
-
-          {/* Legal Column */}
+          {/* Column 1: Brand & Social */}
           <div>
-            <h3 className="text-foreground mb-4 text-sm font-semibold">
-              Legal
-            </h3>
-            <ul className="space-y-3 text-sm">
-              {legalLinks.map((link) => (
-                <li key={link.name}>
-                  <Link
-                    href={link.href}
-                    className="text-muted-foreground hover:text-foreground transition-colors duration-200"
+            <Link
+              href="/"
+              className="mb-4 inline-flex items-center gap-2.5 transition-opacity duration-200 hover:opacity-80"
+            >
+              {/* Shield Logo */}
+              <svg
+                width="32"
+                height="32"
+                viewBox="0 0 100 100"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <defs>
+                  <linearGradient
+                    id="footerShieldGradient"
+                    x1="0%"
+                    y1="0%"
+                    x2="100%"
+                    y2="100%"
                   >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
+                    <stop offset="0%" stopColor="#6366f1" stopOpacity={1} />
+                    <stop offset="100%" stopColor="#8b5cf6" stopOpacity={1} />
+                  </linearGradient>
+                </defs>
+                <path
+                  d="M50 5 L85 20 L85 45 Q85 70 50 90 Q15 70 15 45 L15 20 Z"
+                  fill="url(#footerShieldGradient)"
+                />
+                <path
+                  d="M35 48 L44 57 L65 36"
+                  fill="none"
+                  stroke="white"
+                  strokeWidth="6"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
 
-        {/* Bottom Bar: Copyright, Social Links & Status */}
-        <div className="border-border/20 flex flex-col items-center justify-between gap-6 border-t pt-8 sm:flex-row">
-          {/* Copyright */}
-          <p className="text-muted-foreground text-sm">
-            © {currentYear}{" "}
-            <span className="text-foreground">TrustYourInbox</span>. All rights
-            reserved.
-          </p>
+              <span className="text-foreground text-xl font-semibold">
+                TrustYourInbox
+              </span>
+            </Link>
 
-          {/* Right Side: Social Links + Status */}
-          <div className="flex items-center gap-6">
+            <p className="text-muted-foreground mb-6 text-sm">
+              Simplifying DMARC implementation and email security for
+              organizations worldwide.
+            </p>
+
             {/* Social Links */}
             <div className="flex items-center gap-4">
               {socialLinks.map((social) => {
@@ -284,24 +243,78 @@ export default function Footer() {
                 );
               })}
             </div>
-
-            {/* Divider */}
-            <div className="bg-border h-4 w-px" />
-
-            {/* Status Link with indicator */}
-            <a
-              href="https://status.trustyourinbox.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-foreground flex items-center gap-2 text-sm transition-colors duration-200"
-            >
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
-              </span>
-              <span>Status</span>
-            </a>
           </div>
+
+          {/* Column 2: Product */}
+          <FooterSection title="Product" links={productLinks} />
+
+          {/* Column 3: Resources */}
+          <FooterSection title="Resources" links={resourceLinks} />
+
+          {/* Column 4: Company & Legal */}
+          <div className="space-y-8">
+            {/* Company Links */}
+            <div>
+              <h3 className="text-foreground mb-4 text-sm font-semibold">
+                Company
+              </h3>
+              <ul className="space-y-3 text-sm">
+                {companyLinks.map((link) => (
+                  <li key={link.name}>
+                    <Link
+                      href={link.href}
+                      className="text-muted-foreground hover:text-foreground transition-colors duration-200"
+                    >
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Legal Links */}
+            <div>
+              <h3 className="text-foreground mb-4 text-sm font-semibold">
+                Legal
+              </h3>
+              <ul className="space-y-3 text-sm">
+                {legalLinks.map((link) => (
+                  <li key={link.name}>
+                    <Link
+                      href={link.href}
+                      className="text-muted-foreground hover:text-foreground transition-colors duration-200"
+                    >
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Bar: Copyright & Status */}
+        <div className="border-border/20 flex flex-col items-center justify-between gap-4 border-t pt-8 sm:flex-row">
+          {/* Copyright */}
+          <p className="text-muted-foreground text-sm">
+            © {currentYear}{" "}
+            <span className="text-foreground">TrustYourInbox</span>. All rights
+            reserved.
+          </p>
+
+          {/* Status Link with indicator */}
+          <a
+            href="https://status.trustyourinbox.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-muted-foreground hover:text-foreground flex items-center gap-2 text-sm transition-colors duration-200"
+          >
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
+            </span>
+            <span>Status</span>
+          </a>
         </div>
       </div>
     </footer>
