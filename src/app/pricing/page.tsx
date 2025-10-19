@@ -10,6 +10,7 @@ import {
   TrendingUp,
   Users,
   Zap,
+  ArrowRight,
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 
@@ -292,7 +293,8 @@ export default function PricingPage() {
 
                   {/* CTA */}
                   <Button
-                    className={`mb-8 w-full ${plan.popular ? "" : "variant-outline"}`}
+                    className={`mb-8 w-full ${plan.popular ? "to-accent-hover from-primary gap-2 bg-gradient-to-r text-white hover:opacity-90" : ""}`}
+                    variant={plan.popular ? "default" : "outline"}
                     size="lg"
                   >
                     {plan.cta}
@@ -469,17 +471,19 @@ export default function PricingPage() {
               credit card required.
             </p>
             <div className="flex flex-col justify-center gap-4 sm:flex-row">
-              <Link
-                href="/signup"
-                className="bg-primary text-primary-foreground hover:bg-primary/90 inline-flex items-center justify-center rounded-lg px-8 py-3 text-sm font-semibold transition-colors"
-              >
-                Start Free Trial
+              <Link href="/signup">
+                <Button
+                  size="lg"
+                  className="to-accent-hover from-primary gap-2 bg-gradient-to-r text-white hover:opacity-90"
+                >
+                  Start Free Trial
+                  <ArrowRight className="h-5 w-5" />
+                </Button>
               </Link>
-              <Link
-                href="/contact"
-                className="border-border hover:bg-muted inline-flex items-center justify-center rounded-lg border px-8 py-3 text-sm font-semibold transition-colors"
-              >
-                Contact Sales
+              <Link href="/contact">
+                <Button size="lg" variant="outline">
+                  Contact Sales
+                </Button>
               </Link>
             </div>
           </div>
