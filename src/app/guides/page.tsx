@@ -87,13 +87,13 @@ const guideCategories = [
         name: "SPF Include Chains",
         desc: "Managing complex SPF setups",
         time: "8 min read",
-        href: "#",
+        href: "/guides/spf-include-chains",
       },
       {
         name: "SPF 10 DNS Lookup Limit",
         desc: "Avoid SPF failures",
         time: "5 min read",
-        href: "#",
+        href: "/guides/spf-10-dns-lookup-limit",
       },
       {
         name: "SPF Best Practices",
