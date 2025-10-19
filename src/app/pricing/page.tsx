@@ -189,7 +189,7 @@ export default function PricingPage() {
   return (
     <div className="bg-background min-h-screen">
       {/* Hero Section */}
-      <section className="from-background to-secondary/30 bg-gradient-to-b py-12 sm:py-16 md:py-24 lg:py-32">
+      <section className="py-12 sm:py-16 md:py-24 lg:py-32">
         <div className="container">
           <div className="mx-auto max-w-3xl text-center">
             <div className="border-primary/20 bg-primary/5 mb-4 inline-flex items-center rounded-full border px-3 py-1.5 text-xs font-medium sm:mb-6 sm:px-4 sm:text-sm">
@@ -205,10 +205,10 @@ export default function PricingPage() {
             </p>
 
             {/* Billing Toggle */}
-            <div className="bg-secondary inline-flex items-center gap-2 rounded-lg p-1 sm:gap-3">
+            <div className="bg-secondary inline-flex items-center gap-1 rounded-lg p-1.5">
               <button
                 onClick={() => setBillingPeriod("monthly")}
-                className={`touch-target rounded-md px-4 py-2 text-xs font-medium transition-all sm:px-6 sm:text-sm ${
+                className={`rounded-md px-6 py-2.5 text-sm font-medium transition-all ${
                   billingPeriod === "monthly"
                     ? "bg-background shadow-sm"
                     : "hover:bg-background/50"
@@ -218,16 +218,13 @@ export default function PricingPage() {
               </button>
               <button
                 onClick={() => setBillingPeriod("annual")}
-                className={`touch-target rounded-md px-4 py-2 text-xs font-medium transition-all sm:px-6 sm:text-sm ${
+                className={`rounded-md px-6 py-2.5 text-sm font-medium transition-all ${
                   billingPeriod === "annual"
                     ? "bg-background shadow-sm"
                     : "hover:bg-background/50"
                 }`}
               >
-                Annual{" "}
-                <span className="text-primary ml-1 hidden sm:inline">
-                  (Save 20%)
-                </span>
+                Annual <span className="text-primary ml-1.5">(Save 20%)</span>
               </button>
             </div>
           </div>
@@ -235,9 +232,9 @@ export default function PricingPage() {
       </section>
 
       {/* Pricing Cards */}
-      <section className="-mt-8 py-8 sm:-mt-12 sm:py-12">
+      <section className="py-12 sm:py-16">
         <div className="container">
-          <div className="mx-auto grid max-w-7xl grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <div className="mx-auto grid max-w-7xl gap-8 md:grid-cols-3">
             {plans.map((plan) => {
               const displayPrice =
                 billingPeriod === "annual" && plan.price > 0
@@ -247,53 +244,53 @@ export default function PricingPage() {
               return (
                 <div
                   key={plan.name}
-                  className={`bg-background relative rounded-lg border-2 p-8 transition-all duration-300 ${
+                  className={`bg-card/50 relative flex flex-col rounded-xl border-2 p-8 backdrop-blur-sm transition-all duration-300 ${
                     plan.popular
-                      ? "border-primary scale-105 shadow-2xl lg:-translate-y-4"
-                      : "border-border hover:border-primary/30 hover:shadow-xl"
+                      ? "border-primary shadow-primary/10 shadow-2xl md:-translate-y-2 md:scale-[1.02]"
+                      : "border-border hover:border-primary/30 hover:shadow-lg"
                   }`}
                 >
                   {plan.popular && (
                     <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                      <div className="bg-primary text-primary-foreground rounded-full px-4 py-1 text-xs font-bold">
+                      <div className="from-primary to-accent-hover text-primary-foreground rounded-full bg-gradient-to-r px-6 py-1.5 text-xs font-bold shadow-lg">
                         MOST POPULAR
                       </div>
                     </div>
                   )}
 
                   {/* Plan Header */}
-                  <div className="mb-6">
-                    <h3 className="mb-2 text-2xl font-bold">{plan.name}</h3>
-                    <p className="text-muted-foreground text-sm">
+                  <div className="mb-8">
+                    <h3 className="mb-3 text-2xl font-bold">{plan.name}</h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed">
                       {plan.description}
                     </p>
                   </div>
 
                   {/* Price */}
-                  <div className="mb-6">
-                    <div className="flex items-baseline gap-2">
-                      <span className="text-5xl font-bold">
+                  <div className="mb-8">
+                    <div className="flex items-baseline gap-1">
+                      <span className="text-5xl font-bold tracking-tight">
                         ${displayPrice}
                       </span>
-                      <span className="text-muted-foreground">
+                      <span className="text-muted-foreground text-base">
                         /
                         {plan.period === "forever"
                           ? "forever"
                           : billingPeriod === "annual"
-                            ? "month"
-                            : plan.period}
+                            ? "mo"
+                            : plan.period.replace("per ", "")}
                       </span>
                     </div>
                     {billingPeriod === "annual" && plan.price > 0 && (
-                      <p className="text-muted-foreground mt-2 text-sm">
-                        Billed ${displayPrice * 12}/year
+                      <p className="text-muted-foreground mt-3 text-sm">
+                        Billed ${displayPrice * 12} annually
                       </p>
                     )}
                   </div>
 
                   {/* CTA */}
                   <Button
-                    className={`mb-6 w-full ${plan.popular ? "to-accent-hover from-primary gap-2 bg-gradient-to-r text-white hover:opacity-90" : ""}`}
+                    className={`mb-8 w-full ${plan.popular ? "to-accent-hover from-primary gap-2 bg-gradient-to-r text-white shadow-lg hover:opacity-90" : ""}`}
                     variant={plan.popular ? "default" : "outline"}
                     size="lg"
                   >
@@ -303,36 +300,31 @@ export default function PricingPage() {
                   {/* Divider */}
                   <div className="border-border mb-6 border-t"></div>
 
-                  {/* Included Features */}
-                  <div className="space-y-3">
-                    {plan.features
-                      .filter((f) => f.included)
-                      .map((feature) => (
-                        <div
-                          key={feature.name}
-                          className="flex items-start gap-3"
-                        >
+                  {/* Features */}
+                  <div className="flex-grow space-y-4">
+                    <p className="text-muted-foreground text-xs font-semibold tracking-wide uppercase">
+                      What&apos;s included
+                    </p>
+                    {plan.features.map((feature) => (
+                      <div
+                        key={feature.name}
+                        className="flex items-start gap-3"
+                      >
+                        {feature.included ? (
                           <Check className="text-primary mt-0.5 h-5 w-5 flex-shrink-0" />
-                          <span>{feature.name}</span>
-                        </div>
-                      ))}
-                  </div>
-
-                  {/* Excluded Features */}
-                  {plan.features.filter((f) => !f.included).length > 0 && (
-                    <div className="border-border mt-6 border-t pt-4">
-                      <p className="text-muted-foreground mb-2 text-xs font-medium">
-                        Not included:
-                      </p>
-                      <div className="text-muted-foreground/60 flex flex-wrap gap-x-3 gap-y-1 text-xs">
-                        {plan.features
-                          .filter((f) => !f.included)
-                          .map((feature) => (
-                            <span key={feature.name}>• {feature.name}</span>
-                          ))}
+                        ) : (
+                          <X className="text-muted-foreground/30 mt-0.5 h-5 w-5 flex-shrink-0" />
+                        )}
+                        <span
+                          className={
+                            feature.included ? "" : "text-muted-foreground/50"
+                          }
+                        >
+                          {feature.name}
+                        </span>
                       </div>
-                    </div>
-                  )}
+                    ))}
+                  </div>
                 </div>
               );
             })}
