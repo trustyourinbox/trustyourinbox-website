@@ -66,5 +66,30 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...mainPages, ...solutionPages, ...toolPages, ...resourcePages];
+  // Blog posts
+  const blogPosts = ["/blog/dmarc-compliance-requirements-2025"].map(
+    (route) => ({
+      url: `${baseUrl}${route}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    })
+  );
+
+  // Comparison pages
+  const comparisonPages = ["/vs/powerdmarc"].map((route) => ({
+    url: `${baseUrl}${route}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.85,
+  }));
+
+  return [
+    ...mainPages,
+    ...solutionPages,
+    ...toolPages,
+    ...resourcePages,
+    ...blogPosts,
+    ...comparisonPages,
+  ];
 }

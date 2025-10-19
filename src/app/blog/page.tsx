@@ -12,11 +12,13 @@ import {
 } from "lucide-react";
 
 const featuredPost = {
-  title: "DMARC Enforcement in 2025: What You Need to Know",
+  title:
+    "DMARC Compliance Requirements 2025: Critical Deadlines You Can't Miss",
+  slug: "dmarc-compliance-requirements-2025",
   excerpt:
-    "Major email providers are tightening DMARC requirements. Learn how to prepare your domains and avoid email deliverability issues.",
+    "Google, Yahoo, and Microsoft are enforcing strict DMARC compliance with deadlines on May 5 and July 15, 2025. Learn enforcement timelines, technical requirements, and step-by-step implementation.",
   date: "2025-01-15",
-  readTime: "8 min read",
+  readTime: "12 min read",
   category: "Industry News",
   image: "/images/blog/featured.jpg",
 };
@@ -112,7 +114,7 @@ export default function BlogPage() {
       <section className="-mt-12 py-12">
         <div className="container">
           <Link
-            href="#"
+            href={`/blog/${featuredPost.slug}`}
             className="group border-primary/20 from-background/50 to-background hover:border-primary/40 relative block overflow-hidden rounded-lg border-2 bg-gradient-to-br shadow-2xl backdrop-blur-xl transition-all"
           >
             <div className="grid gap-8 p-8 md:p-12 lg:grid-cols-2">
