@@ -92,7 +92,7 @@ export default function DomainSecurityCheckerPage() {
         },
         {
           name: "Transport Security",
-          icon: <FaLock className="h-5 w-5 text-green-600" />,
+          icon: <FaLock className="text-primary h-5 w-5" />,
           checks: [
             {
               name: "MTA-STS",
@@ -111,7 +111,7 @@ export default function DomainSecurityCheckerPage() {
         },
         {
           name: "DNS Security",
-          icon: <FaServer className="h-5 w-5 text-purple-600" />,
+          icon: <FaServer className="text-primary h-5 w-5" />,
           checks: [
             {
               name: "DNSSEC",
@@ -147,9 +147,9 @@ export default function DomainSecurityCheckerPage() {
 
   // Helper for dynamic progress bar color
   function getProgressColor(score: number) {
-    if (score < 50) return "bg-red-500";
-    if (score < 80) return "bg-amber-400";
-    return "bg-green-500";
+    if (score < 50) return "bg-destructive";
+    if (score < 80) return "bg-warning";
+    return "bg-success";
   }
 
   return (
@@ -158,33 +158,39 @@ export default function DomainSecurityCheckerPage() {
       description="TrustYourInbox's comprehensive security analysis for your domain. Instantly check DMARC, SPF, DKIM, MTA-STS, and more—get actionable, expert recommendations."
       sidebarContent={
         <>
-          <h4 className="text-brand mb-2 font-semibold">
+          <h4 className="text-foreground mb-2 font-semibold">
             Why Domain Security?
           </h4>
-          <p className="text-brand-dark mb-3 text-sm">
+          <p className="text-muted-foreground mb-3 text-sm">
             TrustYourInbox helps you protect your brand and users from phishing
             and spoofing. Secure your domain with industry-leading best
             practices.
           </p>
           <div className="mb-3">
-            <span className="bg-brand/10 text-brand mb-1 inline-block rounded px-2 py-0.5 text-xs font-semibold">
+            <span className="bg-primary/10 text-primary mb-1 inline-block rounded px-2 py-0.5 text-xs font-semibold">
               Key Protections
             </span>
-            <ul className="text-brand-dark list-disc pl-5 text-sm">
+            <ul className="text-muted-foreground list-disc pl-5 text-sm">
               <li>DMARC, SPF, DKIM authentication</li>
               <li>MTA-STS & TLS-RPT for secure delivery</li>
               <li>DNSSEC & FCrDNS for DNS integrity</li>
             </ul>
           </div>
-          <h4 className="text-brand mb-2 font-semibold">Resources</h4>
+          <h4 className="text-foreground mb-2 font-semibold">Resources</h4>
           <ul className="list-disc pl-5 text-sm">
             <li>
-              <a href="/guides/email-security" className="text-brand underline">
+              <a
+                href="/guides/email-security"
+                className="text-primary underline"
+              >
                 Email Security Best Practices
               </a>
             </li>
             <li>
-              <a href="/tools/dmarc-analyzer" className="text-brand underline">
+              <a
+                href="/tools/dmarc-analyzer"
+                className="text-primary underline"
+              >
                 DMARC Analyzer
               </a>
             </li>
@@ -207,18 +213,21 @@ export default function DomainSecurityCheckerPage() {
             className="space-y-4"
           >
             <div className="space-y-2">
-              <label htmlFor="domain" className="text-sm font-medium">
+              <label
+                htmlFor="domain"
+                className="mb-2 block text-sm font-medium"
+              >
                 Domain Name
               </label>
               <div className="relative flex-1">
                 <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                  <Globe className="h-5 w-5 text-gray-400" />
+                  <Globe className="text-muted-foreground h-5 w-5" />
                 </div>
                 <Input
                   id="domain"
                   type="text"
                   placeholder="yourdomain.com"
-                  className="focus:border-primary focus:ring-ring h-11 border-gray-200 pl-10"
+                  className="focus:border-primary focus:ring-ring border-border h-11 pl-10"
                   value={domain}
                   onChange={(e) => setDomain(e.target.value)}
                   required
@@ -271,7 +280,7 @@ export default function DomainSecurityCheckerPage() {
 
       {results.length > 0 && (
         <div className="container mx-auto max-w-5xl px-4 py-8">
-          <Card className="overflow-hidden border border-gray-200 shadow-sm">
+          <Card className="border-border overflow-hidden border shadow-sm">
             <CardHeader className="to-accent-hover from-primary bg-gradient-to-r p-6 text-white">
               <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                 <div className="flex items-center gap-3">
@@ -288,7 +297,7 @@ export default function DomainSecurityCheckerPage() {
                       </span>
                       <Badge
                         variant="outline"
-                        className={`border-0 px-2 py-0.5 text-xs ${securityScore < 50 ? "bg-red-400 text-white" : securityScore < 80 ? "bg-amber-400 text-white" : "bg-green-500 text-white"}`}
+                        className={`border-0 px-2 py-0.5 text-xs ${securityScore < 50 ? "bg-destructive/90 text-white" : securityScore < 80 ? "bg-warning/90 text-white" : "bg-success/90 text-white"}`}
                       >
                         {securityScore < 50
                           ? "Critical"
@@ -310,11 +319,11 @@ export default function DomainSecurityCheckerPage() {
                 </div>
               </div>
             </CardHeader>
-            <CardContent className="bg-slate-50 p-4">
+            <CardContent className="bg-muted p-4">
               <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
                 {/* Email Authentication */}
-                <div className="rounded-lg border border-gray-200 bg-white shadow-sm">
-                  <div className="flex items-center gap-2 rounded-t-lg border-b border-gray-100 bg-slate-50 px-4 py-2">
+                <div className="border-border bg-card rounded-lg border shadow-sm">
+                  <div className="border-border bg-muted flex items-center gap-2 rounded-t-lg border-b px-4 py-2">
                     <Mail className="text-primary h-4 w-4" />
                     <span className="text-sm font-semibold">
                       Email Authentication
@@ -331,7 +340,7 @@ export default function DomainSecurityCheckerPage() {
                         {results[0].checks[0].description}
                       </p>
                       {results[0].checks[0].details && (
-                        <div className="rounded border border-gray-100 bg-slate-50 p-1 font-mono text-xs">
+                        <div className="border-border bg-muted rounded border p-1 font-mono text-xs">
                           {results[0].checks[0].details}
                         </div>
                       )}
@@ -350,7 +359,7 @@ export default function DomainSecurityCheckerPage() {
                         {results[0].checks[1].description}
                       </p>
                       {results[0].checks[1].details && (
-                        <div className="rounded border border-gray-100 bg-slate-50 p-1 font-mono text-xs">
+                        <div className="border-border bg-muted rounded border p-1 font-mono text-xs">
                           {results[0].checks[1].details}
                         </div>
                       )}
@@ -375,8 +384,8 @@ export default function DomainSecurityCheckerPage() {
                   </div>
                 </div>
                 {/* Transport Security */}
-                <div className="rounded-lg border border-gray-200 bg-white shadow-sm">
-                  <div className="flex items-center gap-2 rounded-t-lg border-b border-gray-100 bg-slate-50 px-4 py-2">
+                <div className="border-border bg-card rounded-lg border shadow-sm">
+                  <div className="border-border bg-muted flex items-center gap-2 rounded-t-lg border-b px-4 py-2">
                     <Lock className="text-primary h-4 w-4" />
                     <span className="text-sm font-semibold">
                       Transport Security
@@ -393,7 +402,7 @@ export default function DomainSecurityCheckerPage() {
                         {results[1].checks[0].description}
                       </p>
                       {results[1].checks[0].details && (
-                        <div className="rounded border border-gray-100 bg-slate-50 p-1 font-mono text-xs">
+                        <div className="border-border bg-muted rounded border p-1 font-mono text-xs">
                           {results[1].checks[0].details}
                         </div>
                       )}
@@ -418,8 +427,8 @@ export default function DomainSecurityCheckerPage() {
                   </div>
                 </div>
                 {/* DNS Security */}
-                <div className="rounded-lg border border-gray-200 bg-white shadow-sm">
-                  <div className="flex items-center gap-2 rounded-t-lg border-b border-gray-100 bg-slate-50 px-4 py-2">
+                <div className="border-border bg-card rounded-lg border shadow-sm">
+                  <div className="border-border bg-muted flex items-center gap-2 rounded-t-lg border-b px-4 py-2">
                     <Database className="text-primary h-4 w-4" />
                     <span className="text-sm font-semibold">DNS Security</span>
                   </div>
@@ -455,17 +464,17 @@ export default function DomainSecurityCheckerPage() {
                 </div>
               </div>
               {/* Critical Issues Section */}
-              <Card className="mt-6 border-red-100 bg-red-50 shadow-none">
+              <Card className="border-destructive/20 bg-destructive/10 mt-6 shadow-none">
                 <CardContent className="p-4">
                   <div className="flex items-start gap-3">
-                    <div className="rounded-full bg-red-100 p-2">
-                      <AlertTriangle className="h-5 w-5 text-red-600" />
+                    <div className="bg-destructive/20 rounded-full p-2">
+                      <AlertTriangle className="text-destructive h-5 w-5" />
                     </div>
                     <div>
-                      <h3 className="mb-1 text-base font-semibold text-red-700">
+                      <h3 className="text-destructive mb-1 text-base font-semibold">
                         Critical Issues Detected:
                       </h3>
-                      <ul className="list-inside list-disc space-y-1 text-xs text-red-700">
+                      <ul className="text-destructive list-inside list-disc space-y-1 text-xs">
                         {results[1].checks
                           .filter((c) => c.status === "fail")
                           .map((check, idx) => (
@@ -503,7 +512,7 @@ export default function DomainSecurityCheckerPage() {
                   {/* Example recommendations, you can make this dynamic if you wish */}
                   <div className="flex items-start gap-2">
                     <div className="mt-0.5">
-                      <XCircle className="h-4 w-4 text-red-500" />
+                      <XCircle className="text-destructive h-4 w-4" />
                     </div>
                     <div>
                       <h4 className="text-xs font-medium">Configure MTA-STS</h4>
@@ -515,7 +524,7 @@ export default function DomainSecurityCheckerPage() {
                   </div>
                   <div className="flex items-start gap-2">
                     <div className="mt-0.5">
-                      <XCircle className="h-4 w-4 text-red-500" />
+                      <XCircle className="text-destructive h-4 w-4" />
                     </div>
                     <div>
                       <h4 className="text-xs font-medium">Add TLS-RPT</h4>
@@ -558,73 +567,70 @@ export default function DomainSecurityCheckerPage() {
         </div>
       )}
 
-      <div className="mt-12 mb-8">
-        <div className="mb-6">
-          <h2 className="text-2xl font-bold tracking-tight">Related Tools</h2>
-          <p className="text-muted-foreground mt-1">
-            Explore more email authentication tools to secure your domain
+      <div className="mt-8 mb-8">
+        <div className="mb-4">
+          <h2 className="text-xl font-bold tracking-tight">Related Tools</h2>
+          <p className="text-muted-foreground mt-1 text-sm">
+            More email authentication tools
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
           <Link
             href="/tools/dmarc-analyzer"
-            className="group border-primary/20 bg-secondary dark:border-primary dark:bg-primary relative overflow-hidden rounded-lg border p-5 transition-all hover:shadow-md"
+            className="group border-border/40 bg-card hover:border-primary/30 relative overflow-hidden rounded-lg border p-4 transition-all duration-200 hover:shadow-lg"
           >
-            <div className="flex items-start gap-4">
-              <div className="bg-primary/10 dark:bg-primary rounded-full p-2">
-                <Shield className="text-primary h-6 w-6" />
+            <div className="flex items-start gap-3">
+              <div className="bg-primary/10 flex-shrink-0 rounded-md p-2">
+                <Shield className="text-primary h-4 w-4" />
               </div>
-              <div>
-                <h3 className="text-lg font-semibold group-hover:underline">
+              <div className="min-w-0 flex-1">
+                <h3 className="text-foreground group-hover:text-primary text-sm font-semibold transition-colors">
                   DMARC Analyzer
                 </h3>
-                <p className="text-muted-foreground mt-1 text-sm">
-                  Analyze your DMARC configuration and get detailed reports
+                <p className="text-muted-foreground mt-0.5 line-clamp-2 text-xs">
+                  Analyze DMARC configuration and get detailed reports
                 </p>
               </div>
             </div>
-            <div className="bg-primary absolute bottom-0 left-0 h-1 w-0 transition-all duration-300 group-hover:w-full"></div>
           </Link>
 
           <Link
             href="/tools/spf-surveyor"
-            className="group relative overflow-hidden rounded-lg border border-green-200 bg-green-50 p-5 transition-all hover:shadow-md dark:border-green-800 dark:bg-green-950"
+            className="group border-border/40 bg-card hover:border-primary/30 relative overflow-hidden rounded-lg border p-4 transition-all duration-200 hover:shadow-lg"
           >
-            <div className="flex items-start gap-4">
-              <div className="rounded-full bg-green-100 p-2 dark:bg-green-900">
-                <Mail className="text-primary h-6 w-6" />
+            <div className="flex items-start gap-3">
+              <div className="bg-primary/10 flex-shrink-0 rounded-md p-2">
+                <Mail className="text-primary h-4 w-4" />
               </div>
-              <div>
-                <h3 className="text-lg font-semibold group-hover:underline">
+              <div className="min-w-0 flex-1">
+                <h3 className="text-foreground group-hover:text-primary text-sm font-semibold transition-colors">
                   SPF Surveyor
                 </h3>
-                <p className="text-muted-foreground mt-1 text-sm">
+                <p className="text-muted-foreground mt-0.5 line-clamp-2 text-xs">
                   Validate and troubleshoot your SPF records
                 </p>
               </div>
             </div>
-            <div className="bg-primary absolute bottom-0 left-0 h-1 w-0 transition-all duration-300 group-hover:w-full"></div>
           </Link>
 
           <Link
             href="/tools/dkim-validator"
-            className="group relative overflow-hidden rounded-lg border border-purple-200 bg-purple-50 p-5 transition-all hover:shadow-md dark:border-purple-800 dark:bg-purple-950"
+            className="group border-border/40 bg-card hover:border-primary/30 relative overflow-hidden rounded-lg border p-4 transition-all duration-200 hover:shadow-lg"
           >
-            <div className="flex items-start gap-4">
-              <div className="rounded-full bg-purple-100 p-2 dark:bg-purple-900">
-                <Key className="text-primary h-6 w-6" />
+            <div className="flex items-start gap-3">
+              <div className="bg-primary/10 flex-shrink-0 rounded-md p-2">
+                <Key className="text-primary h-4 w-4" />
               </div>
-              <div>
-                <h3 className="text-lg font-semibold group-hover:underline">
+              <div className="min-w-0 flex-1">
+                <h3 className="text-foreground group-hover:text-primary text-sm font-semibold transition-colors">
                   DKIM Validator
                 </h3>
-                <p className="text-muted-foreground mt-1 text-sm">
+                <p className="text-muted-foreground mt-0.5 line-clamp-2 text-xs">
                   Verify your DKIM signatures and configuration
                 </p>
               </div>
             </div>
-            <div className="bg-primary absolute bottom-0 left-0 h-1 w-0 transition-all duration-300 group-hover:w-full"></div>
           </Link>
         </div>
       </div>
@@ -637,23 +643,25 @@ function getStatusBadge(status: string) {
   switch (status) {
     case "pass":
       return (
-        <Badge className="bg-green-100 text-green-800 hover:bg-green-100">
+        <Badge className="bg-success/10 text-success hover:bg-success/10">
           Pass
         </Badge>
       );
     case "fail":
       return (
-        <Badge className="bg-red-100 text-red-800 hover:bg-red-100">Fail</Badge>
+        <Badge className="bg-destructive/10 text-destructive hover:bg-destructive/10">
+          Fail
+        </Badge>
       );
     case "warning":
       return (
-        <Badge className="bg-amber-100 text-amber-800 hover:bg-amber-100">
+        <Badge className="bg-warning/10 text-warning hover:bg-warning/10">
           Warning
         </Badge>
       );
     case "info":
       return (
-        <Badge className="bg-primary/10 text-foreground hover:bg-primary/10">
+        <Badge className="bg-primary/10 text-primary hover:bg-primary/10">
           Info
         </Badge>
       );
