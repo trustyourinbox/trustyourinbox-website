@@ -384,7 +384,195 @@ Input, Select, and Textarea components from `/src/components/ui` are typically a
 - Analysis/Breakdown
 - Error Messages (when shown conditionally)
 
-### 9. Text Contrast on Colored Backgrounds
+### 9. Card Component Padding - CRITICAL
+
+**Issue:** The Card component from `/src/components/ui/Card.tsx` has NO default padding. Content placed directly inside `<Card>` will be flush against the edges.
+
+**WRONG - Content flush against card edges:**
+
+```jsx
+<Card>
+  <h3 className="text-foreground text-lg font-semibold">
+    DKIM Configuration Score
+  </h3>
+  <p className="text-muted-foreground">Some content here</p>
+</Card>
+```
+
+**CORRECT - Add p-6 padding wrapper:**
+
+```jsx
+<Card>
+  <div className="p-6">
+    <h3 className="text-foreground text-lg font-semibold">
+      DKIM Configuration Score
+    </h3>
+    <p className="text-muted-foreground">Some content here</p>
+  </div>
+</Card>
+```
+
+**Why this matters:**
+
+- The Card component only provides `rounded-lg border bg-card text-card-foreground shadow-sm`
+- NO padding is included in the base Card component
+- You must wrap card content in a `<div className="p-6">` or use the CardContent sub-component
+- Without padding, content appears cramped and unprofessional
+
+**Alternative - Use CardContent sub-component:**
+
+```jsx
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
+
+<Card>
+  <CardHeader>
+    <CardTitle>DKIM Configuration Score</CardTitle>
+  </CardHeader>
+  <CardContent>
+    <p className="text-muted-foreground">Some content here</p>
+  </CardContent>
+</Card>;
+```
+
+**Standard padding values:**
+
+- `p-6` - Most result cards (Score, Warnings, Recommendations, Output)
+- `p-4` - Smaller cards or nested cards
+- CardHeader has `p-4 sm:p-6` built-in
+- CardContent has `p-4 pt-0 sm:p-6` built-in
+
+**Common mistake pattern:**
+
+```jsx
+// WRONG - These all have NO padding
+<Card>
+  <div className="flex items-center justify-between">...</div>
+</Card>
+
+<Card>
+  <h3 className="text-lg font-semibold">Title</h3>
+  <ul className="space-y-2">...</ul>
+</Card>
+
+// CORRECT - Always wrap content
+<Card>
+  <div className="p-6">
+    <div className="flex items-center justify-between">...</div>
+  </div>
+</Card>
+
+<Card>
+  <div className="p-6">
+    <h3 className="text-lg font-semibold">Title</h3>
+    <ul className="space-y-2">...</ul>
+  </div>
+</Card>
+```
+
+### 10. Related Tools Section - Standard Pattern
+
+**CRITICAL:** All tool pages must use the EXACT same Related Tools pattern from Domain Checker. Do NOT create custom colored backgrounds or different layouts.
+
+**Reference Implementation:** `/src/app/tools/dmarc-domain-checker/page.tsx` (lines 281-343)
+
+**WRONG - Custom colored backgrounds:**
+
+```jsx
+// DO NOT USE - Old pattern with hardcoded colors
+<div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+  <Link
+    href="/tools/dmarc-analyzer"
+    className="group relative overflow-hidden rounded-lg border border-primary/20 bg-secondary dark:border-primary dark:bg-primary p-5 transition-all hover:shadow-md"
+  >
+    <div className="flex items-start gap-4">
+      <div className="bg-primary/10 dark:bg-primary rounded-full p-2">
+        <Shield className="text-primary h-6 w-6" />
+      </div>
+      <div>
+        <h3 className="text-lg font-semibold group-hover:underline">
+          DMARC Analyzer
+        </h3>
+        <p className="text-muted-foreground mt-1 text-sm">
+          Analyze your DMARC configuration
+        </p>
+      </div>
+    </div>
+    <div className="bg-primary absolute bottom-0 left-0 h-1 w-0 transition-all duration-300 group-hover:w-full"></div>
+  </Link>
+
+  {/* Other cards with bg-green-50, bg-purple-50, etc. */}
+</Link>
+```
+
+**CORRECT - Domain Checker pattern:**
+
+```jsx
+<div className="mt-8 mb-8">
+  <div className="mb-4">
+    <h2 className="text-xl font-bold tracking-tight">Related Tools</h2>
+    <p className="text-muted-foreground mt-1 text-sm">
+      More email authentication tools
+    </p>
+  </div>
+
+  <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+    <Link
+      href="/tools/dmarc-analyzer"
+      className="group border-border/40 bg-card hover:border-primary/30 relative overflow-hidden rounded-lg border p-4 transition-all duration-200 hover:shadow-lg"
+    >
+      <div className="flex items-start gap-3">
+        <div className="bg-primary/10 flex-shrink-0 rounded-md p-2">
+          <Shield className="text-primary h-4 w-4" />
+        </div>
+        <div className="min-w-0 flex-1">
+          <h3 className="text-foreground group-hover:text-primary text-sm font-semibold transition-colors">
+            DMARC Analyzer
+          </h3>
+          <p className="text-muted-foreground mt-0.5 line-clamp-2 text-xs">
+            Analyze DMARC configuration and get detailed reports
+          </p>
+        </div>
+      </div>
+    </Link>
+    {/* Repeat for other tools */}
+  </div>
+</div>
+```
+
+**Key Requirements:**
+
+- **Header**: `text-xl font-bold` (NOT `text-2xl`), `mb-4` spacing
+- **Description**: `text-sm text-muted-foreground mt-1`
+- **Grid**: `gap-3 sm:grid-cols-3` (NOT `gap-4 md:grid-cols-3`)
+- **Card Border**: `border-border/40 bg-card` (NOT custom colors)
+- **Card Hover**: `hover:border-primary/30 hover:shadow-lg duration-200`
+- **Card Padding**: `p-4` (NOT `p-5`)
+- **Icon Container**: `bg-primary/10 rounded-md p-2 flex-shrink-0` (NOT `rounded-full`)
+- **Icon Size**: `h-4 w-4` (NOT `h-6 w-6`)
+- **Card Spacing**: `gap-3` between icon and text (NOT `gap-4`)
+- **Title**: `text-sm font-semibold text-foreground group-hover:text-primary`
+- **Description**: `text-xs text-muted-foreground mt-0.5 line-clamp-2`
+- **NO bottom border animation** - Use simple `hover:shadow-lg` instead
+
+**Why this matters:**
+
+- Consistency across all tool pages
+- Clean, professional appearance
+- Works perfectly in both light and dark modes
+- Avoids hardcoded colored backgrounds (green-50, purple-50, etc.)
+- Proper responsive spacing and sizing
+
+**Common mistakes to avoid:**
+
+1. Using custom colored backgrounds (`bg-green-50`, `bg-purple-50`, `bg-primary`)
+2. Wrong grid gap (`gap-4` instead of `gap-3`)
+3. Wrong heading size (`text-2xl` instead of `text-xl`)
+4. Rounded icon containers (`rounded-full` instead of `rounded-md`)
+5. Large icons (`h-6 w-6` instead of `h-4 w-4`)
+6. Adding bottom border animations
+7. Wrong responsive breakpoint (`md:grid-cols-3` instead of `sm:grid-cols-3`)
+
+### 11. Text Contrast on Colored Backgrounds
 
 **Issue:** Text with reduced opacity or light color shades on colored alert/status backgrounds can have poor contrast, especially in light mode.
 
@@ -441,6 +629,7 @@ Input, Select, and Textarea components from `/src/components/ui` are typically a
    - [ ] Check generated output sections
    - [ ] Verify all text is readable (not white on white or black on black)
    - [ ] Check alert/status boxes for text contrast on colored backgrounds
+   - [ ] **CRITICAL**: Check all Card components have proper padding (content NOT flush against edges)
 
 2. **Visual Inspection - Light Mode**
    - [ ] Toggle to light mode
@@ -451,6 +640,7 @@ Input, Select, and Textarea components from `/src/components/ui` are typically a
    - [ ] Check generated output sections
    - [ ] Verify all text is readable
    - [ ] **CRITICAL**: Check alert/status boxes - text should NOT appear gray/washed out on colored backgrounds
+   - [ ] **CRITICAL**: Check all Card components have proper padding (content NOT flush against edges)
 
 3. **Interaction Testing**
    - [ ] Test all form inputs
@@ -473,9 +663,15 @@ Input, Select, and Textarea components from `/src/components/ui` are typically a
    - [ ] No reliance on Card `title` prop for semantic headings
 
 6. **Related Tools Section**
-   - [ ] Links are properly themed
-   - [ ] Hover states work correctly
-   - [ ] Cards/boxes use theme colors
+   - [ ] Uses Domain Checker pattern (border-border/40 bg-card)
+   - [ ] NO custom colored backgrounds (green-50, purple-50, etc.)
+   - [ ] Icons are h-4 w-4 in rounded-md containers (NOT h-6 w-6 in rounded-full)
+   - [ ] Grid uses gap-3 sm:grid-cols-3 (NOT gap-4 md:grid-cols-3)
+   - [ ] Cards use p-4 padding (NOT p-5)
+   - [ ] Title is text-sm (NOT text-lg)
+   - [ ] Description is text-xs (NOT text-sm)
+   - [ ] NO bottom border animation
+   - [ ] Hover states work correctly (hover:border-primary/30 hover:shadow-lg)
 
 7. **Sidebar (if present)**
    - [ ] Tabs use theme colors
@@ -586,8 +782,9 @@ A tool page is 100% fixed when:
 7. ✅ Sliders (if present) are clearly visible with borders
 8. ✅ Generated output sections display correctly
 9. ✅ All accordions work properly in both themes
-10. ✅ Related tools section is properly themed
-11. ✅ All result sections have proper semantic headings (h2/h3)
+10. ✅ **CRITICAL**: All Card components have proper padding (p-6 wrapper or CardContent)
+11. ✅ **CRITICAL**: Related Tools section uses Domain Checker pattern (NO custom colored backgrounds)
+12. ✅ All result sections have proper semantic headings (h2/h3)
 
 ## Examples from DMARC Policy Generator Fix
 
@@ -663,7 +860,7 @@ className =
 - ✅ DMARC Domain Checker (/tools/dmarc-domain-checker) - Updated button to homepage style + label spacing and semantic heading fix
 - ✅ DMARC Subdomain Policy Checker (/tools/dmarc-subdomain-policy-checker) - Updated button to homepage style
 - ✅ SPF Surveyor (/tools/spf-surveyor) - Updated button from solid bg-primary to homepage gradient style
-- ✅ DKIM Validator (/tools/dkim-validator) - Updated button from solid bg-primary to homepage gradient style
+- ✅ DKIM Validator (/tools/dkim-validator) - Comprehensive fix: replaced 32+ hardcoded colors with theme variables, fixed broken score card layout, added p-6 padding to all result cards, replaced Related Tools with Domain Checker pattern, reduced alert padding, added semantic headings
 - ✅ DKIM Inspector (/tools/dkim-inspector) - Updated button from solid bg-primary to homepage gradient style
 - ✅ Domain Security Checker (/tools/domain-security-checker) - Updated button from solid bg-primary to homepage gradient style
 - ✅ DMARC Policy Impact Simulator (/tools/dmarc-policy-impact-simulator) - Fixed 19 hardcoded colors + standardized status colors + fixed critical DMARC logic bug
@@ -933,3 +1130,245 @@ reader.onload = (ev) => {
 - Clear helper text ("Select a policy to...") guides users
 - Real-time updates feel more responsive than click-to-submit flows
 - Remove unnecessary manual steps - if we can auto-parse safely, do it!
+
+## DKIM Validator Notes
+
+**Fixed:** January 2025
+
+The DKIM Validator page required comprehensive theme and layout fixes that uncovered critical issues with Card padding and Related Tools consistency.
+
+### Fixes Applied:
+
+**1. Theme Color Replacements (32+ instances):**
+
+All hardcoded colors replaced with semantic theme variables:
+
+**Sidebar (lines 295-314):**
+
+```jsx
+// BEFORE
+<h3 className="text-sm font-medium text-gray-900">About DKIM</h3>
+<p className="mt-2 text-sm text-gray-500">DKIM adds...</p>
+<code className="text-primary rounded bg-gray-100 px-1.5 py-0.5">v=</code>
+
+// AFTER
+<h3 className="text-sm font-medium text-foreground">About DKIM</h3>
+<p className="mt-2 text-sm text-muted-foreground">DKIM adds...</p>
+<code className="text-primary rounded bg-muted px-1.5 py-0.5">v=</code>
+```
+
+**Status Colors in Data Structures (lines 75-106):**
+
+```jsx
+// BEFORE - Hardcoded green/red/yellow
+dots.push({ color: "bg-green-500", label: "Valid DKIM version" });
+dots.push({ color: "bg-red-500", label: "Invalid DKIM version" });
+dots.push({ color: "bg-yellow-500", label: "Testing mode enabled" });
+
+// AFTER - Semantic theme colors
+dots.push({ color: "bg-success", label: "Valid DKIM version" });
+dots.push({ color: "bg-destructive", label: "Invalid DKIM version" });
+dots.push({ color: "bg-warning", label: "Testing mode enabled" });
+```
+
+**Warning/Alert Boxes (lines 127-148):**
+
+```jsx
+// BEFORE
+icon: <FaTimesCircle className="h-4 w-4 text-red-500" />,
+color: "text-red-700 bg-red-50 border-red-200",
+
+// AFTER
+icon: <FaTimesCircle className="h-4 w-4 text-destructive" />,
+color: "text-destructive bg-destructive/10 border-destructive/20",
+```
+
+**Input Fields (lines 345, 351):**
+
+```jsx
+// BEFORE
+<FaFileAlt className="h-5 w-5 text-gray-400" />
+className="... border-gray-200 ..."
+
+// AFTER
+<FaFileAlt className="h-5 w-5 text-muted-foreground" />
+className="... border-border ..."
+```
+
+**2. CRITICAL: Score Card Layout Fix (lines 405-431):**
+
+**Problem:** Rating dots were positioned to the LEFT of the heading due to nested flex structure, creating a confusing visual hierarchy.
+
+```jsx
+// BEFORE - BROKEN LAYOUT
+<Card>
+  <div className="mb-6 flex items-center justify-between">
+    <div className="flex items-center gap-4">
+      <div className="flex items-center gap-1">{/* dots on left */}</div>
+      <div><h3>Score</h3></div>
+    </div>
+    <div className="text-3xl">70%</div>
+  </div>
+</Card>
+
+// AFTER - FIXED LAYOUT
+<Card>
+  <div className="p-6">
+    <div className="flex items-center justify-between">
+      <div>
+        <h3 className="font-medium text-foreground">Score</h3>
+        <p className="text-sm text-muted-foreground mt-1">Based on...</p>
+        <div className="flex items-center gap-1 mt-2">{/* dots below */}</div>
+      </div>
+      <div className="text-primary text-3xl font-bold">70%</div>
+    </div>
+  </div>
+</Card>
+```
+
+**3. CRITICAL: Card Padding Fix (lines 405, 437, 459):**
+
+**Problem:** All three result cards (Score, Warnings, Recommendations) had NO padding - content was flush against card edges.
+
+**Root Cause:** The Card component (`/src/components/ui/Card.tsx`) only provides `rounded-lg border bg-card text-card-foreground shadow-sm` - NO padding is included.
+
+**Solution:** Wrapped all card content in `<div className="p-6">`:
+
+```jsx
+// Score Card
+<Card>
+  <div className="p-6">  {/* ← ADDED */}
+    <div className="flex items-center justify-between">...</div>
+  </div>
+</Card>
+
+// Warnings Card
+<Card>
+  <div className="p-6">  {/* ← ADDED */}
+    <h3 className="text-foreground mb-4 text-lg font-semibold">Warnings</h3>
+    <div className="space-y-3">...</div>
+  </div>
+</Card>
+
+// Recommendations Card
+<Card>
+  <div className="p-6">  {/* ← ADDED */}
+    <h3 className="text-foreground mb-4 text-lg font-semibold">Recommendations</h3>
+    <div className="space-y-4">...</div>
+  </div>
+</Card>
+```
+
+**4. Alert Box Padding Reduction (line 441):**
+
+**Problem:** Alert boxes had excessive padding, looking bloated compared to other tools.
+
+```jsx
+// BEFORE - Too much padding
+<div className="space-y-4">
+  <div className="flex items-start gap-3 rounded-lg p-3 ...">
+
+// AFTER - Tighter, cleaner
+<div className="space-y-3">
+  <div className="flex items-start gap-2.5 rounded-lg px-3 py-2.5 ...">
+```
+
+**5. CRITICAL: Related Tools Pattern Replacement (lines 479-541):**
+
+**Problem:** Page used custom colored card backgrounds (green-50, purple-50) with large icons and bottom border animations - inconsistent with other tools.
+
+**Solution:** Replaced with exact Domain Checker pattern:
+
+```jsx
+// BEFORE - Custom colored backgrounds
+<Link className="group border border-green-200 bg-green-50 p-5 ...">
+  <div className="flex items-start gap-4">
+    <div className="rounded-full bg-green-100 p-2">
+      <Mail className="text-primary h-6 w-6" />
+    </div>
+    <div>
+      <h3 className="text-lg font-semibold">SPF Surveyor</h3>
+      <p className="mt-1 text-sm">Validate SPF records</p>
+    </div>
+  </div>
+  <div className="bg-primary absolute bottom-0 left-0 h-1 w-0 ..."></div>
+</Link>
+
+// AFTER - Domain Checker pattern
+<Link className="group border-border/40 bg-card hover:border-primary/30 p-4 ...">
+  <div className="flex items-start gap-3">
+    <div className="bg-primary/10 flex-shrink-0 rounded-md p-2">
+      <Mail className="text-primary h-4 w-4" />
+    </div>
+    <div className="min-w-0 flex-1">
+      <h3 className="text-foreground group-hover:text-primary text-sm font-semibold">
+        SPF Surveyor
+      </h3>
+      <p className="text-muted-foreground mt-0.5 line-clamp-2 text-xs">
+        Validate and troubleshoot SPF records
+      </p>
+    </div>
+  </div>
+</Link>
+```
+
+**Key changes:**
+
+- `border-border/40 bg-card` instead of `border-green-200 bg-green-50`
+- `p-4` instead of `p-5`
+- `gap-3` instead of `gap-4`
+- `rounded-md` icon containers instead of `rounded-full`
+- `h-4 w-4` icons instead of `h-6 w-6`
+- `text-sm` titles instead of `text-lg`
+- `text-xs` descriptions instead of `text-sm`
+- Removed bottom border animation
+- Added `hover:border-primary/30 hover:shadow-lg`
+
+**6. Semantic Headings (lines 438, 460):**
+
+Added proper `<h3>` elements to Warnings and Recommendations sections for accessibility.
+
+**7. Code Cleanup:**
+
+Removed unused `getStatusColor` function (was 15 lines of dead code).
+
+**8. Label Spacing (line 340):**
+
+Added `mb-2 block` to DKIM Record label for proper spacing.
+
+### Results:
+
+- ✅ All 32+ hardcoded colors eliminated
+- ✅ Score card layout fixed - dots now below heading
+- ✅ All result cards have proper p-6 padding
+- ✅ Alert boxes have cleaner, tighter padding
+- ✅ Related Tools matches Domain Checker pattern exactly
+- ✅ Semantic headings added for accessibility
+- ✅ Perfect visibility in both light and dark modes
+- ✅ Tested with sample DKIM record - all sections render properly
+
+### Key Learnings:
+
+**1. Card Padding is NOT Optional:**
+
+- The base Card component has ZERO padding
+- ALWAYS wrap content in `<div className="p-6">` or use CardContent
+- This is a common mistake that makes cards look broken
+
+**2. Related Tools Must Be Consistent:**
+
+- Do NOT create custom colored backgrounds per tool
+- ALWAYS use the Domain Checker pattern exactly
+- Consistency across tools is critical for professional appearance
+
+**3. Layout Issues are Easy to Miss:**
+
+- Score card dots were on the wrong side for multiple commits
+- Always test the actual visual output, not just color themes
+- Chrome DevTools screenshots are essential for catching layout bugs
+
+**4. Status Colors in Data Structures:**
+
+- Don't just fix colors in JSX - check data arrays too
+- Rating dots, status indicators, etc. may use hardcoded colors in data
+- Search for `bg-green-`, `bg-red-`, `bg-yellow-` patterns in ALL code
