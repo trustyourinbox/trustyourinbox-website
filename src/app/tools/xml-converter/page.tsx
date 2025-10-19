@@ -373,29 +373,29 @@ export default function XMLConverterPage() {
                 className="border-primary/20 bg-secondary"
               >
                 <div
-                  className="flex cursor-pointer items-center gap-2"
+                  className="hover:bg-muted/50 flex cursor-pointer items-center gap-3 rounded-lg p-4 transition-colors"
                   onClick={() => toggleExpand(res.name)}
                 >
                   {expanded[res.name] ? (
-                    <FaChevronDown className="text-primary h-4 w-4" />
+                    <FaChevronDown className="text-primary h-5 w-5" />
                   ) : (
-                    <FaChevronRight className="text-primary h-4 w-4" />
+                    <FaChevronRight className="text-primary h-5 w-5" />
                   )}
-                  <span className="text-foreground font-semibold">
+                  <span className="text-foreground text-lg font-semibold">
                     {res.name}
                   </span>
                   {res.error ? (
-                    <span className="border-destructive/20 bg-destructive/10 text-destructive ml-2 rounded-full border px-2 py-0.5 text-xs font-semibold">
+                    <span className="border-destructive/20 bg-destructive/10 text-destructive ml-auto rounded-full border px-3 py-1 text-xs font-semibold">
                       Error
                     </span>
                   ) : (
-                    <span className="border-success/20 bg-success/10 text-success ml-2 rounded-full border px-2 py-0.5 text-xs font-semibold">
+                    <span className="border-success/20 bg-success/10 text-success ml-auto rounded-full border px-3 py-1 text-xs font-semibold">
                       Processed
                     </span>
                   )}
                 </div>
                 {expanded[res.name] && (
-                  <div className="mt-4">
+                  <div className="p-6 pt-0">
                     {res.error ? (
                       <Alert variant="error" title="Processing Error">
                         {res.error}
@@ -427,30 +427,35 @@ export default function XMLConverterPage() {
                           res.summary.records.length > 0 &&
                           (() => {
                             // Process disposition data
-                            const dispositionCounts: Record<string, number> =
-                              {};
+                            const dispositionCounts: Record<string, number> = {
+                              none: 0,
+                              quarantine: 0,
+                              reject: 0,
+                            };
                             res.summary.records.forEach((r: any) => {
                               const disp = r.disposition || "none";
                               dispositionCounts[disp] =
                                 (dispositionCounts[disp] || 0) +
                                 Number(r.count || 1);
                             });
-                            const dispositionData = Object.entries(
-                              dispositionCounts
-                            )
-                              .map(([name, value]) => ({
-                                name,
-                                value,
-                                fill:
-                                  name === "none"
-                                    ? "hsl(var(--success))"
-                                    : name === "quarantine"
-                                      ? "hsl(var(--warning))"
-                                      : name === "reject"
-                                        ? "hsl(var(--destructive))"
-                                        : "hsl(var(--primary))",
-                              }))
-                              .filter((item) => item.value > 0);
+
+                            const dispositionData = [
+                              {
+                                name: "Allowed",
+                                value: dispositionCounts.none,
+                                fill: "var(--color-success)",
+                              },
+                              {
+                                name: "Quarantined",
+                                value: dispositionCounts.quarantine,
+                                fill: "var(--color-warning)",
+                              },
+                              {
+                                name: "Rejected",
+                                value: dispositionCounts.reject,
+                                fill: "var(--color-destructive)",
+                              },
+                            ].filter((item) => item.value > 0);
 
                             // Process source IP data
                             const sourceCounts: Record<string, number> = {};
@@ -462,7 +467,11 @@ export default function XMLConverterPage() {
                             const sourceData = Object.entries(sourceCounts)
                               .sort((a, b) => b[1] - a[1])
                               .slice(0, 10)
-                              .map(([name, value]) => ({ name, value }));
+                              .map(([name, value]) => ({
+                                name,
+                                value,
+                                fill: "var(--color-primary)",
+                              }));
 
                             // Process DKIM/SPF data
                             let dkimPass = 0,
@@ -476,26 +485,27 @@ export default function XMLConverterPage() {
                               if (r.spf === "pass") spfPass += count;
                               else spfFail += count;
                             });
+
                             const dkimSpfData = [
                               {
                                 name: "DKIM Pass",
                                 value: dkimPass,
-                                fill: "hsl(var(--success))",
+                                fill: "var(--color-success)",
                               },
                               {
                                 name: "DKIM Fail",
                                 value: dkimFail,
-                                fill: "hsl(var(--destructive))",
+                                fill: "var(--color-destructive)",
                               },
                               {
                                 name: "SPF Pass",
                                 value: spfPass,
-                                fill: "hsl(var(--success))",
+                                fill: "var(--color-success)",
                               },
                               {
                                 name: "SPF Fail",
                                 value: spfFail,
-                                fill: "hsl(var(--destructive))",
+                                fill: "var(--color-destructive)",
                               },
                             ];
 
@@ -508,7 +518,7 @@ export default function XMLConverterPage() {
                                   </h3>
                                   <ChartContainer
                                     config={{ value: { label: "Messages" } }}
-                                    className="h-64 w-full"
+                                    className="h-[250px]"
                                   >
                                     <ResponsiveContainer
                                       width="100%"
@@ -551,7 +561,7 @@ export default function XMLConverterPage() {
                                   </h3>
                                   <ChartContainer
                                     config={{ value: { label: "Count" } }}
-                                    className="h-64 w-full"
+                                    className="h-[250px]"
                                   >
                                     <ResponsiveContainer
                                       width="100%"
@@ -585,10 +595,16 @@ export default function XMLConverterPage() {
                                         />
                                         <Bar
                                           dataKey="value"
-                                          fill="hsl(var(--primary))"
                                           radius={[4, 4, 0, 0]}
                                           animationDuration={800}
-                                        />
+                                        >
+                                          {sourceData.map((entry, index) => (
+                                            <Cell
+                                              key={`cell-${index}`}
+                                              fill={entry.fill}
+                                            />
+                                          ))}
+                                        </Bar>
                                       </BarChart>
                                     </ResponsiveContainer>
                                   </ChartContainer>
@@ -601,7 +617,7 @@ export default function XMLConverterPage() {
                                   </h3>
                                   <ChartContainer
                                     config={{ value: { label: "Count" } }}
-                                    className="h-64 w-full"
+                                    className="h-[250px]"
                                   >
                                     <ResponsiveContainer
                                       width="100%"
