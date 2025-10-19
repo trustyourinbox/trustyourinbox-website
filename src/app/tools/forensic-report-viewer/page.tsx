@@ -19,26 +19,6 @@ import { Shield, Mail, Key } from "lucide-react";
 import FAQSchema from "@/components/FAQSchema";
 import Link from "next/link";
 
-export const metadata = {
-  title: "DMARC Forensic Report Viewer: Analyze RUF Reports | TrustYourInbox",
-  description:
-    "View and analyze DMARC forensic reports (RUF) with our free tool. Upload RFC 6591 compliant reports to identify authentication failures, suspicious senders, and email security threats instantly.",
-  keywords: [
-    "DMARC forensic reports",
-    "RUF viewer",
-    "DMARC failure reports",
-    "RFC 6591 viewer",
-    "email authentication failures",
-    "DMARC RUF analyzer",
-  ],
-  openGraph: {
-    title: "DMARC Forensic Report Viewer: Analyze RUF Reports | TrustYourInbox",
-    description:
-      "View and analyze DMARC forensic reports. Upload RUF reports to identify authentication failures and security threats.",
-    type: "website",
-  },
-};
-
 interface ForensicReport {
   // Core Identification
   id: string;

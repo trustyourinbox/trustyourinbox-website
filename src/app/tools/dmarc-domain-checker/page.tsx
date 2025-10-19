@@ -21,27 +21,6 @@ import { DMARCStatus } from "@/components/ui/DMARCStatus";
 import FAQSchema from "@/components/FAQSchema";
 import Link from "next/link";
 
-export const metadata = {
-  title: "Free DMARC Checker: Lookup Domain Records Instantly | TrustYourInbox",
-  description:
-    "Check your domain's DMARC, SPF, and DKIM records instantly with our free tool. Get comprehensive email security analysis, policy recommendations, and compliance status in seconds.",
-  keywords: [
-    "DMARC checker",
-    "DMARC lookup",
-    "check DMARC record",
-    "domain email security",
-    "SPF DKIM DMARC checker",
-    "email authentication checker",
-  ],
-  openGraph: {
-    title:
-      "Free DMARC Checker: Lookup Domain Records Instantly | TrustYourInbox",
-    description:
-      "Check your domain's DMARC, SPF, and DKIM records instantly. Get comprehensive email security analysis and recommendations.",
-    type: "website",
-  },
-};
-
 type DMARCPolicy = "reject" | "quarantine" | "none" | "no-policy";
 
 function getStatusIcon(status: "success" | "warning" | "error") {

@@ -20,26 +20,6 @@ import { gunzipSync, unzipSync } from "fflate";
 import FAQSchema from "@/components/FAQSchema";
 import Link from "next/link";
 
-export const metadata = {
-  title: "DMARC Policy Impact Simulator: Test Policy Changes | TrustYourInbox",
-  description:
-    "Simulate DMARC policy changes before deployment with our free tool. Upload aggregate reports to see impact of p=quarantine or p=reject on email delivery. Prevent legitimate email blocking.",
-  keywords: [
-    "DMARC policy simulator",
-    "DMARC impact analysis",
-    "test DMARC policy",
-    "DMARC policy testing",
-    "quarantine vs reject impact",
-    "DMARC deployment simulator",
-  ],
-  openGraph: {
-    title:
-      "DMARC Policy Impact Simulator: Test Policy Changes | TrustYourInbox",
-    description:
-      "Simulate DMARC policy changes before deployment. See impact of p=quarantine or p=reject on email delivery.",
-    type: "website",
-  },
-};
 import {
   PieChart,
   Pie,

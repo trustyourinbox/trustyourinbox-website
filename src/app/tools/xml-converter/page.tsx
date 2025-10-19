@@ -29,28 +29,6 @@ import FAQSchema from "@/components/FAQSchema";
 import { Shield, Mail, Key, ArrowRight, BarChart2 } from "lucide-react";
 import Link from "next/link";
 
-export const metadata = {
-  title:
-    "DMARC XML to JSON Converter: Parse Aggregate Reports | TrustYourInbox",
-  description:
-    "Convert DMARC aggregate XML reports to JSON format instantly with our free tool. Parse RUA reports, analyze authentication results, and visualize email security data with interactive charts.",
-  keywords: [
-    "DMARC XML converter",
-    "XML to JSON converter",
-    "DMARC aggregate report parser",
-    "RUA XML parser",
-    "DMARC report converter",
-    "XML aggregate report tool",
-  ],
-  openGraph: {
-    title:
-      "DMARC XML to JSON Converter: Parse Aggregate Reports | TrustYourInbox",
-    description:
-      "Convert DMARC XML reports to JSON. Parse aggregate reports and analyze authentication results with interactive visualizations.",
-    type: "website",
-  },
-};
-
 const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
 const ACCEPTED_TYPES = [
   "application/xml",
