@@ -117,7 +117,7 @@ const guideCategories = [
         name: "Generating DKIM Keys",
         desc: "Create strong signatures",
         time: "7 min read",
-        href: "#",
+        href: "/guides/generating-dkim-keys",
       },
       {
         name: "DKIM Selector Strategy",
