@@ -71,6 +71,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const blogPosts = [
     "/blog/dmarc-compliance-requirements-2025",
     "/blog/pci-dss-dmarc-compliance-2025",
+    "/blog/implement-dmarc-large-organizations",
+    "/blog/dmarc-policy-comparison",
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
