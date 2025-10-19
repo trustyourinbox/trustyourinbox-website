@@ -426,14 +426,17 @@ export default function PricingPage() {
 
       {/* FAQ Section */}
       <section className="py-24">
-        <div className="container max-w-4xl">
+        <div className="container max-w-6xl">
           <div className="mb-12 text-center">
-            <h2 className="mb-4 text-4xl font-bold">
+            <h2 className="mb-3 text-2xl font-bold md:text-3xl">
               Frequently Asked Questions
             </h2>
+            <p className="text-muted-foreground text-sm">
+              Everything you need to know about our pricing
+            </p>
           </div>
 
-          <div className="space-y-6">
+          <div className="grid gap-4 md:grid-cols-2 md:gap-6">
             {[
               {
                 q: "Can I change plans later?",
@@ -458,10 +461,12 @@ export default function PricingPage() {
             ].map((faq, i) => (
               <div
                 key={i}
-                className="border-border bg-background rounded-md border p-6"
+                className="bg-card/30 border-border hover:bg-card/50 rounded-lg border p-4 transition-colors"
               >
-                <h3 className="mb-2 font-bold">{faq.q}</h3>
-                <p className="text-muted-foreground">{faq.a}</p>
+                <h3 className="mb-1.5 text-base font-semibold">{faq.q}</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">
+                  {faq.a}
+                </p>
               </div>
             ))}
           </div>
