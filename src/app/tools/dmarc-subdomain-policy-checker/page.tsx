@@ -4,7 +4,29 @@ import { ToolLayout } from "@/components/ui/ToolLayout";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
+import FAQSchema from "@/components/FAQSchema";
 import Link from "next/link";
+
+export const metadata = {
+  title:
+    "DMARC Subdomain Policy Checker: Validate Subdomain Protection | TrustYourInbox",
+  description:
+    "Check if your subdomains are protected by DMARC policies. Validate subdomain-specific policies (sp=) and ensure comprehensive email security across your entire domain infrastructure.",
+  keywords: [
+    "DMARC subdomain policy",
+    "subdomain DMARC checker",
+    "sp= tag DMARC",
+    "subdomain email security",
+    "DMARC sp policy",
+  ],
+  openGraph: {
+    title:
+      "DMARC Subdomain Policy Checker: Validate Subdomain Protection | TrustYourInbox",
+    description:
+      "Check if your subdomains are protected by DMARC. Validate subdomain-specific policies and ensure comprehensive email security.",
+    type: "website",
+  },
+};
 import {
   Shield,
   Mail,
@@ -415,6 +437,87 @@ export default function DMARCSubdomainPolicyCheckerPage() {
           </div>
         </Card>
       )}
+
+      {/* FAQ Schema for SEO */}
+      <FAQSchema
+        faqs={[
+          {
+            question: "What is a DMARC subdomain policy?",
+            answer:
+              "A DMARC subdomain policy (sp=) is an optional tag in your DMARC record that specifies how email receivers should handle messages from your subdomains. If you don't set sp=, subdomains inherit the main domain's policy (p=). You can set sp=quarantine or sp=reject to enforce stricter policies on subdomains than your main domain.",
+          },
+          {
+            question: "Do subdomains need their own DMARC records?",
+            answer:
+              "No, subdomains don't need separate DMARC records by default - they inherit the policy from the main domain's DMARC record at _dmarc.example.com. However, you can publish specific DMARC records for individual subdomains at _dmarc.subdomain.example.com if you need different policies. The sp= tag in your main record sets a default policy for all subdomains.",
+          },
+          {
+            question: "What does sp= mean in DMARC?",
+            answer:
+              "sp= is the subdomain policy tag in DMARC that defines how email receivers should treat messages from your subdomains when authentication fails. Valid values are sp=none (monitor only), sp=quarantine (send to spam), or sp=reject (block completely). If sp= is not specified, subdomains use the same policy as p= (the main domain policy).",
+          },
+          {
+            question: "How do I protect subdomains with DMARC?",
+            answer:
+              "To protect subdomains, add the sp= tag to your main domain's DMARC record. For example: 'v=DMARC1; p=quarantine; sp=reject' applies quarantine to the main domain but reject to all subdomains. Alternatively, publish individual DMARC records for specific subdomains at _dmarc.subdomain.example.com. Our tool checks both approaches.",
+          },
+          {
+            question: "Why are subdomains vulnerable without DMARC?",
+            answer:
+              "Subdomains without DMARC protection can be exploited for phishing attacks. Attackers often use subdomains like 'secure.yourcompany.com' or 'support.yourcompany.com' to impersonate your organization because users trust any @yourcompany.com address. Even if your main domain has DMARC p=reject, subdomains may only have p=none unless you explicitly set sp=reject.",
+          },
+        ]}
+      />
+
+      {/* FAQ Display Section */}
+      <div className="mt-8 mb-8">
+        <div className="mb-4">
+          <h2 className="text-foreground text-xl font-bold tracking-tight">
+            Frequently Asked Questions
+          </h2>
+          <p className="text-muted-foreground mt-1 text-sm">
+            Common questions about DMARC subdomain policies
+          </p>
+        </div>
+
+        <div className="space-y-4">
+          <details className="border-border bg-card group rounded-lg border p-4">
+            <summary className="text-foreground cursor-pointer text-sm font-semibold">
+              What is a DMARC subdomain policy?
+            </summary>
+            <p className="text-muted-foreground mt-2 text-sm">
+              A DMARC subdomain policy (sp=) specifies how receivers should
+              handle messages from your subdomains. If not set, subdomains
+              inherit the main domain&apos;s policy (p=). You can set stricter
+              policies for subdomains.
+            </p>
+          </details>
+
+          <details className="border-border bg-card group rounded-lg border p-4">
+            <summary className="text-foreground cursor-pointer text-sm font-semibold">
+              Do subdomains need their own DMARC records?
+            </summary>
+            <p className="text-muted-foreground mt-2 text-sm">
+              No, by default subdomains inherit the main domain&apos;s policy.
+              You can publish specific records for individual subdomains at
+              _dmarc.subdomain.example.com if needed, or use sp= tag for all
+              subdomains.
+            </p>
+          </details>
+
+          <details className="border-border bg-card group rounded-lg border p-4">
+            <summary className="text-foreground cursor-pointer text-sm font-semibold">
+              Why are subdomains vulnerable without DMARC?
+            </summary>
+            <p className="text-muted-foreground mt-2 text-sm">
+              Attackers often use subdomains like
+              &apos;secure.yourcompany.com&apos; for phishing because users
+              trust any @yourcompany.com address. Without sp=reject, subdomains
+              may only have weak p=none protection.
+            </p>
+          </details>
+        </div>
+      </div>
 
       <div className="mt-8 mb-8">
         <div className="mb-4">

@@ -18,7 +18,29 @@ import {
 } from "lucide-react";
 import { ToolLayout, Button, Input, Card, Alert } from "@/components/ui";
 import { DMARCStatus } from "@/components/ui/DMARCStatus";
+import FAQSchema from "@/components/FAQSchema";
 import Link from "next/link";
+
+export const metadata = {
+  title: "Free DMARC Checker: Lookup Domain Records Instantly | TrustYourInbox",
+  description:
+    "Check your domain's DMARC, SPF, and DKIM records instantly with our free tool. Get comprehensive email security analysis, policy recommendations, and compliance status in seconds.",
+  keywords: [
+    "DMARC checker",
+    "DMARC lookup",
+    "check DMARC record",
+    "domain email security",
+    "SPF DKIM DMARC checker",
+    "email authentication checker",
+  ],
+  openGraph: {
+    title:
+      "Free DMARC Checker: Lookup Domain Records Instantly | TrustYourInbox",
+    description:
+      "Check your domain's DMARC, SPF, and DKIM records instantly. Get comprehensive email security analysis and recommendations.",
+    type: "website",
+  },
+};
 
 type DMARCPolicy = "reject" | "quarantine" | "none" | "no-policy";
 
@@ -689,6 +711,87 @@ export default function DMARCDomainCheckerPage() {
           </div>
         </div>
       )}
+
+      {/* FAQ Schema for SEO */}
+      <FAQSchema
+        faqs={[
+          {
+            question: "How do I check my DMARC record?",
+            answer:
+              "You can check your DMARC record using our free DMARC Domain Checker tool above. Simply enter your domain name (e.g., example.com), and we'll automatically query your DNS records at _dmarc.yourdomain.com to retrieve your DMARC policy, along with SPF and DKIM configurations. Results appear instantly with a security grade and specific recommendations.",
+          },
+          {
+            question: "What is a DMARC lookup?",
+            answer:
+              "A DMARC lookup is a DNS query that retrieves the DMARC TXT record published at _dmarc.yourdomain.com. This record contains your DMARC policy (none, quarantine, or reject), reporting email addresses (rua/ruf), alignment modes, and other configuration settings. Our tool performs this lookup automatically and presents the results in an easy-to-understand format.",
+          },
+          {
+            question: "Why does my domain have no DMARC record?",
+            answer:
+              "If your domain has no DMARC record, it means you haven't published a DMARC policy in your DNS. This leaves your domain vulnerable to email spoofing and phishing attacks. To fix this, use our DMARC Policy Generator to create a record, then publish it as a TXT record at _dmarc.yourdomain.com in your DNS settings. Start with p=none to monitor without affecting email delivery.",
+          },
+          {
+            question: "What's the difference between DMARC, SPF, and DKIM?",
+            answer:
+              "DMARC, SPF, and DKIM work together for email security. SPF lists authorized IP addresses that can send email for your domain. DKIM adds cryptographic signatures to verify message authenticity. DMARC builds on both by telling receivers what to do when SPF or DKIM fails (none/quarantine/reject) and provides reporting. Our checker validates all three protocols simultaneously.",
+          },
+          {
+            question: "How often should I check my DMARC record?",
+            answer:
+              "Check your DMARC record whenever you change email providers, add new sending services, modify SPF/DKIM settings, or update your DMARC policy. For continuous protection, use our automated monitoring platform instead of manual checks - you'll get real-time alerts when issues arise, policy changes are detected, or authentication failures occur.",
+          },
+        ]}
+      />
+
+      {/* FAQ Display Section */}
+      <div className="mt-8 mb-8">
+        <div className="mb-4">
+          <h2 className="text-foreground text-xl font-bold tracking-tight">
+            Frequently Asked Questions
+          </h2>
+          <p className="text-muted-foreground mt-1 text-sm">
+            Common questions about DMARC lookups and domain checking
+          </p>
+        </div>
+
+        <div className="space-y-4">
+          <details className="border-border bg-card group rounded-lg border p-4">
+            <summary className="text-foreground cursor-pointer text-sm font-semibold">
+              How do I check my DMARC record?
+            </summary>
+            <p className="text-muted-foreground mt-2 text-sm">
+              Enter your domain name in our free tool above. We&apos;ll
+              automatically query your DNS at _dmarc.yourdomain.com and show
+              your DMARC, SPF, and DKIM records with a security grade and
+              recommendations.
+            </p>
+          </details>
+
+          <details className="border-border bg-card group rounded-lg border p-4">
+            <summary className="text-foreground cursor-pointer text-sm font-semibold">
+              Why does my domain have no DMARC record?
+            </summary>
+            <p className="text-muted-foreground mt-2 text-sm">
+              No DMARC record means you haven&apos;t published a DMARC policy in
+              DNS. This leaves your domain vulnerable to spoofing. Use our DMARC
+              Policy Generator to create a record, then publish it at
+              _dmarc.yourdomain.com.
+            </p>
+          </details>
+
+          <details className="border-border bg-card group rounded-lg border p-4">
+            <summary className="text-foreground cursor-pointer text-sm font-semibold">
+              What&apos;s the difference between DMARC, SPF, and DKIM?
+            </summary>
+            <p className="text-muted-foreground mt-2 text-sm">
+              SPF lists authorized sending IPs, DKIM adds cryptographic
+              signatures, and DMARC tells receivers what to do when
+              authentication fails. Our checker validates all three
+              simultaneously.
+            </p>
+          </details>
+        </div>
+      </div>
 
       {/* Related Tools */}
       <RelatedTools />

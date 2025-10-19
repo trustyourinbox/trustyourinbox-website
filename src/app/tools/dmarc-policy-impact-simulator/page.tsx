@@ -17,7 +17,29 @@ import {
   Key,
 } from "lucide-react";
 import { gunzipSync, unzipSync } from "fflate";
+import FAQSchema from "@/components/FAQSchema";
 import Link from "next/link";
+
+export const metadata = {
+  title: "DMARC Policy Impact Simulator: Test Policy Changes | TrustYourInbox",
+  description:
+    "Simulate DMARC policy changes before deployment with our free tool. Upload aggregate reports to see impact of p=quarantine or p=reject on email delivery. Prevent legitimate email blocking.",
+  keywords: [
+    "DMARC policy simulator",
+    "DMARC impact analysis",
+    "test DMARC policy",
+    "DMARC policy testing",
+    "quarantine vs reject impact",
+    "DMARC deployment simulator",
+  ],
+  openGraph: {
+    title:
+      "DMARC Policy Impact Simulator: Test Policy Changes | TrustYourInbox",
+    description:
+      "Simulate DMARC policy changes before deployment. See impact of p=quarantine or p=reject on email delivery.",
+    type: "website",
+  },
+};
 import {
   PieChart,
   Pie,
@@ -848,6 +870,87 @@ export default function DmarcPolicyImpactSimulator() {
             </ul>
           </Card>
         )}
+
+        {/* FAQ Schema for SEO */}
+        <FAQSchema
+          faqs={[
+            {
+              question: "What is a DMARC policy impact simulator?",
+              answer:
+                "A DMARC policy impact simulator shows how changing your DMARC policy (from p=none to p=quarantine or p=reject) would affect your email delivery. Upload your DMARC aggregate reports, select a policy, and see which emails would be quarantined or rejected. This prevents accidentally blocking legitimate email when enforcing stricter policies.",
+            },
+            {
+              question: "Should I use p=quarantine or p=reject?",
+              answer:
+                "Start with p=none to monitor authentication without affecting delivery. After 2-4 weeks of analysis, move to p=quarantine (sends failures to spam). Once confident all legitimate sources pass DMARC, implement p=reject (blocks failures completely) for maximum protection. Use our simulator to predict impact before changing policies.",
+            },
+            {
+              question: "How do I test DMARC policy changes safely?",
+              answer:
+                "Use our DMARC Policy Impact Simulator to test policy changes before deployment. Upload your aggregate reports, simulate different policies (none/quarantine/reject), and see exact impact on message delivery. The tool shows which source IPs and email volumes would be affected, helping you identify configuration issues before they block legitimate email.",
+            },
+            {
+              question: "What happens if I set DMARC to p=reject too early?",
+              answer:
+                "Setting p=reject before fixing SPF/DKIM issues will cause receiving servers to block legitimate emails from your domain. This breaks email delivery from third-party services, forwarding addresses, or misconfigured mail servers. Always start with p=none, analyze reports for 2-4 weeks, fix authentication issues, then gradually move to quarantine and finally reject.",
+            },
+            {
+              question:
+                "How long should I monitor before changing DMARC policy?",
+              answer:
+                "Monitor at p=none for at least 2-4 weeks to capture all email sending patterns (monthly newsletters, quarterly reports, etc.). Analyze aggregate reports to ensure all legitimate senders pass SPF/DKIM. Use our simulator to verify impact before moving to p=quarantine. Monitor quarantine for another 2-4 weeks before implementing p=reject for complete protection.",
+            },
+          ]}
+        />
+
+        {/* FAQ Display Section */}
+        <div className="mt-8 mb-8">
+          <div className="mb-4">
+            <h2 className="text-foreground text-xl font-bold tracking-tight">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-muted-foreground mt-1 text-sm">
+              Common questions about DMARC policy simulation
+            </p>
+          </div>
+
+          <div className="space-y-4">
+            <details className="border-border bg-card group rounded-lg border p-4">
+              <summary className="text-foreground cursor-pointer text-sm font-semibold">
+                What is a DMARC policy impact simulator?
+              </summary>
+              <p className="text-muted-foreground mt-2 text-sm">
+                A tool that shows how changing your DMARC policy affects email
+                delivery. Upload aggregate reports, select a policy, and see
+                which emails would be quarantined or rejected. Prevents blocking
+                legitimate email.
+              </p>
+            </details>
+
+            <details className="border-border bg-card group rounded-lg border p-4">
+              <summary className="text-foreground cursor-pointer text-sm font-semibold">
+                Should I use p=quarantine or p=reject?
+              </summary>
+              <p className="text-muted-foreground mt-2 text-sm">
+                Start with p=none (monitor). After 2-4 weeks, move to
+                p=quarantine (spam). Once all legitimate sources pass, use
+                p=reject (block) for maximum protection. Simulate impact before
+                changing.
+              </p>
+            </details>
+
+            <details className="border-border bg-card group rounded-lg border p-4">
+              <summary className="text-foreground cursor-pointer text-sm font-semibold">
+                How long should I monitor before changing policy?
+              </summary>
+              <p className="text-muted-foreground mt-2 text-sm">
+                Monitor at p=none for 2-4 weeks minimum to capture all sending
+                patterns. Ensure all legitimate senders pass SPF/DKIM. Monitor
+                p=quarantine for another 2-4 weeks before p=reject.
+              </p>
+            </details>
+          </div>
+        </div>
 
         {/* Related Tools */}
         <div className="mt-8 mb-8">

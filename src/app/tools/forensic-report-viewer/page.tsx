@@ -16,7 +16,28 @@ import {
   FaSyncAlt,
 } from "react-icons/fa";
 import { Shield, Mail, Key } from "lucide-react";
+import FAQSchema from "@/components/FAQSchema";
 import Link from "next/link";
+
+export const metadata = {
+  title: "DMARC Forensic Report Viewer: Analyze RUF Reports | TrustYourInbox",
+  description:
+    "View and analyze DMARC forensic reports (RUF) with our free tool. Upload RFC 6591 compliant reports to identify authentication failures, suspicious senders, and email security threats instantly.",
+  keywords: [
+    "DMARC forensic reports",
+    "RUF viewer",
+    "DMARC failure reports",
+    "RFC 6591 viewer",
+    "email authentication failures",
+    "DMARC RUF analyzer",
+  ],
+  openGraph: {
+    title: "DMARC Forensic Report Viewer: Analyze RUF Reports | TrustYourInbox",
+    description:
+      "View and analyze DMARC forensic reports. Upload RUF reports to identify authentication failures and security threats.",
+    type: "website",
+  },
+};
 
 interface ForensicReport {
   // Core Identification
@@ -519,6 +540,94 @@ async function processFile(file: File): Promise<ForensicReport[]> {
 
 function getFileIcon(type: string) {
   return <FaFileAlt className="text-primary h-5 w-5" />;
+}
+
+function FAQSection() {
+  return (
+    <>
+      {/* FAQ Schema for SEO */}
+      <FAQSchema
+        faqs={[
+          {
+            question: "What are DMARC forensic reports?",
+            answer:
+              "DMARC forensic reports (also called failure reports or RUF) are individual email samples sent when a message fails DMARC authentication. Unlike aggregate reports which summarize daily statistics, forensic reports contain actual message headers and details about specific authentication failures. They help you identify spoofing attempts, misconfigurations, or unauthorized senders in real-time.",
+          },
+          {
+            question: "What is the difference between RUA and RUF reports?",
+            answer:
+              "RUA (aggregate reports) provide daily XML summaries of all authentication results across your email traffic - they're essential for monitoring trends. RUF (forensic reports) send individual failure samples with actual message details - they're optional and contain sensitive data. Most organizations use only RUA because RUF can include email content and raise privacy concerns.",
+          },
+          {
+            question: "How do I view DMARC forensic reports?",
+            answer:
+              "Use our free Forensic Report Viewer tool above. Upload the RFC 6591 compliant report file you received via email at your ruf= address. The tool parses the report to show authentication failure details, source IP, headers, SPF/DKIM results, and recommendations. We support standard DMARC forensic report formats including AFRF (Authentication Failure Reporting Format).",
+          },
+          {
+            question: "Should I enable DMARC forensic reporting?",
+            answer:
+              "DMARC forensic reporting (ruf=) is optional and has privacy implications since reports may contain email content. Enable it only if you need detailed failure analysis and have proper data handling procedures. Many receivers don't send RUF due to privacy concerns. Aggregate reports (rua=) are sufficient for most organizations and don't have the same privacy issues.",
+          },
+          {
+            question:
+              "What does an authentication failure in a forensic report mean?",
+            answer:
+              "An authentication failure means an email claiming to be from your domain failed SPF, DKIM, or DMARC checks. Common causes include: legitimate services not authorized in SPF, missing DKIM signatures, email forwarding breaking authentication, or actual spoofing attempts. Our viewer identifies the specific failure type (SPF fail, DKIM fail, alignment fail) and provides remediation steps.",
+          },
+        ]}
+      />
+
+      {/* FAQ Display Section */}
+      <div className="mt-8 mb-8">
+        <div className="mb-4">
+          <h2 className="text-foreground text-xl font-bold tracking-tight">
+            Frequently Asked Questions
+          </h2>
+          <p className="text-muted-foreground mt-1 text-sm">
+            Common questions about DMARC forensic reports
+          </p>
+        </div>
+
+        <div className="space-y-4">
+          <details className="border-border bg-card group rounded-lg border p-4">
+            <summary className="text-foreground cursor-pointer text-sm font-semibold">
+              What are DMARC forensic reports?
+            </summary>
+            <p className="text-muted-foreground mt-2 text-sm">
+              DMARC forensic reports (RUF) are individual email samples sent
+              when authentication fails. Unlike aggregate reports, they contain
+              actual message headers and help identify spoofing or
+              misconfigurations in real-time.
+            </p>
+          </details>
+
+          <details className="border-border bg-card group rounded-lg border p-4">
+            <summary className="text-foreground cursor-pointer text-sm font-semibold">
+              What is the difference between RUA and RUF reports?
+            </summary>
+            <p className="text-muted-foreground mt-2 text-sm">
+              RUA provides daily summaries (essential for monitoring). RUF sends
+              individual failure samples with message details (optional,
+              contains sensitive data). Most use only RUA due to privacy
+              concerns.
+            </p>
+          </details>
+
+          <details className="border-border bg-card group rounded-lg border p-4">
+            <summary className="text-foreground cursor-pointer text-sm font-semibold">
+              Should I enable DMARC forensic reporting?
+            </summary>
+            <p className="text-muted-foreground mt-2 text-sm">
+              Forensic reporting (ruf=) is optional with privacy implications.
+              Enable only if you need detailed failure analysis and have proper
+              data handling. Aggregate reports (rua=) are sufficient for most
+              organizations.
+            </p>
+          </details>
+        </div>
+      </div>
+    </>
+  );
 }
 
 function RelatedTools() {
@@ -1795,6 +1904,7 @@ export default function ForensicReportViewerPage() {
             </Card>
           </>
         )}
+        <FAQSection />
         <RelatedTools />
       </div>
     </ToolLayout>

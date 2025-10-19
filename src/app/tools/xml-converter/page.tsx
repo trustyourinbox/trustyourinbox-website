@@ -25,8 +25,31 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/Chart";
 import { ToolLayout, Card, Button, Input, Alert } from "@/components/ui";
+import FAQSchema from "@/components/FAQSchema";
 import { Shield, Mail, Key, ArrowRight, BarChart2 } from "lucide-react";
 import Link from "next/link";
+
+export const metadata = {
+  title:
+    "DMARC XML to JSON Converter: Parse Aggregate Reports | TrustYourInbox",
+  description:
+    "Convert DMARC aggregate XML reports to JSON format instantly with our free tool. Parse RUA reports, analyze authentication results, and visualize email security data with interactive charts.",
+  keywords: [
+    "DMARC XML converter",
+    "XML to JSON converter",
+    "DMARC aggregate report parser",
+    "RUA XML parser",
+    "DMARC report converter",
+    "XML aggregate report tool",
+  ],
+  openGraph: {
+    title:
+      "DMARC XML to JSON Converter: Parse Aggregate Reports | TrustYourInbox",
+    description:
+      "Convert DMARC XML reports to JSON. Parse aggregate reports and analyze authentication results with interactive visualizations.",
+    type: "website",
+  },
+};
 
 const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
 const ACCEPTED_TYPES = [
@@ -46,6 +69,91 @@ function getFileIcon(type: string) {
   if (type.includes("gzip"))
     return <FaFileAlt className="text-success h-5 w-5" />;
   return <FaFileAlt className="text-muted-foreground h-5 w-5" />;
+}
+
+function FAQSection() {
+  return (
+    <>
+      {/* FAQ Schema for SEO */}
+      <FAQSchema
+        faqs={[
+          {
+            question: "How do I convert DMARC XML reports to JSON?",
+            answer:
+              "Use our free XML Converter tool above. Upload your DMARC aggregate report XML file (or .gz/.zip compressed file), and we'll instantly convert it to JSON format. The tool parses the XML structure, extracts all authentication data, and presents it as readable JSON with visualizations showing dispositions, source IPs, SPF/DKIM results, and trends.",
+          },
+          {
+            question: "What are DMARC aggregate reports?",
+            answer:
+              "DMARC aggregate reports (RUA) are daily XML files sent by email receivers showing authentication results for your domain. They include statistics on passed/failed messages, source IPs, SPF/DKIM alignment, and dispositions (none/quarantine/reject). These reports help you monitor email authentication, identify legitimate senders, and detect spoofing attempts.",
+          },
+          {
+            question: "Why convert DMARC XML to JSON?",
+            answer:
+              "DMARC aggregate reports arrive as XML files which are difficult to read manually. Converting to JSON makes the data more accessible for analysis, visualization, and integration with other tools. JSON is easier to parse programmatically, query for specific information, and use with modern data analysis tools and dashboards.",
+          },
+          {
+            question: "Can I upload compressed DMARC reports?",
+            answer:
+              "Yes, our XML Converter accepts compressed files including .gz (gzip) and .zip formats. Most email providers send DMARC aggregate reports compressed to reduce size. Simply upload the compressed file directly - no need to extract it first. We automatically decompress and parse the XML content.",
+          },
+          {
+            question: "What information is in a DMARC aggregate report?",
+            answer:
+              "DMARC aggregate reports contain: reporting organization name and email, date range covered, your domain policy, source IP addresses sending email, message counts (total, passed, failed), SPF authentication results (pass/fail), DKIM authentication results (pass/fail), header From domain, disposition applied (none/quarantine/reject), and DMARC alignment status.",
+          },
+        ]}
+      />
+
+      {/* FAQ Display Section */}
+      <div className="mt-8 mb-8">
+        <div className="mb-4">
+          <h2 className="text-foreground text-xl font-bold tracking-tight">
+            Frequently Asked Questions
+          </h2>
+          <p className="text-muted-foreground mt-1 text-sm">
+            Common questions about DMARC XML conversion
+          </p>
+        </div>
+
+        <div className="space-y-4">
+          <details className="border-border bg-card group rounded-lg border p-4">
+            <summary className="text-foreground cursor-pointer text-sm font-semibold">
+              How do I convert DMARC XML reports to JSON?
+            </summary>
+            <p className="text-muted-foreground mt-2 text-sm">
+              Upload your DMARC aggregate XML file (or compressed .gz/.zip)
+              using our free tool above. We&apos;ll instantly convert it to JSON
+              with visualizations showing dispositions, IPs, and authentication
+              results.
+            </p>
+          </details>
+
+          <details className="border-border bg-card group rounded-lg border p-4">
+            <summary className="text-foreground cursor-pointer text-sm font-semibold">
+              What are DMARC aggregate reports?
+            </summary>
+            <p className="text-muted-foreground mt-2 text-sm">
+              DMARC aggregate reports (RUA) are daily XML files from email
+              receivers showing authentication statistics, source IPs, SPF/DKIM
+              results, and dispositions for your domain.
+            </p>
+          </details>
+
+          <details className="border-border bg-card group rounded-lg border p-4">
+            <summary className="text-foreground cursor-pointer text-sm font-semibold">
+              Why convert DMARC XML to JSON?
+            </summary>
+            <p className="text-muted-foreground mt-2 text-sm">
+              XML reports are hard to read manually. JSON makes data accessible
+              for analysis, visualization, and integration with tools. Easier to
+              parse and query programmatically.
+            </p>
+          </details>
+        </div>
+      </div>
+    </>
+  );
 }
 
 function RelatedTools() {
@@ -731,6 +839,7 @@ export default function XMLConverterPage() {
             ))}
           </div>
         )}
+        <FAQSection />
         <RelatedTools />
       </div>
     </ToolLayout>

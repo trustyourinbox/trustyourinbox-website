@@ -17,8 +17,30 @@ import { Buffer } from "buffer";
 // @ts-expect-error: asn1.js has no types
 import asn1 from "asn1.js";
 import { ToolLayout, Button, Input, Card, Alert } from "@/components/ui";
+import FAQSchema from "@/components/FAQSchema";
 import Link from "next/link";
 import { Shield, Mail, Key, ArrowRight, Globe } from "lucide-react";
+
+export const metadata = {
+  title: "DKIM Inspector: Analyze DKIM Records & Key Strength | TrustYourInbox",
+  description:
+    "Inspect and validate DKIM records with our free tool. Check key lengths, algorithm types, service types, and get detailed recommendations for optimal email authentication security.",
+  keywords: [
+    "DKIM inspector",
+    "DKIM record analyzer",
+    "DKIM key check",
+    "validate DKIM",
+    "DKIM key strength",
+    "email signature validation",
+  ],
+  openGraph: {
+    title:
+      "DKIM Inspector: Analyze DKIM Records & Key Strength | TrustYourInbox",
+    description:
+      "Inspect and validate DKIM records. Check key lengths, algorithms, and get detailed security recommendations.",
+    type: "website",
+  },
+};
 
 function parseDKIMRecord(record: string) {
   // Parse DKIM record into key-value pairs
@@ -633,6 +655,85 @@ export default function DKIMInspectorPage() {
           {error}
         </Alert>
       )}
+
+      {/* FAQ Schema for SEO */}
+      <FAQSchema
+        faqs={[
+          {
+            question: "What is DKIM and how does it work?",
+            answer:
+              "DKIM (DomainKeys Identified Mail) is an email authentication protocol that uses cryptographic signatures to verify email authenticity. When you send an email, your server adds a digital signature to the header using a private key. Receiving servers verify this signature using the public key published in your DNS at selector._domainkey.yourdomain.com. This proves the email wasn't altered in transit and came from an authorized server.",
+          },
+          {
+            question: "How do I inspect my DKIM record?",
+            answer:
+              "Use our free DKIM Inspector tool above. Enter your domain and DKIM selector (usually 'default', 'google', or 'k1'), and we'll retrieve your DKIM public key from DNS. The tool analyzes key length (should be 2048-bit), algorithm type (RSA recommended), service type, flags, and provides security recommendations based on best practices.",
+          },
+          {
+            question: "What is the recommended DKIM key length?",
+            answer:
+              "The recommended DKIM key length is 2048 bits for optimal security. Keys should be at least 1024 bits (minimum acceptable), but anything under 1024 bits is considered weak and may be rejected. While 4096-bit keys offer more security, they can cause DNS record size issues. 2048-bit provides the best balance of security and compatibility.",
+          },
+          {
+            question: "Can I have multiple DKIM selectors?",
+            answer:
+              "Yes, you can have multiple DKIM selectors for the same domain. This is useful when using multiple email services (e.g., 'google' for Google Workspace, 'sendgrid' for SendGrid, 'default' for your own server). Each selector points to a different public key at selector._domainkey.yourdomain.com. Our inspector can check any selector you specify.",
+          },
+          {
+            question: "What does DKIM key rotation mean?",
+            answer:
+              "DKIM key rotation is the security practice of periodically replacing your DKIM keys with new ones. This limits the damage if a private key is ever compromised. Best practice is to rotate keys every 6-12 months. When rotating, publish the new public key in DNS, configure your mail server to sign with the new private key, then remove the old key after propagation.",
+          },
+        ]}
+      />
+
+      {/* FAQ Display Section */}
+      <div className="mt-8 mb-8">
+        <div className="mb-4">
+          <h2 className="text-foreground text-xl font-bold tracking-tight">
+            Frequently Asked Questions
+          </h2>
+          <p className="text-muted-foreground mt-1 text-sm">
+            Common questions about DKIM inspection and validation
+          </p>
+        </div>
+
+        <div className="space-y-4">
+          <details className="border-border bg-card group rounded-lg border p-4">
+            <summary className="text-foreground cursor-pointer text-sm font-semibold">
+              What is DKIM and how does it work?
+            </summary>
+            <p className="text-muted-foreground mt-2 text-sm">
+              DKIM uses cryptographic signatures to verify email authenticity.
+              Your server adds a digital signature using a private key.
+              Receiving servers verify it using the public key published in DNS.
+            </p>
+          </details>
+
+          <details className="border-border bg-card group rounded-lg border p-4">
+            <summary className="text-foreground cursor-pointer text-sm font-semibold">
+              What is the recommended DKIM key length?
+            </summary>
+            <p className="text-muted-foreground mt-2 text-sm">
+              2048-bit keys are recommended. Minimum 1024-bit (anything under is
+              weak). 4096-bit offers more security but can cause DNS issues.
+              2048-bit is the best balance.
+            </p>
+          </details>
+
+          <details className="border-border bg-card group rounded-lg border p-4">
+            <summary className="text-foreground cursor-pointer text-sm font-semibold">
+              Can I have multiple DKIM selectors?
+            </summary>
+            <p className="text-muted-foreground mt-2 text-sm">
+              Yes, multiple selectors allow different email services to use
+              different keys (e.g., &apos;google&apos; for Google Workspace,
+              &apos;sendgrid&apos; for SendGrid). Our inspector can check any
+              selector.
+            </p>
+          </details>
+        </div>
+      </div>
 
       <div className="mt-8 mb-8">
         <div className="mb-4">
