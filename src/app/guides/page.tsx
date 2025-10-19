@@ -123,7 +123,7 @@ const guideCategories = [
         name: "DKIM Selector Strategy",
         desc: "Managing multiple selectors",
         time: "6 min read",
-        href: "#",
+        href: "/guides/dkim-selector-strategy",
       },
       {
         name: "DKIM Troubleshooting",
