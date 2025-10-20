@@ -92,6 +92,49 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.85,
   }));
 
+  // Guide pages (all 28 guides)
+  const guidePages = [
+    // Phase 1: Repurposed blog posts (2)
+    "/guides/what-is-dmarc",
+    "/guides/why-dmarc-matters",
+    // Phase 2: Foundational guides (8)
+    "/guides/dmarc-quick-start-guide",
+    "/guides/understanding-email-authentication",
+    "/guides/dmarc-policy-levels-explained",
+    "/guides/spf-record-basics",
+    "/guides/what-is-dkim",
+    "/guides/subdomain-dmarc-policies",
+    "/guides/moving-to-p-reject-safely",
+    "/guides/multi-tenant-dmarc",
+    // Phase 3: Technical guides (10)
+    "/guides/spf-include-chains",
+    "/guides/spf-10-dns-lookup-limit",
+    "/guides/spf-best-practices",
+    "/guides/generating-dkim-keys",
+    "/guides/dkim-selector-strategy",
+    "/guides/dkim-troubleshooting",
+    "/guides/third-party-email-services",
+    "/guides/dmarc-for-email-marketing",
+    // Phase 4: Advanced guides (6)
+    "/guides/understanding-dmarc-reports",
+    "/guides/reading-aggregate-reports",
+    "/guides/forensic-report-analysis",
+    "/guides/identifying-legitimate-senders",
+    "/guides/bimi-implementation",
+    "/guides/creating-your-first-dmarc-record",
+    // Phase 5: Pillar guides (2)
+    "/guides/complete-dmarc-implementation-guide",
+    "/guides/dmarc-reports-practical-guide",
+  ].map((route) => ({
+    url: `${baseUrl}${route}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority:
+      route.includes("complete-dmarc") || route.includes("practical-guide")
+        ? 0.9
+        : 0.85,
+  }));
+
   return [
     ...mainPages,
     ...solutionPages,
@@ -99,5 +142,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...resourcePages,
     ...blogPosts,
     ...comparisonPages,
+    ...guidePages,
   ];
 }

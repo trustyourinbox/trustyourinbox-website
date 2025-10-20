@@ -297,23 +297,27 @@ export default function GuidesPage() {
                   {
                     name: "Complete DMARC Implementation Guide",
                     desc: "Everything you need for full DMARC deployment",
+                    href: "/guides/complete-dmarc-implementation-guide",
                   },
                   {
                     name: "Fixing SPF 10 DNS Lookup Errors",
                     desc: "Common causes and solutions",
+                    href: "/guides/spf-10-dns-lookup-limit",
                   },
                   {
                     name: "DMARC Reports: A Practical Guide",
                     desc: "Make sense of aggregate and forensic reports",
+                    href: "/guides/dmarc-reports-practical-guide",
                   },
                   {
                     name: "Email Authentication for Beginners",
                     desc: "Start protecting your domain today",
+                    href: "/guides/understanding-email-authentication",
                   },
                 ].map((guide) => (
                   <Link
                     key={guide.name}
-                    href="#"
+                    href={guide.href}
                     className="group border-border bg-background hover:border-primary/30 flex items-start gap-4 rounded-lg border p-4 transition-all hover:shadow-md"
                   >
                     <CheckCircle className="text-primary mt-0.5 h-5 w-5 flex-shrink-0" />
