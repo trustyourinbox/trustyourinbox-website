@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useRef } from "react";
+import DOMPurify from "isomorphic-dompurify";
 import { ToolLayout } from "@/components/ui/ToolLayout";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
@@ -93,6 +94,16 @@ const ACCEPTED_TYPES = [
   "application/zip",
   "application/x-zip-compressed",
 ];
+
+/**
+ * Sanitize user-controlled report data to prevent XSS (CWE-79)
+ * Uses DOMPurify to strip potentially malicious HTML/JavaScript
+ */
+function sanitizeReportField(field: string | undefined): string {
+  if (!field) return "N/A";
+  // Strip all HTML tags and scripts, return plain text only
+  return DOMPurify.sanitize(field, { ALLOWED_TAGS: [] });
+}
 
 /**
  * Parse ARF (Abuse Reporting Format) MIME message per RFC 6591
@@ -1569,13 +1580,13 @@ export default function ForensicReportViewerPage() {
                                 ).toLocaleString()}
                               </td>
                               <td className="border-border bg-muted text-foreground border-r px-4 py-3 font-mono text-xs">
-                                {report.sourceIp}
+                                {sanitizeReportField(report.sourceIp)}
                               </td>
                               <td className="border-border border-r px-4 py-3 text-sm">
-                                {report.from}
+                                {sanitizeReportField(report.from)}
                               </td>
                               <td className="border-border border-r px-4 py-3 text-sm">
-                                {report.subject}
+                                {sanitizeReportField(report.subject)}
                               </td>
                               <td className="border-border border-r px-4 py-3">
                                 <span
@@ -1712,7 +1723,9 @@ export default function ForensicReportViewerPage() {
                                             User Agent:
                                           </dt>{" "}
                                           <dd className="inline font-mono text-[10px]">
-                                            {report.userAgent}
+                                            {sanitizeReportField(
+                                              report.userAgent
+                                            )}
                                           </dd>
                                         </div>
                                         <div>
@@ -1745,7 +1758,9 @@ export default function ForensicReportViewerPage() {
                                             Mail From:
                                           </dt>{" "}
                                           <dd className="inline">
-                                            {report.originalMailFrom}
+                                            {sanitizeReportField(
+                                              report.originalMailFrom
+                                            )}
                                           </dd>
                                         </div>
                                         <div>
@@ -1753,7 +1768,9 @@ export default function ForensicReportViewerPage() {
                                             Rcpt To:
                                           </dt>{" "}
                                           <dd className="inline">
-                                            {report.originalRcptTo}
+                                            {sanitizeReportField(
+                                              report.originalRcptTo
+                                            )}
                                           </dd>
                                         </div>
                                         <div>
@@ -1778,7 +1795,9 @@ export default function ForensicReportViewerPage() {
                                             Domain:
                                           </dt>{" "}
                                           <dd className="inline">
-                                            {report.dkimDomain || "N/A"}
+                                            {sanitizeReportField(
+                                              report.dkimDomain
+                                            )}
                                           </dd>
                                         </div>
                                         <div>
@@ -1786,7 +1805,9 @@ export default function ForensicReportViewerPage() {
                                             Selector:
                                           </dt>{" "}
                                           <dd className="inline">
-                                            {report.dkimSelector || "N/A"}
+                                            {sanitizeReportField(
+                                              report.dkimSelector
+                                            )}
                                           </dd>
                                         </div>
                                         <div>
@@ -1854,8 +1875,9 @@ export default function ForensicReportViewerPage() {
                                             Published:
                                           </dt>{" "}
                                           <dd className="inline font-mono text-[10px]">
-                                            {report.dmarcPolicyPublished ||
-                                              "N/A"}
+                                            {sanitizeReportField(
+                                              report.dmarcPolicyPublished
+                                            )}
                                           </dd>
                                         </div>
                                       </dl>
@@ -1867,7 +1889,9 @@ export default function ForensicReportViewerPage() {
                                         Authentication Results
                                       </h4>
                                       <pre className="text-muted-foreground bg-muted border-border overflow-x-auto rounded border p-2 font-mono text-[10px]">
-                                        {report.authenticationResults || "N/A"}
+                                        {sanitizeReportField(
+                                          report.authenticationResults
+                                        )}
                                       </pre>
                                     </div>
 
@@ -1878,7 +1902,9 @@ export default function ForensicReportViewerPage() {
                                           Message Headers (Preview)
                                         </h4>
                                         <pre className="text-muted-foreground bg-muted border-border overflow-x-auto rounded border p-2 font-mono text-[10px]">
-                                          {report.messageHeaders}
+                                          {sanitizeReportField(
+                                            report.messageHeaders
+                                          )}
                                         </pre>
                                       </div>
                                     )}

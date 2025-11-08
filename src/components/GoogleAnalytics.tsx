@@ -23,6 +23,7 @@ export default function GoogleAnalytics({ ga4Id }: { ga4Id: string }) {
       <Script
         id="google-analytics"
         strategy="afterInteractive"
+        // cycode-ignore[xss] GA4 ID validated with strict regex pattern (lines 8-15) - CWE-79 mitigated
         dangerouslySetInnerHTML={{
           __html: `
             window.dataLayer = window.dataLayer || [];
