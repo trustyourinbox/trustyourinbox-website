@@ -108,7 +108,8 @@ export default function BIMIImplementationPage() {
             <Card className="p-8">
               <div className="mb-6 flex items-center gap-3">
                 <div className="bg-primary/10 flex h-12 w-12 items-center justify-center rounded-lg">
-                  <Image className="text-primary h-6 w-6" />
+                  {/* eslint-disable-next-line jsx-a11y/alt-text */}
+                  <Image className="text-primary h-6 w-6" aria-hidden="true" />
                 </div>
                 <h2 className="text-3xl font-bold">What is BIMI?</h2>
               </div>
@@ -639,7 +640,11 @@ export default function BIMIImplementationPage() {
                 rel="noopener noreferrer"
                 className="border-border bg-background hover:border-primary/30 group rounded-lg border p-6 transition-all hover:shadow-lg"
               >
-                <Image className="text-primary mb-3 h-8 w-8" />
+                {/* eslint-disable-next-line jsx-a11y/alt-text */}
+                <Image
+                  className="text-primary mb-3 h-8 w-8"
+                  aria-hidden="true"
+                />
                 <h3 className="group-hover:text-primary mb-2 font-semibold transition-colors">
                   BIMI Inspector
                 </h3>

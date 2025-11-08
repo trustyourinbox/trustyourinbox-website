@@ -1,0 +1,14 @@
+{
+  "ignores": [
+    "@tailwindcss/postcss",
+    "tailwindcss",
+    "autoprefixer",
+    "postcss",
+    "prettier-plugin-tailwindcss"
+  ],
+  "ignore-patterns": [
+    "design",
+    ".next",
+    "node_modules"
+  ]
+}
