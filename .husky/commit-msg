@@ -1,0 +1,34 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Read the commit message
+commit_msg=$(cat "$1")
+
+# Conventional commit pattern
+# Types: feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert
+conventional_pattern='^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)(\([a-z0-9\-]+\))?: .{1,100}'
+
+# Check if message matches conventional commit format
+if ! echo "$commit_msg" | grep -Eq "$conventional_pattern"; then
+  echo "❌ Invalid commit message format!"
+  echo ""
+  echo "Commit message must follow Conventional Commits format:"
+  echo "  <type>[optional scope]: <description>"
+  echo ""
+  echo "Types: feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert"
+  echo ""
+  echo "Examples:"
+  echo "  feat: add new feature"
+  echo "  fix(api): resolve authentication bug"
+  echo "  docs: update README"
+  echo ""
+  echo "Your message:"
+  echo "  $commit_msg"
+  exit 1
+fi
+
+# Check message length (first line should be <= 100 chars)
+first_line=$(echo "$commit_msg" | head -n 1)
+if [ ${#first_line} -gt 100 ]; then
+  echo "⚠️  Warning: First line of commit message is ${#first_line} characters (recommended: <= 100)"
+fi

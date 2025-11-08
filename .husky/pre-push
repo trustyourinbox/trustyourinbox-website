@@ -1,0 +1,28 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "🔍 Running pre-push checks..."
+echo ""
+
+# Run type check
+echo "📘 Type checking..."
+npm run type-check || {
+  echo "❌ Type check failed. Please fix type errors before pushing."
+  exit 1
+}
+
+# Run build
+echo "🏗️  Building project..."
+npm run build || {
+  echo "❌ Build failed. Please fix build errors before pushing."
+  exit 1
+}
+
+# Run security audit
+echo "🔒 Running security audit..."
+npm audit --audit-level=high || {
+  echo "⚠️  Security vulnerabilities found. Consider running 'npm audit fix'."
+  echo "⚠️  Continuing with push, but please address vulnerabilities soon."
+}
+
+echo "✅ All pre-push checks passed!"

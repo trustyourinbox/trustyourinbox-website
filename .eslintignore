@@ -21,13 +21,6 @@ dist
 .env.test.local
 .env.production.local
 
-# Logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-lerna-debug.log*
-
 # Testing
 coverage
 .nyc_output
@@ -36,23 +29,23 @@ coverage
 .DS_Store
 *.pem
 
-# Debug
-.vscode
-.idea
-
 # Package manager files
 package-lock.json
 yarn.lock
 pnpm-lock.yaml
 
-# Public assets (don't format)
-public/**/*.svg
-public/**/*.png
-public/**/*.jpg
-public/**/*.jpeg
-public/**/*.gif
-public/**/*.ico
+# Public assets
+public
 
 # Generated files
 .contentlayer
 .next-env.d.ts
+
+# Config files
+next.config.js
+next.config.mjs
+next.config.ts
+postcss.config.js
+postcss.config.mjs
+tailwind.config.js
+tailwind.config.ts
