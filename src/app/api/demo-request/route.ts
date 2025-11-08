@@ -81,31 +81,27 @@ Submitted from TrustYourInbox Website
 
     // Send email via SendGrid
     const response = await sgMail.send(emailContent);
-    console.log("SendGrid success:", response[0]?.statusCode);
+
+    // Only log in development
+    if (process.env.NODE_ENV !== "production") {
+      console.log("SendGrid success:", response[0]?.statusCode);
+    }
 
     return NextResponse.json(
       { message: "Demo request submitted successfully" },
       { status: 200 }
     );
   } catch (error: any) {
-    console.error("Error sending demo request email:", error);
-    console.error("Error details:", error.message);
+    // Log generic error message only (CWE-532: Prevent information leakage)
+    console.error("Error sending demo request");
 
-    // Handle SendGrid specific errors
-    if (error.response) {
-      console.error(
-        "SendGrid error body:",
-        JSON.stringify(error.response.body, null, 2)
-      );
-      return NextResponse.json(
-        {
-          error: "Failed to send demo request. Please try again later.",
-          details: error.response.body,
-        },
-        { status: 500 }
-      );
+    // In development, log additional context (without sensitive data)
+    if (process.env.NODE_ENV !== "production") {
+      console.error("Error type:", error.code || "Unknown");
     }
 
+    // Never log error.response.body - may contain API keys or sensitive data
+    // Never expose internal error details to client
     return NextResponse.json(
       { error: "Failed to send demo request. Please try again later." },
       { status: 500 }

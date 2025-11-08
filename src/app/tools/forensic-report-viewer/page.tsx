@@ -117,36 +117,42 @@ function parseARFReport(content: string): ForensicReport | null {
     );
     const originalMessage = originalMessageMatch ? originalMessageMatch[1] : "";
 
+    // Helper function to escape special regex characters (CWE-400: ReDoS prevention)
+    const escapeRegExp = (str: string): string => {
+      return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    };
+
     // Parse key-value pairs from feedback report
     const extractField = (name: string): string | undefined => {
+      const escapedName = escapeRegExp(name);
       const match = feedbackReport.match(
-        new RegExp(`^${name}:\\s*(.+)$`, "mi")
+        new RegExp(`^${escapedName}:\\s*(.+)$`, "mi")
       );
       return match ? match[1].trim() : undefined;
     };
 
     // Parse multi-line Authentication-Results header
     const extractMultilineField = (name: string): string | undefined => {
+      const escapedName = escapeRegExp(name);
       const match = feedbackReport.match(
-        new RegExp(`^${name}:\\s*(.+?)(?=^[A-Z][a-z-]+:|$)`, "msi")
+        new RegExp(`^${escapedName}:\\s*(.+?)(?=^[A-Z][a-z-]+:|$)`, "msi")
       );
       return match ? match[1].replace(/\n\s+/g, " ").trim() : undefined;
     };
 
     // Extract fields from original message headers
     const extractHeaderField = (name: string): string | undefined => {
+      const escapedName = escapeRegExp(name);
       const match = originalMessage.match(
-        new RegExp(`^${name}:\\s*(.+)$`, "mi")
+        new RegExp(`^${escapedName}:\\s*(.+)$`, "mi")
       );
       return match ? match[1].trim() : undefined;
     };
 
-    // Generate a unique ID if not present
+    // Generate a unique ID if not present (CWE-330: Use cryptographically secure random)
     const envelopeId = extractField("Original-Envelope-Id");
     const timestamp = extractField("Arrival-Date") || new Date().toISOString();
-    const id =
-      envelopeId ||
-      `forensic-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+    const id = envelopeId || `forensic-${Date.now()}-${crypto.randomUUID()}`;
 
     // Parse all RFC 6591 fields
     const feedbackType = extractField("Feedback-Type") || "auth-failure";
@@ -261,7 +267,8 @@ function parseARFReport(content: string): ForensicReport | null {
       spf: spfResult,
     };
   } catch (error) {
-    console.error("Error parsing ARF report:", error);
+    // Log generic error (CWE-532: Prevent information leakage)
+    console.error("Error parsing ARF report");
     return null;
   }
 }
@@ -281,7 +288,8 @@ function parseXMLReport(content: string): ForensicReport[] {
     // Check for parsing errors
     const parserError = xmlDoc.querySelector("parsererror");
     if (parserError) {
-      console.error("XML parsing error:", parserError.textContent);
+      // Log generic error (CWE-532: Prevent information leakage)
+      console.error("XML parsing error");
       return reports;
     }
 
@@ -411,7 +419,8 @@ function parseXMLReport(content: string): ForensicReport[] {
 
     return reports;
   } catch (error) {
-    console.error("Error parsing XML report:", error);
+    // Log generic error (CWE-532: Prevent information leakage)
+    console.error("Error parsing XML report");
     return reports;
   }
 }
@@ -454,7 +463,8 @@ async function decompressFile(file: File): Promise<string | null> {
 
     return null;
   } catch (error) {
-    console.error("Error decompressing file:", error);
+    // Log generic error (CWE-532: Prevent information leakage)
+    console.error("Error decompressing file");
     return null;
   }
 }
@@ -487,7 +497,8 @@ async function processFile(file: File): Promise<ForensicReport[]> {
     if (fileName.endsWith(".gz") || fileName.endsWith(".zip")) {
       content = await decompressFile(file);
       if (!content) {
-        console.error("Failed to decompress file:", fileName);
+        // Log generic error (CWE-532: Prevent information leakage)
+        console.error("Failed to decompress file");
         return [];
       }
     } else {
@@ -511,11 +522,13 @@ async function processFile(file: File): Promise<ForensicReport[]> {
       const report = parseARFReport(content);
       return report ? [report] : [];
     } else {
-      console.error("Unknown file format:", fileName);
+      // Log generic error (CWE-532: Prevent information leakage)
+      console.error("Unknown file format");
       return [];
     }
   } catch (error) {
-    console.error("Error processing file:", error);
+    // Log generic error (CWE-532: Prevent information leakage)
+    console.error("Error processing file");
     return [];
   }
 }

@@ -111,7 +111,8 @@ export async function GET(request: Request) {
       dkim,
     });
   } catch (error) {
-    console.error("Error checking domain:", error);
+    // Log generic error message only (CWE-532: Prevent information leakage)
+    console.error("Error checking domain");
     return NextResponse.json(
       { error: "Failed to check domain records" },
       { status: 500 }
