@@ -1,11 +1,11 @@
 import { ReactNode } from "react";
 import { twMerge } from "tailwind-merge";
 import {
-  FaInfoCircle,
-  FaCheckCircle,
-  FaExclamationTriangle,
-  FaTimesCircle,
-} from "react-icons/fa";
+  Info,
+  CheckCircle,
+  AlertTriangle,
+  XCircle,
+} from "lucide-react";
 
 interface AlertProps {
   children: ReactNode;
@@ -22,19 +22,19 @@ export function Alert({
 }: AlertProps) {
   const variants = {
     info: {
-      icon: <FaInfoCircle className="h-5 w-5 text-primary/70" />,
+      icon: <Info className="h-5 w-5 text-primary/70" />,
       styles: "bg-secondary text-foreground border-primary/20",
     },
     success: {
-      icon: <FaCheckCircle className="h-5 w-5 text-green-400" />,
+      icon: <CheckCircle className="h-5 w-5 text-green-400" />,
       styles: "bg-green-50 text-green-800 border-green-200",
     },
     warning: {
-      icon: <FaExclamationTriangle className="h-5 w-5 text-yellow-400" />,
+      icon: <AlertTriangle className="h-5 w-5 text-yellow-400" />,
       styles: "bg-yellow-50 text-yellow-800 border-yellow-200",
     },
     error: {
-      icon: <FaTimesCircle className="h-5 w-5 text-red-400" />,
+      icon: <XCircle className="h-5 w-5 text-red-400" />,
       styles: "bg-red-50 text-red-800 border-red-200",
     },
   };
