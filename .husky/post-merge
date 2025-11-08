@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+# Check if package.json or package-lock.json changed
+changed_files="$(git diff-tree -r --name-only --no-commit-id ORIG_HEAD HEAD)"
+
+if echo "$changed_files" | grep --quiet "package-lock.json\|package.json"; then
+  echo "📦 Dependencies changed. Running npm install..."
+  npm install
+  echo "✅ Dependencies updated!"
+fi

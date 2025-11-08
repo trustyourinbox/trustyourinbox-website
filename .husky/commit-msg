@@ -1,5 +1,32 @@
 #!/usr/bin/env sh
 
+# Get current branch name
+branch=$(git rev-parse --abbrev-ref HEAD)
+
+# Allowed branch patterns (main, develop, or prefixed branches)
+# Prefixes: feat/, fix/, docs/, style/, refactor/, perf/, test/, build/, ci/, chore/, hotfix/, release/, upgrade/
+branch_pattern='^(main|develop|feat|fix|docs|style|refactor|perf|test|build|ci|chore|hotfix|release|upgrade)(/[a-z0-9\-]+)?$'
+
+# Skip branch validation for main, develop
+if [ "$branch" != "main" ] && [ "$branch" != "develop" ]; then
+  if ! echo "$branch" | grep -Eq "$branch_pattern"; then
+    echo "❌ Invalid branch name: $branch"
+    echo ""
+    echo "Branch names must follow the pattern:"
+    echo "  <type>/<description>"
+    echo ""
+    echo "Types: feat, fix, docs, style, refactor, perf, test, build, ci, chore, hotfix, release, upgrade"
+    echo ""
+    echo "Examples:"
+    echo "  feat/add-dark-mode"
+    echo "  fix/authentication-bug"
+    echo "  hotfix/critical-security-patch"
+    echo ""
+    echo "Or use: main, develop"
+    exit 1
+  fi
+fi
+
 # Read the commit message
 commit_msg=$(cat "$1")
 
