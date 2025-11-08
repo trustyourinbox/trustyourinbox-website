@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import dns from "dns";
 import { promisify } from "util";
+import logger from "@/lib/logger";
 
 const resolveTxt = promisify(dns.resolveTxt);
 const resolveMx = promisify(dns.resolveMx);
@@ -112,7 +113,7 @@ export async function GET(request: Request) {
     });
   } catch (error) {
     // Log generic error message only (CWE-532: Prevent information leakage)
-    console.error("Error checking domain");
+    logger.error("Error checking domain");
     return NextResponse.json(
       { error: "Failed to check domain records" },
       { status: 500 }

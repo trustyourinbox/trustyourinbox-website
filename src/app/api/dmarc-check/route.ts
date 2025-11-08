@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import logger from "@/lib/logger";
 
 const DKIM_SELECTORS = ["default", "selector1", "google"];
 
@@ -65,7 +66,7 @@ export async function GET(req: NextRequest) {
       dkim: dkimResults,
     });
   } catch (err) {
-    console.error("Error fetching DNS records:", err);
+    logger.error("Error fetching DNS records:", err);
     return NextResponse.json(
       { error: "Error fetching DNS records." },
       { status: 500 }

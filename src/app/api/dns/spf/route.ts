@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import dns from "dns";
 import { promisify } from "util";
 import CIDR from "cidr-tools";
+import logger from "@/lib/logger";
 
 const resolveTxt = promisify(dns.resolveTxt);
 const resolveMx = promisify(dns.resolveMx);
@@ -140,7 +141,7 @@ async function parseSPFNode(
 
     return node;
   } catch (error) {
-    console.error(`Error parsing SPF for ${domain}:`, error);
+    logger.error(`Error parsing SPF for ${domain}:`, error);
     return null;
   }
 }
@@ -168,7 +169,7 @@ export async function GET(request: Request) {
 
     return NextResponse.json({ spf: spfTree });
   } catch (error) {
-    console.error("Error fetching SPF record:", error);
+    logger.error("Error fetching SPF record:", error);
     return NextResponse.json(
       { message: "Failed to fetch SPF record" },
       { status: 500 }

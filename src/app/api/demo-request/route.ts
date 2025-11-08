@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import sgMail from "@sendgrid/mail";
+import logger from "@/lib/logger";
 
 // Initialize SendGrid with API key
 sgMail.setApiKey(process.env.SENDGRID_API_KEY || "");
@@ -84,7 +85,7 @@ Submitted from TrustYourInbox Website
 
     // Only log in development
     if (process.env.NODE_ENV !== "production") {
-      console.log("SendGrid success:", response[0]?.statusCode);
+      logger.log("SendGrid success:", response[0]?.statusCode);
     }
 
     return NextResponse.json(
@@ -93,11 +94,11 @@ Submitted from TrustYourInbox Website
     );
   } catch (error: any) {
     // Log generic error message only (CWE-532: Prevent information leakage)
-    console.error("Error sending demo request");
+    logger.error("Error sending demo request");
 
     // In development, log additional context (without sensitive data)
     if (process.env.NODE_ENV !== "production") {
-      console.error("Error type:", error.code || "Unknown");
+      logger.error("Error type:", error.code || "Unknown");
     }
 
     // Never log error.response.body - may contain API keys or sensitive data

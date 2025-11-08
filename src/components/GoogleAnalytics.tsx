@@ -1,6 +1,7 @@
 "use client";
 
 import Script from "next/script";
+import logger from "@/lib/logger";
 
 export default function GoogleAnalytics({ ga4Id }: { ga4Id: string }) {
   // Validate GA4 ID format to prevent XSS (CWE-79)
@@ -8,7 +9,7 @@ export default function GoogleAnalytics({ ga4Id }: { ga4Id: string }) {
   const ga4Pattern = /^G[T]?-[A-Z0-9]{10,}$/i;
 
   if (!ga4Id || !ga4Pattern.test(ga4Id)) {
-    console.error(
+    logger.error(
       "Invalid GA4 ID format. Expected format: G-XXXXXXXXXX or GT-XXXXXXXXXX"
     );
     return null;

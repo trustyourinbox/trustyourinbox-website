@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useRef } from "react";
 import DOMPurify from "isomorphic-dompurify";
+import logger from "@/lib/logger";
 import { ToolLayout } from "@/components/ui/ToolLayout";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
@@ -279,7 +280,7 @@ function parseARFReport(content: string): ForensicReport | null {
     };
   } catch (error) {
     // Log generic error (CWE-532: Prevent information leakage)
-    console.error("Error parsing ARF report");
+    logger.error("Error parsing ARF report");
     return null;
   }
 }
@@ -300,7 +301,7 @@ function parseXMLReport(content: string): ForensicReport[] {
     const parserError = xmlDoc.querySelector("parsererror");
     if (parserError) {
       // Log generic error (CWE-532: Prevent information leakage)
-      console.error("XML parsing error");
+      logger.error("XML parsing error");
       return reports;
     }
 
@@ -431,7 +432,7 @@ function parseXMLReport(content: string): ForensicReport[] {
     return reports;
   } catch (error) {
     // Log generic error (CWE-532: Prevent information leakage)
-    console.error("Error parsing XML report");
+    logger.error("Error parsing XML report");
     return reports;
   }
 }
@@ -475,7 +476,7 @@ async function decompressFile(file: File): Promise<string | null> {
     return null;
   } catch (error) {
     // Log generic error (CWE-532: Prevent information leakage)
-    console.error("Error decompressing file");
+    logger.error("Error decompressing file");
     return null;
   }
 }
@@ -509,7 +510,7 @@ async function processFile(file: File): Promise<ForensicReport[]> {
       content = await decompressFile(file);
       if (!content) {
         // Log generic error (CWE-532: Prevent information leakage)
-        console.error("Failed to decompress file");
+        logger.error("Failed to decompress file");
         return [];
       }
     } else {
@@ -534,12 +535,12 @@ async function processFile(file: File): Promise<ForensicReport[]> {
       return report ? [report] : [];
     } else {
       // Log generic error (CWE-532: Prevent information leakage)
-      console.error("Unknown file format");
+      logger.error("Unknown file format");
       return [];
     }
   } catch (error) {
     // Log generic error (CWE-532: Prevent information leakage)
-    console.error("Error processing file");
+    logger.error("Error processing file");
     return [];
   }
 }
@@ -750,7 +751,7 @@ export default function ForensicReportViewerPage() {
 
     // If no reports were parsed, show mock data for demonstration
     if (allReports.length === 0 && valid.length > 0) {
-      console.warn(
+      logger.warn(
         "No reports parsed from files, using mock data for demonstration"
       );
       setReports([
