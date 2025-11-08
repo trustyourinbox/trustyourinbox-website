@@ -11,12 +11,17 @@ const nextConfig = {
     contentDispositionType: "attachment",
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     qualities: [75, 90, 100],
+    // Allow placeholder.svg with query strings and all images from /images directory
     localPatterns: [
       {
         pathname: "/placeholder.svg",
         search: "**",
       },
+      {
+        pathname: "/images/**",
+      },
     ],
+    remotePatterns: [],
   },
 };
 
