@@ -1063,6 +1063,7 @@ export default function ForensicReportViewerPage() {
 
     const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
     const url = URL.createObjectURL(blob);
+    // cycode-ignore[xss] Safe file download pattern - anchor never inserted into DOM, blob URL is safe, filename contains only date
     const a = document.createElement("a");
     a.href = url;
     a.download = `forensic-dmarc-reports-${new Date().toISOString().split("T")[0]}.csv`;
