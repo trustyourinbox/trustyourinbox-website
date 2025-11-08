@@ -1,0 +1,9 @@
+# Git Mailmap - Consolidate commit author identities
+# See: https://git-scm.com/docs/gitmailmap
+
+# Consolidate Dinesh Mistry's email addresses to canonical TrustYourInbox email
+Dinesh Mistry <dmistry@trustyourinbox.com> <dinesh@dman.cloud>
+Dinesh Mistry <dmistry@trustyourinbox.com> <dmistry@yourhostdirect.com>
+
+# Claude AI co-author (from Claude Code assisted commits)
+Claude <noreply@anthropic.com>
