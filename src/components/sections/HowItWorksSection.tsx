@@ -3,23 +3,23 @@ export default function HowItWorksSection() {
     <section id="how-it-works" className="py-20">
       <div className="container">
         <div className="mx-auto max-w-[58rem] text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl md:text-5xl">
+          <h2 className="text-foreground text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
             How DMARC Implementation Works
           </h2>
-          <p className="mt-4 text-lg text-muted-foreground">
+          <p className="text-muted-foreground mt-4 text-lg">
             Our streamlined process gets you from zero to full DMARC enforcement
             in just a few steps.
           </p>
         </div>
         <div className="mt-16">
           <div className="relative">
-            <div className="absolute left-1/2 h-full w-0.5 -translate-x-1/2 bg-border"></div>
+            <div className="bg-border absolute left-1/2 h-full w-0.5 -translate-x-1/2"></div>
             <div className="space-y-12">
               {steps.map((step, index) => (
                 <div key={index} className="relative">
                   <div className="flex items-center">
                     <div className="absolute left-1/2 z-10 -translate-x-1/2">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-full border-4 border-background bg-primary text-primary-foreground">
+                      <div className="border-background bg-primary text-primary-foreground flex h-10 w-10 items-center justify-center rounded-full border-4">
                         {index + 1}
                       </div>
                     </div>
@@ -27,7 +27,7 @@ export default function HowItWorksSection() {
                       className={`w-1/2 ${index % 2 === 0 ? "pr-12 text-right" : "ml-auto pl-12"}`}
                     >
                       <h3 className="text-xl font-bold">{step.title}</h3>
-                      <p className="mt-2 text-muted-foreground">
+                      <p className="text-muted-foreground mt-2">
                         {step.description}
                       </p>
                     </div>

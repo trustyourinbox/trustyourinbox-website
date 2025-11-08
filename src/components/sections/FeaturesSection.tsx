@@ -6,10 +6,10 @@ export default function FeaturesSection() {
     <section id="features" className="py-20">
       <div className="container">
         <div className="mx-auto max-w-[58rem] text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl md:text-5xl">
+          <h2 className="text-foreground text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
             Comprehensive DMARC Protection
           </h2>
-          <p className="mt-4 text-lg text-muted-foreground">
+          <p className="text-muted-foreground mt-4 text-lg">
             Our platform simplifies email authentication and provides the tools
             you need to secure your domain.
           </p>
@@ -18,11 +18,11 @@ export default function FeaturesSection() {
           {features.map((feature) => (
             <Card key={feature.title} className="border-none shadow-md">
               <CardContent className="pt-6">
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
-                  <feature.icon className="h-6 w-6 text-primary" />
+                <div className="bg-primary/10 mb-4 flex h-12 w-12 items-center justify-center rounded-full">
+                  <feature.icon className="text-primary h-6 w-6" />
                 </div>
                 <h3 className="text-xl font-bold">{feature.title}</h3>
-                <p className="mt-2 text-muted-foreground">
+                <p className="text-muted-foreground mt-2">
                   {feature.description}
                 </p>
               </CardContent>

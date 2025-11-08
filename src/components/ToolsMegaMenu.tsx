@@ -1,10 +1,4 @@
-import {
-  Shield,
-  LineChart,
-  Network,
-  FileCode,
-  Search,
-} from "lucide-react";
+import { Shield, LineChart, Network, FileCode, Search } from "lucide-react";
 
 const coreTools = [
   {
@@ -12,7 +6,7 @@ const coreTools = [
     description:
       "Create and customize DMARC policies with our intuitive generator",
     href: "/tools/dmarc-policy-generator",
-    icon: <Shield className="h-5 w-5 text-primary" />,
+    icon: <Shield className="text-primary h-5 w-5" />,
   },
   {
     name: "DMARC Policy Impact Simulator",

@@ -1,0 +1,77 @@
+name: Question or Support
+description: Ask a question or request help with TrustYourInbox
+title: "[Question]: "
+labels: ["question", "support"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Have a question or need help? Fill out the form below and we'll get back to you!
+
+  - type: textarea
+    id: question
+    attributes:
+      label: Your Question
+      description: What would you like to know?
+      placeholder: I'm trying to understand...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Question Category
+      description: What is your question about?
+      options:
+        - DMARC Implementation
+        - SPF Configuration
+        - DKIM Setup
+        - BIMI
+        - Using the Tools
+        - Website Features
+        - Account/Pricing
+        - Technical Issue
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: Provide any relevant context or background
+      placeholder: I'm currently working on...
+
+  - type: textarea
+    id: tried
+    attributes:
+      label: What Have You Tried?
+      description: What steps have you already taken to solve this?
+      placeholder: I've already tried...
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots or Links
+      description: If applicable, add screenshots or links
+      placeholder: Drag and drop screenshots or paste links here
+
+  - type: checkboxes
+    id: searched
+    attributes:
+      label: Pre-submission Checklist
+      description: Before submitting, please check the following
+      options:
+        - label: I have searched the existing issues and guides
+          required: true
+        - label: This is not a bug report (use the Bug Report template instead)
+          required: true
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      description: By submitting this issue, you agree to follow our Code of Conduct
+      options:
+        - label: I agree to follow this project's Code of Conduct
+          required: true

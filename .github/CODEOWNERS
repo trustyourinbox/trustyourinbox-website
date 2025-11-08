@@ -1,0 +1,63 @@
+# CODEOWNERS file
+# This file defines individuals or teams responsible for code in this repository.
+# Code owners are automatically requested for review when someone opens a pull request
+# that modifies code that they own.
+#
+# More info: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Default owners for everything in the repo
+# These owners will be requested for review unless a later match takes precedence
+* @trustyourinbox/engineering
+
+# Configuration files
+/.github/ @trustyourinbox/engineering
+/.husky/ @trustyourinbox/engineering
+/.vscode/ @trustyourinbox/engineering
+*.config.js @trustyourinbox/engineering
+*.config.mjs @trustyourinbox/engineering
+*.config.ts @trustyourinbox/engineering
+package.json @trustyourinbox/engineering
+package-lock.json @trustyourinbox/engineering
+
+# Documentation
+/README.md @trustyourinbox/engineering @trustyourinbox/documentation
+/CONTRIBUTING.md @trustyourinbox/engineering @trustyourinbox/documentation
+/CHANGELOG.md @trustyourinbox/engineering
+/SECURITY.md @trustyourinbox/engineering @trustyourinbox/security
+/LICENSE @trustyourinbox/engineering @trustyourinbox/legal
+
+# Source code
+/src/ @trustyourinbox/engineering
+
+# API routes
+/src/app/api/ @trustyourinbox/engineering @trustyourinbox/backend
+
+# Guides and content
+/src/app/guides/ @trustyourinbox/documentation @trustyourinbox/engineering
+/src/app/blog/ @trustyourinbox/documentation @trustyourinbox/marketing
+
+# Marketing pages
+/src/app/(marketing)/ @trustyourinbox/marketing @trustyourinbox/engineering
+/src/app/pricing/ @trustyourinbox/marketing @trustyourinbox/engineering
+/src/app/solutions/ @trustyourinbox/marketing @trustyourinbox/engineering
+
+# Tools
+/src/app/tools/ @trustyourinbox/engineering
+
+# UI Components
+/src/components/ @trustyourinbox/engineering @trustyourinbox/design
+
+# Styles
+/src/app/globals.css @trustyourinbox/design @trustyourinbox/engineering
+
+# Public assets
+/public/ @trustyourinbox/design
+
+# CI/CD
+/.github/workflows/ @trustyourinbox/devops @trustyourinbox/engineering
+
+# Dependencies
+/.github/dependabot.yml @trustyourinbox/devops @trustyourinbox/engineering
+
+# Note: Update team names (e.g., @trustyourinbox/engineering) with actual GitHub team names
+# or individual usernames (e.g., @dinesh) once teams are created in GitHub

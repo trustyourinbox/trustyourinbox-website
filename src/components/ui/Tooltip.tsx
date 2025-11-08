@@ -27,7 +27,7 @@ export function TooltipContent({ children }: { children: React.ReactNode }) {
       className="relative"
     >
       {show && (
-        <span className="absolute left-1/2 z-10 mt-2 -translate-x-1/2 whitespace-nowrap rounded bg-gray-900 px-3 py-2 text-xs text-white shadow-lg">
+        <span className="absolute left-1/2 z-10 mt-2 -translate-x-1/2 rounded bg-gray-900 px-3 py-2 text-xs whitespace-nowrap text-white shadow-lg">
           {children}
         </span>
       )}

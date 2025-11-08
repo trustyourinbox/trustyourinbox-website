@@ -27,7 +27,7 @@ export function Navbar() {
             href="/"
             className="-m-1.5 flex items-center gap-2 p-1.5 text-xl font-bold transition-all duration-300 hover:scale-105"
           >
-            <Shield className="h-6 w-6 text-primary" />
+            <Shield className="text-primary h-6 w-6" />
             <span>
               <span className="text-primary">Trust</span>YourInbox
             </span>
@@ -81,7 +81,7 @@ export function Navbar() {
           isMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
         } overflow-hidden`}
       >
-        <div className="space-y-1 px-4 pb-3 pt-2">
+        <div className="space-y-1 px-4 pt-2 pb-3">
           {navigation.map((item) => (
             <Link
               key={item.name}

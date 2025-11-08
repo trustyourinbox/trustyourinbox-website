@@ -12,15 +12,15 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     return (
       <div className="w-full">
         {label && (
-          <label className="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-300 sm:mb-1 sm:text-sm">
+          <label className="mb-1.5 block text-sm font-medium text-gray-700 sm:mb-1 sm:text-sm dark:text-gray-300">
             {label}
           </label>
         )}
         <textarea
           ref={ref}
           className={twMerge(
-            "block w-full rounded-lg border border-gray-300 bg-background shadow-sm dark:border-gray-600",
-            "focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20",
+            "bg-background block w-full rounded-lg border border-gray-300 shadow-sm dark:border-gray-600",
+            "focus:border-primary focus:ring-primary/20 focus:ring-2 focus:outline-none",
             "text-base sm:text-sm",
             "min-h-[100px] px-4 py-3 sm:py-2",
             "transition-colors duration-200",
@@ -34,12 +34,12 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           {...props}
         />
         {error && (
-          <p className="mt-1.5 text-sm text-red-600 dark:text-red-400 sm:mt-1">
+          <p className="mt-1.5 text-sm text-red-600 sm:mt-1 dark:text-red-400">
             {error}
           </p>
         )}
         {helperText && !error && (
-          <p className="mt-1.5 text-sm text-gray-500 dark:text-gray-400 sm:mt-1">
+          <p className="mt-1.5 text-sm text-gray-500 sm:mt-1 dark:text-gray-400">
             {helperText}
           </p>
         )}

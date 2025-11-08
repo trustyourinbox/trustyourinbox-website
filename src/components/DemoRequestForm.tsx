@@ -149,7 +149,7 @@ export default function DemoRequestForm({
           <Button
             size="lg"
             variant="outline"
-            className="border-primary-foreground bg-transparent text-primary-foreground hover:bg-primary-foreground/10"
+            className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10 bg-transparent"
           >
             Schedule Demo
           </Button>
@@ -168,7 +168,7 @@ export default function DemoRequestForm({
           <div className="flex flex-col items-center justify-center py-8">
             <CheckCircle className="mb-4 h-16 w-16 text-green-500" />
             <h3 className="mb-2 text-lg font-semibold">Request Submitted!</h3>
-            <p className="text-center text-sm text-muted-foreground">
+            <p className="text-muted-foreground text-center text-sm">
               Thank you for your interest. We&apos;ll be in touch soon to
               schedule your demo.
             </p>

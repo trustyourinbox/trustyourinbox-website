@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Documentation
+    url: https://trustyourinbox.com/guides
+    about: Check out our comprehensive guides for DMARC, SPF, and DKIM
+  - name: Free Tools
+    url: https://trustyourinbox.com/tools
+    about: Try our free DMARC, SPF, and DKIM analysis tools
+  - name: Support
+    url: https://trustyourinbox.com/contact
+    about: Contact our support team for general inquiries

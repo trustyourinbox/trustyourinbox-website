@@ -1,11 +1,6 @@
 import { ReactNode } from "react";
 import { twMerge } from "tailwind-merge";
-import {
-  Info,
-  CheckCircle,
-  AlertTriangle,
-  XCircle,
-} from "lucide-react";
+import { Info, CheckCircle, AlertTriangle, XCircle } from "lucide-react";
 
 interface AlertProps {
   children: ReactNode;
@@ -22,7 +17,7 @@ export function Alert({
 }: AlertProps) {
   const variants = {
     info: {
-      icon: <Info className="h-5 w-5 text-primary/70" />,
+      icon: <Info className="text-primary/70 h-5 w-5" />,
       styles: "bg-secondary text-foreground border-primary/20",
     },
     success: {

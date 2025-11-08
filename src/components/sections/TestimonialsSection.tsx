@@ -5,10 +5,10 @@ export default function TestimonialsSection() {
     <section id="testimonials" className="bg-muted/30 py-20">
       <div className="container">
         <div className="mx-auto max-w-[58rem] text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl md:text-5xl">
+          <h2 className="text-foreground text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
             Trusted by IT Teams Worldwide
           </h2>
-          <p className="mt-4 text-lg text-muted-foreground">
+          <p className="text-muted-foreground mt-4 text-lg">
             See how organizations of all sizes have simplified their DMARC
             implementation.
           </p>
@@ -18,17 +18,17 @@ export default function TestimonialsSection() {
             <Card key={index} className="overflow-hidden">
               <div className="p-6">
                 <div className="mb-6 flex items-center gap-4">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 font-bold text-primary">
+                  <div className="bg-primary/10 text-primary flex h-12 w-12 items-center justify-center rounded-full font-bold">
                     {testimonial.initials}
                   </div>
                   <div>
                     <h3 className="font-bold">{testimonial.name}</h3>
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-muted-foreground text-sm">
                       {testimonial.title}
                     </p>
                   </div>
                 </div>
-                <blockquote className="border-l-2 border-primary/50 pl-4 italic text-muted-foreground">
+                <blockquote className="border-primary/50 text-muted-foreground border-l-2 pl-4 italic">
                   &ldquo;{testimonial.quote}&rdquo;
                 </blockquote>
               </div>

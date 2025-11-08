@@ -12,7 +12,7 @@ export function ToolLayout({ title, description, children }: ToolLayoutProps) {
       <div className="mx-auto max-w-4xl">
         <div className="mb-12 text-center">
           <h1 className="mb-4 text-4xl font-bold">{title}</h1>
-          <p className="text-xl text-muted-foreground">{description}</p>
+          <p className="text-muted-foreground text-xl">{description}</p>
         </div>
         {children}
       </div>
