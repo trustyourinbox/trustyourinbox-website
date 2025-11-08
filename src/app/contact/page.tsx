@@ -14,8 +14,8 @@ export default function ContactPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Implement form submission
-    console.log("Form submitted:", formData);
+    // TODO: Implement form submission (backend integration required)
+    // Form data would be sent to API endpoint here
   };
 
   const handleChange = (
