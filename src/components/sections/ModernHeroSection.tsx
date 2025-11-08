@@ -135,7 +135,7 @@ export default function ModernHeroSection() {
                   width={1200}
                   height={750}
                   className="h-auto w-full"
-                  priority
+                  preload
                   fetchPriority="high"
                   quality={90}
                   placeholder="blur"
