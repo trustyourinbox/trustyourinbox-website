@@ -1,6 +1,6 @@
 import HeroSection from "@/components/HeroSection";
 import FeatureGrid from "@/components/FeatureGrid";
-import { FaBriefcase, FaUsers, FaRocket, FaHandshake } from "react-icons/fa";
+import { Briefcase, Users, Rocket, Handshake } from "lucide-react";
 
 export const metadata = {
   title: "Careers | TrustYourInbox",
@@ -120,25 +120,25 @@ export default function CareersPage() {
       <FeatureGrid
         features={[
           {
-            icon: <FaBriefcase className="h-6 w-6" />,
+            icon: <Briefcase className="h-6 w-6" />,
             title: "Meaningful Work",
             description:
               "Make a real impact in the fight against email fraud and cyber threats.",
           },
           {
-            icon: <FaUsers className="h-6 w-6" />,
+            icon: <Users className="h-6 w-6" />,
             title: "Great Team",
             description:
               "Work with talented, passionate people who are experts in their fields.",
           },
           {
-            icon: <FaRocket className="h-6 w-6" />,
+            icon: <Rocket className="h-6 w-6" />,
             title: "Growth Opportunities",
             description:
               "Learn, grow, and advance your career in a fast-paced environment.",
           },
           {
-            icon: <FaHandshake className="h-6 w-6" />,
+            icon: <Handshake className="h-6 w-6" />,
             title: "Work-Life Balance",
             description:
               "Enjoy flexible hours, remote work, and a supportive company culture.",

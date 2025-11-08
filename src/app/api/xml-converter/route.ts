@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-// @ts-expect-error: adm-zip has no types
 import AdmZip from "adm-zip";
 import { gunzipSync } from "zlib";
-// @ts-expect-error: xml2js has no types
 import { parseStringPromise } from "xml2js";
 
 async function bufferFile(file: File) {

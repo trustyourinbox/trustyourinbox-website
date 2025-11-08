@@ -2,24 +2,26 @@
 
 import { useState } from "react";
 import {
-  FaKey,
-  FaCopy,
-  FaInfoCircle,
-  FaShieldAlt,
-  FaExclamationTriangle,
-  FaCheckCircle,
-  FaTimesCircle,
-  FaTrophy,
-  FaServer,
-  FaFileAlt,
-} from "react-icons/fa";
+  Key,
+  Copy,
+  Info,
+  Shield,
+  AlertTriangle,
+  CheckCircle,
+  XCircle,
+  Trophy,
+  Server,
+  FileText,
+  Mail,
+  ArrowRight,
+  Globe,
+} from "lucide-react";
 import { Buffer } from "buffer";
 // @ts-expect-error: asn1.js has no types
 import asn1 from "asn1.js";
 import { ToolLayout, Button, Input, Card, Alert } from "@/components/ui";
 import FAQSchema from "@/components/FAQSchema";
 import Link from "next/link";
-import { Shield, Mail, Key, ArrowRight, Globe } from "lucide-react";
 
 function parseDKIMRecord(record: string) {
   // Parse DKIM record into key-value pairs
@@ -80,7 +82,7 @@ function CopyButton({ value }: { value: string }) {
         setTimeout(() => setCopied(false), 1200);
       }}
     >
-      <FaCopy className="mr-2" />
+      <Copy className="mr-2" />
       {copied ? "Copied!" : "Copy"}
     </Button>
   );
@@ -128,7 +130,7 @@ function getGradeAndScore(
   let score = 0;
   const dots: { color: string; message: string }[] = [];
   let color = "bg-destructive/10 text-destructive border-destructive/20";
-  let icon = <FaTimesCircle className="text-destructive h-7 w-7" />;
+  let icon = <XCircle className="text-destructive h-7 w-7" />;
   let message = "High risk: DKIM configuration needs improvement.";
 
   // Check version
@@ -193,11 +195,11 @@ function getGradeAndScore(
   // Calculate color based on score
   if (score >= 4) {
     color = "bg-success/10 text-success border-success/20";
-    icon = <FaTrophy className="text-warning h-7 w-7" />;
+    icon = <Trophy className="text-warning h-7 w-7" />;
     message = "Excellent! DKIM is well configured.";
   } else if (score >= 3) {
     color = "bg-warning/10 text-warning border-warning/20";
-    icon = <FaCheckCircle className="text-warning h-7 w-7" />;
+    icon = <CheckCircle className="text-warning h-7 w-7" />;
     message = "Fair. DKIM needs some improvements.";
   }
 
@@ -320,7 +322,7 @@ export default function DKIMInspectorPage() {
         score: 0,
         dots: [],
         color: "bg-destructive/10 text-destructive border-destructive/20",
-        icon: <FaTimesCircle className="text-destructive h-7 w-7" />,
+        icon: <XCircle className="text-destructive h-7 w-7" />,
         message: "High risk: DKIM configuration needs improvement.",
       };
   const recommendations = record
@@ -331,7 +333,7 @@ export default function DKIMInspectorPage() {
     <div className="space-y-6">
       <div>
         <h3 className="text-foreground flex items-center gap-1.5 text-sm font-medium">
-          <FaShieldAlt className="text-primary h-4 w-4" />
+          <Shield className="text-primary h-4 w-4" />
           About DKIM
         </h3>
         <p className="text-muted-foreground mt-2 text-sm">
@@ -343,20 +345,20 @@ export default function DKIMInspectorPage() {
 
       <div>
         <h3 className="text-foreground flex items-center gap-1.5 text-sm font-medium">
-          <FaInfoCircle className="text-primary h-4 w-4" />
+          <Info className="text-primary h-4 w-4" />
           What We Check
         </h3>
         <ul className="text-muted-foreground mt-2 space-y-2 text-sm">
           <li className="flex items-start gap-2">
-            <FaKey className="text-primary mt-0.5 h-4 w-4" />
+            <Key className="text-primary mt-0.5 h-4 w-4" />
             <span>DKIM record version and format</span>
           </li>
           <li className="flex items-start gap-2">
-            <FaKey className="text-primary mt-0.5 h-4 w-4" />
+            <Key className="text-primary mt-0.5 h-4 w-4" />
             <span>Public key presence and length</span>
           </li>
           <li className="flex items-start gap-2">
-            <FaKey className="text-primary mt-0.5 h-4 w-4" />
+            <Key className="text-primary mt-0.5 h-4 w-4" />
             <span>Testing mode flags</span>
           </li>
         </ul>
@@ -412,7 +414,7 @@ export default function DKIMInspectorPage() {
                 </label>
                 <div className="relative flex-1">
                   <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                    <FaFileAlt className="text-muted-foreground h-5 w-5" />
+                    <FileText className="text-muted-foreground h-5 w-5" />
                   </div>
                   <Input
                     id="selector"
@@ -476,7 +478,7 @@ export default function DKIMInspectorPage() {
             <div className="p-6">
               <div className="mb-4 flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <FaShieldAlt className="text-primary/70 h-6 w-6" />
+                  <Shield className="text-primary/70 h-6 w-6" />
                   <span className="text-foreground text-xl font-bold">
                     Status
                   </span>
@@ -528,11 +530,11 @@ export default function DKIMInspectorPage() {
                       }`}
                     >
                       {rec.type === "warning" ? (
-                        <FaExclamationTriangle className="h-5 w-5" />
+                        <AlertTriangle className="h-5 w-5" />
                       ) : rec.type === "info" ? (
-                        <FaInfoCircle className="h-5 w-5" />
+                        <Info className="h-5 w-5" />
                       ) : (
-                        <FaCheckCircle className="h-5 w-5" />
+                        <CheckCircle className="h-5 w-5" />
                       )}
                     </div>
                     <p
@@ -557,7 +559,7 @@ export default function DKIMInspectorPage() {
             <div className="p-6">
               <div className="mb-4 flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <FaKey className="text-primary/70 h-6 w-6" />
+                  <Key className="text-primary/70 h-6 w-6" />
                   <span className="text-foreground text-xl font-bold">
                     DKIM Record
                   </span>

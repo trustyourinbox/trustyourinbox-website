@@ -1,6 +1,6 @@
 import HeroSection from "@/components/HeroSection";
 import FeatureGrid from "@/components/FeatureGrid";
-import { FaBullseye, FaUsers, FaHeart } from "react-icons/fa";
+import { Target, Users, Heart } from "lucide-react";
 
 export const metadata = {
   title: "Company | TrustYourInbox",
@@ -28,19 +28,19 @@ export default function CompanyPage() {
         <FeatureGrid
           features={[
             {
-              icon: <FaBullseye className="h-6 w-6" />,
+              icon: <Target className="h-6 w-6" />,
               title: "Our Mission",
               description:
                 "To empower organizations of all sizes to protect their email domains and users from phishing and cyber threats with ease.",
             },
             {
-              icon: <FaUsers className="h-6 w-6" />,
+              icon: <Users className="h-6 w-6" />,
               title: "Our Team",
               description:
                 "A diverse group of security experts, engineers, and innovators dedicated to building the future of email protection.",
             },
             {
-              icon: <FaHeart className="h-6 w-6" />,
+              icon: <Heart className="h-6 w-6" />,
               title: "Our Values",
               description:
                 "Integrity, transparency, and a relentless focus on customer success drive everything we do.",

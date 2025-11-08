@@ -2,12 +2,12 @@
 
 import { useState, useRef } from "react";
 import {
-  FaFileAlt,
-  FaUpload,
-  FaTimesCircle,
-  FaChevronDown,
-  FaChevronRight,
-} from "react-icons/fa";
+  FileText,
+  Upload,
+  XCircle,
+  ChevronDown,
+  ChevronRight,
+} from "lucide-react";
 import {
   PieChart,
   Pie,
@@ -43,10 +43,10 @@ const ACCEPTED_TYPES = [
 
 function getFileIcon(type: string) {
   if (type.includes("zip"))
-    return <FaFileAlt className="text-primary h-5 w-5" />;
+    return <FileText className="text-primary h-5 w-5" />;
   if (type.includes("gzip"))
-    return <FaFileAlt className="text-success h-5 w-5" />;
-  return <FaFileAlt className="text-muted-foreground h-5 w-5" />;
+    return <FileText className="text-success h-5 w-5" />;
+  return <FileText className="text-muted-foreground h-5 w-5" />;
 }
 
 function FAQSection() {
@@ -320,7 +320,7 @@ export default function XMLConverterPage() {
               role="button"
               aria-label="Upload DMARC XML files"
             >
-              <FaUpload className="text-primary mb-2 h-10 w-10" />
+              <Upload className="text-primary mb-2 h-10 w-10" />
               <span className="text-primary font-semibold">
                 Drag and drop DMARC XML, .gz, or .zip files here
               </span>
@@ -402,7 +402,7 @@ export default function XMLConverterPage() {
                         }}
                         type="button"
                       >
-                        <FaTimesCircle className="h-4 w-4" />
+                        <XCircle className="h-4 w-4" />
                       </button>
                     </li>
                   );
@@ -463,9 +463,9 @@ export default function XMLConverterPage() {
                   onClick={() => toggleExpand(res.name)}
                 >
                   {expanded[res.name] ? (
-                    <FaChevronDown className="text-primary h-5 w-5" />
+                    <ChevronDown className="text-primary h-5 w-5" />
                   ) : (
-                    <FaChevronRight className="text-primary h-5 w-5" />
+                    <ChevronRight className="text-primary h-5 w-5" />
                   )}
                   <span className="text-foreground text-lg font-semibold">
                     {res.name}

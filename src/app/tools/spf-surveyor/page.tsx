@@ -1,26 +1,27 @@
 "use client";
 import { useState, useRef } from "react";
 import {
-  FaCheckCircle,
-  FaExclamationTriangle,
-  FaTimesCircle,
-  FaInfoCircle,
-  FaServer,
-  FaGlobe,
-  FaShieldAlt,
-  FaExclamationCircle,
-  FaNetworkWired,
-  FaChevronRight,
-  FaChevronDown,
-  FaCopy,
-  FaTrophy,
-  FaKey,
-  FaFileAlt,
-} from "react-icons/fa";
+  CheckCircle,
+  AlertTriangle,
+  XCircle,
+  Info,
+  Server,
+  Globe,
+  Shield,
+  AlertCircle,
+  Network,
+  ChevronRight,
+  ChevronDown,
+  Copy,
+  Trophy,
+  Key,
+  FileText,
+  Mail,
+  ArrowRight,
+} from "lucide-react";
 import { ToolLayout, Button, Input, Card, Alert } from "@/components/ui";
 import FAQSchema from "@/components/FAQSchema";
 import Link from "next/link";
-import { Shield, Key, Mail, ArrowRight, Globe } from "lucide-react";
 
 interface SPFNode {
   domain: string;
@@ -56,9 +57,9 @@ function SPFTreeNode({ node, level = 0 }: { node: SPFNode; level?: number }) {
         {hasContent && (
           <span className="text-muted-foreground hover:text-foreground transition-colors">
             {isExpanded ? (
-              <FaChevronDown className="h-4 w-4" />
+              <ChevronDown className="h-4 w-4" />
             ) : (
-              <FaChevronRight className="h-4 w-4" />
+              <ChevronRight className="h-4 w-4" />
             )}
           </span>
         )}
@@ -87,7 +88,7 @@ function SPFTreeNode({ node, level = 0 }: { node: SPFNode; level?: number }) {
             {node.ip4.length > 0 && (
               <div className="border-border bg-card rounded-lg border p-3">
                 <h4 className="text-foreground mb-2 flex items-center gap-2 font-medium">
-                  <FaServer className="text-primary" />
+                  <Server className="text-primary" />
                   IPv4 Addresses ({node.totalIp4Blocks} blocks)
                 </h4>
                 <ul className="space-y-1">
@@ -102,7 +103,7 @@ function SPFTreeNode({ node, level = 0 }: { node: SPFNode; level?: number }) {
             {node.ip6.length > 0 && (
               <div className="border-border bg-card rounded-lg border p-3">
                 <h4 className="text-foreground mb-2 flex items-center gap-2 font-medium">
-                  <FaServer className="text-primary" />
+                  <Server className="text-primary" />
                   IPv6 Addresses ({node.totalIp6Blocks} blocks)
                 </h4>
                 <ul className="space-y-1">
@@ -117,7 +118,7 @@ function SPFTreeNode({ node, level = 0 }: { node: SPFNode; level?: number }) {
             {node.mx.length > 0 && (
               <div className="border-border bg-card rounded-lg border p-3">
                 <h4 className="text-foreground mb-2 flex items-center gap-2 font-medium">
-                  <FaGlobe className="text-primary" />
+                  <Globe className="text-primary" />
                   MX Records
                 </h4>
                 <ul className="space-y-1">
@@ -132,7 +133,7 @@ function SPFTreeNode({ node, level = 0 }: { node: SPFNode; level?: number }) {
             {node.a.length > 0 && (
               <div className="border-border bg-card rounded-lg border p-3">
                 <h4 className="text-foreground mb-2 flex items-center gap-2 font-medium">
-                  <FaNetworkWired className="text-primary" />A Records
+                  <Network className="text-primary" />A Records
                 </h4>
                 <ul className="space-y-1">
                   {node.a.map((a, i) => (
@@ -163,21 +164,21 @@ function getDnsLookupStatus(lookups: number) {
     return {
       status: "Good",
       color: "text-success bg-success/10 border-success/20",
-      icon: <FaCheckCircle className="text-success h-5 w-5" />,
+      icon: <CheckCircle className="text-success h-5 w-5" />,
       message: "Safe: Well within SPF DNS lookup limits.",
     };
   } else if (lookups < 10) {
     return {
       status: "Warning",
       color: "text-warning bg-warning/10 border-warning/20",
-      icon: <FaExclamationTriangle className="text-warning h-5 w-5" />,
+      icon: <AlertTriangle className="text-warning h-5 w-5" />,
       message: "Warning: Approaching the 10 DNS lookup limit.",
     };
   } else {
     return {
       status: "Critical",
       color: "text-destructive bg-destructive/10 border-destructive/20",
-      icon: <FaTimesCircle className="text-destructive h-5 w-5" />,
+      icon: <XCircle className="text-destructive h-5 w-5" />,
       message: "Critical: Exceeds SPF DNS lookup limit! SPF will fail.",
     };
   }
@@ -188,28 +189,28 @@ function getAllMechanismStatus(all: string) {
     return {
       label: "Strict (-all)",
       color: "bg-success/10 text-success border-success/20",
-      icon: <FaCheckCircle className="text-success h-4 w-4" />,
+      icon: <CheckCircle className="text-success h-4 w-4" />,
       tooltip: "Best practice: Only allow explicitly authorized senders.",
     };
   } else if (all === "~all") {
     return {
       label: "SoftFail (~all)",
       color: "bg-warning/10 text-warning border-warning/20",
-      icon: <FaExclamationTriangle className="text-warning h-4 w-4" />,
+      icon: <AlertTriangle className="text-warning h-4 w-4" />,
       tooltip: "SoftFail: Not as strict, may allow unauthorized senders.",
     };
   } else if (all === "+all" || all === "all") {
     return {
       label: "Permissive (+all)",
       color: "bg-destructive/10 text-destructive border-destructive/20",
-      icon: <FaTimesCircle className="text-destructive h-4 w-4" />,
+      icon: <XCircle className="text-destructive h-4 w-4" />,
       tooltip: "Permissive: Allows any sender. Not recommended!",
     };
   } else {
     return {
       label: all,
       color: "bg-muted text-foreground border-border",
-      icon: <FaInfoCircle className="text-muted-foreground h-4 w-4" />,
+      icon: <Info className="text-muted-foreground h-4 w-4" />,
       tooltip: "Custom or unknown policy.",
     };
   }
@@ -218,7 +219,7 @@ function getAllMechanismStatus(all: string) {
 function getGradeAndScore(spfTree: SPFNode) {
   const dots: { color: string; message: string }[] = [];
   let color = "bg-destructive/10 text-destructive border-destructive/20";
-  let icon = <FaTimesCircle className="text-destructive h-7 w-7" />;
+  let icon = <XCircle className="text-destructive h-7 w-7" />;
   let message = "High risk: SPF configuration needs improvement.";
 
   // Dot 1: DNS Lookups
@@ -275,11 +276,11 @@ function getGradeAndScore(spfTree: SPFNode) {
 
   if (greenDots >= 4) {
     color = "bg-success/10 text-success border-success/20";
-    icon = <FaTrophy className="text-warning h-7 w-7" />;
+    icon = <Trophy className="text-warning h-7 w-7" />;
     message = "Excellent! SPF is well configured.";
   } else if (greenDots + yellowDots >= 4) {
     color = "bg-warning/10 text-warning border-warning/20";
-    icon = <FaCheckCircle className="text-warning h-7 w-7" />;
+    icon = <CheckCircle className="text-warning h-7 w-7" />;
     message = "Fair. SPF needs some improvements.";
   }
 
@@ -409,7 +410,7 @@ export default function SPFSurveyorPage() {
     // Risky mechanism: +all or all
     if (spfTree.all === "+all" || spfTree.all === "all") {
       warnings.push({
-        icon: <FaExclamationTriangle className="text-destructive h-4 w-4" />,
+        icon: <AlertTriangle className="text-destructive h-4 w-4" />,
         color: "text-destructive bg-destructive/10 border-destructive/20",
         message:
           "Risky: The SPF record uses '+all' or 'all', which allows any sender. This is not recommended.",
@@ -418,7 +419,7 @@ export default function SPFSurveyorPage() {
     // SPF record length
     if (spfTree.record.length > 255) {
       warnings.push({
-        icon: <FaExclamationTriangle className="text-warning h-4 w-4" />,
+        icon: <AlertTriangle className="text-warning h-4 w-4" />,
         color: "text-warning bg-warning/10 border-warning/20",
         message: `Warning: The SPF record is ${spfTree.record.length} characters long. DNS TXT records over 255 characters may be truncated or cause issues.`,
       });
@@ -426,7 +427,7 @@ export default function SPFSurveyorPage() {
     // SPF flattening suggestion
     if (spfTree.dnsLookups >= 8) {
       warnings.push({
-        icon: <FaInfoCircle className="text-primary h-4 w-4" />,
+        icon: <Info className="text-primary h-4 w-4" />,
         color: "text-primary bg-primary/10 border-primary/20",
         message:
           "Suggestion: Consider SPF flattening to reduce DNS lookups and improve reliability.",
@@ -439,7 +440,7 @@ export default function SPFSurveyorPage() {
     <div className="space-y-6">
       <div>
         <h3 className="text-foreground flex items-center gap-1.5 text-sm font-medium">
-          <FaShieldAlt className="text-primary h-4 w-4" />
+          <Shield className="text-primary h-4 w-4" />
           About SPF
         </h3>
         <p className="text-muted-foreground mt-2 text-sm">
@@ -451,20 +452,20 @@ export default function SPFSurveyorPage() {
 
       <div>
         <h3 className="text-foreground flex items-center gap-1.5 text-sm font-medium">
-          <FaInfoCircle className="text-primary h-4 w-4" />
+          <Info className="text-primary h-4 w-4" />
           What We Check
         </h3>
         <ul className="text-muted-foreground mt-2 space-y-2 text-sm">
           <li className="flex items-start gap-2">
-            <FaServer className="text-primary mt-0.5 h-4 w-4" />
+            <Server className="text-primary mt-0.5 h-4 w-4" />
             <span>DNS lookup count and limits</span>
           </li>
           <li className="flex items-start gap-2">
-            <FaServer className="text-primary mt-0.5 h-4 w-4" />
+            <Server className="text-primary mt-0.5 h-4 w-4" />
             <span>SPF policy and mechanisms</span>
           </li>
           <li className="flex items-start gap-2">
-            <FaServer className="text-primary mt-0.5 h-4 w-4" />
+            <Server className="text-primary mt-0.5 h-4 w-4" />
             <span>Record structure and length</span>
           </li>
         </ul>
@@ -569,7 +570,7 @@ export default function SPFSurveyorPage() {
                   <div className={`rounded-lg border p-4 ${color}`}>
                     <div className="mb-4 flex items-center justify-between">
                       <div className="flex items-center gap-3">
-                        <FaShieldAlt className="h-6 w-6" />
+                        <Shield className="h-6 w-6" />
                         <h3 className="text-xl font-bold">Status</h3>
                       </div>
                       {icon}
@@ -625,11 +626,11 @@ export default function SPFSurveyorPage() {
                           }`}
                         >
                           {rec.type === "warning" ? (
-                            <FaExclamationTriangle className="h-5 w-5" />
+                            <AlertTriangle className="h-5 w-5" />
                           ) : rec.type === "info" ? (
-                            <FaInfoCircle className="h-5 w-5" />
+                            <Info className="h-5 w-5" />
                           ) : (
-                            <FaCheckCircle className="h-5 w-5" />
+                            <CheckCircle className="h-5 w-5" />
                           )}
                         </div>
                         <p
@@ -656,7 +657,7 @@ export default function SPFSurveyorPage() {
             <div className="p-6">
               <div className="mb-4 flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <FaServer className="text-primary/70 h-6 w-6" />
+                  <Server className="text-primary/70 h-6 w-6" />
                   <h3 className="text-foreground text-xl font-bold">
                     SPF Record
                   </h3>
@@ -671,7 +672,7 @@ export default function SPFSurveyorPage() {
                   size="sm"
                   onClick={() => handleCopy(spfTree.record)}
                 >
-                  <FaCopy className="mr-2" />
+                  <Copy className="mr-2" />
                   {copied ? "Copied!" : "Copy"}
                 </Button>
               </div>

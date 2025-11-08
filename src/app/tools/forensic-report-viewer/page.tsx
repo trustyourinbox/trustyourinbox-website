@@ -5,17 +5,19 @@ import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Input } from "@/components/ui/Input";
 import {
-  FaUpload,
-  FaFileAlt,
-  FaTimesCircle,
-  FaChevronDown,
-  FaChevronUp,
-  FaChevronLeft,
-  FaChevronRight,
-  FaFilter,
-  FaSyncAlt,
-} from "react-icons/fa";
-import { Shield, Mail, Key } from "lucide-react";
+  Upload,
+  FileText,
+  XCircle,
+  ChevronDown,
+  ChevronUp,
+  ChevronLeft,
+  ChevronRight,
+  Filter,
+  RefreshCw,
+  Shield,
+  Mail,
+  Key,
+} from "lucide-react";
 import FAQSchema from "@/components/FAQSchema";
 import Link from "next/link";
 
@@ -519,7 +521,7 @@ async function processFile(file: File): Promise<ForensicReport[]> {
 }
 
 function getFileIcon(type: string) {
-  return <FaFileAlt className="text-primary h-5 w-5" />;
+  return <FileText className="text-primary h-5 w-5" />;
 }
 
 function FAQSection() {
@@ -1145,7 +1147,7 @@ export default function ForensicReportViewerPage() {
               role="button"
               aria-label="Upload Forensic DMARC XML files"
             >
-              <FaUpload className="text-primary mb-2 h-10 w-10" />
+              <Upload className="text-primary mb-2 h-10 w-10" />
               <span className="text-primary font-semibold">
                 Drag and drop Forensic DMARC Report files here
               </span>
@@ -1221,7 +1223,7 @@ export default function ForensicReportViewerPage() {
                       }}
                       type="button"
                     >
-                      <FaTimesCircle className="h-4 w-4" />
+                      <XCircle className="h-4 w-4" />
                     </button>
                   </li>
                 );
@@ -1470,10 +1472,10 @@ export default function ForensicReportViewerPage() {
                   className="w-full max-w-xs"
                 />
                 <Button variant="ghost" size="icon" aria-label="Refresh">
-                  <FaSyncAlt className="h-4 w-4" />
+                  <RefreshCw className="h-4 w-4" />
                 </Button>
                 <Button variant="ghost" size="icon" aria-label="Filter">
-                  <FaFilter className="h-4 w-4" />
+                  <Filter className="h-4 w-4" />
                 </Button>
               </div>
               <Button

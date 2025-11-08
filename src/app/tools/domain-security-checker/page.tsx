@@ -6,23 +6,15 @@ import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import FAQSchema from "@/components/FAQSchema";
 import {
-  FaShieldAlt,
-  FaCheckCircle,
-  FaTimesCircle,
-  FaInfoCircle,
-  FaExclamationTriangle,
-  FaLock,
-  FaEnvelope,
-  FaServer,
-} from "react-icons/fa";
-import {
   Shield,
-  Mail,
-  Lock,
-  Database,
-  AlertTriangle,
+  CheckCircle,
   XCircle,
   Info,
+  AlertTriangle,
+  Lock,
+  Mail,
+  Server,
+  Database,
   Key,
   Globe,
   ArrowRight,
@@ -67,7 +59,7 @@ export default function DomainSecurityCheckerPage() {
       setResults([
         {
           name: "Email Authentication",
-          icon: <FaEnvelope className="text-primary h-5 w-5" />,
+          icon: <Mail className="text-primary h-5 w-5" />,
           checks: [
             {
               name: "DMARC",
@@ -93,7 +85,7 @@ export default function DomainSecurityCheckerPage() {
         },
         {
           name: "Transport Security",
-          icon: <FaLock className="text-primary h-5 w-5" />,
+          icon: <Lock className="text-primary h-5 w-5" />,
           checks: [
             {
               name: "MTA-STS",
@@ -112,7 +104,7 @@ export default function DomainSecurityCheckerPage() {
         },
         {
           name: "DNS Security",
-          icon: <FaServer className="text-primary h-5 w-5" />,
+          icon: <Server className="text-primary h-5 w-5" />,
           checks: [
             {
               name: "DNSSEC",

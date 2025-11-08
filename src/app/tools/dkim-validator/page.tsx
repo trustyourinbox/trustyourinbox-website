@@ -2,24 +2,25 @@
 
 import { useState } from "react";
 import {
-  FaCheckCircle,
-  FaExclamationTriangle,
-  FaTimesCircle,
-  FaKey,
-  FaCopy,
-  FaInfoCircle,
-  FaTrophy,
-  FaMedal,
-  FaShieldAlt,
-  FaServer,
-  FaFileAlt,
-} from "react-icons/fa";
+  CheckCircle,
+  AlertTriangle,
+  XCircle,
+  Key,
+  Copy,
+  Info,
+  Trophy,
+  Award,
+  Shield,
+  Server,
+  FileText,
+  Mail,
+  ArrowRight,
+} from "lucide-react";
 import { Buffer } from "buffer";
 // @ts-expect-error: asn1.js has no types
 import asn1 from "asn1.js";
 import { ToolLayout, Button, Input, Card, Alert } from "@/components/ui";
 import FAQSchema from "@/components/FAQSchema";
-import { Shield, Mail, Key, ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 function parseDKIMRecord(record: string) {
@@ -125,27 +126,27 @@ function getWarnings(fields: Record<string, string>) {
   }[] = [];
   if (!fields.v || fields.v !== "DKIM1") {
     warnings.push({
-      icon: <FaTimesCircle className="text-destructive h-4 w-4" />,
+      icon: <XCircle className="text-destructive h-4 w-4" />,
       color: "text-destructive bg-destructive/10 border-destructive/20",
       message: "Missing or invalid version (v=DKIM1) field.",
     });
   }
   if (!fields.p) {
     warnings.push({
-      icon: <FaTimesCircle className="text-destructive h-4 w-4" />,
+      icon: <XCircle className="text-destructive h-4 w-4" />,
       color: "text-destructive bg-destructive/10 border-destructive/20",
       message: "Missing public key (p) field.",
     });
   } else if (fields.p.length < 200) {
     warnings.push({
-      icon: <FaExclamationTriangle className="text-warning h-4 w-4" />,
+      icon: <AlertTriangle className="text-warning h-4 w-4" />,
       color: "text-warning bg-warning/10 border-warning/20",
       message: "Public key is unusually short. Should be at least 1024 bits.",
     });
   }
   if (fields.t && fields.t.includes("y")) {
     warnings.push({
-      icon: <FaInfoCircle className="text-warning h-4 w-4" />,
+      icon: <Info className="text-warning h-4 w-4" />,
       color: "text-warning bg-warning/10 border-warning/20",
       message:
         "Testing mode is enabled (t=y). DKIM signature may not be enforced.",
@@ -230,7 +231,7 @@ function CopyButton({ value }: { value: string }) {
         setTimeout(() => setCopied(false), 1200);
       }}
     >
-      <FaCopy className="mr-2" />
+      <Copy className="mr-2" />
       {copied ? "Copied!" : "Copy"}
     </Button>
   );
@@ -294,7 +295,7 @@ export default function DKIMValidatorPage() {
     <div className="space-y-6">
       <div>
         <h3 className="text-foreground flex items-center gap-1.5 text-sm font-medium">
-          <FaShieldAlt className="text-primary h-4 w-4" />
+          <Shield className="text-primary h-4 w-4" />
           About DKIM
         </h3>
         <p className="text-muted-foreground mt-2 text-sm">
@@ -306,7 +307,7 @@ export default function DKIMValidatorPage() {
 
       <div>
         <h3 className="text-foreground flex items-center gap-1.5 text-sm font-medium">
-          <FaInfoCircle className="text-primary h-4 w-4" />
+          <Info className="text-primary h-4 w-4" />
           Common Tags
         </h3>
         <ul className="text-muted-foreground mt-2 space-y-2 text-sm">
@@ -343,7 +344,7 @@ export default function DKIMValidatorPage() {
               </label>
               <div className="relative flex-1">
                 <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                  <FaFileAlt className="text-muted-foreground h-5 w-5" />
+                  <FileText className="text-muted-foreground h-5 w-5" />
                 </div>
                 <Input
                   id="dkim"
@@ -465,7 +466,7 @@ export default function DKIMValidatorPage() {
                   {getRecommendations(fields, getKeyLength(fields.p)).map(
                     (rec, idx) => (
                       <div key={idx} className="flex items-start gap-2">
-                        <FaInfoCircle className="text-primary mt-0.5 h-4 w-4" />
+                        <Info className="text-primary mt-0.5 h-4 w-4" />
                         <span>{rec.message}</span>
                       </div>
                     )
