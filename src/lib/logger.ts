@@ -19,6 +19,7 @@ const logger = {
    * Use for critical errors that need attention
    */
   error: (message: string, ...args: unknown[]): void => {
+    // cycode-ignore[console-usage] Centralized logger - approved console usage
     console.error(message, ...args);
   },
 
@@ -27,6 +28,7 @@ const logger = {
    * Use for non-critical issues or deprecation notices
    */
   warn: (message: string, ...args: unknown[]): void => {
+    // cycode-ignore[console-usage] Centralized logger - approved console usage
     console.warn(message, ...args);
   },
 
@@ -35,6 +37,7 @@ const logger = {
    * Use for general application flow information
    */
   log: (message: string, ...args: unknown[]): void => {
+    // cycode-ignore[console-usage] Centralized logger - approved console usage
     console.log(message, ...args);
   },
 
@@ -43,6 +46,7 @@ const logger = {
    * Alias for log() - use for informational messages
    */
   info: (message: string, ...args: unknown[]): void => {
+    // cycode-ignore[console-usage] Centralized logger - approved console usage
     console.info(message, ...args);
   },
 };
